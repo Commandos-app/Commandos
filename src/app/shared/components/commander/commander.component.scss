@@ -1,0 +1,44 @@
+:host {
+    width: 100%;
+}
+
+.command-input-container {
+    margin: 8px;
+    width: 100%;
+    text-align: center;
+    .command-input {
+        width: 50%;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.2);
+        display: grid;
+        grid-template-columns: 34px auto;
+        cds-icon {
+            margin: 9px;
+        }
+        input {
+            border: 0; //1px solid rgba(0, 0, 0, 0.1);
+            background: transparent;
+            outline: none;
+            color: white;
+            height: 34px;
+            padding: 2px 10px 2px 0;
+            width: 100%;
+        }
+    }
+}
+
+.command-body {
+    background: var(--cds-alias-object-app-background);
+    margin: 0;
+    padding: 4px 0;
+    box-shadow: 0px 7px 9px 0px rgba(0, 0, 0, 0.5);
+    width: 100%;
+}
+
+.command {
+    padding: 2px 10px;
+    cursor: pointer;
+    &.selected {
+        background: var(--cds-alias-object-border-color-shade); // #e8e8e8;
+    }
+}

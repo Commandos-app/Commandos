@@ -1,0 +1,47 @@
+<div class="subnav-grid">
+    <div>
+        <app-button-control title="Current repository" [value]="repositoryService.repositorySetting?.name"
+            startIcon="home" endIcon="plus" (onClick)="goToHome()">
+            <cds-icon-button detail-action action="flat" [routerLink]="['/add-repository']" routerLinkActive="active">
+                <cds-icon shape="plus"></cds-icon>
+            </cds-icon-button>
+        </app-button-control>
+    </div>
+    <ng-container *ngIf="!!repositoryService.repositorySetting?.name">
+        <div class="spacer"></div>
+        <div>
+            <app-button-control title="Current branch" [value]="repositoryService.currentBranch" width="350px"
+                [routerLink]="['/repository', repositoryService.currentId, 'branches']" routerLinkActive="button-active"
+                startIcon="branch">
+
+
+                <cds-icon-button detail-action action="flat" class="hover">
+                    <cds-icon shape="plus" (click)="openNewBranch()"></cds-icon>
+                </cds-icon-button>
+            </app-button-control>
+        </div>
+        <div class="spacer"></div>
+        <div icon>
+            <cds-icon-button action="flat" class="icon-button"
+                [routerLink]="['/repository', repositoryService.currentId, 'commit']" routerLinkActive="active">
+                <cds-icon shape="commit" size="24"></cds-icon>
+            </cds-icon-button>
+        </div>
+        <div class="spacer"></div>
+        <div>
+            <cds-icon-button action="flat" class="icon-button"
+                [routerLink]="['/repository', repositoryService.currentId, 'history']" routerLinkActive="active">
+                <cds-icon shape="history" size="24"></cds-icon>
+            </cds-icon-button>
+        </div>
+        <div class="spacer"></div>
+        <div>
+            <cds-icon-button action="flat" class="icon-button"
+                [routerLink]="['/repository', repositoryService.currentId, 'setting']" routerLinkActive="active">
+                <cds-icon shape="cog" size="24"></cds-icon>
+            </cds-icon-button>
+        </div>
+    </ng-container>
+    <div></div>
+
+</div>

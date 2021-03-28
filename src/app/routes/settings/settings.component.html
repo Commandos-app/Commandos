@@ -1,0 +1,51 @@
+<div cds-layout="vertical align:stretch p:lg">
+    <p cds-text="heading" cds-layout="m-t:none m-b:lg">Settings</p>
+    <form #form="ngForm" cds-layout="m-t:md">
+        <cds-form-group layout="horizontal" cds-layout="m-b:lg">
+            <cds-input>
+                <label>Git Path</label>
+                <input type="text" name="path" #path required [(ngModel)]="gitExecutablePath" />
+                <cds-control-message status="error" *ngIf="gitExecutablePath.length === 0">Path is required
+                </cds-control-message>
+            </cds-input>
+
+            <cds-select>
+                <label>Number of grid entries</label>
+                <select>
+                    <option *ngFor="let c of gridCounts" [ngValue]="c">{{c}}</option>
+                </select>
+            </cds-select>
+
+            <cds-checkbox-group>
+                <label>Dark Mode</label>
+                <cds-checkbox>
+                    <label></label>
+                    <input type="checkbox" checked name="darkmode" [(ngModel)]="darkMode" />
+                </cds-checkbox>
+            </cds-checkbox-group>
+
+            <cds-checkbox-group>
+                <label>Diff: Side by Side</label>
+                <cds-checkbox>
+                    <label></label>
+                    <input type="checkbox" name="sidebyside" [(ngModel)]="diffFormate" />
+                </cds-checkbox>
+            </cds-checkbox-group>
+
+            <cds-checkbox-group>
+                <label>Auto Fetch (10 sec)</label>
+                <cds-checkbox>
+                    <label></label>
+                    <input type="checkbox" name="autofetch" [(ngModel)]="autoFetch" />
+                </cds-checkbox>
+            </cds-checkbox-group>
+
+        </cds-form-group>
+        <div cds-layout="horizontal gap:sm">
+            <cds-button (click)="save()" [disabled]="form.invalid">Save</cds-button>
+            <cds-button status="success" (click)="openDevTools()">Open DevTools</cds-button>
+        </div>
+    </form>
+
+
+</div>

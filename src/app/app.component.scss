@@ -1,0 +1,16 @@
+:host {}
+
+.command {
+    padding: 2px 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+}
+
+.modal-header {
+    display: grid;
+    grid-template-columns: 1fr 30px;
+    align-items: start;
+}

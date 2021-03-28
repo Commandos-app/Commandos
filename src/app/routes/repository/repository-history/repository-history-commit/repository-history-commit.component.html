@@ -1,0 +1,31 @@
+<div cds-layout="vertical align:stretch" class="commander-full-height">
+    <div class="commander-grid-history commander-full-height">
+        SHA: {{sha}}
+        <cds-divider></cds-divider>
+        <div class="commander-scroll-overflow commander-full-height">
+
+            <!-- <ng-scrollbar class="virtual-scroll">
+                <virtual-scroller scrollViewport #scroll [items]="commits">
+                    <div *ngFor="let commit of scroll.viewPortItems" class="commander-history-item">
+
+                        <div class="commander-history-title">
+                            {{commit.summary}}
+                        </div>
+                        <div class="commander-history-author">
+                            {{commit.author}} <cds-icon shape="minus"></cds-icon> {{commit.authorDate | dayJS}}
+                        </div>
+                    </div>
+                </virtual-scroller>
+            </ng-scrollbar> -->
+
+            <ng-scrollbar class="virtual-scroll">
+                <div scrollViewport [innerHtml]="outputHtml">
+                </div>
+                <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height"
+                    *ngIf="isLoading">
+                    <cds-progress-circle size="xl"></cds-progress-circle>
+                </div>
+            </ng-scrollbar>
+        </div>
+    </div>
+</div>

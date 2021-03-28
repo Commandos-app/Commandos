@@ -1,0 +1,17 @@
+.subnav-grid {
+    display: grid;
+    grid-template-columns: auto 1px auto 1px auto 1px auto 1px auto 1fr;
+}
+
+.icon-button {
+    margin: 7px;
+    display: block;
+}
+
+// cds-icon-button.hover:hover {
+//     background: black;
+// }
+.spacer {
+    background: rgba(0, 0, 0, 0.2);
+    margin: 12px 0;
+}

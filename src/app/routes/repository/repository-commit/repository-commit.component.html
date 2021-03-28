@@ -1,0 +1,105 @@
+<div cds-layout="vertical p:lg gap:md" class="commander-full-height">
+    <div class="commander-grid-commit commander-full-height">
+        <div class="commander-layout-fixed-side">
+            <form #form="ngForm">
+
+
+                <cds-form-group layout="vertical">
+                    <cds-textarea layout="vertical">
+                        <label></label>
+                        <textarea [(ngModel)]="commitMessage" autosize name="commit" id="commit"
+                            [disabled]="formDisabled"></textarea>
+                    </cds-textarea>
+                </cds-form-group>
+                <cds-button cds-layout="m-t:md" block action="outline" status="success" size="sm" (click)="commit()"
+                    [disabled]="formDisabled">
+                    Commit
+                </cds-button>
+            </form>
+
+            <div class="grid-info">
+                <span>AutoFetch is </span>
+                <cds-tag readonly status="info" *ngIf="settingsService.AutoFetch">On</cds-tag>
+                <cds-tag readonly status="danger" *ngIf="!settingsService.AutoFetch">Off</cds-tag>
+                <span></span>
+            </div>
+            <br>
+            <br>
+            <cds-button block (click)="load()">Debug: reload</cds-button>
+        </div>
+        <cds-divider orientation="vertical"></cds-divider>
+        <div>
+            <commander-tree-view [treeData]="fileTree" [itemTemplate]="itemTmpl"></commander-tree-view>
+
+
+            <ng-template #itemTmpl let-node>
+                <ng-container [ngSwitch]="node.type">
+                    <div *ngSwitchCase="'title'" class="comander-tree-row comander-tree-title">
+                        <b>{{node.name}}</b>
+                    </div>
+
+                    <div *ngSwitchCase="'file'" class="comander-tree-row">
+                        <cds-icon shape="file"></cds-icon>
+                        <ng-container *ngIf="node.file.isRenamed">
+                            {{node.file.oldPath}} ->
+                        </ng-container>
+                        <span class="comander-tree-row-text">
+                            {{node.file.name}}
+                        </span>
+                        <b>
+                            [<span *ngIf="node.file.isNew" class="new">A</span>
+                            <span *ngIf="node.file.isDeleted" class="deleted">D</span>
+                            <span *ngIf="node.file.isModified" class="modified">M</span>
+                            <span *ngIf="node.file.isRenamed" class="renamed">R</span>
+                            <span *ngIf="node.file.isCopied" class="copied">C</span>
+                            <span *ngIf="node.file.isUntracked" class="new">A</span>]
+                        </b>
+                        &nbsp;
+                        <ng-container *ngIf="node.staged; then staged; else unstaged"></ng-container>
+                        <ng-template #staged>
+                            <cds-icon-button class="action" action="flat" size="sm" (click)="unstage(node.file.path)">
+                                <cds-icon shape="minus" class="clickable"></cds-icon>
+                            </cds-icon-button>
+                        </ng-template>
+                        <ng-template #unstaged>
+                            <cds-icon-button class="action" action="flat" size="sm" (click)="undo(node.file)">
+                                <cds-icon shape="undo" class="clickable"></cds-icon>
+                            </cds-icon-button>
+                            <cds-icon-button class="action" action="flat" size="sm" (click)="stage(node.file.path)">
+                                <cds-icon shape="plus" class="clickable"></cds-icon>
+                            </cds-icon-button>
+                        </ng-template>
+                    </div>
+
+                    <div *ngSwitchDefault class="comander-tree-row">
+                        <cds-icon shape="folder-open" solid="true"></cds-icon>
+                        <span class="comander-tree-row-text">
+                            {{node.name}}
+                        </span>
+
+                        <!-- <span class="action"> -->
+                        <ng-container *ngIf="node.staged; then staged; else unstaged"></ng-container>
+                        <ng-template #staged>
+                            <cds-icon-button class="action" action="flat" size="sm" (click)="unstage(node.path)">
+                                <cds-icon shape="minus" class="clickable"></cds-icon>
+                            </cds-icon-button>
+                        </ng-template>
+                        <ng-template #unstaged>
+                            <cds-icon-button class="action" action="flat" size="sm" (click)="stage(node.path)">
+                                <cds-icon shape="plus" class="clickable"></cds-icon>
+                            </cds-icon-button>
+                        </ng-template>
+                        <!-- </span> -->
+                    </div>
+
+
+                </ng-container>
+            </ng-template>
+
+            <ng-container *ngIf="fileTree.length  === 0 ">
+                <h1 class="gray-col">No changes</h1>
+            </ng-container>
+        </div>
+    </div>
+
+</div>

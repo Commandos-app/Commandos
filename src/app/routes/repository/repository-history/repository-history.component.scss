@@ -1,0 +1,55 @@
+:host {
+    display: block;
+    height: 100%;
+}
+
+.commander-grid-history {
+    overflow: hidden;
+    position: relative;
+    display: grid;
+    grid-template-columns: 300px 1px 1fr; // gap: 0.75rem;
+}
+
+.commander-history-item {
+    // padding: 0 10px;
+    cursor: pointer;
+    width: 100%;
+    height: 50px;
+    box-sizing: border-box !important;
+    border-bottom: 1px solid var(--cds-alias-object-border-color, #cbd4d8);
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: center;
+    .commander-history-title {
+        padding: 0 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 20px;
+        font-size: var(--cds-global-typography-secondary-font-size);
+        font-weight: var(--cds-global-typography-font-weight-bold); // line-height: var(--cds-global-typography-secondary-line-height);
+    }
+    .commander-history-author {
+        padding: 0 10px;
+        line-height: 18px;
+        color: var(--cds-global-color-construction-500);
+        font-size: var(--cds-global-typography-smallcaption-font-size);
+        font-weight: var(--cds-global-typography-smallcaption-font-weight); // line-height: var(--cds-global-typography-smallcaption-line-height);
+        letter-spacing: var(--cds-global-typography-smallcaption-letter-spacing);
+    }
+}
+
+// ::ng-deep {
+ng-scrollbar.virtual-scroll {
+    --scrollbar-size: 8px;
+    --scrollbar-thumb-color: gray;
+    --scrollbar-hover-size: 12px;
+    --scrollbar-track-color: rgba(0, 0, 0, 0.05);
+    --scrollbar-border-radius: 10px;
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+// }

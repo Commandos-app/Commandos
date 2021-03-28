@@ -1,0 +1,41 @@
+<cds-modal [closable]="false">
+    <cds-modal-header>
+        <h3 cds-text="title">Command: {{commanderModalService.title}}</h3>
+    </cds-modal-header>
+    <cds-modal-content>
+        <cds-form-group layout="horizontal" cds-layout="m-b:lg">
+            <cds-control layout="horizontal">
+                <label>Repositories:</label>
+                <ng-select cds-control [items]="items" bindLabel="text" [closeOnSelect]="true" [searchable]="true"
+                    [(ngModel)]="selected" appendTo="body" groupBy="type" (change)="onRepositoriesSelected($event)">
+                    <ng-template ng-label-tmp let-item="item">
+                        {{item.type}}: {{item.text}}
+                    </ng-template>
+                </ng-select>
+            </cds-control>
+
+
+            <ng-container *ngFor="let field of commanderModalService.fields">
+
+                <cds-input *ngIf="field.type === 'string'">
+                    <label>{{field.label}}:</label>
+                    <input type="text" name="name" required [(ngModel)]="field.value" />
+                </cds-input>
+
+                <cds-control layout="horizontal" *ngIf="field.type === 'branch'">
+                    <label>{{field.label}}:</label>
+                    <ng-select cds-control [items]="branches" [closeOnSelect]="true" [searchable]="true"
+                        [(ngModel)]="field.value" appendTo="body">
+                    </ng-select>
+                </cds-control>
+
+
+            </ng-container>
+        </cds-form-group>
+
+    </cds-modal-content>
+    <cds-modal-actions>
+        <cds-button action="flat" (click)="commanderModalService.closeModal()">Cancel</cds-button>
+        <cds-button (click)="run()">Run Command</cds-button>
+    </cds-modal-actions>
+</cds-modal>

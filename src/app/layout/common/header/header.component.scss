@@ -1,0 +1,14 @@
+:host {
+    display: grid;
+    grid-template-columns: auto 1fr 30px 30px 30px;
+    width: 100%;
+}
+
+.action {
+    margin: 15px 0;
+}
+
+[cds-text="section"] {
+    padding: 18px 0 18px 18px;
+    color: var(--cds-global-color-gray-0);
+}

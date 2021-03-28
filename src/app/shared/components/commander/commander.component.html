@@ -1,0 +1,19 @@
+<div class="command-input-container">
+    <div #commandInputContainer class="command-input">
+        <cds-icon shape="wand"></cds-icon>
+        <input #commandInput type="text" [(ngModel)]="searchText" (click)="handleKeyDownListener()">
+    </div>
+</div>
+<ng-template #commandsTemplate>
+    <div class="command-body">
+        <div *ngFor="let cmd of commands; index as i" class="command" [class.selected]="i === selected"
+            (click)="runCommand(cmd)">
+            <cds-icon [shape]="cmd.icon" [direction]="cmd.direction"></cds-icon>
+            &nbsp;{{cmd.name}}
+        </div>
+        <div *ngIf="commands.length === 0" class="command">
+            <cds-icon shape="unknown-status"></cds-icon>
+            No matching commands
+        </div>
+    </div>
+</ng-template>

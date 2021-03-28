@@ -1,1 +1,377 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '~normalize.css/normalize.css'; // css reset
+@import '~@cds/core/global.min'; // clarity global styles
+@import '~@cds/core/styles/theme.dark.min.css';
+@import '~@cds/city/css/bundles/default.min'; // load base font
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import '~@angular/cdk/overlay-prebuilt.css';
+@import 'tippy.js/dist/tippy.css';
+@import '~highlight.js/scss/github.scss';
+@import '~diff2html/bundles/css/diff2html.min.css';
+@import './variables';
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%; // * {
+    //     outline: none;
+    // }
+}
+
+[tree-view]>.item {
+    padding-left: 21px;
+}
+
+:focus {
+    outline: none !important;
+}
+
+.drag {
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+    a,
+    input {
+        -webkit-app-region: no-drag;
+    }
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.no-break {
+    white-space: nowrap;
+}
+
+.commander-content {
+    router-outlet {
+        &+* {
+            width: 100%;
+        }
+    }
+}
+
+.commander-tabs {
+    .active {
+        box-shadow: 0 -.15rem 0 var(--cds-alias-status-info, var(--cds-global-color-blue-700, #0079ad)) inset;
+    }
+}
+
+.commander-button-control-backdrop {
+    background: rgba(0, 0, 0, .32);
+    top: calc(var(--commander-header-height) + var(--commander-sub-header-height));
+}
+
+.commander-layout-fixed-side {
+    width: 300px;
+}
+
+[cds-text*=body] {
+    &::before,
+    &::after {
+        display: none;
+    }
+}
+
+.command-overlay {
+    ng-component {
+        width: 100%;
+    }
+}
+
+header {
+    .branding {
+        height: auto;
+        .nav-link {
+            height: auto;
+            .title {
+                line-height: initial;
+            }
+        }
+    }
+}
+
+code {
+    font-family: Consolas, "Courier New", Courier, monospace;
+}
+
+.main-container {
+    .content-container {
+        .content-area {
+            padding: .9rem 1.2rem 1.2rem 1.2rem;
+        }
+    }
+}
+
+.form-flex {
+    width: 100%;
+    .clr-control-container {
+        display: block;
+        width: 100%; // Override to make select full width
+        .clr-select-wrapper,
+        .clr-select {
+            width: 100%;
+        } // Override to make search full width
+        .hf-search-wrapper>.hf-search,
+        .hf-search-select-input,
+        .hf-search-input-text-container {
+            width: 100%;
+        } // Override to make input full width
+        .clr-input-wrapper>.clr-input {
+            width: 100%;
+        } // Override to make password full width
+        .clr-input-wrapper {
+            max-width: 100%;
+            width: 100%;
+            &>.clr-input-group {
+                max-width: 100%;
+                width: 100%;
+                padding-right: 0.4rem;
+                &>input {
+                    width: calc(100% - 1rem);
+                }
+            }
+        }
+    }
+}
+
+#css-override {
+    .ng-select {
+        .ng-select-container {
+            --border-color: var(--cds-alias-object-border-color, var(--cds-global-color-construction-200, #cbd4d8));
+            color: #333;
+            background-color: transparent;
+            border-radius: 0;
+            border: none;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+            height: 24px;
+            min-height: 24px;
+            font-size: 13px;
+            .ng-clear-wrapper,
+            .ng-arrow-wrapper {
+                margin-top: 2px;
+            }
+        }
+        &.ng-select-multiple {
+            .ng-select-container {
+                .ng-value-container {
+                    padding-top: 0;
+                    .ng-value {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+        .ng-value-container {
+            line-height: initial;
+        }
+    }
+    .ng-dropdown-panel {
+        z-index: 1000000;
+        .ng-option {
+            font-size: 13px;
+            padding: 3px 10px;
+            &.ng-option-marked,
+            &.ng-option-selected {
+                background: #F2F2F2;
+            }
+            &.ng-option-child {
+                padding-left: 20px;
+            }
+        }
+        .ng-optgroup {
+            padding: 3px 10px;
+            font-size: 13px;
+            background: #cecece;
+        }
+    }
+    .tag-select {
+        .ng-select-container {
+            min-height: 30px;
+        }
+        .ng-value {
+            --border-color: var(--cds-alias-status-info, var(--cds-global-color-blue-700, #0079ad));
+            --border-width: var(--cds-alias-object-border-width-100, 0.05rem);
+            --border-radius: var(--cds-alias-object-border-radius-200, 0.6rem);
+            --font-size: var(--cds-global-typography-font-size-2, 0.5rem);
+            border-width: var(--border-width);
+            border-color: var(--border-color);
+            border-radius: var(--border-radius);
+            border-style: solid;
+            .ng-value-label {
+                // padding: 11px 10px 11px 0px !important;
+                font-size: var(--font-size);
+            }
+        }
+    }
+    .d2h-file-collapse,
+    .d2h-file-wrapper {
+        border: none;
+    }
+    .comander-navigation {
+        height: var(--commander-sub-header-height);
+        background: var(--cds-global-color-warm-gray-100);
+        flex-grow: initial;
+    }
+    cds-icon-button {
+        &:hover:not([standart-hover]) {
+            border-radius: 5px;
+            --background: var(--cds-alias-status-info);
+            --color: var(--cds-global-typography-color-100);
+        }
+        &.active {
+            border-radius: 5px;
+            --background: var(--cds-alias-status-info);
+            --color: var(--cds-global-typography-color-100);
+        }
+    }
+    .action {
+        --cds-alias-object-app-background: var(--cds-global-color-blue-900);
+    }
+    .commander-grid {
+        color: var(--cds-global-typography-color-500, var(--cds-global-color-gray-1000, black));
+        background: #fff;
+        .commander-row-title {
+            background: var(--cds-alias-object-app-background);
+            border: 1px solid #ccc;
+            >div:not(.custom-padding) {
+                padding: 4px 10px 2px;
+            }
+        }
+        .commander-row {
+            border: 1px solid var(--cds-global-color-gray-400);
+            border-top: 0;
+            min-height: 30px;
+            >div:not(.custom-padding) {
+                padding: 4px 10px;
+            }
+            &:hover {
+                background: var(--cds-global-color-gray-100);
+                cursor: pointer;
+            }
+        }
+    }
+    .commander-list-item {
+        background: #fff;
+        &:hover {
+            background: var(--cds-global-color-gray-100);
+            cursor: pointer;
+        }
+        &.commander-list-item-active {
+            background: var(--cds-global-color-gray-300);
+        }
+    }
+    .commander-scroll-overflow {
+        overflow-x: hidden;
+    }
+    &[cds-theme=dark] {
+        .comander-navigation {
+            background: var(--cds-global-color-blue-900);
+        }
+        .commander-header {
+            background: var(--cds-global-color-blue-1000);
+        }
+        .commander-button-control-backdrop {
+            background: rgba(255, 255, 255, .15);
+        }
+        svg {
+            color: currentColor;
+            fill: currentColor;
+        }
+        .commander-grid {
+            background: var(--cds-alias-object-app-background);
+            .commander-row-title {
+                border: 1px solid var(--cds-global-color-blue-800); // background: var(--cds-global-color-blue-900);
+            }
+            .commander-row {
+                border: 1px solid var(--cds-global-color-blue-800);
+                border-top: 0;
+                background: var(--cds-global-color-blue-1000);
+                &:hover {
+                    background: var(--cds-global-color-blue-900);
+                }
+            }
+        }
+        .commander-list-item {
+            background: var(--cds-global-color-blue-1000);
+            &:hover {
+                background: var(--cds-global-color-blue-900);
+            }
+            &.commander-list-item-active {
+                background: var(--cds-global-color-blue-800);
+            }
+        }
+        .tippy-box {
+            background-color: var(--cds-global-color-blue-700);
+            .tippy-arrow {
+                color: var(--cds-global-color-blue-700);
+            }
+        }
+    }
+    .button-active {
+        .commander-button-control-dropdown {
+            background: var(--cds-alias-status-info);
+            color: var(--cds-global-typography-color-100); // margin-left: -1px;
+            // margin-right: -1px;
+        }
+        .commander-button-control-arrow {
+            cds-icon-button {
+                --color: var(--cds-global-typography-color-100);
+            }
+        }
+    }
+    .commander-full-height,
+    virtual-scroller {
+        max-height: 100%;
+        height: 100%;
+    }
+    .commander-flex {
+        display: flex;
+    }
+}
+
+.comander-tooltip {
+    height: 25px;
+    display: grid !important;
+    grid-template-columns: 1fr 40px;
+    .center-text {
+        line-height: 25px
+    }
+    .tooltip-input {
+        border: 0;
+        border-radius: 5px;
+        height: 25px;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 4px 6px 0;
+        &::placeholder {
+            color: white;
+        }
+    }
+}
+
+header {
+    .header-actions {
+        .nav-link {
+            padding: 0.9rem 0.5rem;
+        }
+    }
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+textarea {
+    resize: none !important;
+}
+
+.clr-form {
+    padding: 0 !important;
+}
+
+cds-checkbox {
+    --cds-global-space-1: 0px;
+}

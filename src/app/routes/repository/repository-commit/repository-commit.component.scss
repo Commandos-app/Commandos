@@ -1,0 +1,104 @@
+:host {
+    display: block;
+    height: 100%;
+}
+
+.commander-grid-commit {
+    display: grid;
+    grid-template-columns: 300px 1px 1fr;
+    gap: 0.75rem;
+}
+
+.grid-info {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 6px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.clr-form-control {
+    margin-top: 5px;
+}
+
+.new {
+    color: green;
+}
+
+.deleted {
+    color: darkred;
+}
+
+.modified {
+    color: darksalmon;
+}
+
+.renamed {
+    color: blueviolet;
+}
+
+.copied {
+    color: deeppink;
+}
+
+.gray-col {
+    color: var(--cds-global-typography-color-300);
+}
+
+.icons {
+    display: none;
+}
+
+cds-icon-button {
+    margin: 0; // height: 28px;
+    padding: 0; // line-height: 27px;
+    min-width: auto;
+    --padding: 0;
+    &.action {
+        vertical-align: top;
+        display: inline-flex;
+    }
+    cds-icon {
+        margin-right: 3px;
+        margin-left: 3px;
+    }
+}
+
+.commander-tree-invisible {
+    display: none;
+}
+
+.commander-tree ul,
+.commander-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+}
+
+.commander-tree-node {
+    display: block;
+    div {
+        line-height: 25px;
+    }
+}
+
+.commander-tree-node .commander-tree-node {
+    padding-left: 20px;
+}
+
+.commander-tree-folder {
+    margin-left: 5px;
+}
+
+.comander-tree-row {
+    display: flex;
+    align-items: center;
+    height: 26px;
+    .comander-tree-row-text {
+        margin: 3px 5px 0 5px;
+    }
+}
+
+.comander-tree-title {
+    padding-left: 10px;
+}

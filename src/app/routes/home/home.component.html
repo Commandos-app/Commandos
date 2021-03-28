@@ -1,0 +1,22 @@
+<div cds-layout="vertical align:stretch p:lg">
+    <p cds-text="heading" cds-layout="m-t:none m-b:lg">{{ 'PAGES.HOME.TITLE' | translate }}</p>
+
+    <div class="commander-grid commander-overview-grid ">
+        <div class="commander-row-title commander-overview-row-title" cds-text="body bold">
+            <div>Name</div>
+            <div>Order</div>
+            <div>Tags</div>
+        </div>
+        <div class="commander-row commander-overview-row" *ngFor="let repo of repositories" cds-text="body"
+            (click)="openRepository(repo.id)">
+            <div class="lh">{{repo.name}}</div>
+            <div class="lh">{{repo.path}}</div>
+            <div>
+                <div cds-layout="horizontal gap:sm">
+                    <cds-tag readonly *ngFor="let tag of repo.tags" color="gray">{{tag}}</cds-tag>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

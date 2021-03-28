@@ -1,0 +1,94 @@
+<div class="commander-layout commander-app-layout" cds-layout="vertical align:stretch">
+    <header class="drag commander-header">
+        <app-header></app-header>
+    </header>
+    <div class="comander-navigation" cds-layout="">
+        <app-subnav></app-subnav>
+    </div>
+    <div cds-layout="horizontal align:vertical-stretch wrap:none">
+        <!-- <nav class="commander-sidenav" cds-layout="">
+            <app-sidenav></app-sidenav>
+        </nav> -->
+        <!-- <cds-divider class="commander-divider" orientation="vertical"></cds-divider> -->
+        <div cds-layout="vertical align:stretch">
+            <div class="commander-content commander-scrollable-content">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 
+<div cds-layout="vertical align:stretch">
+    <header class="drag header" cds-layout="p:md">
+        <div class="branding">
+            <a class="nav-link" [routerLink]="['/home']">
+                <cds-icon class="title" shape="wand" size="30"></cds-icon>
+                <span class="title">The Commander</span>
+            </a>
+        </div>
+        <div class="header-nav">
+            <app-commander></app-commander>
+        </div>
+        <div class="header-actions">
+
+            <a (click)="minimize()" class="nav-link nav-icon" aria-label="close" role='button'>
+                <cds-icon shape="window-min" size="20"></cds-icon>
+            </a>
+            <ng-container *ngIf="electronService.fullscreen$ | async as fullscreen">
+                <a (click)="maximize()" class="nav-link nav-icon" aria-label="close" role='button'
+                    *ngIf="fullscreen.visible">
+                    <cds-icon shape="window-max" size="20"></cds-icon>
+                </a>
+                <a (click)="restore()" class="nav-link nav-icon" aria-label="close" role='button'
+                    *ngIf="!fullscreen.visible">
+                    <cds-icon shape="window-restore" size="20"></cds-icon>
+                </a>
+            </ng-container>
+            <a (click)="closeClient()" class="nav-link nav-icon" aria-label="close" role='button'>
+                <cds-icon shape="window-close" size="20"></cds-icon>
+            </a>
+        </div>
+    </header>
+    <div cds-layout="horizontal align:vertical-stretch wrap:none">
+        <nav class="sidenav" cds-layout="">
+            <clr-vertical-nav>
+                <clr-vertical-nav-group routerLinkActive=" active">
+                    <a routerLink="./normal" hidden aria-hidden="true"> </a>
+                    Repositories
+                    <clr-vertical-nav-group-children *clrIfExpanded="true">
+                        <a clrVerticalNavLink (click)="navigate(repo.id)" [class.active]="repo.id == currentId"
+                            *ngFor="let repo of repositories" class="clickable">
+                            <cds-icon clrVerticalNavIcon shape="folder"></cds-icon> {{repo.id}} {{repo.name}}
+                        </a>
+                    </clr-vertical-nav-group-children>
+                </clr-vertical-nav-group>
+                <div class="nav-divider"></div>
+                <a clrVerticalNavLink [routerLink]="['/add-repository']" routerLinkActive="active">
+                    <cds-icon clrVerticalNavIcon shape="plus"></cds-icon> Neues Repository
+                </a>
+                <div class="nav-divider"></div>
+            </clr-vertical-nav>
+
+            <nav class="cds-vertical-nav-mock" cds-layout="vertical">
+                <button *ngFor="let repo of repositories">
+                    <cds-icon shape="folder" size="sm"></cds-icon> {{repo.id}} {{repo.name}}
+                </button>
+
+                <cds-divider cds-layout="align:bottom"></cds-divider>
+                <button>
+                    <cds-icon shape="cog" size="sm"></cds-icon> Settings
+                </button>
+            </nav>
+
+        </nav>
+        <cds-divider class="divider" orientation="vertical"></cds-divider>
+        <div cds-layout="vertical align:stretch">
+            <div class="content scrollable-content">
+                <div cds-layout="vertical gap:md p:lg">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

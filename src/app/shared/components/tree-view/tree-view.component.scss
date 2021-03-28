@@ -1,0 +1,12 @@
+.item {
+    --base-padding: 21px;
+    &:hover {
+        background: var(--cds-global-color-gray-100);
+    }
+}
+
+@for $i from 1 through 50 {
+    .item-#{$i} {
+        padding-left: calc(var(--base-padding) * #{$i});
+    }
+}

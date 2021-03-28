@@ -1,0 +1,164 @@
+<div cds-layout="vertical align:stretch p:lg">
+    <p cds-text="heading" cds-layout="m-t:none m-b:lg">Branches</p>
+
+    <!-- <div cds-layout="horizontal gap:sm m-b:lg">
+        <cds-button (click)="onRename()" [disabled]="selected.size !== 1">Rename</cds-button>
+        <cds-button (click)="onCheckout()" [disabled]="selected.size !== 1">Checkout</cds-button>
+        <cds-button status="danger" (click)="onDelete()" [disabled]="selected.size === 0">Delete</cds-button>
+    </div> -->
+    <div class="commander-grid commander-branches-grid ">
+        <div class="commander-row-title commander-branches-row-title" cds-text="body bold">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div>Name</div>
+        </div>
+        <div class="commander-row commander-branches-row" *ngFor="let branch of repositoryService.branches$ | async"
+            cds-text="body">
+
+            <div class="action custom-padding">
+                <cds-icon shape="download" [ngxTippy]="checkoutTemplate" tippyName="template-ref"
+                    [tippyProps]="templateRef"></cds-icon>
+                <div #checkoutTemplate class="comander-tooltip">
+                    <div class="center-text">
+                        Checkout branch?&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <cds-icon-button size="sm" status="success" standart-hover (click)="onCheckout(branch.name)">
+                        <cds-icon shape="check" class="clickable"></cds-icon>
+                    </cds-icon-button>
+                </div>
+            </div>
+            <div class="action custom-padding ">
+                <cds-icon shape="note" [ngxTippy]="renameTemplate" tippyName="template-ref" [tippyProps]="templateRef">
+                </cds-icon>
+
+                <div #renameTemplate class="comander-tooltip">
+                    <div class="center-text">
+                        <input class="tooltip-input" [placeholder]="branch.name" #renameInput />
+                        &nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    <cds-icon-button size="sm" status="success" standart-hover
+                        (click)="onRename(branch.name, renameInput.value)">
+                        <cds-icon shape="check" class="clickable"></cds-icon>
+                    </cds-icon-button>
+                </div>
+            </div>
+            <div class="action custom-padding">
+                <cds-icon shape="trash" [ngxTippy]="deleteTemplate" tippyName="template-ref" [tippyProps]="templateRef">
+                </cds-icon>
+                <div #deleteTemplate class="comander-tooltip">
+                    <div class="center-text">
+                        Delete branch?&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <cds-icon-button size="sm" status="danger" standart-hover (click)="onDelete(branch.name)">
+                        <cds-icon shape="check" class="clickable"></cds-icon>
+                    </cds-icon-button>
+                </div>
+            </div>
+            <div class="lh">{{branch.name}}</div>
+        </div>
+    </div>
+
+    <!-- <clr-datagrid class="datagrid-compact" [(clrDgSelected)]="selected">
+        <clr-dg-action-bar>
+            <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-success-outline" (click)="onNew()">
+                    <cds-icon shape="pencil">
+                    </cds-icon> New branch
+                </button>
+                <button type="button" class="btn btn-sm btn-outline" (click)="onRename()"
+                    [disabled]="selected.length !== 1">
+                    <cds-icon shape="pencil"></cds-icon> Rename
+                </button>
+                <button type="button" class="btn btn-sm btn-outline" (click)="onCheckout()"
+                    [disabled]="selected.length !== 1">
+                    <cds-icon shape="pencil"></cds-icon> Checkout
+                </button>
+                <button type="button" class="btn btn-sm btn-danger" (click)="onDelete()"
+                    [disabled]="selected.length === 0">
+                    <cds-icon shape="ban"></cds-icon> Delete
+                </button>
+            </div>
+        </clr-dg-action-bar>
+
+        <clr-dg-column [clrDgField]="'name'">Name
+        </clr-dg-column>
+
+        <clr-dg-row *clrDgItems="let branch of branches" [clrDgItem]="branch">
+            <clr-dg-cell>{{branch.name}}</clr-dg-cell>
+        </clr-dg-row>
+
+        <clr-dg-footer>{{branches.length}} Branches</clr-dg-footer>
+    </clr-datagrid> -->
+</div>
+
+
+
+
+
+<!-- <h5>Remote branches</h5>
+<ng-container *ngIf="remoteBranches.length > 0">
+    <clr-datagrid class="datagrid-compact" [(clrDgSelected)]="selected">
+
+        <clr-dg-column [clrDgField]="'name'" [clrDgSortOrder]="ascSort">Name
+        </clr-dg-column>
+
+        <clr-dg-row *clrDgItems="let branch of remoteBranches" [clrDgItem]="branch">
+            <clr-dg-cell>{{branch.name}} </clr-dg-cell>
+            <clr-dg-cell>{{branch.target}} </clr-dg-cell>
+        </clr-dg-row>
+
+        <clr-dg-footer>{{branches.length}} Branches</clr-dg-footer>
+    </clr-datagrid>
+</ng-container>
+<ng-container *ngIf="remoteBranches.length === 0">
+    ---
+</ng-container> -->
+<!-- <clr-modal [(clrModalOpen)]="openModalNew">
+    <h3 class="modal-title">New branch</h3>
+    <div class="modal-body">
+        <form clrForm clrLayout="horizontal">
+            <clr-input-container>
+                <label>Name</label>
+                <input clrInput type="text" name="branchname" [(ngModel)]="newBranch.branchName" />
+            </clr-input-container>
+            <clr-checkbox-container>
+                <clr-checkbox-wrapper>
+                    <input type="checkbox" clrCheckbox name="pushRemote" [(ngModel)]="newBranch.pushRemote" />
+                    <label>Push to Remote</label>
+                </clr-checkbox-wrapper>
+                <clr-checkbox-wrapper>
+                    <input type="checkbox" clrCheckbox name="override" [(ngModel)]="newBranch.checkout" />
+                    <label>Change branch</label>
+                </clr-checkbox-wrapper>
+            </clr-checkbox-container>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-link" (click)="openModalNew = false">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onCreate()">Create</button>
+    </div>
+</clr-modal> -->
+
+<!-- <clr-modal [(clrModalOpen)]="openModalChange">
+    <h3 class="modal-title">Rename branch '{{changeBranch.oldName}}'</h3>
+    <div class="modal-body">
+        <form clrForm clrLayout="horizontal">
+            <clr-input-container>
+                <label class="no-break">New Name</label>
+                <input clrInput type="text" name="branchname" [(ngModel)]="changeBranch.newName" />
+            </clr-input-container>
+            <clr-checkbox-container>
+                <clr-checkbox-wrapper>
+                    <input type="checkbox" clrCheckbox name="override" [(ngModel)]="changeBranch.checkout" />
+                    <label>Change to branch</label>
+                </clr-checkbox-wrapper>
+            </clr-checkbox-container>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-link" (click)="openModalChange = false">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onChange()">Rename</button>
+    </div>
+</clr-modal> -->
