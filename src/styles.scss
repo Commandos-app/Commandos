@@ -23,6 +23,11 @@ body {
     padding-left: 21px;
 }
 
+.commander-tree-parent {
+    margin-bottom: 40px;
+    ;
+}
+
 :focus {
     outline: none !important;
 }
@@ -159,7 +164,14 @@ code {
                 .ng-value-container {
                     padding-top: 0;
                     .ng-value {
+                        overflow: hidden;
                         margin-bottom: 0;
+                        .ng-value-icon {
+                            padding: 2px 5px 1px;
+                        }
+                    }
+                    .ng-input {
+                        padding: 2px 0 0 3px;
                     }
                 }
             }
@@ -266,6 +278,26 @@ code {
     .commander-scroll-overflow {
         overflow-x: hidden;
     }
+    .button-active {
+        .commander-button-control-dropdown {
+            background: var(--cds-alias-status-info);
+            color: var(--cds-global-typography-color-100); // margin-left: -1px;
+            // margin-right: -1px;
+        }
+        .commander-button-control-arrow {
+            cds-icon-button {
+                --color: var(--cds-global-typography-color-100);
+            }
+        }
+    }
+    .commander-full-height,
+    virtual-scroller {
+        max-height: 100%;
+        height: 100%;
+    }
+    .commander-flex {
+        display: flex;
+    }
     &[cds-theme=dark] {
         .comander-navigation {
             background: var(--cds-global-color-blue-900);
@@ -309,26 +341,6 @@ code {
                 color: var(--cds-global-color-blue-700);
             }
         }
-    }
-    .button-active {
-        .commander-button-control-dropdown {
-            background: var(--cds-alias-status-info);
-            color: var(--cds-global-typography-color-100); // margin-left: -1px;
-            // margin-right: -1px;
-        }
-        .commander-button-control-arrow {
-            cds-icon-button {
-                --color: var(--cds-global-typography-color-100);
-            }
-        }
-    }
-    .commander-full-height,
-    virtual-scroller {
-        max-height: 100%;
-        height: 100%;
-    }
-    .commander-flex {
-        display: flex;
     }
 }
 

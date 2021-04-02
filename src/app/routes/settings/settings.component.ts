@@ -1,6 +1,7 @@
-import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
+import { Component, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ErrorService, StoreService } from '@core/services';
 import { DOCUMENT } from '@angular/common';
+import { NgForm } from '@angular/forms';
 
 @Component({
     selector: 'app-settings',
@@ -8,6 +9,8 @@ import { DOCUMENT } from '@angular/common';
     styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
+
+    @ViewChild('form') settingsForm: NgForm;
 
     gridCounts = [25, 50, 100];
     gridCount: number;
@@ -45,6 +48,7 @@ export class SettingsComponent implements OnInit {
             this.renderer.setAttribute(this.document.body, 'cds-theme', '');
         }
         this.storeService.saveData();
+        this.settingsForm.form.markAsPristine();
     }
 
 }

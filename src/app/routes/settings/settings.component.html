@@ -35,7 +35,7 @@
 
         </cds-form-group>
         <div cds-layout="horizontal gap:sm">
-            <cds-button (click)="save()" [disabled]="form.invalid">Save</cds-button>
+            <cds-button (click)="save()" [disabled]="form.invalid || !form.dirty">Save</cds-button>
             <cds-button status="success" (click)="openDevTools()">Open DevTools</cds-button>
         </div>
     </form>

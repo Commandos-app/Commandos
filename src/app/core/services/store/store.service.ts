@@ -71,7 +71,7 @@ export class StoreService {
         return this.data[prop] ?? defaultValue;
     }
 
-    save<T = any>(prop: string, value: T): void {
+    set<T = any>(prop: string, value: T): void {
         if (!prop) {
             return;
         }
@@ -81,21 +81,21 @@ export class StoreService {
     }
 
     getRepositories = (): RepositoriesSettings => this.get<RepositoriesSettings>('repositories', []);
-    setRepositories = (value: RepositoriesSettings): void => this.save<RepositoriesSettings>('repositories', value);
+    setRepositories = (value: RepositoriesSettings): void => this.set<RepositoriesSettings>('repositories', value);
 
     getDarkMode = (): boolean => this.get<boolean>('darkmode', false);
-    setDarkMode = (value: boolean): void => this.save<boolean>('darkmode', value);
+    setDarkMode = (value: boolean): void => this.set<boolean>('darkmode', value);
 
     getAutoFetch = (): boolean => this.get<boolean>('autofetch', true);
-    setAutoFetch = (value: boolean): void => this.save<boolean>('autofetch', value);
+    setAutoFetch = (value: boolean): void => this.set<boolean>('autofetch', value);
 
     // getGridCount = (): number => this.get<number>('gridcount', 10);
     // setGridCount = (value: number): void => this.save<number>('gridcount', value);
 
     getDiff2HtmlOutputFormat = (): DiffFormate => this.get<DiffFormate>('diff2htmloutputformat', 'line-by-line');
-    setDiff2HtmlOutputFormat = (value: DiffFormate): void => this.save<DiffFormate>('diff2htmloutputformat', value);
+    setDiff2HtmlOutputFormat = (value: DiffFormate): void => this.set<DiffFormate>('diff2htmloutputformat', value);
 
     getTags = (): Array<string> => this.get<Array<string>>('tags', []);
-    setTags = (value: Array<string>): void => this.save<Array<string>>('tags', value);
+    setTags = (value: Array<string>): void => this.set<Array<string>>('tags', value);
 
 }

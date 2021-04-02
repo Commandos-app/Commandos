@@ -1,8 +1,8 @@
+import { selectFolder } from '@shared/functions';
 import { RepositoryService } from './../repository/repository.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoggerService, RepositoriesSettingsService } from '@core/services';
-import { open } from "@tauri-apps/api/dialog";
 
 
 @Component({
@@ -30,12 +30,10 @@ export class AddRepositoryComponent implements OnInit {
 
 
     async openDialog(): Promise<void> {
-        const filePath: string = await open({ /*defaultPath: 'd:\\_WORK',*/ directory: true }) as string;
-        // const [filePath] = filePaths;
-        if (filePath) {
-            this.path = filePath.replace(/\\\\/g, '/');
-            this.name = this.path; //path.basename(filePath);
-            console.log(`TODO!: ~ file: add-repository.component.ts ~ line 38 ~ AddRepositoryComponent ~ openDialog ~ this.path`, this.path);
+        const { path, name } = await selectFolder();
+        if (path) {
+            this.path = path;
+            this.name = name;
         }
     }
 

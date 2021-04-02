@@ -10,9 +10,7 @@ export async function runGit(args: string[], path: string, name: string): Promis
     // return rtn;
     args.unshift(path);
     args.unshift('-C');
-    console.log(`TODO logger.service.ts`);
     const commandName = `${name}: git ${args.join(' ')}`;
-    console.log(`TCL: ~ file: base.ts ~ line 15 ~ runGit ~ commandName`, commandName);
 
     const cmd = new Command('git', args);
 
