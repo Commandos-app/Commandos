@@ -1,7 +1,7 @@
 import { IStatusResult } from './../../../git/model/status';
 import { LoggerService } from '@core/services/logger/logger.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { RepositoriesSettingsService, SettingsService, StoreService } from '@core/services';
+import { RepositoriesSettingsService, StoreService } from '@core/services';
 import { RepositoryService } from '../repository.service';
 import { filter, first } from 'rxjs/operators';
 import { interval } from 'rxjs';
@@ -51,7 +51,6 @@ export class RepositoryCommitComponent implements OnInit {
         private repositoriesSettings: RepositoriesSettingsService,
         private storeService: StoreService,
         private repositoryService: RepositoryService,
-        public settingsService: SettingsService,
         private logger: LoggerService,
         private cd: ChangeDetectorRef
     ) { }
@@ -61,7 +60,7 @@ export class RepositoryCommitComponent implements OnInit {
         this.repositoryService.loaded$.pipe(filter(x => x), first()).subscribe(() => {
             this.load();
         });
-        if (this.settingsService.AutoFetch) {
+        if (this.storeService.getAutoFetch()) {
             // defer(() => this.load())
             //     .pipe(
             //         untilDestroyed(this),

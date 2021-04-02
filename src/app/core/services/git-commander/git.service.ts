@@ -1,9 +1,9 @@
-import { CommandParams, FieldDefinition, RegisterCommandOptions } from '@shared/components';
-import { RepositorySetting } from './../store/store.service';
+import { FieldDefinition, RegisterCommandOptions } from '@shared/components';
 import { ICommand, CommanderService, CommanderModalService } from '@shared/services';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { createBranch, deleteLocalBranch } from '@git/commands';
+import { RepositorySetting } from '../store/store.types';
 
 @Injectable({
     providedIn: 'root'

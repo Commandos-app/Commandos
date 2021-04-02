@@ -1,4 +1,4 @@
-import { SettingsService } from '@core/services';
+import { StoreService } from '@core/services';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import * as Diff2Html from 'diff2html/lib-esm/diff2html';
@@ -20,7 +20,7 @@ export class RepositoryHistoryCommitComponent implements OnInit {
         private route: ActivatedRoute,
         private repositoryService: RepositoryService,
         private sanitizer: DomSanitizer,
-        private settingsService: SettingsService
+        private storeService: StoreService
     ) { }
 
     ngOnInit(): void {
@@ -37,7 +37,7 @@ export class RepositoryHistoryCommitComponent implements OnInit {
         const outputHtml = Diff2Html.html(strInput, {
             drawFileList: false,
             matching: 'lines',
-            outputFormat: this.settingsService.Diff2HtmlOutputFormat,
+            outputFormat: this.storeService.getDiff2HtmlOutputFormat(),
             renderNothingWhenEmpty: true
         });
         this.isLoading = false;

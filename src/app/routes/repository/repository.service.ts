@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RepositoriesSettingsService, RepositorySetting, SettingsService } from '@core/services';
+import { RepositoriesSettingsService, RepositorySetting } from '@core/services';
 import { BehaviorSubject } from 'rxjs';
 import { LoggerService } from '@core/services/logger/logger.service';
 import {
@@ -45,7 +45,6 @@ export class RepositoryService {
 
     constructor(
         private repositoriesSettingsService: RepositoriesSettingsService,
-        public settingsService: SettingsService,
         private logger: LoggerService
     ) { }
 

@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { SettingsService } from '@core/services';
 import { RepositoryService } from '../repository.service';
 import { filter, first } from 'rxjs/operators';
 import { LogItem } from '@git/model';
@@ -18,7 +17,6 @@ export class RepositoryHistoryComponent implements OnInit {
 
     constructor(
         private cd: ChangeDetectorRef,
-        public settingsService: SettingsService,
         private repositoryService: RepositoryService
     ) {
     }

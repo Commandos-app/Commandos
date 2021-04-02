@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { RepositoriesSettings, RepositorySetting, StoreService } from '../store/store.service';
+import { StoreService } from '../store/store.service';
+import { RepositoriesSettings, RepositorySetting } from '../store/store.types';
 
 export type AddRepositoryParameter = { name: string, path: string };
 
@@ -23,14 +24,14 @@ export class RepositoriesSettingsService {
 
         const repo: RepositorySetting = { id: nextId, name, path };
         repos.push(repo);
-        this.store.saveRepositories(repos);
+        this.store.setRepositories(repos);
         return nextId;
     }
 
     removeRepository(id: number): void {
         const repos = this.getRepositories();
         const newRepos = repos.filter(r => r.id !== id);
-        this.store.saveRepositories(newRepos);
+        this.store.setRepositories(newRepos);
     }
 
     getRepositories(): RepositoriesSettings {
@@ -52,13 +53,13 @@ export class RepositoriesSettingsService {
         const repos = this.getRepositories();
         const repo = repos.find(r => r.id === id);
         repo.tags = tags;
-        this.store.saveRepositories(repos);
+        this.store.setRepositories(repos);
     }
 
     saveRepo(repo: RepositorySetting): void {
         const allRepos = this.getRepositories();
         const idxRepo = allRepos.findIndex(r => r.id === repo.id);
         allRepos[idxRepo] = repo;
-        this.store.saveRepositories(allRepos);
+        this.store.setRepositories(allRepos);
     }
 }

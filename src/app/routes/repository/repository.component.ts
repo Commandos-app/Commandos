@@ -1,8 +1,7 @@
-import { LoggerService } from '@core/services';
+import { LoggerService, StoreService } from '@core/services';
 import { RepositoryService } from './repository.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { invoke } from '@tauri-apps/api/tauri';
 
 @Component({
     selector: 'app-repository',
@@ -15,7 +14,8 @@ export class RepositoryComponent implements OnInit {
         private activeRoute: ActivatedRoute,
         private router: Router,
         public repositoryService: RepositoryService,
-        private logger: LoggerService
+        private logger: LoggerService,
+        private store: StoreService
     ) {
         // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
@@ -28,8 +28,7 @@ export class RepositoryComponent implements OnInit {
         });
     }
     async invokeIt() {
-        const rtn: string = await invoke('logging', { message: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ', level: 4 });
-        this.logger.trace(rtn);
+        this.store.saveData();
 
     }
 

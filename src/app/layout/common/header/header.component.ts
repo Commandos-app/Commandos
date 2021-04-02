@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ErrorService, SettingsService } from '@core/services';
+import { ErrorService } from '@core/services';
 
 @Component({
     selector: 'app-header',
@@ -9,7 +9,6 @@ import { ErrorService, SettingsService } from '@core/services';
 export class HeaderComponent implements OnInit {
 
     constructor(
-        public settingsService: SettingsService,
         public errorService: ErrorService
     ) { }
 

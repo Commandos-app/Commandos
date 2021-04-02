@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
 
     loadRepos(): void {
         this.repositories = this.repos.getRepositories();
+        console.log(`TCL: ~ file: home.component.ts ~ line 29 ~ HomeComponent ~ loadRepos ~ this.repositories`, this.repositories);
     }
 
     openRepository(id: number): void {

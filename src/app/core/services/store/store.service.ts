@@ -1,52 +1,74 @@
+import { LoggerService } from '../logger/logger.service';
 import { Injectable } from '@angular/core';
-//import Store from 'electron-store';
-// import { readTexKtFile, writeFile } from 'tauri/api/fs';
-
-export type RepositorySetting = {
-    id: number;
-    name: string;
-    path: string;
-    tags?: Array<string>;
-};
-
-export type RepositoriesSettings = Array<RepositorySetting>;
-export type DiffFormate = 'side-by-side' | 'line-by-line';
-export type Settins = { [key: string]: any };
-
+import { createDir, readDir, readTextFile, writeFile } from '@tauri-apps/api/fs';
+import { localDataDir } from '@tauri-apps/api/path';
+import { DiffFormate, RepositoriesSettings, Settings } from './store.types';
 
 @Injectable({
     providedIn: 'root'
 })
 export class StoreService {
     //  private store: Store;
-    private data: Settins = {
-        "repositories": [
-            { "id": 1, "name": "multi-repo-command", "path": "D:\\_dev\\_git\\Playground\\multi-repo-command" },
-            { "id": 2, "name": "init", "path": "D:\\_dev\\_repotest\\init" },
-            { "id": 3, "name": "branch", "path": "D:\\_dev\\_repotest\\branch", "tags": ["test"] }
-        ],
-        "darkmode": false,
-        "tags": ["test"]
-    };
 
-    constructor() {
-        // this.store = new Store(/*{ cwd: storepath }*/);
+    private fileName = 'store.json'
+    private data: Settings = {};
+
+    constructor(
+        private logger: LoggerService
+    ) { }
+
+    async loadData(): Promise<void> {
+        const path = await this.getStorePath();
+        console.log(`TCL: ~ file: store.service.ts ~ line 22 ~ StoreService ~ loadData ~ path`, path);
+        this.checkDirIfExistsOrCreate(path);
+        this.data = await this.parseFile(`${path}\\${this.fileName}`);
+        console.log(`TCL: ~ file: store.service.ts ~ line 25 ~ StoreService ~ loadData ~ this.data`, this.data);
+    }
+
+    async saveData(): Promise<void> {
+        const path = await this.getStorePath();
+        var data = JSON.stringify(this.data, null, 2);
+        writeFile({ path: `${path}\\${this.fileName}`, contents: data });
+    }
+
+    private async parseFile(file: string): Promise<Settings> {
+        console.log(`TCL: ~ file: store.service.ts ~ line 33 ~ StoreService ~ parseFile ~ parseFile`);
+        const data = await readTextFile(file);
+        return JSON.parse(data);
+
+    }
+
+    private async getStorePath(): Promise<string> {
+        const basePath = await localDataDir();
+        return `${basePath}dos-commander`;
+    }
+
+    private async checkDirIfExistsOrCreate(path: string): Promise<void> {
+        try {
+            await readDir(path);
+            //
+        } catch (e) {
+            try {
+                this.logger.warn(`Tring to create the settings folder ${e}`);
+                this.createDir(path);
+            }
+            catch (e2) {
+                this.logger.error(e2);
+            }
+        }
+    }
+
+    private async createDir(path: string): Promise<void> {
+        await createDir(path);
     }
 
     get<T = any>(prop: string, defaultValue: T): T {
-        if (!prop) {
+        if (!prop || !this.data) {
             return <any>null;
         }
         prop = prop.toLowerCase();
-        let data = defaultValue;
 
-        if (this.data[prop]) {
-            data = this.data[prop];
-        }
-
-        return data;
-        //return null;
-
+        return this.data[prop] ?? defaultValue;
     }
 
     save<T = any>(prop: string, value: T): void {
@@ -59,24 +81,21 @@ export class StoreService {
     }
 
     getRepositories = (): RepositoriesSettings => this.get<RepositoriesSettings>('repositories', []);
-    saveRepositories = (value: RepositoriesSettings): void => this.save<RepositoriesSettings>('repositories', value);
+    setRepositories = (value: RepositoriesSettings): void => this.save<RepositoriesSettings>('repositories', value);
 
     getDarkMode = (): boolean => this.get<boolean>('darkmode', false);
-    saveDarkMode = (value: boolean): void => this.save<boolean>('darkmode', value);
+    setDarkMode = (value: boolean): void => this.save<boolean>('darkmode', value);
 
-    getAutoFetch = (): boolean => this.get<boolean>('autofetch', false);
-    saveAutoFetch = (value: boolean): void => this.save<boolean>('autofetch', value);
+    getAutoFetch = (): boolean => this.get<boolean>('autofetch', true);
+    setAutoFetch = (value: boolean): void => this.save<boolean>('autofetch', value);
 
-    getGridCount = (): number => this.get<number>('gridcount', 10);
-    saveGridCount = (value: number): void => this.save<number>('gridcount', value);
-
-    getGitExecutablePath = (): string => this.get<string>('gitexecutablepath', 'node_modules/dugite/git/');
-    saveGitExecutablePath = (value: string): void => this.save<string>('gitexecutablepath', value);
+    // getGridCount = (): number => this.get<number>('gridcount', 10);
+    // setGridCount = (value: number): void => this.save<number>('gridcount', value);
 
     getDiff2HtmlOutputFormat = (): DiffFormate => this.get<DiffFormate>('diff2htmloutputformat', 'line-by-line');
-    saveDiff2HtmlOutputFormat = (value: DiffFormate): void => this.save<DiffFormate>('diff2htmloutputformat', value);
+    setDiff2HtmlOutputFormat = (value: DiffFormate): void => this.save<DiffFormate>('diff2htmloutputformat', value);
 
     getTags = (): Array<string> => this.get<Array<string>>('tags', []);
-    saveTags = (value: Array<string>): void => this.save<Array<string>>('tags', value);
+    setTags = (value: Array<string>): void => this.save<Array<string>>('tags', value);
 
 }

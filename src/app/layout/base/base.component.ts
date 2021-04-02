@@ -1,6 +1,6 @@
 import { ErrorService } from '@core/services/error/error.service';
 import { Component, OnInit } from '@angular/core';
-import {  SettingsService, GitService } from '@core/services';
+import { GitService } from '@core/services';
 
 
 @Component({
@@ -13,7 +13,6 @@ export class BaseLayoutComponent implements OnInit {
 
     show = false;
 
-    gitNotSet = true;
     openModal = false;
     currentId = 0;
 
@@ -22,15 +21,12 @@ export class BaseLayoutComponent implements OnInit {
 
     constructor(
         private gitService: GitService,
-        public settingsService: SettingsService,
-
         public errorService: ErrorService
     ) {
 
     }
 
     ngOnInit(): void {
-        this.gitNotSet = !this.settingsService.GitExecutablePath;
     }
 
 
