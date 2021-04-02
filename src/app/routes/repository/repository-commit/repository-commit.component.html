@@ -57,15 +57,18 @@
                         &nbsp;
                         <ng-container *ngIf="node.staged; then staged; else unstaged"></ng-container>
                         <ng-template #staged>
-                            <cds-icon-button class="action" action="flat" size="sm" (click)="unstage(node.file.path)">
+                            <cds-icon-button class="action" action="flat" size="sm" (click)="unstage(node.file.path)"
+                                ariaLabel="unstage file">
                                 <cds-icon shape="minus" class="clickable"></cds-icon>
                             </cds-icon-button>
                         </ng-template>
                         <ng-template #unstaged>
-                            <cds-icon-button class="action" action="flat" size="sm" (click)="undo(node.file)">
+                            <cds-icon-button class="action" action="flat" size="sm" (click)="undo(node.file)"
+                                ariaLabel="undo file">
                                 <cds-icon shape="undo" class="clickable"></cds-icon>
                             </cds-icon-button>
-                            <cds-icon-button class="action" action="flat" size="sm" (click)="stage(node.file.path)">
+                            <cds-icon-button class="action" action="flat" size="sm" (click)="stage(node.file.path)"
+                                ariaLabel="stage file">
                                 <cds-icon shape="plus" class="clickable"></cds-icon>
                             </cds-icon-button>
                         </ng-template>
@@ -80,12 +83,14 @@
                         <!-- <span class="action"> -->
                         <ng-container *ngIf="node.staged; then staged; else unstaged"></ng-container>
                         <ng-template #staged>
-                            <cds-icon-button class="action" action="flat" size="sm" (click)="unstage(node.path)">
+                            <cds-icon-button class="action" action="flat" size="sm" (click)="unstage(node.path)"
+                                ariaLabel="unstage folder">
                                 <cds-icon shape="minus" class="clickable"></cds-icon>
                             </cds-icon-button>
                         </ng-template>
                         <ng-template #unstaged>
-                            <cds-icon-button class="action" action="flat" size="sm" (click)="stage(node.path)">
+                            <cds-icon-button class="action" action="flat" size="sm" (click)="stage(node.path)"
+                                ariaLabel="stage folder">
                                 <cds-icon shape="plus" class="clickable"></cds-icon>
                             </cds-icon-button>
                         </ng-template>

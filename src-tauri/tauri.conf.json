@@ -45,10 +45,12 @@
         "windows": [
             {
                 "title": "DOS-Commander",
-                "width": 900,
-                "height": 600,
+                "width": 1000,
+                "height": 700,
                 "resizable": true,
-                "fullscreen": false
+                "fullscreen": false,
+                "minWidth": 1000,
+                "minHeight": 700
             }
         ],
         "security": {

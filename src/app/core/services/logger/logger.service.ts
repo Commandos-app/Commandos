@@ -34,9 +34,7 @@ export class LoggerService {
         const prefix = this.getPrefix(level);
         console.log(...prefix, message);
 
-        console.log(`TODO logger.service.ts`);
-
-        invoke('tauriPluginLog', {
+        invoke('logging', {
             level,
             message
         });

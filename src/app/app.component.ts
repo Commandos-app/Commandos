@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { ErrorService, LoggerService, SettingsService, GitService } from '@core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { CommanderService, ICommand } from '@shared/services';
-import { invoke } from '@tauri-apps/api/tauri';
 
 @Component({
     selector: 'commander-root',
@@ -33,9 +32,12 @@ export class AppComponent {
         this.translate.setDefaultLang('de');
         this.translate.use('de');
 
+        this.logger.trace(`Starting The Commander`);
+        this.logger.debug(`Starting The Commander`);
         this.logger.info(`Starting The Commander`);
+        this.logger.error(`Starting The Commander`);
+        this.logger.warn(`Starting The Commander`);
 
-        console.log('Run in tauri');
         // if (!process.env.LOCAL_GIT_DIRECTORY) {
         //     this.errorService.setError({
         //         type: 'danger',
@@ -55,8 +57,8 @@ export class AppComponent {
     }
 
     load() {
-        const valu = invoke('getPath');
-        console.log(`TCL: ~ file: app.component.ts ~ line 62 ~ AppComponent ~ load ~ valu`, valu);
+        // const valu = invoke('getPath');
+        // console.log(`TCL: ~ file: app.component.ts ~ line 62 ~ AppComponent ~ load ~ valu`, valu);
     }
 
     private setDarkMode() {
