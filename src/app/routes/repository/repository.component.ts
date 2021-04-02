@@ -27,9 +27,5 @@ export class RepositoryComponent implements OnInit {
             this.repositoryService.loadGitRepository();
         });
     }
-    async invokeIt() {
-        this.store.saveData();
-
-    }
 
 }
