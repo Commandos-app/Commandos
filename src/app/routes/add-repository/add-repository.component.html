@@ -38,8 +38,8 @@
             </cds-checkbox-group>
 
         </cds-form-group>
-        <cds-button (click)="saveRepo()" [disabled]="form.invalid" cds-layout="m-r:lg">
-            <cds-icon shape="plus"></cds-icon>
+        <cds-button (click)="saveRepo()" [disabled]="form.invalid || !form.dirty">
+            <!-- <cds-icon shape="plus"></cds-icon> -->
             Add
         </cds-button>
 

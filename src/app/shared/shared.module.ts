@@ -22,6 +22,7 @@ import { FilterModule } from '@josee9988/filter-pipe-ngx';
 
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkTreeModule } from '@angular/cdk/tree';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
@@ -53,6 +54,7 @@ const modules = [
     // CDK
     OverlayModule,
     CdkTreeModule,
+    ClipboardModule,
 
     // Clarity
     CdsModule,

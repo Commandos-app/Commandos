@@ -1,8 +1,9 @@
 import { selectFolder } from '@shared/functions';
 import { RepositoryService } from './../repository/repository.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoggerService, RepositoriesSettingsService } from '@core/services';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -11,6 +12,8 @@ import { LoggerService, RepositoriesSettingsService } from '@core/services';
     styleUrls: ['./add-repository.component.scss']
 })
 export class AddRepositoryComponent implements OnInit {
+
+    @ViewChild('form') addForm: NgForm;
 
     path = '';
     name = '';
@@ -34,6 +37,7 @@ export class AddRepositoryComponent implements OnInit {
         if (path) {
             this.path = path;
             this.name = name;
+            this.addForm.form.markAsDirty();
         }
     }
 

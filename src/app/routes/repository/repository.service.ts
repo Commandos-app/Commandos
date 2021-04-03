@@ -5,7 +5,7 @@ import { LoggerService } from '@core/services/logger/logger.service';
 import {
     createBranch, deleteLocalBranch, deleteRemoteBranch, getBranches, getCurrentBranch,
     getStatus, renameBranch, stageAll, stageFile, unstageAll,
-    unstageFile, revertFile, checkout, commit, getLog, getLogOfSha
+    unstageFile, revertFile, checkout, commit, getLogMeta, getLogOfSha, getLogMetaDataOfSha
 } from '@git/commands';
 import { parseBranches, parseLog, parseStatus } from '@git/parsers';
 import { IStatusResult, LogItem } from '@git/model';
@@ -166,27 +166,24 @@ export class RepositoryService {
     //#endregion
 
     //#region History
-    async getHistroy(): Promise<Array<LogItem>> {
-        const log = await getLog(this.getPath());
+    async getHistroy(branch = 'HEAD'): Promise<Array<LogItem>> {
+        const log = await getLogMeta(this.getPath(), branch);
         const result = parseLog(log);
 
         return result;
     }
 
-    async getChangedOfSha(sha: string) {
+    async getChangesOfSha(sha: string): Promise<string> {
         return getLogOfSha(this.getPath(), sha);
     }
 
-    async getHistroyOfHeadBranch(): Promise<void> {
-        // const commits = await git.log({
-        //     fs: this.fs,
-        //     dir: this.getPath(),
-        //     depth: this.settingsService.GridCount,
-        //     // ref: '47a070e247f5dbad14037ffa1a5f595e25bd5585'
-        // })
+    async getChangesMetaDataOfSha(sha: string): Promise<LogItem> {
+        const log = await getLogMetaDataOfSha(this.getPath(), sha);
+        const [result] = parseLog(log);
 
-        // return commits;
+        return result;
     }
+
     //#endregion
 
     // loadConfig(): any {

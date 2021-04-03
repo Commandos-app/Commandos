@@ -59,5 +59,6 @@ export class RepositorySettingComponent implements OnInit {
             this.path = path;
             this.name = name;
         }
+        this.settingsForm.form.markAsDirty();
     }
 }

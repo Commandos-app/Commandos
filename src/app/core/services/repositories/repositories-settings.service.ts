@@ -25,6 +25,7 @@ export class RepositoriesSettingsService {
         const repo: RepositorySetting = { id: nextId, name, path };
         repos.push(repo);
         this.store.setRepositories(repos);
+        this.store.saveData();
         return nextId;
     }
 

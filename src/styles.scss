@@ -10,6 +10,7 @@
 @import '~highlight.js/scss/github.scss';
 @import '~diff2html/bundles/css/diff2html.min.css';
 @import './variables';
+@import './theme/history.scss';
 html,
 body {
     margin: 0;
@@ -386,4 +387,10 @@ textarea {
 
 cds-checkbox {
     --cds-global-space-1: 0px;
+}
+
+.copy {
+    &:hover {
+        color: var(--cds-alias-status-info);
+    }
 }
