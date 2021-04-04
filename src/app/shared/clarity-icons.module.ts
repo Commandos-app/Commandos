@@ -10,6 +10,7 @@ import {
     windowRestoreIcon, twoWayArrowsIcon, userIcon
 } from '@cds/core/icon';
 
+import '@cds/core/icon/register.js';
 
 const icons = [
     playIcon, plusIcon, shrinkIcon, noteIcon, timesIcon,
