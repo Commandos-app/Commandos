@@ -5,8 +5,8 @@
 
 .commander-grid-commit {
     display: grid;
-    grid-template-columns: 300px 1px 1fr;
-    gap: 0.75rem;
+    grid-template-columns: 300px 1px 300px 1px 1fr;
+    width: 100%;
 }
 
 .grid-info {

@@ -21,7 +21,7 @@ export async function getLogMeta(repository: string, branch = 'HEAD', limit = 10
     return result;
 }
 
-export async function getLogMetaDataOfSha(repository: string, sha: string): Promise<string> {
+export async function getLogMetadataOfSha(repository: string, sha: string): Promise<string> {
 
     const format = Object.values(logFormaterObject).join('%x00');
 
@@ -58,5 +58,20 @@ export async function getLogOfSha(repository: string, sha: string): Promise<stri
     ];
 
     const result = await runGit(args, repository, 'getLogOfSha');
+    return result;
+}
+
+
+export async function getDiffOfFile(repository: string, path: string, staged: boolean = false): Promise<string> {
+
+    const args = [
+        'diff',
+        '--no-color'
+    ];
+    if (staged) {
+        args.push('--staged');
+    }
+
+    const result = await runGit([...args, path], repository, 'getDiffOfFile');
     return result;
 }

@@ -5,8 +5,8 @@
     }
 }
 
-@for $i from 1 through 50 {
-    .item-#{$i} {
-        padding-left: calc(var(--base-padding) * #{$i});
-    }
-}
+// @for $i from 1 through 50 {
+//     .item-#{$i} {
+//         padding-left: calc(var(--base-padding) * #{$i});
+//     }
+// }

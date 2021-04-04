@@ -5,7 +5,7 @@ import { LoggerService } from '@core/services/logger/logger.service';
 import {
     createBranch, deleteLocalBranch, deleteRemoteBranch, getBranches, getCurrentBranch,
     getStatus, renameBranch, stageAll, stageFile, unstageAll,
-    unstageFile, revertFile, checkout, commit, getLogMeta, getLogOfSha, getLogMetaDataOfSha
+    unstageFile, revertFile, checkout, commit, getLogMeta, getLogOfSha, getLogMetadataOfSha, getDiffOfFile
 } from '@git/commands';
 import { parseBranches, parseLog, parseStatus } from '@git/parsers';
 import { IStatusResult, LogItem } from '@git/model';
@@ -177,10 +177,14 @@ export class RepositoryService {
     }
 
     async getChangesMetaDataOfSha(sha: string): Promise<LogItem> {
-        const log = await getLogMetaDataOfSha(this.getPath(), sha);
+        const log = await getLogMetadataOfSha(this.getPath(), sha);
         const [result] = parseLog(log);
 
         return result;
+    }
+
+    async getDiffOfFile(path: string, staged: boolean): Promise<string> {
+        return getDiffOfFile(this.getPath(), path, staged);
     }
 
     //#endregion

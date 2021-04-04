@@ -46,6 +46,8 @@ export class RepositoryCommitComponent implements OnInit {
     commitMessage = '';
     autofetch = false;
     private hasStaged = false;
+    isLoading = false;
+    changes: string;
 
 
     constructor(
@@ -177,4 +179,9 @@ export class RepositoryCommitComponent implements OnInit {
         this.cd.detectChanges();
     }
 
+    async loadDiff(node: TreeObject) {
+        this.isLoading = true;
+        this.changes = await this.repositoryService.getDiffOfFile(node.file.path, node.staged);
+        this.isLoading = false;
+    }
 }

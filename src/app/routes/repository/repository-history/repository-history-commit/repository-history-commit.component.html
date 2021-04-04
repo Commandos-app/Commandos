@@ -1,17 +1,16 @@
-<div cds-layout="vertical align:stretch" class="commander-full-height">
-    <div class="commander-grid-history commander-full-height">
-        <div class="commander-grid-history-header" *ngIf="!isLoading">
-            <div class="commander-history-title">{{metadata.summary}}</div>
-            <div class="commander-history-author">{{metadata.author}}<cds-icon shape="minus"></cds-icon>
-                <span [cdkCopyToClipboard]="metadata.sha" class="clickable copy">{{metadata.shortSha}}</span>
-                <cds-icon shape="minus"></cds-icon>
-                {{metadata.authorDate | dayJS}}
-            </div>
+<div class="commander-grid-history-detail commander-full-height">
+    <div class="commander-grid-history-header" *ngIf="!isLoading">
+        <div class="commander-history-title">{{metadata.summary}}</div>
+        <div class="commander-history-author">{{metadata.author}}<cds-icon shape="minus"></cds-icon>
+            <span [cdkCopyToClipboard]="metadata.sha" class="clickable copy">{{metadata.shortSha}}</span>
+            <cds-icon shape="minus"></cds-icon>
+            {{metadata.authorDate | dayJS}}
         </div>
-        <cds-divider></cds-divider>
+    </div>
+    <cds-divider></cds-divider>
+    <div>
         <ng-scrollbar class="virtual-scroll">
-            <div scrollViewport [innerHtml]="changes | diff">
-            </div>
+            <div scrollViewport [innerHtml]="changes | diff"></div>
             <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height"
                 *ngIf="isLoading">
                 <cds-progress-circle size="xl"></cds-progress-circle>
