@@ -5,7 +5,7 @@
 
 mod logger;
 
-use crate::logger::{logging_wrapper, init_log};
+use crate::logger::{init_log, logging_wrapper};
 
 fn main() {
   init_log();

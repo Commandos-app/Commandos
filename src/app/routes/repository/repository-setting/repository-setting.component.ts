@@ -49,7 +49,7 @@ export class RepositorySettingComponent implements OnInit {
         const tagSet = new Set([...this.tags, ...this.selectedTags!]);
         const newTags = [...tagSet];
         this.storeService.setTags(newTags);
-        this.storeService.saveData();
+        this.storeService.saveSettings();
         this.settingsForm.form.markAsPristine();
     }
 

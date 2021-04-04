@@ -53,7 +53,7 @@ pub fn init_log() {
 }
 
 #[tauri::command]
-pub fn logging(message: String, level: LogLevel) -> String {
+pub fn logging(message: String, level: LogLevel) {
   match level {
     LogLevel::Trace => trace!("{}", message),
     LogLevel::Debug => debug!("{}", message),
@@ -61,6 +61,4 @@ pub fn logging(message: String, level: LogLevel) -> String {
     LogLevel::Warn => warn!("{}", message),
     LogLevel::Error => error!("{}", message),
   }
-
-  "Hello from Rust!".into()
 }

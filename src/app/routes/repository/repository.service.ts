@@ -86,7 +86,6 @@ export class RepositoryService {
 
     async getCurrentBranch(): Promise<string | void> {
         const currentBranch = await getCurrentBranch(this.getPath());
-        console.log(`TCL: ~ file: repository.service.ts ~ line 92 ~ RepositoryService ~ getCurrentBranch ~ currentBranch`, currentBranch);
         if (currentBranch) {
             this.currentBranch = currentBranch;
         }

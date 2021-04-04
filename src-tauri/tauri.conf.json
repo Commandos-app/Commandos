@@ -50,7 +50,9 @@
                 "resizable": true,
                 "fullscreen": false,
                 "minWidth": 1000,
-                "minHeight": 700
+                "minHeight": 700,
+                "visible": true,
+                "decorations": true
             }
         ],
         "security": {

@@ -47,7 +47,7 @@ export class SettingsComponent implements OnInit {
         else {
             this.renderer.setAttribute(this.document.body, 'cds-theme', '');
         }
-        this.storeService.saveData();
+        this.storeService.saveSettings();
         this.settingsForm.form.markAsPristine();
     }
 

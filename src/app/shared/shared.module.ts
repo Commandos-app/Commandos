@@ -1,8 +1,11 @@
+import { SplashComponent } from './components/splash/splash.component';
 import { DateFormatePipe } from './pipe/date-formate.pipe';
 import { TreeViewComponent } from './components/tree-view/tree-view.component';
 import { CommanderModalComponent } from './components/commander/commander-modal/commander-modal.component';
 import { ButtonControlComponent } from './components/button-control/button-control.component';
 import { CommanderComponent } from './components/commander/commander.component';
+
+
 import { ClarityIconsModule } from './clarity-icons.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgModule } from '@angular/core';
@@ -38,6 +41,7 @@ const components = [
     CommanderModalComponent,
     ButtonControlComponent,
     TreeViewComponent,
+    SplashComponent,
 
     DateFormatePipe
 

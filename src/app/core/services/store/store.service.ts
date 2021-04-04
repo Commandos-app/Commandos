@@ -17,22 +17,19 @@ export class StoreService {
         private logger: LoggerService
     ) { }
 
-    async loadData(): Promise<void> {
+    async loadSettings(): Promise<void> {
         const path = await this.getStorePath();
-        console.log(`TCL: ~ file: store.service.ts ~ line 22 ~ StoreService ~ loadData ~ path`, path);
         this.checkDirIfExistsOrCreate(path);
         this.data = await this.parseFile(`${path}\\${this.fileName}`);
-        console.log(`TCL: ~ file: store.service.ts ~ line 25 ~ StoreService ~ loadData ~ this.data`, this.data);
     }
 
-    async saveData(): Promise<void> {
+    async saveSettings(): Promise<void> {
         const path = await this.getStorePath();
         var data = JSON.stringify(this.data, null, 2);
         writeFile({ path: `${path}\\${this.fileName}`, contents: data });
     }
 
     private async parseFile(file: string): Promise<Settings> {
-        console.log(`TCL: ~ file: store.service.ts ~ line 33 ~ StoreService ~ parseFile ~ parseFile`);
         const data = await readTextFile(file);
         return JSON.parse(data);
 

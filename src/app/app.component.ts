@@ -2,7 +2,7 @@ import { CommanderModalService } from '@shared/services';
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
-import { ErrorService, LoggerService, GitService, StoreService } from '@core/services';
+import { ErrorService, LoggerService, GitService, StoreService, SplashScreenResolver } from '@core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { CommanderService, ICommand } from '@shared/services';
 
@@ -25,13 +25,11 @@ export class AppComponent {
         private renderer: Renderer2,
         public commanderModalService: CommanderModalService,
         private storeService: StoreService
-
     ) {
         this.load();
     }
 
-    async load() {
-        await this.storeService.loadData();
+    load() {
         this.gitService.registerGitCommands();
         this.translate.setDefaultLang('de');
         this.translate.use('de');

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ErrorService } from '@core/services';
+import { appWindow } from '@tauri-apps/api/window'
 
 @Component({
     selector: 'app-header',
@@ -16,11 +17,11 @@ export class HeaderComponent implements OnInit {
     }
 
     minimize(): void {
-        // this.electronService.minimize();
+        appWindow.minimize();
     }
 
     maximize(): void {
-        // this.electronService.maximize();
+        appWindow.maximize();
     }
 
     restore(): void {
@@ -28,6 +29,6 @@ export class HeaderComponent implements OnInit {
     }
 
     closeClient(): void {
-        // this.electronService.close();
+        appWindow.close();
     }
 }
