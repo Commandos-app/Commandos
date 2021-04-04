@@ -57,6 +57,7 @@ export class AppComponent {
         this.registerNewRepoCommand();
     }
 
+
     private setDarkMode() {
         if (this.storeService.getDarkMode()) {
             this.renderer.setAttribute(this.document.body, 'cds-theme', 'dark');

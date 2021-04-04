@@ -1,3 +1,4 @@
+import { DiffPipe } from './pipe/diff.pipe';
 import { SplashComponent } from './components/splash/splash.component';
 import { DateFormatePipe } from './pipe/date-formate.pipe';
 import { TreeViewComponent } from './components/tree-view/tree-view.component';
@@ -20,7 +21,6 @@ import { RouterModule } from '@angular/router';
 
 import { AutosizeModule } from 'ngx-autosize';
 
-// import { CdsModule } from '@cds/angular';
 import { FilterModule } from '@josee9988/filter-pipe-ngx';
 
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -43,7 +43,8 @@ const components = [
     TreeViewComponent,
     SplashComponent,
 
-    DateFormatePipe
+    DateFormatePipe,
+    DiffPipe
 
 ];
 

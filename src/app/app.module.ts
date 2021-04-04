@@ -20,7 +20,11 @@ import '@cds/core/forms/register.js';
 import '@cds/core/input/register.js';
 import '@cds/core/select/register.js';
 import '@cds/core/textarea/register.js';
+import '@cds/core/tag/register.js';
+//preview
+import '@cds/core/divider/register.js';
 import '@cds/core/accordion/register.js';
+import '@cds/core/progress-circle/register.js';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {

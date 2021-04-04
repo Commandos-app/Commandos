@@ -1,7 +1,6 @@
 import { StoreService } from '@core/services';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import * as Diff2Html from 'diff2html/lib-esm/diff2html';
 import { RepositoryService } from '../../repository.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { LogItem } from '@git/model';
@@ -14,15 +13,13 @@ import { LogItem } from '@git/model';
 export class RepositoryHistoryCommitComponent implements OnInit {
 
     sha!: string;
-    outputHtml!: SafeHtml;
     isLoading = true;
     metadata: LogItem;
+    changes: string;
 
     constructor(
         private route: ActivatedRoute,
-        private repositoryService: RepositoryService,
-        private sanitizer: DomSanitizer,
-        private storeService: StoreService
+        private repositoryService: RepositoryService
     ) { }
 
     ngOnInit(): void {
@@ -34,17 +31,9 @@ export class RepositoryHistoryCommitComponent implements OnInit {
 
     async load(): Promise<void> {
         this.isLoading = true;
-        this.outputHtml = '';
-        const completeChange = await this.repositoryService.getChangesOfSha(this.sha);
+        this.changes = await this.repositoryService.getChangesOfSha(this.sha);
         this.metadata = await this.repositoryService.getChangesMetaDataOfSha(this.sha);
-        const outputHtml = Diff2Html.html(completeChange, {
-            drawFileList: false,
-            matching: 'lines',
-            outputFormat: this.storeService.getDiff2HtmlOutputFormat(),
-            renderNothingWhenEmpty: true
-        });
         this.isLoading = false;
-        this.outputHtml = this.sanitizer.bypassSecurityTrustHtml(outputHtml);
     }
 
     copy() {
