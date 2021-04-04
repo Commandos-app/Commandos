@@ -156,6 +156,7 @@ export class RepositoryCommitComponent implements OnInit {
         // await this.repositoryService.gitRepository.createCommitOnHead([], author, author, message);
         await this.repositoryService.commit(this.commitMessage);
         this.commitMessage = '';
+        this.changes = null;
         await this.load();
     }
 
