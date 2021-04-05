@@ -172,11 +172,8 @@ export class RepositoryCommitComponent implements OnInit {
     }
 
     async unstage(path: string): Promise<void> {
-        console.log(`[ unsatge ] Begin `);
         await this.repositoryService.unstageFile(path);
-        console.log(`[ unsatge ] unstageFile `);
         await this.load();
-        console.log(`[ unsatge ] load `);
         this.cd.detectChanges();
     }
 

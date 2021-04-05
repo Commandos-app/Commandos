@@ -94,11 +94,19 @@ cds-icon-button {
     display: flex;
     align-items: center;
     height: 26px;
+    padding: 0 0 0 5px;
     .comander-tree-row-text {
-        margin: 3px 5px 0 5px;
+        margin: 0 5px 0 5px;
+        white-space: nowrap;
     }
+}
+
+.commander-tree-file-row {
+    display: grid !important;
+    grid-template-columns: 16px 1fr 27px 24px 24px;
 }
 
 .comander-tree-title {
     padding-left: 10px;
+    background: var(--cds-global-color-warm-gray-100);
 }

@@ -28,8 +28,9 @@
     </div>
     <cds-divider orientation="vertical"></cds-divider>
     <div>
-        <commander-tree-view [treeData]="fileTree" [itemTemplate]="itemTmpl"></commander-tree-view>
-
+        <ng-scrollbar class="virtual-scroll">
+            <commander-tree-view [treeData]="fileTree" [itemTemplate]="itemTmpl"></commander-tree-view>
+        </ng-scrollbar>
 
         <ng-template #itemTmpl let-node>
             <ng-container [ngSwitch]="node.type">
@@ -37,12 +38,12 @@
                     <b>{{node.name}}</b>
                 </div>
 
-                <div *ngSwitchCase="'file'" class="comander-tree-row">
+                <div *ngSwitchCase="'file'" class="comander-tree-row commander-tree-file-row">
                     <cds-icon shape="file"></cds-icon>
                     <ng-container *ngIf="node.file.isRenamed">
                         {{node.file.oldPath}} ->
                     </ng-container>
-                    <span class="comander-tree-row-text clickable" (click)="loadDiff(node)">
+                    <span cds-text="secondary" class="comander-tree-row-text clickable" (click)="loadDiff(node)">
                         {{node.file.name}}
                     </span>
                     <b>
@@ -53,7 +54,6 @@
                         <span *ngIf="node.file.isCopied" class="copied">C</span>
                         <span *ngIf="node.file.isUntracked" class="new">A</span>]
                     </b>
-                    &nbsp;
                     <ng-container *ngIf="node.staged; then staged; else unstaged"></ng-container>
                     <ng-template #staged>
                         <cds-icon-button class="action" action="flat" size="sm" (click)="unstage(node.file.path)"
@@ -97,6 +97,7 @@
                 </div>
 
 
+                <cds-divider></cds-divider>
             </ng-container>
         </ng-template>
 
