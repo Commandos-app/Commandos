@@ -1,4 +1,4 @@
-import { IStatusResult } from './../../../git/model/status';
+import { IStatusResult } from '@git/model';
 import { LoggerService } from '@core/services/logger/logger.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RepositoriesSettingsService, StoreService } from '@core/services';
@@ -6,13 +6,16 @@ import { RepositoryService } from '../repository.service';
 import { filter, first } from 'rxjs/operators';
 import { interval } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { basename } from '@shared/functions';
+import { basename, Differ } from '@shared/functions';
 
 
 export type ChangedFile = {
     name: string;
     path: string;
     oldName?: string;
+    isNew: boolean;
+    isUntracked: boolean;
+    isRenamed: boolean;
 }
 
 export type GroupedChangedFile = {
@@ -47,8 +50,6 @@ export class RepositoryCommitComponent implements OnInit {
     autofetch = false;
     private hasStaged = false;
     isLoading = false;
-    changes: string;
-
 
     constructor(
         private repositoriesSettings: RepositoriesSettingsService,
@@ -156,7 +157,6 @@ export class RepositoryCommitComponent implements OnInit {
         // await this.repositoryService.gitRepository.createCommitOnHead([], author, author, message);
         await this.repositoryService.commit(this.commitMessage);
         this.commitMessage = '';
-        this.changes = null;
         await this.load();
     }
 
@@ -178,8 +178,13 @@ export class RepositoryCommitComponent implements OnInit {
     }
 
     async loadDiff(node: TreeObject) {
+        console.log(`TCL: ~ file: repository-commit.component.ts ~ line 180 ~ RepositoryCommitComponent ~ loadDiff ~ node`, node);
         this.isLoading = true;
-        this.changes = await this.repositoryService.getDiffOfFile(node.file.path, node.staged);
+        const newOrUntracked = node.file.isNew || node.file.isUntracked;
+        const changes = await this.repositoryService.getDiffOfFile(node.file.path, newOrUntracked, node.file.isRenamed, node.staged);
+
+        const outputFormat = this.storeService.getDiff2HtmlOutputFormat()
+        Differ('diffoutput', changes, outputFormat);
         this.isLoading = false;
     }
 }

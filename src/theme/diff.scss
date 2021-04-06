@@ -1,0 +1,35 @@
+.d2h-wrapper {
+    *,
+    :after,
+    :before,
+    :host {
+        box-sizing: border-box !important;
+    }
+}
+
+.d2h-file-header,
+.d2h-file-stats {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+[cds-theme=dark] {
+    .d2h-file-header,
+    .d2h-file-stats {
+        background: var(--cds-alias-object-app-background);
+    }
+}
+
+table td:not([align]),
+table th:not([align]) {
+    text-align: inherit;
+}
+
+.d2h-wrapper {
+    margin-bottom: 200px;
+}
+
+.d2h-file-list-header {
+    padding: 5px 10px 0;
+}

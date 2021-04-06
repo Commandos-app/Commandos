@@ -23,19 +23,25 @@
         </div>
         <div class="spacer"></div>
         <div icon>
-            <cds-icon-button action="flat" class="icon-button"
+            <!-- <cds-icon-button action="flat" class="icon-button"
                 [routerLink]="['/repository', repositoryService.currentId, 'commit']" routerLinkActive="active"
                 ariaLabel="repository changes">
                 <cds-icon shape="commit" size="24"></cds-icon>
-            </cds-icon-button>
+            </cds-icon-button> -->
+            <cds-button action="flat" class="icon-button"
+                [routerLink]="['/repository', repositoryService.currentId, 'commit']" routerLinkActive="active">Changes
+            </cds-button>
         </div>
         <div class="spacer"></div>
         <div>
-            <cds-icon-button action="flat" class="icon-button"
+            <!-- <cds-icon-button action="flat" class="icon-button"
                 [routerLink]="['/repository', repositoryService.currentId, 'history']" routerLinkActive="active"
                 ariaLabel="branch history">
                 <cds-icon shape="history" size="24"></cds-icon>
-            </cds-icon-button>
+            </cds-icon-button> -->
+            <cds-button action="flat" class="icon-button"
+                [routerLink]="['/repository', repositoryService.currentId, 'history']" routerLinkActive="active">History
+            </cds-button>
         </div>
         <div class="spacer"></div>
         <div>
@@ -44,6 +50,10 @@
                 ariaLabel="repository setting">
                 <cds-icon shape="cog" size="24"></cds-icon>
             </cds-icon-button>
+            <!-- <cds-button action="flat" class="icon-button"
+                [routerLink]="['/repository', repositoryService.currentId, 'setting']" routerLinkActive="active">
+                Settings
+            </cds-button> -->
         </div>
     </ng-container>
     <div></div>

@@ -2,9 +2,10 @@ import { StoreService } from '@core/services';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { RepositoryService } from '../../repository.service';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { LogItem } from '@git/model';
+import { Differ } from '@shared/functions';
 
+declare var Diff2HtmlUI: any;
 @Component({
     selector: 'commander-repository-history-commit',
     templateUrl: './repository-history-commit.component.html',
@@ -15,11 +16,11 @@ export class RepositoryHistoryCommitComponent implements OnInit {
     sha!: string;
     isLoading = true;
     metadata: LogItem;
-    changes: string;
 
     constructor(
         private route: ActivatedRoute,
-        private repositoryService: RepositoryService
+        private repositoryService: RepositoryService,
+        private storeService: StoreService
     ) { }
 
     ngOnInit(): void {
@@ -31,12 +32,15 @@ export class RepositoryHistoryCommitComponent implements OnInit {
 
     async load(): Promise<void> {
         this.isLoading = true;
-        this.changes = await this.repositoryService.getChangesOfSha(this.sha);
+        const value = await this.repositoryService.getChangesOfSha(this.sha);
         this.metadata = await this.repositoryService.getChangesMetaDataOfSha(this.sha);
+
+        const outputFormat = this.storeService.getDiff2HtmlOutputFormat()
+        Differ('diffoutput', value, outputFormat);
         this.isLoading = false;
     }
 
     copy() {
-        
+
     }
 }

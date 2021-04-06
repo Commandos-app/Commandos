@@ -62,16 +62,27 @@ export async function getLogOfSha(repository: string, sha: string): Promise<stri
 }
 
 
-export async function getDiffOfFile(repository: string, path: string, staged: boolean = false): Promise<string> {
+export async function getDiffOfFile(repository: string, path: string, isNew: boolean, isRenamed: boolean, staged: boolean = false): Promise<string> {
 
     const args = [
         'diff',
+        '--no-ext-diff',
+        '--patch-with-raw',
         '--no-color'
     ];
+
+    if (isNew && !staged) {
+        args.push('--no-index', '--', '/dev/null');
+        // } else if (isRenamed) {
+        //     args.push('--');
+    } else {
+        args.push('HEAD', '--');
+    }
+
     if (staged) {
         args.push('--staged');
     }
 
-    const result = await runGit([...args, '--', path], repository, 'getDiffOfFile');
+    const result = await runGit([...args, path], repository, 'getDiffOfFile');
     return result;
 }

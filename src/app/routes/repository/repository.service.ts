@@ -183,8 +183,8 @@ export class RepositoryService {
         return result;
     }
 
-    async getDiffOfFile(path: string, staged: boolean): Promise<string> {
-        return getDiffOfFile(this.getPath(), path, staged);
+    async getDiffOfFile(path: string, isNew: boolean, isRenamed: boolean, staged: boolean): Promise<string> {
+        return getDiffOfFile(this.getPath(), path, isNew, isRenamed, staged);
     }
 
     //#endregion

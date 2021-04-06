@@ -1,4 +1,3 @@
-import { DiffPipe } from './pipe/diff.pipe';
 import { SplashComponent } from './components/splash/splash.component';
 import { DateFormatePipe } from './pipe/date-formate.pipe';
 import { TreeViewComponent } from './components/tree-view/tree-view.component';
@@ -43,8 +42,7 @@ const components = [
     TreeViewComponent,
     SplashComponent,
 
-    DateFormatePipe,
-    DiffPipe
+    DateFormatePipe
 
 ];
 

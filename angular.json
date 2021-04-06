@@ -35,7 +35,9 @@
                         "styles": [
                             "src/styles.scss"
                         ],
-                        "scripts": []
+                        "scripts": [
+                            "node_modules/diff2html/bundles/js/diff2html-ui.min.js"
+                        ]
                     },
                     "configurations": {
                         "production": {
@@ -98,7 +100,9 @@
                         "styles": [
                             "src/styles.scss"
                         ],
-                        "scripts": []
+                        "scripts": [
+                            "node_modules/diff2html/bundles/js/diff2html-ui.min.js"
+                        ]
                     }
                 },
                 "lint": {

@@ -40,10 +40,11 @@
 
                 <div *ngSwitchCase="'file'" class="comander-tree-row commander-tree-file-row">
                     <cds-icon shape="file"></cds-icon>
-                    <ng-container *ngIf="node.file.isRenamed">
-                        {{node.file.oldPath}} ->
-                    </ng-container>
+
                     <span cds-text="secondary" class="comander-tree-row-text clickable" (click)="loadDiff(node)">
+                        <ng-container *ngIf="node.file.isRenamed">
+                            {{node.file.oldPath}} ->
+                        </ng-container>
                         {{node.file.name}}
                     </span>
                     <b>
@@ -108,7 +109,7 @@
     <cds-divider orientation="vertical"></cds-divider>
     <div class="commander-full-height">
         <ng-scrollbar class="virtual-scroll">
-            <div scrollViewport [innerHtml]="changes | diff"></div>
+            <div scrollViewport id="diffoutput"></div>
             <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height"
                 *ngIf="isLoading">
                 <cds-progress-circle size="xl"></cds-progress-circle>
