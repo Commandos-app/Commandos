@@ -72,6 +72,6 @@ export async function getDiffOfFile(repository: string, path: string, staged: bo
         args.push('--staged');
     }
 
-    const result = await runGit([...args, path], repository, 'getDiffOfFile');
+    const result = await runGit([...args, '--', path], repository, 'getDiffOfFile');
     return result;
 }
