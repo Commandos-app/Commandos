@@ -47,7 +47,6 @@ export class RepositoryCommitComponent implements OnInit {
     fileTree: GroupedChangedFiles = [];
     formDisabled = false;
     commitMessage = '';
-    autofetch = false;
     private hasStaged = false;
     isLoading = false;
 
@@ -95,7 +94,6 @@ export class RepositoryCommitComponent implements OnInit {
         this.fileTree = [...filesStaged, ...filesUnstaged];
         this.formDisabled = this.fileTree.length === 0;
         this.hasStaged = filesStaged.length > 0;
-        this.autofetch = this.storeService.getAutoFetch();
     }
 
     private groupChangedFiles(files: IStatusResult[], title: string, staged: boolean): GroupedChangedFiles {

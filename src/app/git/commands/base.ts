@@ -13,7 +13,7 @@ export async function runGit(args: string[], path: string, name: string): Promis
     const commandName = `${name}: git ${args.join(' ')}`;
 
     const cmd = new Command('git', args);
-
+    // cmd.execute();
     const result = await GitPerf.measure(commandName, () => cmd.execute())
         .catch(err => {
             // If this is an exception thrown by Node.js (as opposed to
@@ -22,6 +22,8 @@ export async function runGit(args: string[], path: string, name: string): Promis
             throw new Error(`Failed to execute ${name}: ${err.code}`);
         });
 
+    console.log(`TCL: ~ file: base.ts ~ line 29 ~ runGit ~ result`, result);
+    console.log(`TCL: ~ file: base.ts ~ line 29 ~ runGit ~ result`, result.stdout);
     return result.stdout;
 
 

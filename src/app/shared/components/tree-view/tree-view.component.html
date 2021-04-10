@@ -6,7 +6,7 @@
 
 <ng-template #recursiveListTmpl let-list="list" let-index="index">
     <ng-container *ngFor="let node of list">
-        <div class="item item-{{index}}">
+        <div class="commander-tree-item commander-tree-item-{{index}}">
 
             <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: node  }">
             </ng-container>
@@ -18,4 +18,3 @@
         </ng-container>
     </ng-container>
 </ng-template>
-

@@ -9,9 +9,8 @@
 @import 'tippy.js/dist/tippy.css';
 @import '~highlight.js/styles/github.css';
 @import '~diff2html/bundles/css/diff2html.min.css';
-@import './variables';
-@import './theme/history.scss';
-@import './theme/diff.scss';
+@import './theme/variables';
+@import './theme/import';
 html,
 body {
     margin: 0;
@@ -67,10 +66,6 @@ body {
 .commander-button-control-backdrop {
     background: rgba(0, 0, 0, .32);
     top: calc(var(--commander-header-height) + var(--commander-sub-header-height));
-}
-
-.commander-layout-fixed-side {
-    width: 300px;
 }
 
 [cds-text*=body] {

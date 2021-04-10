@@ -5,7 +5,7 @@
 
 .commander-grid-commit {
     display: grid;
-    grid-template-columns: 300px 1px 300px 1px 1fr;
+    grid-template-columns: 320px 1px 1fr;
     width: 100%;
 }
 
@@ -64,49 +64,6 @@ cds-icon-button {
     }
 }
 
-.commander-tree-invisible {
-    display: none;
-}
-
-.commander-tree ul,
-.commander-tree li {
-    margin-top: 0;
-    margin-bottom: 0;
-    list-style-type: none;
-}
-
-.commander-tree-node {
-    display: block;
-    div {
-        line-height: 25px;
-    }
-}
-
-.commander-tree-node .commander-tree-node {
-    padding-left: 20px;
-}
-
-.commander-tree-folder {
-    margin-left: 5px;
-}
-
-.comander-tree-row {
-    display: flex;
-    align-items: center;
-    height: 26px;
-    padding: 0 0 0 5px;
-    .comander-tree-row-text {
-        margin: 0 5px 0 5px;
-        white-space: nowrap;
-    }
-}
-
-.commander-tree-file-row {
-    display: grid !important;
-    grid-template-columns: 16px 1fr 27px 24px 24px;
-}
-
-.comander-tree-title {
-    padding-left: 10px;
-    background: var(--cds-global-color-warm-gray-100);
+.commander-commit-message-box+.virtual-scroll {
+    height: calc(100% - 154px);
 }

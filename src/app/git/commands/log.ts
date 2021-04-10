@@ -68,6 +68,7 @@ export async function getDiffOfFile(repository: string, path: string, isNew: boo
         'diff',
         '--no-ext-diff',
         '--patch-with-raw',
+        //   '-z',
         '--no-color'
     ];
 
