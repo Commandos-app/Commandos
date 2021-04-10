@@ -95,19 +95,18 @@
                 <cds-divider></cds-divider>
             </ng-container>
         </ng-template>
-
-        <ng-container *ngIf="fileTree.length  === 0 ">
-            <h1 class="gray-col">No changes</h1>
-        </ng-container>
     </div>
     <cds-divider orientation="vertical"></cds-divider>
     <div class="commander-full-height">
-        <ng-scrollbar class="virtual-scroll">
+        <ng-scrollbar class="virtual-scroll" *ngIf="fileTree.length  !== 0 ">
             <div scrollViewport id="diffoutput"></div>
             <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height"
                 *ngIf="isLoading">
                 <cds-progress-circle size="xl"></cds-progress-circle>
             </div>
         </ng-scrollbar>
+        <ng-container *ngIf="fileTree.length  === 0 ">
+            <h1 class="gray-col">No changes</h1>
+        </ng-container>
     </div>
 </div>
