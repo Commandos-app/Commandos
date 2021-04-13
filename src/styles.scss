@@ -138,6 +138,9 @@ code {
 }
 
 #css-override {
+    [cds-control][_disabled] {
+        --color: hsl(198, 10%, 71%);
+    }
     .ng-select {
         .ng-select-container {
             --border-color: var(--cds-alias-object-border-color, var(--cds-global-color-construction-200, #cbd4d8));
@@ -402,4 +405,12 @@ cds-checkbox {
     &:hover {
         color: var(--cds-alias-status-info);
     }
+}
+
+.smily-center {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0, 0, 0, .10);
 }

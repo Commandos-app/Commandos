@@ -65,6 +65,12 @@
     background: var(--cds-global-color-warm-gray-100);
 }
 
+.commander-tree-item-0 {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
 .commander-tree-item {
     --base-padding: 10px;
     &:hover {

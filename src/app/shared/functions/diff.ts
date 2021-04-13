@@ -2,7 +2,6 @@
 declare var Diff2HtmlUI: any;
 
 export function Differ(id: string, value: string, outputFormat: string) {
-    console.log(`TCL: ~ file: diff.ts ~ line 5 ~ Differ ~ value`, value);
     if (!value) {
         return;
     }
