@@ -1,9 +1,10 @@
+import { BehaviorSubject } from 'rxjs';
 import { RepositoryService } from '@routes/repository/repository.service';
-import { FieldDefinition, SelectedRepositoryTypes } from './../types';
+import { SelectedRepositoryTypes } from './../types';
 import { RepositoriesSettings, StoreService } from '@core/services';
 import { RepositoriesSettingsService } from '@core/services';
 import { CommanderModalService } from './commander-modal.service';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ChangeDetectorRef } from '@angular/core';
 import { getBranches } from '@git/commands';
 import { parseBranches } from '@git/parsers';
 
@@ -30,7 +31,8 @@ export class CommanderModalComponent implements OnInit {
         public commanderModalService: CommanderModalService,
         private repositoriesSettingsService: RepositoriesSettingsService,
         private storeService: StoreService,
-        public repositoryService: RepositoryService
+        public repositoryService: RepositoryService,
+        private cd: ChangeDetectorRef
     ) { }
 
     ngOnInit(): void {
@@ -76,13 +78,6 @@ export class CommanderModalComponent implements OnInit {
 
     }
 
-    private addAll() {
-        this.items.push({
-            type: 'All',
-            text: 'All Repositories'
-        });
-    }
-
     private loadSelectedRepos(selected: SelectedRepositoryTypes): RepositoriesSettings {
         switch (selected.type) {
             case 'Tag':
@@ -96,8 +91,15 @@ export class CommanderModalComponent implements OnInit {
         }
     }
 
-    private async loadTags(): Promise<void> {
-        const tags = await this.storeService.getTags();
+    private addAll(): void {
+        this.items.push({
+            type: 'All',
+            text: 'All Repositories'
+        });
+    }
+
+    private loadTags(): void {
+        const tags = this.storeService.getTags();
         const mapedTags = tags.map<SelectedRepositoryTypes>(tag => ({ type: 'Tag', text: tag }));
 
         this.items.push(...mapedTags);
