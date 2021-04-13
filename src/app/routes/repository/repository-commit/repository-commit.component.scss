@@ -64,6 +64,15 @@ cds-icon-button {
     }
 }
 
-.commander-commit-message-box+.virtual-scroll {
-    height: calc(100% - 154px);
+.commander-commit-area {
+    display: grid;
+    grid-template-rows: 97px 1px 1fr;
+    .virtual-scroll {
+        // height: calc(100% - 91px);
+    }
+}
+
+cds-textarea {
+    --cds-global-layout-space-xxl: 32px;
+    --padding: var(--cds-global-space-4)
 }

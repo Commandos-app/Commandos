@@ -1,12 +1,12 @@
 import { IStatusResult } from '@git/model';
 import { LoggerService } from '@core/services/logger/logger.service';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { RepositoriesSettingsService, StoreService } from '@core/services';
 import { RepositoryService } from '../repository.service';
 import { filter, first } from 'rxjs/operators';
 import { interval } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { basename, Differ } from '@shared/functions';
+import { basename, Differ, sleep } from '@shared/functions';
 
 
 export type ChangedFile = {
@@ -35,6 +35,7 @@ export type TreeObject = {
 
 export type GroupedChangedFiles = Array<GroupedChangedFile>;
 
+type LoadingState = 'default' | 'loading' | 'success' | 'error';
 
 @UntilDestroy()
 @Component({
@@ -49,6 +50,8 @@ export class RepositoryCommitComponent implements OnInit {
     commitMessage = '';
     private hasStaged = false;
     isLoading = false;
+    isCommiting: LoadingState = 'default';
+
 
     constructor(
         private repositoriesSettings: RepositoriesSettingsService,
@@ -141,12 +144,16 @@ export class RepositoryCommitComponent implements OnInit {
         return [{ name: title, type: 'title', children: result }];
     }
 
+    @HostListener('window:keyup.control.enter', ['$event'])
     async commit(): Promise<void> {
 
+        this.isCommiting = 'loading';
         // const { name, email } = await this.repositoryService.loadConfig();
-        if (this.fileTree.length === 0) {
+        if (this.fileTree.length === 0 || this.commitMessage === '') {
             return;
         }
+        this.isCommiting = 'loading';
+        this.cd.detectChanges();
         if (!this.hasStaged) {
             await this.repositoryService.stageAll();
         }
@@ -156,6 +163,10 @@ export class RepositoryCommitComponent implements OnInit {
         await this.repositoryService.commit(this.commitMessage);
         this.commitMessage = '';
         await this.load();
+        await sleep(300);
+        this.isCommiting = 'success';
+        await sleep(1000);
+        this.isCommiting = 'default';
     }
 
     async undo(file: ChangedFile): Promise<void> {
@@ -176,13 +187,15 @@ export class RepositoryCommitComponent implements OnInit {
     }
 
     async loadDiff(node: TreeObject) {
-        console.log(`TCL: ~ file: repository-commit.component.ts ~ line 180 ~ RepositoryCommitComponent ~ loadDiff ~ node`, node);
         this.isLoading = true;
         const newOrUntracked = node.file.isNew || node.file.isUntracked;
         const changes = await this.repositoryService.getDiffOfFile(node.file.path, newOrUntracked, node.file.isRenamed, node.staged);
 
         const outputFormat = this.storeService.getDiff2HtmlOutputFormat()
         Differ('diffoutput', changes, outputFormat);
+
         this.isLoading = false;
     }
+
+
 }

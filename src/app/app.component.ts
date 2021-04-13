@@ -34,11 +34,7 @@ export class AppComponent {
         this.translate.setDefaultLang('de');
         this.translate.use('de');
 
-        this.logger.trace(`Starting The Commander`);
-        this.logger.debug(`Starting The Commander`);
         this.logger.info(`Starting The Commander`);
-        this.logger.error(`Starting The Commander`);
-        this.logger.warn(`Starting The Commander`);
 
 
         // if (!process.env.LOCAL_GIT_DIRECTORY) {
