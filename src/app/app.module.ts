@@ -21,7 +21,11 @@ import '@cds/core/input/register.js';
 import '@cds/core/select/register.js';
 import '@cds/core/textarea/register.js';
 import '@cds/core/tag/register.js';
+import '@cds/core/modal/register.js';
+import '@cds/core/radio/register.js';
+
 //preview
+import '@cds/core/file/register.js';
 import '@cds/core/divider/register.js';
 import '@cds/core/accordion/register.js';
 import '@cds/core/progress-circle/register.js';
