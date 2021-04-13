@@ -45,16 +45,17 @@ export async function getLogMetadataOfSha(repository: string, sha: string): Prom
 export async function getLogOfSha(repository: string, sha: string): Promise<string> {
 
     const args = [
-        'log',
+        'diff-tree',
+        '-p',
         sha,
-        '-m',
-        '-1',
-        '--first-parent',
-        '--patch-with-raw',
-        '-z',
+        // '-m',
+        // '-1',
+        // '--first-parent',
+        // '--patch-with-raw',
+        // '-z',
         //        `--format=${format}`,
         '--no-color',
-        '--'
+        //'--'
     ];
 
     const result = await runGit(args, repository, 'getLogOfSha');

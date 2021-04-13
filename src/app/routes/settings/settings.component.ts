@@ -1,7 +1,9 @@
+
 import { Component, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ErrorService, StoreService } from '@core/services';
 import { DOCUMENT } from '@angular/common';
 import { NgForm } from '@angular/forms';
+import { UserConfig, RepositoryService } from '@routes/repository/repository.service';
 
 @Component({
     selector: 'app-settings',
@@ -17,18 +19,25 @@ export class SettingsComponent implements OnInit {
     autoFetch: boolean;
     darkMode: boolean;
     diffFormate: boolean;
+    user: UserConfig = {
+        name: '',
+        email: '',
+        global: true
+    }
 
     constructor(
         private errorService: ErrorService,
         @Inject(DOCUMENT) private document: Document,
         private renderer: Renderer2,
-        private storeService: StoreService
+        private storeService: StoreService,
+        private repositoryService: RepositoryService
     ) { }
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
         this.autoFetch = this.storeService.getAutoFetch();
         this.darkMode = this.storeService.getDarkMode();
         this.diffFormate = this.storeService.getDiff2HtmlOutputFormat() === 'side-by-side';
+        this.user = await this.repositoryService.loadGlobalUserConfig();
     }
 
     openDevTools(): void {
@@ -48,7 +57,9 @@ export class SettingsComponent implements OnInit {
             this.renderer.setAttribute(this.document.body, 'cds-theme', '');
         }
         this.storeService.saveSettings();
+        this.repositoryService.saveGlobalUserConfig(this.user);
         this.settingsForm.form.markAsPristine();
+        this.ngOnInit();
     }
 
 }

@@ -2,7 +2,7 @@ import { selectFolder } from '@shared/functions';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { RepositoriesSettingsService, StoreService } from '@core/services';
-import { RepositoryService } from './../repository.service';
+import { RepositoryService, UserConfig } from './../repository.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -18,6 +18,12 @@ export class RepositorySettingComponent implements OnInit {
     tags: Array<string> = [];
     path = '';
     name = '';
+    origin = '';
+    user: UserConfig = {
+        name: '',
+        email: '',
+        global: true
+    }
 
     constructor(
         private repositoriesSettings: RepositoriesSettingsService,
@@ -26,11 +32,13 @@ export class RepositorySettingComponent implements OnInit {
         private repositoryService: RepositoryService
     ) { }
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
         this.tags = this.storeService.getTags();
         this.selectedTags = this.repositoryService.repositorySetting.tags;
         this.path = this.repositoryService.repositorySetting.path;
         this.name = this.repositoryService.repositorySetting.name;
+        this.user = await this.repositoryService.loadUserConfig();
+        this.origin = await this.repositoryService.getOriginUrl();
     }
 
     removeRepo(): void {
@@ -39,7 +47,7 @@ export class RepositorySettingComponent implements OnInit {
     }
 
 
-    save(): void {
+    async save(): Promise<void> {
         this.repositoryService.repositorySetting.path = this.path;
         this.repositoryService.repositorySetting.name = this.name;
         this.repositoryService.repositorySetting.tags = this.selectedTags;
@@ -49,8 +57,16 @@ export class RepositorySettingComponent implements OnInit {
         const tagSet = new Set([...this.tags, ...this.selectedTags!]);
         const newTags = [...tagSet];
         this.storeService.setTags(newTags);
-        this.storeService.saveSettings();
+        await this.storeService.saveSettings();
+
+        if (!this.user.global) {
+            await this.repositoryService.saveLocalUserConfig(this.user);
+        } else {
+            await this.repositoryService.unsetLocalUserConfig();
+        }
+
         this.settingsForm.form.markAsPristine();
+        this.ngOnInit();
     }
 
     async openDialog(): Promise<void> {

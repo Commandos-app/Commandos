@@ -1,0 +1,19 @@
+#css-override {
+    cds-form-group[card] {
+        padding: 20px;
+        border: 1px solid var(--cds-global-color-gray-400); // border-radius: 5px;
+        background: #fff;
+    }
+    &[cds-theme=dark] {
+        cds-form-group[card] {
+            border: 1px solid var(--cds-global-color-blue-800);
+            background: var(--cds-alias-object-app-background);
+        }
+    }
+}
+
+.form-full-divider {
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px);
+}

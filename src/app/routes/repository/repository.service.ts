@@ -10,6 +10,7 @@ import {
 import { parseBranches, parseLog, parseStatus } from '@git/parsers';
 import { IStatusResult, LogItem } from '@git/model';
 import { ChangedFile } from './repository-commit/repository-commit.component';
+import { getOriginUrl, getUserMail, getUsername, setUserMail, setUsername } from '@git/commands/config';
 
 export type NewBranch = {
     pushRemote?: boolean;
@@ -26,6 +27,7 @@ export type ChangeBranch = {
 export type Branch = { name: string; remote?: boolean };
 export type Branches = Array<Branch>;
 
+export type UserConfig = { name: string; email: string, global: boolean };
 
 @Injectable({
     providedIn: 'root'
@@ -150,7 +152,6 @@ export class RepositoryService {
     //#endregion
 
     //#region Commit
-    // async getStatus(): Promise<IStatusResult | null> {
     async getStatus(): Promise<IStatusResult[]> {
         const status = await getStatus(this.getPath());
         const result = parseStatus(status);
@@ -189,36 +190,53 @@ export class RepositoryService {
 
     //#endregion
 
-    // loadConfig(): any {
-    //     const globalPath = getGitConfigPath('global')
-    //     let config = {}
-    //     if (this.electronService.fs.existsSync(globalPath)) {
-    //         config = parseConfig.sync(globalPath);
-    //     }
+    //#regin Config
+    async loadUserConfig(): Promise<UserConfig> {
+        const user = await this.loadGlobalUserConfig();
 
-    //     if (this.repositorySetting.path) {
-    //         const repoConfig = path.join(this.repositorySetting.path, '.git', 'config');
-    //         const newConfig = parseConfig.sync(repoConfig);
-    //         extend(true, config, newConfig);
-    //     }
+        const localName = await getUsername(this.getPath(), false);
+        const localEmail = await getUserMail(this.getPath(), false);
 
-    //     return config;
-    // }
+        if (localName || localEmail) {
+            user.global = false;
+            user.name = localName;
+            user.email = localEmail;
+        }
 
-    async loadConfig(): Promise<any> {
-        // const globalConfig = await this.electronService.git.Config.openDefault();
-        // const globalName = await globalConfig.getStringBuf('user.name');
-        // const globalEmail = await globalConfig.getStringBuf('user.email');
-
-        // const localConfig = await this.gitRepository.config();
-        // const localName = await localConfig.getStringBuf('user.name');
-        // const localEmail = await localConfig.getStringBuf('user.email');
-
-        // const name = localName || globalName;
-        // const email = globalEmail || localEmail;
-
-        // return { name, email };
+        return user;
     }
+
+    //! Refactor this to a global git service
+    async loadGlobalUserConfig(): Promise<UserConfig> {
+        let name = await getUsername(undefined, true);
+        let email = await getUserMail(undefined, true);
+
+        return {
+            name,
+            email,
+            global: true
+        };
+    }
+
+    async getOriginUrl(): Promise<string> {
+        return getOriginUrl(this.getPath());
+    }
+
+    async saveLocalUserConfig(user: UserConfig): Promise<void> {
+        setUsername(this.getPath(), user.name, false);
+        setUserMail(this.getPath(), user.email, false);
+    }
+
+    async saveGlobalUserConfig(user: UserConfig): Promise<void> {
+        setUsername(undefined, user.name, true);
+        setUserMail(undefined, user.email, true);
+    }
+
+    async unsetLocalUserConfig(): Promise<void> {
+        setUsername(this.getPath(), undefined, false);
+        setUserMail(this.getPath(), undefined, false);
+    }
+    //#endregion
 
     async stageAll(): Promise<void> {
         return await stageAll(this.getPath());

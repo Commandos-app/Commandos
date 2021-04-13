@@ -1,13 +1,7 @@
 <div cds-layout="vertical align:stretch p:lg">
-    <p cds-text="heading" cds-layout="m-t:none m-b:lg">Settings</p>
     <form #form="ngForm" cds-layout="m-t:md">
-        <cds-form-group layout="horizontal" cds-layout="m-b:lg">
-            <!-- <cds-select>
-                <label>Number of grid entries</label>
-                <select>
-                    <option *ngFor="let c of gridCounts" [ngValue]="c">{{c}}</option>
-                </select>
-            </cds-select> -->
+        <p cds-text="title" cds-layout="m-t:none m-b:lg">Settings</p>
+        <cds-form-group card layout="horizontal" cds-layout="m-b:lg">
 
             <cds-checkbox-group>
                 <label>Dark Mode</label>
@@ -32,6 +26,27 @@
                     <input type="checkbox" name="autofetch" [(ngModel)]="autoFetch" />
                 </cds-checkbox>
             </cds-checkbox-group>
+
+        </cds-form-group>
+        <p cds-text="title" cds-layout="m-t:none m-b:lg">Git global user</p>
+        <cds-form-group card layout="horizontal" cds-layout="m-b:lg">
+
+            <cds-input>
+                <label>Name</label>
+                <input type="text" name="gitname" required [(ngModel)]="user.name" />
+                <cds-control-message status="error" *ngIf="form.controls['gitname']?.touched && user.name.length === 0">
+                    Name not defined
+                </cds-control-message>
+            </cds-input>
+
+            <cds-input>
+                <label>Email</label>
+                <input type="text" name="gitemail" required [(ngModel)]="user.email" />
+                <cds-control-message status="error"
+                    *ngIf="form.controls['gitemail']?.touched && user.email.length === 0">
+                    Email not defined
+                </cds-control-message>
+            </cds-input>
 
         </cds-form-group>
         <div cds-layout="horizontal gap:sm">

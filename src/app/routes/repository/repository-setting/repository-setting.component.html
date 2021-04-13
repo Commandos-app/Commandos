@@ -1,7 +1,9 @@
 <div cds-layout="vertical p:lg">
     <div cds-layout="vertical align:stretch">
         <form #form="ngForm" cds-layout="m-t:md">
-            <cds-form-group layout="horizontal" cds-layout="m-b:lg">
+            <p cds-text="title" cds-layout="m-t:none m-b:lg">Repositorie Settings</p>
+            <!-- <cds-divider cds-layout="m-b:lg"></cds-divider> -->
+            <cds-form-group card layout="horizontal" cds-layout="m-b:lg">
 
                 <cds-input-group layout="vertical">
                     <label>Path</label>
@@ -9,8 +11,7 @@
                         <label>Path</label>
                         <input type="text" name="path" required [(ngModel)]="path" />
                         <cds-control-message status="error" *ngIf="form.controls['path']?.touched && path.length === 0">
-                            Path
-                            not selected
+                            Path not selected
                         </cds-control-message>
                     </cds-input>
                     <cds-file cds-layout="align:shrink">
@@ -22,10 +23,8 @@
                 <cds-input>
                     <label>Repository Name</label>
                     <input type="text" name="name" required [(ngModel)]="name" />
-                    <cds-control-message status="error" *ngIf="form.controls['name']?.touched && name.length === 0">Name
-                        of
-                        repository not
-                        defined
+                    <cds-control-message status="error" *ngIf="form.controls['name']?.touched && name.length === 0">
+                        Name of repository not defined
                     </cds-control-message>
                 </cds-input>
 
@@ -36,6 +35,49 @@
                         appendTo="body" class="tag-select">
                     </ng-select>
                 </cds-control>
+
+            </cds-form-group>
+            <p cds-text="title" cds-layout="m-t:none m-b:lg">Git Settings</p>
+            <!-- <cds-divider cds-layout="m-b:lg"></cds-divider> -->
+            <cds-form-group card layout="horizontal" cds-layout="m-b:lg">
+
+                <cds-input-group layout="vertical">
+                    <label>Git Remote (origin)</label>
+                    <cds-input cds-layout="m-r:xs">
+                        <label>Path</label>
+                        <input type="text" name="oirign" [(ngModel)]="origin" />
+                    </cds-input>
+                </cds-input-group>
+                <cds-divider class="form-full-divider"></cds-divider>
+                <cds-radio-group layout="horizontal-inline">
+                    <label>Git user</label>
+                    <cds-radio>
+                        <label>Global</label>
+                        <input type="radio" name="gituser" [(ngModel)]="user.global" [value]="true" />
+                    </cds-radio>
+                    <cds-radio>
+                        <label>Local</label>
+                        <input type="radio" name="gituser" [(ngModel)]="user.global" [value]="false" />
+                    </cds-radio>
+                </cds-radio-group>
+
+                <cds-input>
+                    <label>Name</label>
+                    <input type="text" name="gitname" required [disabled]="user.global" [(ngModel)]="user.name" />
+                    <cds-control-message status="error"
+                        *ngIf="form.controls['gitname']?.touched && user.name.length === 0">
+                        Name not defined
+                    </cds-control-message>
+                </cds-input>
+
+                <cds-input>
+                    <label>Email</label>
+                    <input type="text" name="gitemail" required [disabled]="user.global" [(ngModel)]="user.email" />
+                    <cds-control-message status="error"
+                        *ngIf="form.controls['gitemail']?.touched && user.email.length === 0">
+                        Email not defined
+                    </cds-control-message>
+                </cds-input>
 
             </cds-form-group>
             <div cds-layout="horizontal gap:sm">
