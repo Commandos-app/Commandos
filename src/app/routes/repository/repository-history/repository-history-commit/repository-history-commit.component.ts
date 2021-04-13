@@ -5,7 +5,6 @@ import { RepositoryService } from '../../repository.service';
 import { LogItem } from '@git/model';
 import { Differ } from '@shared/functions';
 
-declare var Diff2HtmlUI: any;
 @Component({
     selector: 'commander-repository-history-commit',
     templateUrl: './repository-history-commit.component.html',
