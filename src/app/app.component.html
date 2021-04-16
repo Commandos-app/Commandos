@@ -1,3 +1,24 @@
-<router-outlet></router-outlet>
+<div class="commander-layout commander-app-layout" cds-layout="vertical align:stretch">
+    <header class="commander-header">
+        <app-header></app-header>
+    </header>
+    <div class="commander-navigation" cds-layout="">
+        <app-subnav></app-subnav>
+    </div>
+    <div cds-layout="horizontal align:vertical-stretch wrap:none" class="commander-global-content">
+        <!-- <nav class="commander-sidenav" cds-layout="">
+            <app-sidenav></app-sidenav>
+        </nav> -->
+        <!-- <cds-divider class="commander-divider" orientation="vertical"></cds-divider> -->
+        <div cds-layout="vertical align:stretch">
+            <div class="commander-content commander-scrollable-content">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+    <!-- <footer class="commander-footer">
+        footer!
+    </footer> -->
+</div>
 <commander-splash></commander-splash>
 <app-commander-modal *ngIf="commanderModalService.open"></app-commander-modal>

@@ -8,8 +8,7 @@ import {
     unstageFile, revertFile, checkout, commit, getLogMeta, getLogOfSha, getLogMetadataOfSha, getDiffOfFile
 } from '@git/commands';
 import { parseBranches, parseLog, parseStatus } from '@git/parsers';
-import { IStatusResult, LogItem } from '@git/model';
-import { ChangedFile } from './repository-commit/repository-commit.component';
+import { IStatusResult, LogItem, ChangedFile } from '@git/model';
 import { getOriginUrl, getUserMail, getUsername, setUserMail, setUsername } from '@git/commands/config';
 
 export type NewBranch = {
@@ -238,29 +237,28 @@ export class RepositoryService {
     }
     //#endregion
 
+    //#region commit operations
     async stageAll(): Promise<void> {
-        return await stageAll(this.getPath());
+        return stageAll(this.getPath());
     }
 
     async unstageAll(): Promise<void> {
-        return await unstageAll(this.getPath());
+        return unstageAll(this.getPath());
     }
 
-
     async addFile(path: string): Promise<any> {
-        return await stageFile(path, this.getPath());
+        return stageFile(path, this.getPath());
     }
 
     async unstageFile(path: string): Promise<any> {
-        return await unstageFile(path, this.getPath());
-
+        return unstageFile(path, this.getPath());
     }
-
 
     async revertFile(file: ChangedFile): Promise<any> {
-        return await revertFile(file, this.getPath());
+        // Check if Added then delete!
+        return revertFile(file, this.getPath());
     }
-
+    //#endregion 
 
     private getPath(): string {
         return this.repositorySetting?.path?.replace(/\\\\/g, '/');

@@ -3,10 +3,13 @@
     height: 100%;
 }
 
-.commander-grid-commit {
-    display: grid;
-    grid-template-columns: 320px 1px 1fr;
-    width: 100%;
+// .commander-grid-commit {
+//     display: grid;
+//     grid-template-columns: 320px 1px 1fr;
+//     width: 100%;
+// }
+.ninja-content {
+    height: 100%;
 }
 
 .grid-info {
@@ -67,6 +70,7 @@ cds-icon-button {
 .commander-commit-area {
     display: grid;
     grid-template-rows: 97px 1px 1fr;
+    height: 100%;
     .virtual-scroll {
         // height: calc(100% - 91px);
     }

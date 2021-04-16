@@ -1,3 +1,4 @@
+import { RepositorySetting } from '@core/services';
 import { RepositoryService } from './../repository/repository.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -25,10 +26,15 @@ export class HomeComponent implements OnInit {
 
     loadRepos(): void {
         this.repositories = this.repos.getRepositories();
-        console.log(`TCL: ~ file: home.component.ts ~ line 29 ~ HomeComponent ~ loadRepos ~ this.repositories`, this.repositories);
     }
 
     openRepository(id: number): void {
         this.router.navigate(['repository', id]);
+    }
+
+    openContext(repo: RepositorySetting, $event: Event) {
+        console.log(`TCL: ~ file: home.component.ts ~ line 36 ~ HomeComponent ~ openContext ~ repo`, repo);
+        $event.preventDefault();
+        $event.stopPropagation();
     }
 }

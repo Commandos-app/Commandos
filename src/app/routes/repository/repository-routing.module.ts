@@ -5,33 +5,27 @@ import { RepositoryHistoryComponent } from './repository-history/repository-hist
 import { RepositoryCommitComponent } from './repository-commit/repository-commit.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BaseLayoutComponent } from '@layout/base/base.component';
+
 import { RepositoryComponent } from './repository.component';
 
 const routes: Routes = [
     {
-        path: '',
-        component: BaseLayoutComponent,
+        path: ':id',
+        component: RepositoryComponent,
         children: [
+            { path: 'commit', component: RepositoryCommitComponent },
+            { path: 'branches', component: RepositoryBranchComponent },
             {
-                path: ':id',
-                component: RepositoryComponent,
+                path: 'history', component: RepositoryHistoryComponent,
                 children: [
-                    { path: 'commit', component: RepositoryCommitComponent },
-                    { path: 'branches', component: RepositoryBranchComponent },
-                    {
-                        path: 'history', component: RepositoryHistoryComponent,
-                        children: [
-                            { path: ':sha', component: RepositoryHistoryCommitComponent }
-                        ]
-                    },
-                    { path: 'setting', component: RepositorySettingComponent },
-                    { path: '', redirectTo: 'commit', pathMatch: 'full' }
-                ],
+                    { path: ':sha', component: RepositoryHistoryCommitComponent }
+                ]
+            },
+            { path: 'setting', component: RepositorySettingComponent },
+            { path: '', redirectTo: 'commit', pathMatch: 'full' }
+        ],
 
 
-            }
-        ]
     }
 ];
 

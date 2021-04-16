@@ -27,6 +27,16 @@
                 </cds-checkbox>
             </cds-checkbox-group>
 
+            <cds-input>
+                <label>Pane size</label>
+                <input type="text" name="panesize" required [(ngModel)]="paneSize" />
+                <cds-control-message status="error" *ngIf="form.controls['panesize']?.touched && paneSize === 0">
+                    Pane size not defined
+                </cds-control-message>
+                <cds-control-message status="error" *ngIf="paneSize < 300">
+                    It is recommended to have a size of 300.
+                </cds-control-message>
+            </cds-input>
         </cds-form-group>
         <p cds-text="title" cds-layout="m-t:none m-b:lg">Git global user</p>
         <cds-form-group card layout="horizontal" cds-layout="m-b:lg">
@@ -50,7 +60,8 @@
 
         </cds-form-group>
         <div cds-layout="horizontal gap:sm">
-            <cds-button (click)="save()" [disabled]="form.invalid || !form.dirty">Save</cds-button>
+            <cds-button (click)="save()" [loadingState]="saveState" [disabled]="form.invalid || !form.dirty">Save
+            </cds-button>
             <cds-button status="success" (click)="openDevTools()">Open DevTools</cds-button>
         </div>
     </form>

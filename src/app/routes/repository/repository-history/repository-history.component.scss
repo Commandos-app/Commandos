@@ -5,20 +5,6 @@
 
 .commander-grid-history {
     overflow: hidden;
-    position: relative;
-    display: grid;
-    grid-template-columns: 300px 1px 1fr; // gap: 0.75rem;
+    position: relative; // display: grid;
+    // grid-template-columns: 300px 1px 1fr; // gap: 0.75rem;
 }
-
-// ::ng-deep {
-// ng-scrollbar.virtual-scroll {
-//     --scrollbar-size: 8px;
-//     --scrollbar-thumb-color: gray;
-//     --scrollbar-hover-size: 12px;
-//     --scrollbar-track-color: rgba(0, 0, 0, 0.05);
-//     --scrollbar-border-radius: 10px;
-//     height: 100%;
-//     max-height: 100%;
-//     overflow: hidden;
-// }
-// }

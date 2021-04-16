@@ -1,3 +1,4 @@
+import { ChangedFile } from './../model/file';
 
 import { runGit } from "./base";
 
@@ -24,9 +25,9 @@ export async function unstageFile(file: string, repository: string): Promise<any
 }
 
 
-export async function revertFile(file: any, repository: string): Promise<any> {
+export async function revertFile(file: ChangedFile, repository: string): Promise<any> {
     let args = [];
-    if (file.status === 'untracked') {
+    if (file.isUntracked) {
         args = [
             'clean',
             '-f',

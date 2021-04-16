@@ -83,6 +83,9 @@ export class StoreService {
     getDarkMode = (): boolean => this.get<boolean>('darkmode', false);
     setDarkMode = (value: boolean): void => this.set<boolean>('darkmode', value);
 
+    getPaneSize = (): number => this.get<number>('panesize', 300);
+    setPaneSize = (value: number): void => this.set<number>('panesize', value);
+
     getAutoFetch = (): boolean => this.get<boolean>('autofetch', true);
     setAutoFetch = (value: boolean): void => this.set<boolean>('autofetch', value);
 

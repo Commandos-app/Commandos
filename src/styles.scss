@@ -221,7 +221,7 @@ code {
     .d2h-file-wrapper {
         border: none;
     }
-    .comander-navigation {
+    .commander-navigation {
         height: var(--commander-sub-header-height);
         background: var(--cds-global-color-warm-gray-100);
         flex-grow: initial;
@@ -288,9 +288,6 @@ code {
             background: var(--cds-global-color-gray-300);
         }
     }
-    .commander-scroll-overflow {
-        overflow-x: hidden;
-    }
     .button-active {
         .commander-button-control-dropdown {
             background: var(--cds-alias-status-info);
@@ -312,7 +309,7 @@ code {
         display: flex;
     }
     &[cds-theme=dark] {
-        .comander-navigation {
+        .commander-navigation {
             background: var(--cds-global-color-blue-900);
         }
         .commander-header {
@@ -387,6 +384,10 @@ header {
 
 .clickable {
     cursor: pointer;
+}
+
+.default-cursor {
+    cursor: default;
 }
 
 textarea {

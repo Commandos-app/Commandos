@@ -1,120 +1,128 @@
 <div class="commander-grid-commit commander-full-height">
 
-    <div class="commander-commit-area">
-        <div class="commander-commit-message-box" cds-layout="m-b:sm">
-            <form #form="ngForm">
-                <cds-form-group layout="vertical">
-                    <cds-textarea cds-layout="vertical p-l:xs p-r:xs">
-                        <label></label>
-                        <textarea [(ngModel)]="commitMessage" rows="3" name="commit" id="commit"
-                            [disabled]="formDisabled" placeholder="Message"></textarea>
-                    </cds-textarea>
-                </cds-form-group>
+    <commander-split-layout>
+        <div class="commander-commit-area" sidebar>
+            <div class="commander-commit-message-box" cds-layout="m-b:sm">
+                <form #form="ngForm">
+                    <cds-form-group layout="vertical">
+                        <cds-textarea cds-layout="vertical p-l:xs p-r:xs">
+                            <label></label>
+                            <textarea [(ngModel)]="commitMessage" rows="3" name="commit" id="commit"
+                                [disabled]="formDisabled" placeholder="Message"></textarea>
+                        </cds-textarea>
+                    </cds-form-group>
 
-                <div cds-layout="horizontal gap:sm align-items:bottom align:right m-t:xs m-r:sm">
-                    <cds-button action="flat" status="success" [loadingState]="isCommiting" size="sm" (click)="commit()"
-                        [disabled]="formDisabled">
-                        Commit
-                    </cds-button>
-                    <cds-icon-button (click)="load()" size="sm" action="flat" cds-layout="m-r:sm" aria-label="refresh">
-                        <cds-icon shape="refresh" size="14"></cds-icon>
-                    </cds-icon-button>
-                </div>
-            </form>
-        </div>
-        <cds-divider orientation="horizontal"></cds-divider>
-        <ng-scrollbar class="virtual-scroll">
-            <ng-container *ngIf="fileTree.length  === 0 ">
-                <p class="gray-col" cds-text="section" cds-layout="m:md">No changes</p>
-            </ng-container>
-            <commander-tree-view [treeData]="fileTree" [itemTemplate]="itemTmpl"></commander-tree-view>
-        </ng-scrollbar>
-
-        <ng-template #itemTmpl let-node>
-            <ng-container [ngSwitch]="node.type">
-                <div *ngSwitchCase="'title'" class="comander-tree-row comander-tree-title">
-                    <b>{{node.name}}</b>
-                </div>
-
-                <div *ngSwitchCase="'file'" class="comander-tree-row commander-tree-file-row">
-                    <cds-icon shape="file"></cds-icon>
-
-                    <span cds-text="secondary" class="comander-tree-row-text clickable" (click)="loadDiff(node)">
-                        <ng-container *ngIf="node.file.isRenamed">
-                            {{node.file.oldPath}} ->
-                        </ng-container>
-                        {{node.file.name}}
-                    </span>
-                    <ng-container *ngIf="node.staged; then staged; else unstaged"></ng-container>
-                    <ng-template #staged>
-                        <div>
-                            <!-- Placeholder ! -->
-                        </div>
-                        <cds-icon-button class="action" action="flat" size="sm" (click)="unstage(node.file.path)"
-                            aria-label="unstage file">
-                            <cds-icon shape="minus" class="clickable"></cds-icon>
+                    <div cds-layout="horizontal gap:sm align-items:bottom align:right m-t:xs m-r:sm">
+                        <cds-button action="flat" status="success" [loadingState]="isCommiting" size="sm"
+                            (click)="commit()" [disabled]="formDisabled">
+                            Commit
+                        </cds-button>
+                        <cds-icon-button (click)="load()" size="sm" action="flat" cds-layout="m-r:sm"
+                            aria-label="refresh">
+                            <cds-icon shape="refresh" size="14"></cds-icon>
                         </cds-icon-button>
-                    </ng-template>
-                    <ng-template #unstaged>
-                        <cds-icon-button class="action" action="flat" size="sm" (click)="undo(node.file)"
-                            aria-label="undo file">
-                            <cds-icon shape="undo" class="clickable"></cds-icon>
-                        </cds-icon-button>
-                        <cds-icon-button class="action" action="flat" size="sm" (click)="stage(node.file.path)"
-                            aria-label="stage file">
-                            <cds-icon shape="plus" class="clickable"></cds-icon>
-                        </cds-icon-button>
-                    </ng-template>
-                    <b cds-text="right">
-                        [<span *ngIf="node.file.isNew" class="new">A</span>
-                        <span *ngIf="node.file.isDeleted" class="deleted">D</span>
-                        <span *ngIf="node.file.isModified" class="modified">M</span>
-                        <span *ngIf="node.file.isRenamed" class="renamed">R</span>
-                        <span *ngIf="node.file.isCopied" class="copied">C</span>
-                        <span *ngIf="node.file.isUntracked" class="new">A</span>]
-                    </b>
-                </div>
-
-                <div *ngSwitchDefault class="comander-tree-row commander-tree-folder-row">
-                    <cds-icon shape="folder-open" solid="true"></cds-icon>
-                    <span class="comander-tree-row-text">
-                        {{node.name}}
-                    </span>
-
-                    <!-- <span class="action"> -->
-                    <ng-container *ngIf="node.staged; then staged; else unstaged"></ng-container>
-                    <ng-template #staged>
-                        <cds-icon-button class="action" action="flat" size="sm" (click)="unstage(node.path)"
-                            aria-label="unstage folder">
-                            <cds-icon shape="minus" class="clickable"></cds-icon>
-                        </cds-icon-button>
-                    </ng-template>
-                    <ng-template #unstaged>
-                        <cds-icon-button class="action" action="flat" size="sm" (click)="stage(node.path)"
-                            aria-label="stage folder">
-                            <cds-icon shape="plus" class="clickable"></cds-icon>
-                        </cds-icon-button>
-                    </ng-template>
-                    <!-- </span> -->
-                </div>
-
-
-                <cds-divider></cds-divider>
-            </ng-container>
-        </ng-template>
-    </div>
-    <cds-divider orientation="vertical"></cds-divider>
-    <div class="commander-full-height">
-        <div *ngIf="fileTree.length  === 0 " class="smily-center">
-            <cds-icon shape="happy-face" size="xxl"></cds-icon>
-        </div>
-        <ng-scrollbar class="virtual-scroll" *ngIf="fileTree.length  !== 0 ">
-            <div scrollViewport id="diffoutput"></div>
-            <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height"
-                *ngIf="isLoading">
-                <cds-progress-circle size="xl"></cds-progress-circle>
+                    </div>
+                </form>
             </div>
-        </ng-scrollbar>
+            <cds-divider orientation="horizontal"></cds-divider>
+            <ng-scrollbar class="virtual-scroll">
+                <ng-container *ngIf="fileTree.length  === 0 ">
+                    <p class="gray-col" cds-text="section" cds-layout="m:md">No changes</p>
+                </ng-container>
+                <commander-tree-view [treeData]="fileTree" [itemTemplate]="itemTmpl"></commander-tree-view>
 
-    </div>
+            </ng-scrollbar>
+
+        </div>
+
+        <div class="commander-full-height" content>
+            <div *ngIf="fileTree.length  === 0 " class="smily-center">
+                <cds-icon shape="happy-face" size="xxl"></cds-icon>
+            </div>
+            <ng-scrollbar class="virtual-scroll" *ngIf="fileTree.length  !== 0 ">
+                <div scrollViewport id="diffoutput"></div>
+                <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height"
+                    *ngIf="isLoading">
+                    <cds-progress-circle size="xl"></cds-progress-circle>
+                </div>
+            </ng-scrollbar>
+
+        </div>
+    </commander-split-layout>
+
 </div>
+
+
+
+<ng-template #itemTmpl let-node>
+    <ng-container [ngSwitch]="node.type">
+        <div *ngSwitchCase="'title'" class="comander-tree-row comander-tree-title">
+            <b>{{node.name}}</b>
+        </div>
+
+        <div *ngSwitchCase="'file'" class="comander-tree-row commander-tree-file-row">
+            <cds-icon shape="file"></cds-icon>
+
+            <span cds-text="secondary" class="comander-tree-row-text clickable" (click)="loadDiff(node)">
+                <ng-container *ngIf="node.file.isRenamed">
+                    {{node.file.oldPath}} ->
+                </ng-container>
+                {{node.file.name}}
+            </span>
+            <ng-container *ngIf="node.staged; then staged; else unstaged"></ng-container>
+            <ng-template #staged>
+                <div>
+                    <!-- Placeholder ! -->
+                </div>
+                <cds-icon-button class="action" action="flat" size="sm" (click)="unstage(node.file.path)"
+                    aria-label="unstage file">
+                    <cds-icon shape="minus" class="clickable"></cds-icon>
+                </cds-icon-button>
+            </ng-template>
+            <ng-template #unstaged>
+                <cds-icon-button class="action" action="flat" size="sm" (click)="undo(node.file)"
+                    aria-label="undo file">
+                    <cds-icon shape="undo" class="clickable"></cds-icon>
+                </cds-icon-button>
+                <cds-icon-button class="action" action="flat" size="sm" (click)="stage(node.file.path)"
+                    aria-label="stage file">
+                    <cds-icon shape="plus" class="clickable"></cds-icon>
+                </cds-icon-button>
+            </ng-template>
+            <b cds-text="right">
+                [<span *ngIf="node.file.isNew" class="new">A</span>
+                <span *ngIf="node.file.isDeleted" class="deleted">D</span>
+                <span *ngIf="node.file.isModified" class="modified">M</span>
+                <span *ngIf="node.file.isRenamed" class="renamed">R</span>
+                <span *ngIf="node.file.isCopied" class="copied">C</span>
+                <span *ngIf="node.file.isUntracked" class="new">A</span>]
+            </b>
+        </div>
+
+        <div *ngSwitchDefault class="comander-tree-row commander-tree-folder-row">
+            <cds-icon shape="folder-open" solid="true"></cds-icon>
+            <span class="comander-tree-row-text">
+                {{node.name}}
+            </span>
+
+            <!-- <span class="action"> -->
+            <ng-container *ngIf="node.staged; then staged; else unstaged"></ng-container>
+            <ng-template #staged>
+                <cds-icon-button class="action" action="flat" size="sm" (click)="unstage(node.path)"
+                    aria-label="unstage folder">
+                    <cds-icon shape="minus" class="clickable"></cds-icon>
+                </cds-icon-button>
+            </ng-template>
+            <ng-template #unstaged>
+                <cds-icon-button class="action" action="flat" size="sm" (click)="stage(node.path)"
+                    aria-label="stage folder">
+                    <cds-icon shape="plus" class="clickable"></cds-icon>
+                </cds-icon-button>
+            </ng-template>
+            <!-- </span> -->
+        </div>
+
+
+        <cds-divider></cds-divider>
+    </ng-container>
+</ng-template>

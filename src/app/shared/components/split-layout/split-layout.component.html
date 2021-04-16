@@ -1,0 +1,11 @@
+<as-split direction="horizontal" unit="pixel" [gutterSize]="5">
+    <!-- [gutterStep]="50" -->
+    <as-split-area [size]="paneSize" [minSize]="paneSize">
+        <ng-content select="[sidebar]"></ng-content>
+    </as-split-area>
+
+    <as-split-area [size]="$any('*')">
+        <ng-content select="[content]"></ng-content>
+    </as-split-area>
+
+</as-split>

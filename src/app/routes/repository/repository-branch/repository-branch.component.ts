@@ -45,7 +45,11 @@ export class RepositoryBranchComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.repositoryService.loaded$.pipe(filter(x => x), first())
+        this.repositoryService.loaded$
+            .pipe(
+                filter(x => x), first(),
+                untilDestroyed(this)
+            )
             .subscribe(() => {
                 console.log(`TCL: ~ file: repository-branch.component.ts ~ line 51 ~ RepositoryBranchComponent ~ ngOnInit ~ loaded`);
                 this.repositoryService.getBranches();

@@ -7,3 +7,5 @@ export * from './store/store.types';
 export * from './store/splash-screen.resolver';
 
 export * from './git-commander/git.service';
+
+export * from './tauri/tauri.service';

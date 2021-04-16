@@ -45,7 +45,7 @@
                     <label>Git Remote (origin)</label>
                     <cds-input cds-layout="m-r:xs">
                         <label>Path</label>
-                        <input type="text" name="oirign" [(ngModel)]="origin" />
+                        <input type="text" name="oirign" placeholer="no origin set" [(ngModel)]="origin" />
                     </cds-input>
                 </cds-input-group>
                 <cds-divider class="form-full-divider"></cds-divider>
@@ -81,7 +81,8 @@
 
             </cds-form-group>
             <div cds-layout="horizontal gap:sm">
-                <cds-button (click)="save()" [disabled]="form.invalid || !form.dirty">Save</cds-button>
+                <cds-button (click)="save()" [loadingState]="saveState" [disabled]="form.invalid || !form.dirty">Save
+                </cds-button>
                 <cds-button status="danger" (click)="removeRepo()">Remove Repository</cds-button>
             </div>
         </form>

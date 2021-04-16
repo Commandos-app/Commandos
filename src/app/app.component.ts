@@ -24,7 +24,8 @@ export class AppComponent {
         @Inject(DOCUMENT) private document: Document,
         private renderer: Renderer2,
         public commanderModalService: CommanderModalService,
-        private storeService: StoreService
+        private storeService: StoreService,
+        
     ) {
         this.load();
     }

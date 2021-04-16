@@ -1,4 +1,4 @@
-import { selectFolder } from '@shared/functions';
+import { selectFolder, sleep, LoadingState } from '@shared/functions';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { RepositoriesSettingsService, StoreService } from '@core/services';
@@ -18,12 +18,13 @@ export class RepositorySettingComponent implements OnInit {
     tags: Array<string> = [];
     path = '';
     name = '';
-    origin = '';
+    origin: string;
     user: UserConfig = {
         name: '',
         email: '',
         global: true
-    }
+    };
+    saveState: LoadingState = 'default';
 
     constructor(
         private repositoriesSettings: RepositoriesSettingsService,
@@ -39,6 +40,7 @@ export class RepositorySettingComponent implements OnInit {
         this.name = this.repositoryService.repositorySetting.name;
         this.user = await this.repositoryService.loadUserConfig();
         this.origin = await this.repositoryService.getOriginUrl();
+        this.settingsForm.form.markAsPristine();
     }
 
     removeRepo(): void {
@@ -48,6 +50,7 @@ export class RepositorySettingComponent implements OnInit {
 
 
     async save(): Promise<void> {
+        this.saveState = 'loading';
         this.repositoryService.repositorySetting.path = this.path;
         this.repositoryService.repositorySetting.name = this.name;
         this.repositoryService.repositorySetting.tags = this.selectedTags;
@@ -65,7 +68,12 @@ export class RepositorySettingComponent implements OnInit {
             await this.repositoryService.unsetLocalUserConfig();
         }
 
-        this.settingsForm.form.markAsPristine();
+        // TODO Refactor this somehow!
+        await sleep(300);
+        this.saveState = 'success';
+        await sleep(1000);
+        this.saveState = 'default';
+
         this.ngOnInit();
     }
 

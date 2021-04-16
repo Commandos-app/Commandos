@@ -41,8 +41,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         BrowserModule,
         BrowserAnimationsModule,
 
-        FormsModule,
-        HttpClientModule,
         SharedModule,
         AppRoutingModule,
 

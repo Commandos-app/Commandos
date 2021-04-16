@@ -1,3 +1,5 @@
+import { SubnavComponent } from './components/subnav/subnav.component';
+import { HeaderComponent } from './components/header/header.component';
 import { SplashComponent } from './components/splash/splash.component';
 import { DateFormatePipe } from './pipe/date-formate.pipe';
 import { TreeViewComponent } from './components/tree-view/tree-view.component';
@@ -30,7 +32,8 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 
 import { NgxTippyModule } from 'ngx-tippy-wrapper';
 import { VirtualScrollerModule } from 'ngx-virtual-scroller';
-
+import { AngularSplitModule } from 'angular-split';
+import { SplitLayoutComponent } from './components/split-layout/split-layout.component';
 
 
 const components = [
@@ -41,6 +44,9 @@ const components = [
     ButtonControlComponent,
     TreeViewComponent,
     SplashComponent,
+    HeaderComponent,
+    SubnavComponent,
+    SplitLayoutComponent,
 
     DateFormatePipe
 
@@ -69,6 +75,7 @@ const modules = [
     NgxTippyModule,
     AutosizeModule,
     FilterModule,
+    AngularSplitModule,
 
     VirtualScrollerModule
 ];

@@ -8,7 +8,7 @@
             <div>Tags</div>
         </div>
         <div class="commander-row commander-overview-row" *ngFor="let repo of repositories" cds-text="body"
-            (click)="openRepository(repo.id)">
+            (click)="openRepository(repo.id)" (contextmenu)="openContext(repo, $event)">
             <div class="lh">{{repo.name}}</div>
             <div class="lh">{{repo.path}}</div>
             <div>

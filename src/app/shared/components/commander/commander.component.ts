@@ -90,6 +90,11 @@ export class CommanderComponent implements OnInit {
 
     }
 
+    // @HostListener()
+    // clickOutside(): void {
+
+    // }
+
     overlayRef: OverlayRef;
 
     commands: ICommand[];

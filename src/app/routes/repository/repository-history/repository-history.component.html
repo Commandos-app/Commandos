@@ -1,25 +1,20 @@
-<div cds-layout="vertical align:stretch" class="commander-full-height">
+<div class="commander-grid-history commander-full-height">
 
-    <div class="commander-grid-history commander-full-height">
-        <div class="commander-scroll-overflow">
-            <ng-scrollbar class="virtual-scroll">
-                <virtual-scroller scrollViewport #scroll [items]="commits">
-                    <div *ngFor="let commit of scroll.viewPortItems" class="commander-list-item commander-history-item"
-                        [routerLink]="[commit.sha]" routerLinkActive="commander-list-item-active">
-                        <div class="commander-history-title">
-                            {{commit.summary}}
-                        </div>
-                        <div class="commander-history-author">
-                            {{commit.author}} <cds-icon shape="minus"></cds-icon> {{commit.authorDate | dayJS}}
-                        </div>
+    <commander-split-layout>
+        <ng-scrollbar class="virtual-scroll" sidebar>
+            <virtual-scroller scrollViewport #scroll [items]="commits">
+                <div *ngFor="let commit of scroll.viewPortItems" class="commander-list-item commander-history-item"
+                    [routerLink]="[commit.sha]" routerLinkActive="commander-list-item-active">
+                    <div class="commander-history-title">
+                        {{commit.summary}}
                     </div>
-                </virtual-scroller>
-            </ng-scrollbar>
-        </div>
-        <cds-divider orientation="vertical"></cds-divider>
-        <div>
-            <router-outlet></router-outlet>
-        </div>
+                    <div class="commander-history-author">
+                        {{commit.author}} <cds-icon shape="minus"></cds-icon> {{commit.authorDate | dayJS}}
+                    </div>
+                </div>
+            </virtual-scroller>
+        </ng-scrollbar>
 
-    </div>
+        <router-outlet content></router-outlet>
+    </commander-split-layout>
 </div>

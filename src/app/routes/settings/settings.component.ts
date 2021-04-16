@@ -4,6 +4,7 @@ import { ErrorService, StoreService } from '@core/services';
 import { DOCUMENT } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { UserConfig, RepositoryService } from '@routes/repository/repository.service';
+import { sleep, LoadingState } from '@shared/functions';
 
 @Component({
     selector: 'app-settings',
@@ -17,13 +18,15 @@ export class SettingsComponent implements OnInit {
     gridCounts = [25, 50, 100];
     gridCount: number;
     autoFetch: boolean;
+    paneSize: number;
     darkMode: boolean;
     diffFormate: boolean;
     user: UserConfig = {
         name: '',
         email: '',
         global: true
-    }
+    };
+    saveState: LoadingState = 'default';
 
     constructor(
         private errorService: ErrorService,
@@ -36,8 +39,10 @@ export class SettingsComponent implements OnInit {
     async ngOnInit(): Promise<void> {
         this.autoFetch = this.storeService.getAutoFetch();
         this.darkMode = this.storeService.getDarkMode();
+        this.paneSize = this.storeService.getPaneSize();
         this.diffFormate = this.storeService.getDiff2HtmlOutputFormat() === 'side-by-side';
         this.user = await this.repositoryService.loadGlobalUserConfig();
+        this.settingsForm.form.markAsPristine();
     }
 
     openDevTools(): void {
@@ -45,9 +50,11 @@ export class SettingsComponent implements OnInit {
     }
 
 
-    save(): void {
+    async save(): Promise<void> {
+        this.saveState = 'loading';
         this.storeService.setAutoFetch(this.autoFetch);
         this.storeService.setDarkMode(this.darkMode);
+        this.storeService.setPaneSize(this.paneSize);
         this.storeService.setDiff2HtmlOutputFormat(this.diffFormate ? 'side-by-side' : 'line-by-line');
 
         if (this.darkMode) {
@@ -58,7 +65,13 @@ export class SettingsComponent implements OnInit {
         }
         this.storeService.saveSettings();
         this.repositoryService.saveGlobalUserConfig(this.user);
-        this.settingsForm.form.markAsPristine();
+
+        // TODO Refactor this somehow!
+        await sleep(600);
+        this.saveState = 'success';
+        await sleep(1000);
+        this.saveState = 'default';
+
         this.ngOnInit();
     }
 

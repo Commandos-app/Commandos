@@ -1,41 +1,12 @@
-import { IStatusResult } from '@git/model';
+import { IStatusResult, TreeObject, ChangedFile, GroupedChangedFiles } from '@git/model';
 import { LoggerService } from '@core/services/logger/logger.service';
 import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
-import { RepositoriesSettingsService, StoreService } from '@core/services';
+import { StoreService } from '@core/services';
 import { RepositoryService } from '../repository.service';
 import { filter, first } from 'rxjs/operators';
 import { interval } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { basename, Differ, sleep } from '@shared/functions';
-
-
-export type ChangedFile = {
-    name: string;
-    path: string;
-    oldName?: string;
-    isNew: boolean;
-    isUntracked: boolean;
-    isRenamed: boolean;
-}
-
-export type GroupedChangedFile = {
-    name: string;
-    type: string;
-    children: any[];
-};
-
-export type TreeObject = {
-    file: ChangedFile;
-    type: string;
-    path: string;
-    name: string;
-    staged: boolean;
-    children: any;
-}
-
-export type GroupedChangedFiles = Array<GroupedChangedFile>;
-
-type LoadingState = 'default' | 'loading' | 'success' | 'error';
+import { basename, Differ, sleep, LoadingState } from '@shared/functions';
 
 @UntilDestroy()
 @Component({
@@ -54,7 +25,6 @@ export class RepositoryCommitComponent implements OnInit {
 
 
     constructor(
-        private repositoriesSettings: RepositoriesSettingsService,
         private storeService: StoreService,
         private repositoryService: RepositoryService,
         private logger: LoggerService,
@@ -67,13 +37,6 @@ export class RepositoryCommitComponent implements OnInit {
             this.load();
         });
         if (this.storeService.getAutoFetch()) {
-            // defer(() => this.load())
-            //     .pipe(
-            //         untilDestroyed(this),
-            //         repeatWhen(delay(1000))
-            //     )
-
-
             interval(10000)
                 .pipe(
                     untilDestroyed(this),
@@ -146,8 +109,6 @@ export class RepositoryCommitComponent implements OnInit {
 
     @HostListener('window:keyup.control.enter', ['$event'])
     async commit(): Promise<void> {
-
-        this.isCommiting = 'loading';
         // const { name, email } = await this.repositoryService.loadConfig();
         if (this.fileTree.length === 0 || this.commitMessage === '') {
             return;
@@ -163,6 +124,8 @@ export class RepositoryCommitComponent implements OnInit {
         await this.repositoryService.commit(this.commitMessage);
         this.commitMessage = '';
         await this.load();
+
+        // TODO Refactor this somehow!
         await sleep(300);
         this.isCommiting = 'success';
         await sleep(1000);

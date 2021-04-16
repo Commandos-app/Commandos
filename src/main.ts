@@ -3,6 +3,8 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
+import { appWindow } from '@tauri-apps/api/window';
+//appWindow.setDecorations(false);
 
 if (environment.production) {
     enableProdMode();

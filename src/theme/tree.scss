@@ -34,7 +34,7 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
-        line-height: 25px;
+        line-height: 25+px;
     }
     cds-icon-button {
         visibility: hidden;
@@ -43,6 +43,9 @@
         cds-icon-button {
             visibility: visible;
         }
+    }
+    +cds-divider {
+        --color: rgba(0, 0, 0, 0.05);
     }
 }
 

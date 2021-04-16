@@ -13,11 +13,10 @@ export class RepositoryHistoryComponent implements OnInit {
 
     commits: Array<LogItem>;
     commitsCount = 0;
-    items = Array.from({ length: 1000 }, (v, k) => k + 1);
 
     constructor(
         private cd: ChangeDetectorRef,
-        private repositoryService: RepositoryService
+        private repositoryService: RepositoryService,
     ) {
     }
 
