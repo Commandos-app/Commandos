@@ -1,4 +1,4 @@
-<div cds-layout="vertical align:stretch p:lg">
+<div class="parent" cds-layout="vertical align:stretch p:lg">
     <p cds-text="heading" cds-layout="m-t:none m-b:lg">Branches</p>
 
     <!-- <div cds-layout="horizontal gap:sm m-b:lg">
@@ -6,69 +6,74 @@
         <cds-button (click)="onCheckout()" [disabled]="selected.size !== 1">Checkout</cds-button>
         <cds-button status="danger" (click)="onDelete()" [disabled]="selected.size === 0">Delete</cds-button>
     </div> -->
-    <div class="commander-grid commander-branches-grid ">
-        <div class="commander-row-title commander-branches-row-title" cds-text="body bold">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div>Name</div>
+    <ng-scrollbar class="virtual-scroll">
+        <div class="commander-grid commander-branches-grid ">
+            <div class="commander-row-title commander-branches-row-title sticky" cds-text="body bold">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div>Name
+                    <i class="upstream" cds-layout="m-r:md">Upstream</i>
+                </div>
+            </div>
+            <div class="commander-row commander-branches-row" *ngFor="let branch of repositoryService.branches$ | async"
+                cds-text="body">
+
+                <div class="action custom-padding">
+                    <cds-icon shape="download" [ngxTippy]="checkoutTemplate" tippyName="template-ref"
+                        [tippyProps]="templateRef"></cds-icon>
+                    <div #checkoutTemplate class="comander-tooltip">
+                        <div class="center-text">
+                            Checkout branch?&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <cds-icon-button size="sm" status="success" standart-hover (click)="onCheckout(branch.name)"
+                            aria-label="checkout branch">
+                            <cds-icon shape="check" class="clickable"></cds-icon>
+                        </cds-icon-button>
+                    </div>
+                </div>
+                <div class="action custom-padding ">
+                    <cds-icon shape="note" [ngxTippy]="renameTemplate" tippyName="template-ref"
+                        [tippyProps]="templateRef">
+                    </cds-icon>
+
+                    <div #renameTemplate class="comander-tooltip">
+                        <div class="center-text">
+                            <input class="tooltip-input" [placeholder]="branch.name" #renameInput />
+                            &nbsp;&nbsp;&nbsp;
+                        </div>
+
+                        <cds-icon-button size="sm" status="success" standart-hover
+                            (click)="onRename(branch.name, renameInput.value)" aria-label="rename branch">
+                            <cds-icon shape="check" class="clickable"></cds-icon>
+                        </cds-icon-button>
+                    </div>
+                </div>
+                <div class="action custom-padding">
+                    <cds-icon shape="trash" [ngxTippy]="deleteTemplate" tippyName="template-ref"
+                        [tippyProps]="templateRef">
+                    </cds-icon>
+                    <div #deleteTemplate class="comander-tooltip">
+                        <div class="center-text">
+                            Delete branch?&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <cds-icon-button size="sm" status="danger" standart-hover (click)="onDelete(branch.name)"
+                            aria-label="delete branch">
+                            <cds-icon shape="check" class="clickable"></cds-icon>
+                        </cds-icon-button>
+                    </div>
+                </div>
+                <div class="lh">
+                    <span cds-layout="m-r:md">{{branch.name}}</span>
+                    <ng-container *ngIf="branch.upstream">
+                        <i class="upstream" cds-layout="m-r:md">{{branch.upstream}}</i>
+                        <span>{{branch.behind}}<cds-icon shape="arrow" direction="down"></cds-icon></span>
+                        <span>{{branch.ahead}}<cds-icon shape="arrow"></cds-icon></span>
+                    </ng-container>
+                </div>
+            </div>
         </div>
-        <div class="commander-row commander-branches-row" *ngFor="let branch of repositoryService.branches$ | async"
-            cds-text="body">
-
-            <div class="action custom-padding">
-                <cds-icon shape="download" [ngxTippy]="checkoutTemplate" tippyName="template-ref"
-                    [tippyProps]="templateRef"></cds-icon>
-                <div #checkoutTemplate class="comander-tooltip">
-                    <div class="center-text">
-                        Checkout branch?&nbsp;&nbsp;&nbsp;
-                    </div>
-                    <cds-icon-button size="sm" status="success" standart-hover (click)="onCheckout(branch.name)"
-                        aria-label="checkout branch">
-                        <cds-icon shape="check" class="clickable"></cds-icon>
-                    </cds-icon-button>
-                </div>
-            </div>
-            <div class="action custom-padding ">
-                <cds-icon shape="note" [ngxTippy]="renameTemplate" tippyName="template-ref" [tippyProps]="templateRef">
-                </cds-icon>
-
-                <div #renameTemplate class="comander-tooltip">
-                    <div class="center-text">
-                        <input class="tooltip-input" [placeholder]="branch.name" #renameInput />
-                        &nbsp;&nbsp;&nbsp;
-                    </div>
-
-                    <cds-icon-button size="sm" status="success" standart-hover
-                        (click)="onRename(branch.name, renameInput.value)" aria-label="rename branch">
-                        <cds-icon shape="check" class="clickable"></cds-icon>
-                    </cds-icon-button>
-                </div>
-            </div>
-            <div class="action custom-padding">
-                <cds-icon shape="trash" [ngxTippy]="deleteTemplate" tippyName="template-ref" [tippyProps]="templateRef">
-                </cds-icon>
-                <div #deleteTemplate class="comander-tooltip">
-                    <div class="center-text">
-                        Delete branch?&nbsp;&nbsp;&nbsp;
-                    </div>
-                    <cds-icon-button size="sm" status="danger" standart-hover (click)="onDelete(branch.name)"
-                        aria-label="delete branch">
-                        <cds-icon shape="check" class="clickable"></cds-icon>
-                    </cds-icon-button>
-                </div>
-            </div>
-            <div class="lh">
-                <span cds-layout="m-r:md">{{branch.name}}</span>
-                <ng-container *ngIf="branch.upstream">
-                    <i class="upstream" cds-layout="m-r:md">{{branch.upstream}}</i>
-                    {{branch.behind}}<cds-icon shape="arrow" direction="down"></cds-icon>
-                    {{branch.ahead}}<cds-icon shape="arrow"></cds-icon>
-                </ng-container>
-            </div>
-        </div>
-    </div>
-
+    </ng-scrollbar>
     <!-- <clr-datagrid class="datagrid-compact" [(clrDgSelected)]="selected">
         <clr-dg-action-bar>
             <div class="btn-group">

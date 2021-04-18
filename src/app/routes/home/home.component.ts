@@ -33,7 +33,6 @@ export class HomeComponent implements OnInit {
     }
 
     openContext(repo: RepositorySetting, $event: Event) {
-        console.log(`TCL: ~ file: home.component.ts ~ line 36 ~ HomeComponent ~ openContext ~ repo`, repo);
         $event.preventDefault();
         $event.stopPropagation();
     }

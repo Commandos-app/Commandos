@@ -1,18 +1,31 @@
 .commander-overview-grid {
     width: 100%;
     --commander-overview-grid-template-columns: 300px 1fr 300px;
+
     .commander-overview-row-title {
         display: grid;
         grid-template-columns: var(--commander-overview-grid-template-columns);
+
         div {
             padding: 2px 10px;
         }
     }
+
     .commander-overview-row {
         display: grid;
         grid-template-columns: var(--commander-overview-grid-template-columns);
+
         .lh {
             line-height: 25px;
         }
     }
+}
+
+:host {
+    display: block;
+    height: 100%;
+}
+
+.parent {
+    height: 100%;
 }

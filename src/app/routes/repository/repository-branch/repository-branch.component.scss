@@ -31,3 +31,16 @@
 .upstream {
     color: var(--cds-global-typography-color-200);
 }
+
+// .virtual-scroll {
+//     height: calc(100% - 60px);
+// }
+
+:host {
+    display: block;
+    height: 100%;
+}
+
+.parent {
+    height: 100%;
+}
