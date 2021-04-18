@@ -1,6 +1,7 @@
+import { IBranch } from "@git/model";
 
 
-export function parseBranches(stdout: string) {
+export function parseBranches(stdout: string): Array<IBranch> {
     if (stdout) {
         const delimiter = '1F';
         const delimiterString = String.fromCharCode(parseInt(delimiter, 16));
@@ -11,7 +12,7 @@ export function parseBranches(stdout: string) {
             return [];
         }
 
-        const branches = [];
+        const branches: Array<IBranch> = [];
 
         for (const [ix, line] of lines.entries()) {
             // preceding newline character after first row
@@ -22,7 +23,7 @@ export function parseBranches(stdout: string) {
             const upstream = pieces[2];
 
 
-            branches.push({ name });
+            branches.push({ name, upstream , ref});
         }
 
         return branches;

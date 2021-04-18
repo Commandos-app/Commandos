@@ -8,7 +8,7 @@ import {
     unstageFile, revertFile, checkout, commit, getLogMeta, getLogOfSha, getLogMetadataOfSha, getDiffOfFile
 } from '@git/commands';
 import { parseBranches, parseLog, parseStatus } from '@git/parsers';
-import { IStatusResult, LogItem, ChangedFile } from '@git/model';
+import { IStatusResult, LogItem, ChangedFile, IBranch } from '@git/model';
 import { getOriginUrl, getUserMail, getUsername, setUserMail, setUsername } from '@git/commands/config';
 
 export type NewBranch = {
@@ -23,8 +23,6 @@ export type ChangeBranch = {
     checkout?: boolean;
 };
 
-export type Branch = { name: string; remote?: boolean };
-export type Branches = Array<Branch>;
 
 export type UserConfig = { name: string; email: string, global: boolean };
 
@@ -41,7 +39,7 @@ export class RepositoryService {
     private loaded = new BehaviorSubject(false);
     loaded$ = this.loaded.asObservable();
 
-    private branches = new BehaviorSubject<Branches | null>(null);
+    private branches = new BehaviorSubject<Array<IBranch> | null>(null);
     branches$ = this.branches.asObservable();
 
     constructor(
@@ -101,6 +99,7 @@ export class RepositoryService {
         const branches = await getBranches(this.getPath());
         if (branches) {
             const parsedBranches = parseBranches(branches);
+            console.log(`TCL: ~ file: repository.service.ts ~ line 104 ~ RepositoryService ~ getBranches ~ parsedBranches`, parsedBranches);
             this.branches.next(parsedBranches);
         }
     }
@@ -258,7 +257,7 @@ export class RepositoryService {
         // Check if Added then delete!
         return revertFile(file, this.getPath());
     }
-    //#endregion 
+    //#endregion
 
     private getPath(): string {
         return this.repositorySetting?.path?.replace(/\\\\/g, '/');

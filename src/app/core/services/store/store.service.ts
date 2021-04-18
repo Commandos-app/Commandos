@@ -30,9 +30,14 @@ export class StoreService {
     }
 
     private async parseFile(file: string): Promise<Settings> {
-        const data = await readTextFile(file);
-        return JSON.parse(data);
+        try {
+            const data = await readTextFile(file);
+            return JSON.parse(data);
+        } catch (e) {
+            await this.saveSettings();
+        }
 
+        return {};
     }
 
     private async getStorePath(): Promise<string> {

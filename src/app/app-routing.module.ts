@@ -32,7 +32,9 @@ const routes: Routes = [
         RouterModule.forRoot(routes, {
             enableTracing: false,
             paramsInheritanceStrategy: 'always',
-            relativeLinkResolution: 'legacy'
+            relativeLinkResolution: 'legacy',
+            anchorScrolling: 'enabled',
+            useHash: true
         }),
     ],
     exports: [RouterModule]

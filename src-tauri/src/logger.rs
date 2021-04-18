@@ -11,6 +11,7 @@ use log4rs::{
   filter::threshold::ThresholdFilter,
 };
 use serde_repr::Deserialize_repr;
+use tauri::api::path::{resolve_path, BaseDirectory::LocalData};
 
 #[derive(Deserialize_repr, Debug)]
 #[repr(u16)]
@@ -23,12 +24,20 @@ pub enum LogLevel {
 }
 
 pub fn init_log() {
+  let log_path =
+    resolve_path("dos-commander\\log", Some(LocalData)).expect("failed to resolve path");
+  //   println!("{}", log_path.as_path().display().to_string());
+  let path_str = log_path.as_path().display().to_string();
+  let log_file_pattern = path_str.clone() + "\\log_{}.log";
+  let log_file = path_str.clone() + "\\log.log";
+
   let window_size = 3; // log0, log1, log2
+
   let fixed_window_roller = FixedWindowRoller::builder()
-    .build("log/log_{}.log", window_size)
+    .build(&log_file_pattern, window_size)
     .unwrap();
 
-  let size_limit = 10 * 1024 /* * 1024*/; // 10MB as max log file size to roll
+  let size_limit = 10 * 1024 * 1024; // 10MB as max log file size to roll
   let size_trigger = SizeTrigger::new(size_limit);
 
   let compound_policy = CompoundPolicy::new(Box::new(size_trigger), Box::new(fixed_window_roller));
@@ -37,7 +46,7 @@ pub fn init_log() {
     .encoder(Box::new(PatternEncoder::new(
       "[{d(%Y-%m-%d %H:%M:%S)}][{l}] {m}{n}",
     )))
-    .build("log/logs.log", Box::new(compound_policy))
+    .build(&log_file, Box::new(compound_policy))
     .unwrap();
 
   let config = Config::builder()

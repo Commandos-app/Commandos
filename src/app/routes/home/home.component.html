@@ -1,4 +1,4 @@
-<div cds-layout="vertical align:stretch p:lg">
+<div cds-layout="vertical align:stretch p:lg" *ngIf="repositories?.length > 0;else noRepos">
     <p cds-text="heading" cds-layout="m-t:none m-b:lg">{{ 'PAGES.HOME.TITLE' | translate }}</p>
 
     <div class="commander-grid commander-overview-grid ">
@@ -20,3 +20,13 @@
     </div>
 
 </div>
+
+<ng-template #noRepos>
+    <div class="center-region text-center">
+        <p>Thank you for useing DOS-Commander!<br>
+            Start adding repositories to DOS-Commander, to use the awesome features!<br>
+            <br>
+            <cds-button [routerLink]="['/add-repository']">Add Repository</cds-button>
+        </p>
+    </div>
+</ng-template>

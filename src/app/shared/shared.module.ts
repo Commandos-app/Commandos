@@ -58,7 +58,7 @@ const modules = [
     FormsModule,
     HttpClientModule,
     RouterModule,
-    ReactiveFormsModule,
+    // ReactiveFormsModule,
 
     // CDK
     OverlayModule,

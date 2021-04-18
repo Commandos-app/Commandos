@@ -1,10 +1,11 @@
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CommanderService } from '@shared/services';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Branches, ChangeBranch, NewBranch, RepositoryService } from '../repository.service';
+import { ChangeBranch, NewBranch, RepositoryService } from '../repository.service';
 import { filter, first } from 'rxjs/operators';
 import { NgxTippyProps } from 'ngx-tippy-wrapper';
 import { NgxTippyService } from 'ngx-tippy-wrapper';
+import { IBranches } from '@git/model';
 
 
 @UntilDestroy()
@@ -16,8 +17,8 @@ import { NgxTippyService } from 'ngx-tippy-wrapper';
 export class RepositoryBranchComponent implements OnInit {
 
 
-    branches: Branches = [];
-    remoteBranches: Branches = [];
+    branches: IBranches = [];
+    remoteBranches: IBranches = [];
 
     openModalNew = false;
     openModalChange = false;

@@ -35,10 +35,10 @@ export class LoggerService {
         const prefix = this.getPrefix(level);
         console.log(...prefix, message);
 
-        invoke('logging', {
-            level,
-            message
-        });
+        // invoke('logging', {
+        //     level,
+        //     message
+        // });
     }
 
     private getPrefix(level: LogLevel): string[] {
