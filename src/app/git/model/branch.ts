@@ -1,6 +1,14 @@
-export interface IBranch {
-    name: string;
-    upstream: string;
-    ref: string;
+export class Branch {
+    ref!: string;
+    name!: string;
+    upstream!: string;
+    ahead!: number;
+    behind!: number;
 }
-export type IBranches = Array<IBranch>;
+export type Branches = Array<Branch>;
+
+export const branchFormaterObject = {
+    ref: '%(refname)',
+    name: '%(refname:short)',
+    upstream: '%(upstream:short)',
+}

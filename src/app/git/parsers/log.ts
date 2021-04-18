@@ -20,7 +20,7 @@ export function parseLog<T extends Record<string, string>>(stdout: string): Arra
 
     }
     else {
-        throw new Error(`Failed to parse branches`);
+        throw new Error(`Failed to parse log`);
     }
 }
 

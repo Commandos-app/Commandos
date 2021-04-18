@@ -58,7 +58,13 @@
                     </cds-icon-button>
                 </div>
             </div>
-            <div class="lh">{{branch.name}} "{{branch.upstream}}"
+            <div class="lh">
+                <span cds-layout="m-r:md">{{branch.name}}</span>
+                <ng-container *ngIf="branch.upstream">
+                    <i class="upstream" cds-layout="m-r:md">{{branch.upstream}}</i>
+                    {{branch.behind}}<cds-icon shape="arrow" direction="down"></cds-icon>
+                    {{branch.ahead}}<cds-icon shape="arrow"></cds-icon>
+                </ng-container>
             </div>
         </div>
     </div>

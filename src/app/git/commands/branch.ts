@@ -1,3 +1,4 @@
+import { branchFormaterObject } from "@git/model";
 import { runGit } from "./base";
 
 
@@ -19,19 +20,23 @@ export async function getCurrentBranch(repository: string): Promise<string> {
 }
 
 export async function getBranches(repository: string): Promise<any> {
-    const delimiter = '1F';
 
-    const format = [
-        '%(refname)',
-        '%(refname:short)',
-        '%(upstream:short)',
-        // '%(objectname)', // SHA
-        // '%(objectname:short)', // short SHA
-        // '%(author)',
-        // '%(committer)',
-        // '%(symref)',
-        `%${delimiter}`, // indicate end-of-line as %(body) may contain newlines
-    ].join('%00');
+
+    const format = Object.values(branchFormaterObject).join('%x00');
+
+    // const delimiter = '1F';
+
+    // const format = [
+    //     '%(refname)',
+    //     '%(refname:short)',
+    //     '%(upstream:short)',
+    //     // '%(objectname)', // SHA
+    //     // '%(objectname:short)', // short SHA
+    //     // '%(author)',
+    //     // '%(committer)',
+    //     // '%(symref)',
+    //     `%${delimiter}`, // indicate end-of-line as %(body) may contain newlines
+    // ].join('%00');
 
     const args = [
         'for-each-ref',

@@ -1,3 +1,4 @@
+import { filter } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { RepositoriesSettingsService, RepositorySetting } from '@core/services';
 import { BehaviorSubject } from 'rxjs';
@@ -8,8 +9,9 @@ import {
     unstageFile, revertFile, checkout, commit, getLogMeta, getLogOfSha, getLogMetadataOfSha, getDiffOfFile
 } from '@git/commands';
 import { parseBranches, parseLog, parseStatus } from '@git/parsers';
-import { IStatusResult, LogItem, ChangedFile, IBranch } from '@git/model';
+import { IStatusResult, LogItem, ChangedFile, Branch, Branches } from '@git/model';
 import { getOriginUrl, getUserMail, getUsername, setUserMail, setUsername } from '@git/commands/config';
+import { countRevList } from '@git/commands/rev-list';
 
 export type NewBranch = {
     pushRemote?: boolean;
@@ -39,7 +41,7 @@ export class RepositoryService {
     private loaded = new BehaviorSubject(false);
     loaded$ = this.loaded.asObservable();
 
-    private branches = new BehaviorSubject<Array<IBranch> | null>(null);
+    private branches = new BehaviorSubject<Branches | null>(null);
     branches$ = this.branches.asObservable();
 
     constructor(
@@ -99,7 +101,14 @@ export class RepositoryService {
         const branches = await getBranches(this.getPath());
         if (branches) {
             const parsedBranches = parseBranches(branches);
-            console.log(`TCL: ~ file: repository.service.ts ~ line 104 ~ RepositoryService ~ getBranches ~ parsedBranches`, parsedBranches);
+            const upstreamBranches = parsedBranches.filter(f => f.upstream)
+            for (let index = 0; index < upstreamBranches.length; index++) {
+                const element = upstreamBranches[index];
+                const ahead = await countRevList(this.getPath(), element.upstream, element.name);
+                const behind = await countRevList(this.getPath(), element.name, element.upstream);
+                element.ahead = ahead;
+                element.behind = behind;
+            }
             this.branches.next(parsedBranches);
         }
     }
@@ -122,7 +131,6 @@ export class RepositoryService {
 
         if (!isRemote) {
             const rtn = await deleteLocalBranch(name, this.getPath());
-            console.log(`TCL: ~ file: repository.service.ts ~ line 121 ~ RepositoryService ~ deleteBranch ~ rtn`, rtn);
         }
         if (includeRemote || isRemote) {
             await deleteRemoteBranch(name, this.getPath());

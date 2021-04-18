@@ -5,7 +5,7 @@ import { ChangeBranch, NewBranch, RepositoryService } from '../repository.servic
 import { filter, first } from 'rxjs/operators';
 import { NgxTippyProps } from 'ngx-tippy-wrapper';
 import { NgxTippyService } from 'ngx-tippy-wrapper';
-import { IBranches } from '@git/model';
+import { Branches } from '@git/model';
 
 
 @UntilDestroy()
@@ -17,8 +17,8 @@ import { IBranches } from '@git/model';
 export class RepositoryBranchComponent implements OnInit {
 
 
-    branches: IBranches = [];
-    remoteBranches: IBranches = [];
+    branches: Branches = [];
+    remoteBranches: Branches = [];
 
     openModalNew = false;
     openModalChange = false;
