@@ -4,7 +4,6 @@ import { Branch, Branches, branchFormaterObject } from '@git/model';
 export function parseBranches<T extends Record<string, string>>(stdout: string): Branches {
 
     if (stdout) {
-        debugger;
         const keys: Array<keyof T> = Object.keys(branchFormaterObject);
         const records = stdout.split('\n');
         let entries: Array<Branch> = [];
