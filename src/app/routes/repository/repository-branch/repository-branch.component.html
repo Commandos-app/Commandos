@@ -67,8 +67,12 @@
                     <span cds-layout="m-r:md">{{branch.name}}</span>
                     <ng-container *ngIf="branch.upstream">
                         <i class="upstream" cds-layout="m-r:md">{{branch.upstream}}</i>
-                        <span>{{branch.behind}}<cds-icon shape="arrow" direction="down"></cds-icon></span>
-                        <span>{{branch.ahead}}<cds-icon shape="arrow"></cds-icon></span>
+                        <span class="red">{{branch.behind}}
+                            <cds-icon shape="arrow" direction="down" class="updownarrow"></cds-icon>
+                        </span>
+                        <span class="green">{{branch.ahead}}
+                            <cds-icon shape="arrow" class="updownarrow"></cds-icon>
+                        </span>
                     </ng-container>
                 </div>
             </div>
