@@ -36,7 +36,8 @@ export class RepositoryService {
     currentId!: number;
     repositorySetting!: RepositorySetting;
     // currentBranch: Branch;
-    currentBranch!: string;
+    currentBranch!: Branch;
+    currentBranchStr!: string;
 
     private loaded = new BehaviorSubject(false);
     loaded$ = this.loaded.asObservable();
@@ -86,14 +87,13 @@ export class RepositoryService {
     //#region Branches
 
     async getCurrentBranch(): Promise<string | void> {
-        const currentBranch = await getCurrentBranch(this.getPath());
-        if (currentBranch) {
-            this.currentBranch = currentBranch;
+        const currentBranchStr = await getCurrentBranch(this.getPath());
+
+        if (currentBranchStr) {
+            this.currentBranchStr = currentBranchStr;
         }
 
-        // this.branches.find(b => b.name === currentBranch);
-
-        return this.currentBranch;
+        return this.currentBranchStr;
     }
 
     async getBranches(): Promise<void> {
@@ -109,10 +109,16 @@ export class RepositoryService {
                 element.ahead = ahead;
                 element.behind = behind;
             }
+            const currentBranchStr = await getCurrentBranch(this.getPath());
+            const currentBranch = parsedBranches.find(b => b.name === currentBranchStr);
+
+            if (currentBranch) {
+                this.currentBranch = currentBranch;
+            }
+
             this.branches.next(parsedBranches);
         }
     }
-
 
     async createBranch(name: string, checkout = false): Promise<void> {
         this.logger.info(`create branch ${name}`);
@@ -145,7 +151,6 @@ export class RepositoryService {
         await checkout(name, this.getPath());
     }
 
-
     async deleteBranches(names: string[]): Promise<void> {
         for (let index = 0; index < names.length; index++) {
             const name = names[index];
@@ -155,6 +160,13 @@ export class RepositoryService {
         }
     }
 
+    async getAheadCount(branch: Branch): Promise<number> {
+        return await countRevList(this.getPath(), branch.upstream, branch.name);
+    }
+
+    async getBehindCount(branch: Branch): Promise<number> {
+        return await countRevList(this.getPath(), branch.name, branch.upstream);
+    }
     //#endregion
 
     //#region Commit
@@ -196,7 +208,7 @@ export class RepositoryService {
 
     //#endregion
 
-    //#regin Config
+    //#region Config
     async loadUserConfig(): Promise<UserConfig> {
         const user = await this.loadGlobalUserConfig();
 

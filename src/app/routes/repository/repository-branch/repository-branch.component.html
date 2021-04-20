@@ -26,7 +26,7 @@
                         <div class="center-text">
                             Checkout branch?&nbsp;&nbsp;&nbsp;
                         </div>
-                        <cds-icon-button size="sm" status="success" standart-hover (click)="onCheckout(branch.name)"
+                        <cds-icon-button size="sm" status="success" standard-hover (click)="onCheckout(branch.name)"
                             aria-label="checkout branch">
                             <cds-icon shape="check" class="clickable"></cds-icon>
                         </cds-icon-button>
@@ -43,7 +43,7 @@
                             &nbsp;&nbsp;&nbsp;
                         </div>
 
-                        <cds-icon-button size="sm" status="success" standart-hover
+                        <cds-icon-button size="sm" status="success" standard-hover
                             (click)="onRename(branch.name, renameInput.value)" aria-label="rename branch">
                             <cds-icon shape="check" class="clickable"></cds-icon>
                         </cds-icon-button>
@@ -57,7 +57,7 @@
                         <div class="center-text">
                             Delete branch?&nbsp;&nbsp;&nbsp;
                         </div>
-                        <cds-icon-button size="sm" status="danger" standart-hover (click)="onDelete(branch.name)"
+                        <cds-icon-button size="sm" status="danger" standard-hover (click)="onDelete(branch.name)"
                             aria-label="delete branch">
                             <cds-icon shape="check" class="clickable"></cds-icon>
                         </cds-icon-button>
@@ -67,12 +67,8 @@
                     <span cds-layout="m-r:md">{{branch.name}}</span>
                     <ng-container *ngIf="branch.upstream">
                         <i class="upstream" cds-layout="m-r:md">{{branch.upstream}}</i>
-                        <span class="red">{{branch.behind}}
-                            <cds-icon shape="arrow" direction="down" class="updownarrow"></cds-icon>
-                        </span>
-                        <span class="green">{{branch.ahead}}
-                            <cds-icon shape="arrow" class="updownarrow"></cds-icon>
-                        </span>
+
+                        <commander-branch-ahead-behind [branch]="branch"></commander-branch-ahead-behind>
                     </ng-container>
                 </div>
             </div>

@@ -1,10 +1,11 @@
 <div class="command-input-container drag-region">
     <div #commandInputContainer class="command-input">
         <cds-icon shape="wand"></cds-icon>
-        <input #commandInput type="text" [(ngModel)]="searchText" (click)="handleKeyDownListener()">
+        <input #commandInput type="text" [(ngModel)]="searchText" (click)="handleKeyDownListener($event)">
     </div>
 </div>
 <ng-template #commandsTemplate>
+    <div class=""></div>
     <div class="command-body">
         <div *ngFor="let cmd of commands; index as i" class="command" [class.selected]="i === selected"
             (click)="runCommand(cmd)">

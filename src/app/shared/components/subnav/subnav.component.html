@@ -11,10 +11,17 @@
     <ng-container *ngIf="!!repositoryService.repositorySetting?.name">
         <div class="spacer"></div>
         <div>
-            <app-button-control title="Current branch" [value]="repositoryService.currentBranch" width="350px"
-                [routerLink]="['/repository', repositoryService.currentId, 'branches']" routerLinkActive="button-active"
-                startIcon="branch">
+            <app-button-control width="350px" [routerLink]="['/repository', repositoryService.currentId, 'branches']"
+                routerLinkActive="button-active" startIcon="branch">
+                <div title>
+                    Current branch <commander-branch-ahead-behind [noColor]="true"
+                        [branch]="repositoryService.currentBranch" cds-layout="m-l:sm">
+                    </commander-branch-ahead-behind>
+                </div>
+                <div value>
+                    {{ repositoryService.currentBranch?.name }}&nbsp;&nbsp;
 
+                </div>
 
                 <cds-icon-button detail-action action="flat" class="hover" aria-label="Create new branch">
                     <cds-icon shape="plus" (click)="openNewBranch()"></cds-icon>

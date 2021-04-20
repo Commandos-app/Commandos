@@ -14,8 +14,8 @@ export function parseBranches<T extends Record<string, string>>(stdout: string):
             keys.forEach((key, ix) => (entry[key] = data[ix]));
 
             const branch = (entry as unknown) as Branch;
-            branch.ahead = 0;
-            branch.behind = 0;
+            branch.ahead = '0';
+            branch.behind = '0';
 
             entries.push(branch);
         }

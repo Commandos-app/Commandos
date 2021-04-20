@@ -9,7 +9,7 @@
                 <div>Tags</div>
             </div>
             <div class="commander-row commander-overview-row" *ngFor="let repo of repositories" cds-text="body"
-                (click)="openRepository(repo.id)" (contextmenu)="openContext(repo, $event)">
+                (click)="openRepository(repo.id)" (contextmenu)="openContext($event, repo)">
                 <div class="lh">{{repo.name}}</div>
                 <div class="lh">{{repo.path}}</div>
                 <div>
@@ -31,4 +31,17 @@
             <cds-button [routerLink]="['/add-repository']">Add Repository</cds-button>
         </p>
     </div>
+</ng-template>
+
+<ng-template #userMenu let-repo>
+    <section class="contextmenu" cds-layout="p:xs">
+        <div (click)="openCmd(repo.path)" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
+            Open in Explorer
+        </div>
+        <cds-divider></cds-divider>
+        <div (click)="openCmd(repo.path)" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
+            Open in Explorer
+        </div>
+        <!-- <div>Send to</div> -->
+    </section>
 </ng-template>

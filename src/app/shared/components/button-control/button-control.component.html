@@ -1,24 +1,21 @@
 <div cds-layout="horizontal" class="commander-button-control">
     <div class="commander-button-control-dropdown commander-button-control-hover" #commandButtonControlContainer>
         <div class="commander-button-control-icon" (click)="onClick.emit()">
-            <ng-content select="[icon]"> </ng-content>
+            <ng-content select="[icon]"></ng-content>
             <cds-icon [shape]="startIcon" size="24" *ngIf="startIcon"></cds-icon>
         </div>
         <div class="commander-button-control-text" (click)="onClick.emit()">
-            <div class="commander-button-control-title">{{title}}</div>
-            <div class="commander-button-control-value" cds-text="body">{{value ? value: '---'}}</div>
+            <div class="commander-button-control-title">
+                <ng-container *ngIf="title">{{title}}</ng-container>
+                <ng-content select="[title]"></ng-content>
+            </div>
+            <div class="commander-button-control-value" cds-text="body">
+                <ng-container *ngIf="value">{{value ? value: '---'}}</ng-container>
+                <ng-content select="[value]"></ng-content>
+            </div>
         </div>
     </div>
     <div class="commander-button-control-arrow">
         <ng-content select="[detail-action]"></ng-content>
-        <!-- <cds-icon shape="angle" direction="{{ overlayRef ? 'up': 'down'}}"></cds-icon> -->
     </div>
-    <!-- <cds-divider orientation="vertical"></cds-divider> -->
 </div>
-<!-- <ng-template #commandsTemplate>
-    <div class="commander-button-control-window">
-        <div cds-layout="p:md">
-            <ng-content></ng-content>
-        </div>
-    </div>
-</ng-template> -->

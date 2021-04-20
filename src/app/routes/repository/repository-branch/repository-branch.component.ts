@@ -52,7 +52,6 @@ export class RepositoryBranchComponent implements OnInit {
                 untilDestroyed(this)
             )
             .subscribe(() => {
-                console.log(`TCL: ~ file: repository-branch.component.ts ~ line 51 ~ RepositoryBranchComponent ~ ngOnInit ~ loaded`);
                 this.repositoryService.getBranches();
                 // setTimeout(() => {
                 //     this.cd.detectChanges();
@@ -60,7 +59,6 @@ export class RepositoryBranchComponent implements OnInit {
             });
         this.commanderService.onReload$.pipe(untilDestroyed(this))
             .subscribe(() => {
-                console.log(`TCL: ~ file: repository-branch.component.ts ~ line 56 ~ RepositoryBranchComponent ~ ngOnInit ~ onReload`);
                 this.repositoryService.getBranches();
                 // this.cd.detectChanges();
             });

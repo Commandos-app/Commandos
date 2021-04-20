@@ -1,3 +1,4 @@
+import { BranchAheadBehindComponent } from './components/branch-ahead-behind/branch-ahead-behind.component';
 import { SubnavComponent } from './components/subnav/subnav.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SplashComponent } from './components/splash/splash.component';
@@ -47,6 +48,7 @@ const components = [
     HeaderComponent,
     SubnavComponent,
     SplitLayoutComponent,
+    BranchAheadBehindComponent,
 
     DateFormatePipe
 

@@ -1,8 +1,13 @@
+import { filter, take } from 'rxjs/operators';
+import { TemplatePortal } from '@angular/cdk/portal';
 import { RepositorySetting } from '@core/services';
 import { RepositoryService } from './../repository/repository.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { RepositoriesSettings, RepositoriesSettingsService } from '@core/services';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { fromEvent, merge, Subscription } from 'rxjs';
+import { open } from '@tauri-apps/api/shell';
 
 @Component({
     selector: 'app-home',
@@ -12,11 +17,17 @@ import { RepositoriesSettings, RepositoriesSettingsService } from '@core/service
 export class HomeComponent implements OnInit {
 
     repositories: RepositoriesSettings = [];
+    @ViewChild('userMenu') userMenu: TemplateRef<any>;
+    overlayRef: OverlayRef | null;
+    sub: Subscription;
 
     constructor(
         private router: Router,
         private repos: RepositoriesSettingsService,
-        private repositoryService: RepositoryService
+        private repositoryService: RepositoryService,
+        public overlay: Overlay,
+        public viewContainerRef: ViewContainerRef
+
     ) { }
 
     ngOnInit(): void {
@@ -32,8 +43,60 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['repository', id]);
     }
 
-    openContext(repo: RepositorySetting, $event: Event) {
+    // openContext(, $event: Event) {
+    //     $event.preventDefault();
+    //     $event.stopPropagation();
+    // }
+
+    openCmd(path: string) {
+        open(path);
+    }
+
+    openContext($event: MouseEvent, repo: RepositorySetting) {
         $event.preventDefault();
         $event.stopPropagation();
+        const { x, y } = $event;
+        this.close();
+        const positionStrategy = this.overlay.position()
+            .flexibleConnectedTo({ x, y })
+            .withPositions([
+                {
+                    originX: 'end',
+                    originY: 'bottom',
+                    overlayX: 'end',
+                    overlayY: 'top',
+                }
+            ]);
+
+        this.overlayRef = this.overlay.create({
+            positionStrategy,
+            scrollStrategy: this.overlay.scrollStrategies.close()
+        });
+
+        this.overlayRef.attach(new TemplatePortal(this.userMenu, this.viewContainerRef, {
+            $implicit: repo
+        }));
+
+        this.sub = merge(
+            fromEvent<MouseEvent>(document, 'click'),
+            fromEvent<MouseEvent>(document, 'contextmenu')
+        )
+            .pipe(
+                filter(event => {
+                    const clickTarget = event.target as HTMLElement;
+                    return !!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget);
+                }),
+                take(1)
+            )
+            .subscribe(() => this.close())
+
+    }
+
+    close() {
+        this.sub && this.sub.unsubscribe();
+        if (this.overlayRef) {
+            this.overlayRef.dispose();
+            this.overlayRef = null;
+        }
     }
 }

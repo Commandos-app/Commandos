@@ -1,0 +1,9 @@
+.contextmenu {
+    .contextmenu-action {
+        &:hover {
+            background: var(--cds-alias-status-info);
+            color: var(--cds-global-typography-color-100);
+
+        }
+    }
+}

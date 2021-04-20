@@ -2,8 +2,8 @@ export class Branch {
     ref!: string;
     name!: string;
     upstream!: string;
-    ahead!: number;
-    behind!: number;
+    ahead!: string;
+    behind!: string;
 }
 export type Branches = Array<Branch>;
 

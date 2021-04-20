@@ -1,3 +1,4 @@
+import { filter, take } from 'rxjs/operators';
 import { CommanderModalService } from './commander-modal/commander-modal.service';
 import { LoggerService } from '@core/services';
 import { CommanderService, ICommand } from './commander.service';
@@ -6,6 +7,7 @@ import { ConnectedPosition, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { Component, HostListener, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { FilterPipe } from '@josee9988/filter-pipe-ngx';
 import { Router } from '@angular/router';
+import { fromEvent, merge, Subscription } from 'rxjs';
 
 
 @Component({
@@ -14,6 +16,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./commander.component.scss']
 })
 export class CommanderComponent implements OnInit {
+    public sub: Subscription;
 
     @ViewChild('commandInputContainer', { read: ViewContainerRef }) commandInputContainerRef: ViewContainerRef;
     @ViewChild('commandInput', { read: ViewContainerRef }) commandInputRef: ViewContainerRef;
@@ -63,7 +66,9 @@ export class CommanderComponent implements OnInit {
 
     @HostListener('window:keydown.f1', ['$event'])
     @HostListener('window:keydown.control.e', ['$event'])
-    handleKeyDownListener(): void {
+    handleKeyDownListener($event: Event): void {
+        $event.preventDefault();
+        $event.stopPropagation();
         if (this.commanderModalService.preventKeyboardShortcuts()) { return; }
         if (!this.overlayRef) {
             //new FlexibleConnectedPositionStrategy(this.commandInput.element);
@@ -75,12 +80,26 @@ export class CommanderComponent implements OnInit {
 
             this.overlayRef = this.overlay.create({
                 positionStrategy,
-                width
+                width,
+                hasBackdrop: true,
+
             });
             const commander = new TemplatePortal(this.commandsRef, this.viewContainerRef);
             this.overlayRef.attach(commander);
             this.selected = 0;
             this.commandInputRef.element.nativeElement.focus();
+
+            this.sub = merge(
+                fromEvent<MouseEvent>(document, 'click'),
+                fromEvent<MouseEvent>(document, 'contextmenu')
+            )
+                .pipe(
+                    filter(event => {
+                        const clickTarget = event.target as HTMLElement;
+                        return !!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget);
+                    }),
+                    take(1)
+                ).subscribe(() => this.disposeOverlay())
         }
         else {
             if (this.overlayRef) {
@@ -155,6 +174,7 @@ export class CommanderComponent implements OnInit {
     }
 
     private disposeOverlay() {
+        this.sub && this.sub.unsubscribe();
         this.overlayRef.dispose();
         this.overlayRef = null;
     }
