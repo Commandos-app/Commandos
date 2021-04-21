@@ -50,6 +50,19 @@ export class HomeComponent implements OnInit {
 
     openCmd(path: string) {
         open(path);
+        this.close();
+    }
+
+    openCode(path: string) {
+        open(path, 'code');
+        this.close();
+    }
+
+    openTerminal(path: string) {
+        const windows = navigator.userAgent.includes('Windows')
+        let cmd = windows ? 'cmd' : 'sh'
+        open(path, cmd);
+        this.close();
     }
 
     openContext($event: MouseEvent, repo: RepositorySetting) {

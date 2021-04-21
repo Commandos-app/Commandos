@@ -6,7 +6,7 @@ import { LoggerService } from '@core/services/logger/logger.service';
 import {
     createBranch, deleteLocalBranch, deleteRemoteBranch, getBranches, getCurrentBranch,
     getStatus, renameBranch, stageAll, stageFile, unstageAll,
-    unstageFile, revertFile, checkout, commit, getLogMeta, getLogOfSha, getLogMetadataOfSha, getDiffOfFile
+    unstageFile, revertFile, checkout, commit, getLogMeta, getLogOfSha, getLogMetadataOfSha, getDiffOfFile, pull, push
 } from '@git/commands';
 import { parseBranches, parseLog, parseStatus } from '@git/parsers';
 import { IStatusResult, LogItem, ChangedFile, Branch, Branches } from '@git/model';
@@ -182,6 +182,24 @@ export class RepositoryService {
     }
 
     //#endregion
+
+    //#region Push/Pull
+    async sync(): Promise<void> {
+        await this.pull();
+        await this.push();
+    }
+
+    async pull(): Promise<void> {
+        await pull(this.getPath());
+    }
+
+    async push(): Promise<void> {
+        await push(this.getPath());
+    }
+
+    //#endregion
+
+
 
     //#region History
     async getHistroy(branch = 'HEAD'): Promise<Array<LogItem>> {

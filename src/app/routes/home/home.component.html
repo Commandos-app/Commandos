@@ -38,9 +38,13 @@
         <div (click)="openCmd(repo.path)" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
             Open in Explorer
         </div>
-        <cds-divider></cds-divider>
-        <div (click)="openCmd(repo.path)" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
-            Open in Explorer
+        <!-- <cds-divider></cds-divider> -->
+        <div (click)="openCode(repo.path)" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
+            Open in VSCode
+        </div>
+        <div (click)="openTerminal(repo.path)" cds-text="secondary" cds-layout="p:sm"
+            class="clickable contextmenu-action">
+            Open in Terminal
         </div>
         <!-- <div>Send to</div> -->
     </section>

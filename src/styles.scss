@@ -47,9 +47,6 @@ body {
     margin: 0 !important;
 }
 
-.no-break {
-    white-space: nowrap;
-}
 
 .commander-content {
     router-outlet {
@@ -335,19 +332,7 @@ code {
         }
     }
 
-    .button-active {
-        .commander-button-control-dropdown {
-            background: var(--cds-alias-status-info);
-            color: var(--cds-global-typography-color-100); // margin-left: -1px;
-            // margin-right: -1px;
-        }
 
-        .commander-button-control-arrow {
-            cds-icon-button {
-                --color: var(--cds-global-typography-color-100);
-            }
-        }
-    }
 
     .commander-full-height,
     virtual-scroller {

@@ -4,12 +4,39 @@
         border: 1px solid var(--cds-global-color-gray-400); // border-radius: 5px;
         background: #fff;
     }
+
     &[cds-theme=dark] {
         cds-form-group[card] {
             border: 1px solid var(--cds-global-color-blue-800);
             background: var(--cds-alias-object-app-background);
         }
+
+        .button-active {
+            .commander-button-control {
+                .commander-button-control-title {
+                    color: var(--cds-global-color-cool-gray-900);
+                }
+            }
+        }
     }
+
+    .button-active {
+        .commander-button-control {
+            background: var(--cds-alias-status-info);
+            color: var(--cds-global-typography-color-100);
+
+            .commander-button-control-title {
+                color: var(--cds-global-color-cool-gray-200);
+            }
+        }
+
+        .commander-button-control-action {
+            cds-icon-button {
+                --color: var(--cds-global-typography-color-100);
+            }
+        }
+    }
+
 }
 
 .form-full-divider {
