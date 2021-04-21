@@ -18,7 +18,9 @@ export class CommanderModalService {
     openModal(options: CommanderModalOptions): Observable<CommandParams> {
         this.open = true;
         this.title = options.title;
-        this.fields = JSON.parse(JSON.stringify(options.fields));
+        if (options.fields) {
+            this.fields = JSON.parse(JSON.stringify(options.fields));
+        }
         this.onClose = new Subject<CommandParams>();
         return this.onClose.asObservable();
     }
