@@ -1,10 +1,12 @@
-import { LoadingState } from '@shared/functions';
+import { CommanderService } from './../commander/commander.service';
+import { CommanderModalService } from '@shared/services';
 import { RepositoryService } from '@routes/repository/repository.service';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { filter, first } from 'rxjs/operators';
 import { RepositoriesSettingsService } from '@core/services';
-import { sleep } from '@cds/core/internal';
+import { sleep } from '@shared/functions';
+import { FieldDefinition } from '..';
 
 type NewBranch = {
     pushRemote?: boolean;
@@ -31,7 +33,9 @@ export class SubnavComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private router: Router,
         public repositoryService: RepositoryService,
-        public repositoriesSettingsService: RepositoriesSettingsService
+        public repositoriesSettingsService: RepositoriesSettingsService,
+        private commanderModalService: CommanderModalService,
+        private commanderService: CommanderService
     ) { }
 
     ngOnInit(): void {
@@ -57,7 +61,24 @@ export class SubnavComponent implements OnInit {
     openNewBranch($event: Event): void {
         $event.preventDefault();
         $event.stopPropagation();
+        const name = 'Create Branch';
+        const fields: Array<FieldDefinition> = [
+            { type: 'repository', label: 'Repository', name: 'repo', value: this.repositoryService.repositorySetting.path },
+            { type: 'string', label: 'Name', name: 'name' },
+            { type: 'bool', label: 'Checkout', name: 'checkout' }
+        ];
 
+
+        const onClose$ = this.commanderModalService.openModal({ title: name, fields: fields! });
+        const sub = onClose$
+            .subscribe((params) => {
+                if (params?.formData?.name) {
+                    this.repositoryService.createBranch(params?.formData?.name);
+                }
+                sub.unsubscribe();
+                this.commanderService.reloadData();
+                this.commanderModalService.closeModal();
+            });
     }
 
     async sync($event: Event) {

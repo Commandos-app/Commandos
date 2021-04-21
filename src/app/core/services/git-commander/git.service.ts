@@ -35,14 +35,16 @@ export class GitService {
         const name = 'Pull repositories';
         const icon = 'download-cloud';
         const command = 'executePull';
-        this.registerCommand({ name, command, icon });
+        const fields: Array<FieldDefinition> = [{ type: 'repositories', label: 'Repositories', name: 'repo' }];
+        this.registerCommand({ name, command, icon, fields });
     }
 
     private registerPushCommand() {
         const name = 'Push repositories';
         const icon = 'upload-cloud';
         const command = 'executePush';
-        this.registerCommand({ name, command, icon });
+        const fields: Array<FieldDefinition> = [{ type: 'repositories', label: 'Repositories', name: 'repo' }];
+        this.registerCommand({ name, command, icon, fields });
     }
 
     private registerSyncCommand() {
@@ -50,14 +52,18 @@ export class GitService {
         const icon = 'sync';
         const direction = 'left';
         const command = 'executeSync';
-        this.registerCommand({ name, command, icon, direction });
+        const fields: Array<FieldDefinition> = [{ type: 'repositories', label: 'Repositories', name: 'repo' }];
+        this.registerCommand({ name, command, icon, direction, fields });
     }
 
     private registerCreateBranchCommand() {
         const name = 'Create Branch';
         const icon = 'branch-16';
         const command = 'executeCreateBranch';
-        const fields: Array<FieldDefinition> = [{ type: 'string', label: 'Name', name: 'name' }];
+        const fields: Array<FieldDefinition> = [
+            { type: 'repositories', label: 'Repositories', name: 'repo' },
+            { type: 'string', label: 'Name', name: 'name' }
+        ];
         this.registerCommand({ name, command, icon, fields });
     }
 
@@ -65,7 +71,10 @@ export class GitService {
         const name = 'Delete branch';
         const icon = 'trash';
         const command = 'executeDeleteBranch';
-        const fields: Array<FieldDefinition> = [{ type: 'branch', label: 'Branch', name: 'name' }];
+        const fields: Array<FieldDefinition> = [
+            { type: 'repositories', label: 'Repositories', name: 'repo' },
+            { type: 'branch', label: 'Branch', name: 'name' }
+        ];
         this.registerCommand({ name, command, icon, fields });
     }
 
@@ -73,7 +82,8 @@ export class GitService {
         const name = 'Prune Remote';
         const icon = 'sync';
         const command = 'executePruneRemote';
-        this.registerCommand({ name, command, icon });
+        const fields: Array<FieldDefinition> = [{ type: 'repositories', label: 'Repositories', name: 'repo' }];
+        this.registerCommand({ name, command, icon, fields });
     }
 
 

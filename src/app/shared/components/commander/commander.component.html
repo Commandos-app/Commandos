@@ -5,7 +5,6 @@
     </div>
 </div>
 <ng-template #commandsTemplate>
-    <div class=""></div>
     <div class="command-body">
         <div *ngFor="let cmd of commands; index as i" class="command" [class.selected]="i === selected"
             (click)="runCommand(cmd)">

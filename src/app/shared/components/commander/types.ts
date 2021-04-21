@@ -6,7 +6,7 @@ export type AvailableCommands =
     'executePruneRemote';
 
 export type FieldDefinition = {
-    type: 'string' | 'branch';
+    type: 'string' | 'branch' | 'repositories' | 'repository' | 'bool';
     name: string;
     label: string;
     value?: any;

@@ -7,7 +7,9 @@ import { Router } from '@angular/router';
 import { RepositoriesSettings, RepositoriesSettingsService } from '@core/services';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { fromEvent, merge, Subscription } from 'rxjs';
-import { open } from '@tauri-apps/api/shell';
+import { Command, open } from '@tauri-apps/api/shell';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { invoke } from '@tauri-apps/api/tauri';
 
 @Component({
     selector: 'app-home',
@@ -26,7 +28,8 @@ export class HomeComponent implements OnInit {
         private repos: RepositoriesSettingsService,
         private repositoryService: RepositoryService,
         public overlay: Overlay,
-        public viewContainerRef: ViewContainerRef
+        public viewContainerRef: ViewContainerRef,
+        private clipboard: Clipboard
 
     ) { }
 
@@ -48,20 +51,32 @@ export class HomeComponent implements OnInit {
     //     $event.stopPropagation();
     // }
 
-    openCmd(path: string) {
+    openCmd(path: string): void {
         open(path);
         this.close();
     }
 
-    openCode(path: string) {
+    openCode(path: string): void {
         open(path, 'code');
         this.close();
     }
 
-    openTerminal(path: string) {
-        const windows = navigator.userAgent.includes('Windows')
-        let cmd = windows ? 'cmd' : 'sh'
-        open(path, cmd);
+    openTerminal(path: string): void {
+
+        invoke('cmd', { path });
+
+        // const windows = navigator.userAgent.includes('Windows');
+        // let cmd = windows ? 'cmd' : 'sh';
+        // let args = windows ? ['/C'] : ['-c'];
+        // let script = 'echo "hello world"';
+        // const command = new Command(cmd, [...args, script]);
+        // command.spawn();
+        // open('cmd', path);
+        this.close();
+    }
+
+    copyPath(path: string): void {
+        this.clipboard.copy(path);
         this.close();
     }
 

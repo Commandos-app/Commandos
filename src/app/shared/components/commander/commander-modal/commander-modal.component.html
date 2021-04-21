@@ -4,23 +4,38 @@
     </cds-modal-header>
     <cds-modal-content>
         <cds-form-group layout="horizontal" cds-layout="m-b:lg">
-            <cds-control layout="horizontal">
-                <label>Repositories:</label>
-                <ng-select cds-control [items]="items" bindLabel="text" [closeOnSelect]="true" [searchable]="true"
-                    [(ngModel)]="selected" appendTo="body" groupBy="type" (change)="onRepositoriesSelected($event)">
-                    <ng-template ng-label-tmp let-item="item">
-                        {{item.type}}: {{item.text}}
-                    </ng-template>
-                </ng-select>
-            </cds-control>
+
 
 
             <ng-container *ngFor="let field of commanderModalService.fields">
 
+                <cds-control layout="horizontal" *ngIf="field.type === 'repositories'">
+                    <label>{{field.label}}:</label>
+                    <ng-select cds-control [items]="items" bindLabel="text" [closeOnSelect]="true" [searchable]="true"
+                        [(ngModel)]="selected" appendTo="body" groupBy="type" (change)="onRepositoriesSelected($event)">
+                        <ng-template ng-label-tmp let-item="item">
+                            {{item.type}}: {{item.text}}
+                        </ng-template>
+                    </ng-select>
+                </cds-control>
+
+                <cds-input *ngIf="field.type === 'repository'">
+                    <label>{{field.label}}:</label>
+                    <input type="text" readonly [(ngModel)]="field.value" />
+                </cds-input>
+
                 <cds-input *ngIf="field.type === 'string'">
                     <label>{{field.label}}:</label>
-                    <input type="text" name="name" required [(ngModel)]="field.value" />
+                    <input type="text" required [(ngModel)]="field.value" />
                 </cds-input>
+
+                <cds-checkbox-group *ngIf="field.type === 'bool'">
+                    <label>{{field.label}}:</label>
+                    <cds-checkbox>
+                        <label></label>
+                        <input type="checkbox" checked [(ngModel)]="field.value" />
+                    </cds-checkbox>
+                </cds-checkbox-group>
 
                 <cds-control layout="horizontal" *ngIf="field.type === 'branch'">
                     <label>{{field.label}}:</label>

@@ -46,6 +46,10 @@
             class="clickable contextmenu-action">
             Open in Terminal
         </div>
+        <cds-divider></cds-divider>
+        <div (click)="copyPath(repo.path)" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
+            Copy Path
+        </div>
         <!-- <div>Send to</div> -->
     </section>
 </ng-template>

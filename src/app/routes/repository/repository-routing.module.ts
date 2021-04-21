@@ -22,7 +22,7 @@ const routes: Routes = [
                 ]
             },
             { path: 'setting', component: RepositorySettingComponent },
-            { path: '', redirectTo: 'commit', pathMatch: 'full' }
+            { path: '', redirectTo: 'branches', pathMatch: 'full' }
         ],
 
 

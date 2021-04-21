@@ -79,7 +79,7 @@ export class CommanderModalComponent implements OnInit {
     }
 
     private loadSelectedRepos(selected: SelectedRepositoryTypes): RepositoriesSettings {
-        switch (selected.type) {
+        switch (selected?.type) {
             case 'Tag':
                 return this.repositoriesSettingsService.getRepositoriesByTag(selected.text);
             case 'Repository':
