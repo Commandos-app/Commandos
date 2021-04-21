@@ -2,12 +2,12 @@ import { FieldDefinition, RegisterCommandOptions } from '@shared/components';
 import { ICommand, CommanderService, CommanderModalService } from '@shared/services';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { createBranch, deleteLocalBranch } from '@git/commands';
+import { createBranch, deleteLocalBranch, push, pull, pruneRemote } from '@git/commands';
 import { RepositorySetting } from '../store/store.types';
 
 
 
-//! Refactor: Rename this Service 
+//! Refactor: Rename this Service
 
 @Injectable({
     providedIn: 'root'
@@ -22,35 +22,37 @@ export class GitService {
     ) { }
 
     registerGitCommands(): void {
-        // this.registerPullCommand();
-        // this.registerPushCommand();
+        this.registerPullCommand();
+        this.registerPushCommand();
+        this.registerSyncCommand();
         this.registerDeleteBranchCommand();
         this.registerCreateBranchCommand();
         // this.registerMergeCommand();
-        // this.registerSyncCommand();
+        this.registerPruneRemoteCommand();
     }
 
-    // private registerPullCommand() {
-    //     const name = 'Pull repositories';
-    //     const icon = 'download-cloud';
-    //     const command = 'executePull';
-    //     this.registerCommand({ name, command, icon });
-    // }
+    private registerPullCommand() {
+        const name = 'Pull repositories';
+        const icon = 'download-cloud';
+        const command = 'executePull';
+        this.registerCommand({ name, command, icon });
+    }
 
-    // private registerPushCommand() {
-    //     const name = 'Push repositories';
-    //     const icon = 'upload-cloud';
-    //     const command = 'executePush';
-    //     this.registerCommand({ name, command, icon });
-    // }
+    private registerPushCommand() {
+        const name = 'Push repositories';
+        const icon = 'upload-cloud';
+        const command = 'executePush';
+        this.registerCommand({ name, command, icon });
+    }
 
-    // private registerSyncCommand() {
-    //     const name = 'Sync repositories';
-    //     const icon = 'two-way-arrows';
-    //     const direction = 'left';
-    //     const command = 'executeSync';
-    //     this.registerCommand({ name, command, icon, direction });
-    // }
+    private registerSyncCommand() {
+        const name = 'Sync (pull/push)';
+        const icon = 'sync';
+        const direction = 'left';
+        const command = 'executeSync';
+        this.registerCommand({ name, command, icon, direction });
+    }
+
     private registerCreateBranchCommand() {
         const name = 'Create Branch';
         const icon = 'branch-16';
@@ -65,6 +67,13 @@ export class GitService {
         const command = 'executeDeleteBranch';
         const fields: Array<FieldDefinition> = [{ type: 'branch', label: 'Branch', name: 'name' }];
         this.registerCommand({ name, command, icon, fields });
+    }
+
+    private registerPruneRemoteCommand() {
+        const name = 'Prune Remote';
+        const icon = 'sync';
+        const command = 'executePruneRemote';
+        this.registerCommand({ name, command, icon });
     }
 
 
@@ -113,13 +122,14 @@ export class GitService {
         return deleteLocalBranch(formData.name, repository.path);
     }
 
-    private executePush(formData: any, repository: RepositorySetting): Promise<any> {
-        throw new Error('Method not implemented.');
+
+    private executePush(formData: any, repository: RepositorySetting): Promise<void> {
+        return push(repository.path);
 
     }
 
-    private executePull(formData: any, repository: RepositorySetting): Promise<any> {
-        throw new Error('Method not implemented.');
+    private executePull(formData: any, repository: RepositorySetting): Promise<void> {
+        return pull(repository.path);
     }
 
     private async executeCreateBranch(formData: any, repository: RepositorySetting): Promise<any> {
@@ -129,6 +139,11 @@ export class GitService {
     private async executeSync(formData: any, repository: RepositorySetting): Promise<any> {
         await this.executePull(formData, repository);
         return this.executePush(formData, repository);
+    }
+
+
+    private async executePruneRemote(formData: any, repository: RepositorySetting): Promise<any> {
+        return pruneRemote(repository.path);
     }
 
     private unsubscribe() {
