@@ -1,8 +1,10 @@
+import { LoadingState } from '@shared/functions';
 import { RepositoryService } from '@routes/repository/repository.service';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { filter, first } from 'rxjs/operators';
 import { RepositoriesSettingsService } from '@core/services';
+import { sleep } from '@cds/core/internal';
 
 type NewBranch = {
     pushRemote?: boolean;
@@ -23,6 +25,7 @@ export class SubnavComponent implements OnInit {
     currentId = 0;
     branches: branches = [];
     repositories: any[];
+    isSyncing: boolean = false;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -51,8 +54,19 @@ export class SubnavComponent implements OnInit {
 
     }
 
-    openNewBranch(): void {
+    openNewBranch($event: Event): void {
+        $event.preventDefault();
+        $event.stopPropagation();
 
+    }
+
+    async sync($event: Event) {
+        this.isSyncing = true;
+        $event.preventDefault();
+        $event.stopPropagation();
+        await this.repositoryService.sync();
+        await sleep(1000);
+        this.isSyncing = false;
     }
 
     private getPathArray(route: ActivatedRouteSnapshot): Array<string | undefined> {

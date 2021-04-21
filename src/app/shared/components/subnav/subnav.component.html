@@ -2,7 +2,7 @@
     <div>
         <app-button-control title="Current repository" [value]="repositoryService.repositorySetting?.name"
             startIcon="home" endIcon="plus" (onClick)="goToHome()">
-            <cds-icon-button detail-action action="flat" [routerLink]="['/add-repository']" routerLinkActive="active"
+            <cds-icon-button action-primary action="flat" [routerLink]="['/add-repository']" routerLinkActive="active"
                 aria-label="Add Repository">
                 <cds-icon shape="plus"></cds-icon>
             </cds-icon-button>
@@ -10,21 +10,26 @@
     </div>
     <ng-container *ngIf="!!repositoryService.repositorySetting?.name">
         <div class="spacer"></div>
-        <div>
-            <app-button-control width="350px" [routerLink]="['/repository', repositoryService.currentId, 'branches']"
+        <div class="branch-control">
+            <app-button-control [routerLink]="['/repository', repositoryService.currentId, 'branches']"
                 routerLinkActive="button-active" startIcon="branch">
                 <div title>
                     Current branch <commander-branch-ahead-behind [noColor]="true"
                         [branch]="repositoryService.currentBranch" cds-layout="m-l:sm">
                     </commander-branch-ahead-behind>
                 </div>
-                <div value>
+                <div value class="no-break text-overflow">
                     {{ repositoryService.currentBranch?.name }}&nbsp;&nbsp;
 
                 </div>
 
-                <cds-icon-button detail-action action="flat" class="hover" aria-label="Create new branch">
-                    <cds-icon shape="plus" (click)="openNewBranch()"></cds-icon>
+                <cds-icon-button action-secondary action="flat" class="hover" aria-label="Create new branch"
+                    [loadingState]="isSyncing" (click)="sync($event)">
+                    <cds-icon shape="sync" [class.spin]="isSyncing"></cds-icon>
+                </cds-icon-button>
+                <cds-icon-button action-primary action="flat" class="hover" aria-label="Create new branch"
+                    (click)="openNewBranch($event)">
+                    <cds-icon shape="plus"></cds-icon>
                 </cds-icon-button>
             </app-button-control>
         </div>

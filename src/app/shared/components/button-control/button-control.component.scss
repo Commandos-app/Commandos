@@ -1,6 +1,7 @@
 .commander-button-control {
     position: relative;
-    .commander-button-control-dropdown {
+
+    .commander-button-control-area {
         display: grid;
         grid-template-columns: 40px 1fr;
         width: 250px;
@@ -9,47 +10,60 @@
         cursor: pointer;
         margin-left: -1px;
         margin-right: -1px;
+
         &.open {
             background: var(--cds-alias-object-app-background, var(--cds-global-color-gray-50, #fafafa));
             color: var(--cds-global-typography-color-500, var(--cds-global-color-gray-1000, black));
         }
+
         .commander-button-control-icon {
             // line-height: var(--commander-button-control-sub-header-height);
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
         .commander-button-control-title {
-            color: var(--color);
+            color: var(--cds-global-color-cool-gray-600);
             font-weight: var(--cds-global-typography-font-weight-light);
             font-size: var(--cds-global-typography-font-size-2);
         }
+
         .commander-button-control-value {
             color: var(--color);
         }
-        &.commander-button-control-hover {
-            &:hover {
-                background: var(--cds-alias-object-app-background, var(--cds-global-color-gray-50, #fafafa));
-                color: var(--cds-global-typography-color-500, var(--cds-global-color-gray-1000, black));
-            }
-        }
+
+
+
         .commander-button-control-text {
             padding-left: 7px;
         }
     }
-    .commander-button-control-arrow {
+
+    &.commander-button-control-hover {
+        &:hover {
+            background: var(--cds-alias-object-app-background, var(--cds-global-color-gray-50, #fafafa));
+            color: var(--cds-global-typography-color-500, var(--cds-global-color-gray-1000, black));
+        }
+    }
+
+    .commander-button-control-action {
         // text-align: center; // line-height: var(--commander-button-control-sub-header-height);
         display: flex;
         justify-content: center;
         align-items: center;
-        position: absolute;
-        right: 5px;
         border-radius: 5px;
         margin: 7px 0; // background: var(--cds-global-color-warm-gray-100);
+
         cds-icon-button:hover {
             background: var(--cds-alias-object-app-background, var(--cds-global-color-gray-50, #fafafa));
         }
+
+        &.last {
+            margin-right: 5px;
+        }
     }
+
     .commander-button-control-window {
         width: 100%; // background: var(--cds-global-color-warm-gray-100);
         background: var(--cds-alias-object-app-background, var(--cds-global-color-gray-50, #fafafa));

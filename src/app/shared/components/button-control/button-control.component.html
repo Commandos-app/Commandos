@@ -1,5 +1,5 @@
-<div cds-layout="horizontal" class="commander-button-control">
-    <div class="commander-button-control-dropdown commander-button-control-hover" #commandButtonControlContainer>
+<div cds-layout="horizontal wrap:none" class="commander-button-control commander-button-control-hover">
+    <div class="commander-button-control-area" #commandButtonControlContainer>
         <div class="commander-button-control-icon" (click)="onClick.emit()">
             <ng-content select="[icon]"></ng-content>
             <cds-icon [shape]="startIcon" size="24" *ngIf="startIcon"></cds-icon>
@@ -10,12 +10,15 @@
                 <ng-content select="[title]"></ng-content>
             </div>
             <div class="commander-button-control-value" cds-text="body">
-                <ng-container *ngIf="value">{{value ? value: '---'}}</ng-container>
+                <ng-container *ngIf="value">{{value}}</ng-container>
                 <ng-content select="[value]"></ng-content>
             </div>
         </div>
     </div>
-    <div class="commander-button-control-arrow">
-        <ng-content select="[detail-action]"></ng-content>
+    <div class="commander-button-control-action">
+        <ng-content select="[action-secondary]"></ng-content>
+    </div>
+    <div class="commander-button-control-action last">
+        <ng-content select="[action-primary]"></ng-content>
     </div>
 </div>

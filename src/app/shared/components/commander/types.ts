@@ -2,7 +2,8 @@ import { RepositoriesSettings } from "@core/services";
 
 export type AvailableCommands =
     'executeMerge' | 'executePull' | 'executePush' |
-    'executeCreateBranch' | 'executeDeleteBranch' | 'executeSync';
+    'executeCreateBranch' | 'executeDeleteBranch' | 'executeSync' |
+    'executePruneRemote';
 
 export type FieldDefinition = {
     type: 'string' | 'branch';
