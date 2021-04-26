@@ -37,6 +37,11 @@
 
         .commander-button-control-text {
             padding-left: 7px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: flex-start;
         }
     }
 

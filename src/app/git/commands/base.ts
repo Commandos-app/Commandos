@@ -1,5 +1,5 @@
 import * as GitPerf from '../git-perf';
-import { Command } from '@tauri-apps/api/shell';
+import { Command } from '@tauri-apps/api/shell.js';
 
 // export async function runGit2(args: string[], path: string, name: string): Promise<any> {
 

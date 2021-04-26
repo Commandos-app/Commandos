@@ -1,6 +1,6 @@
 {
     "package": {
-        "productName": "DOS-Commander",
+        "productName": "Commandos",
         "version": "0.3.3"
     },
     "build": {
@@ -14,7 +14,7 @@
         "bundle": {
             "active": true,
             "targets": "all",
-            "identifier": "ch.domischenk.dos",
+            "identifier": "ch.domischenk.commandos",
             "icon": [
                 "icons/32x32.png",
                 "icons/128x128.png",

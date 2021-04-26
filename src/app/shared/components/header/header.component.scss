@@ -4,16 +4,19 @@
     width: 100%;
 }
 
-.action {
-    // padding: 15px 0;
-}
-
-[cds-text="section"] {
-    padding: 18px 0 18px 18px;
-    color: var(--cds-global-color-gray-0);
-}
 
 .window-action {
     display: flex;
     align-items: center;
+}
+
+.branding {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    font-size: var(--cds-global-typography-section-font-size);
+    color: var(--cds-global-color-gray-0);
+    // gap: 10px;
+    margin-left: 10px;
 }

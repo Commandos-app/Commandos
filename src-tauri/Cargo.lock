@@ -2558,9 +2558,9 @@ dependencies = [
 
 [[package]]
 name = "rfd"
-version = "0.2.2"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3cf7347832c8a6641053cda45bcdae57916204de0c53f7964abab69015454f54"
+checksum = "9d70f2f644f85e23857c7fa9b939ec6a85f3eace37ebcae9ec977a33865496f5"
 dependencies = [
  "block",
  "dispatch",
@@ -2930,11 +2930,12 @@ dependencies = [
 
 [[package]]
 name = "sysinfo"
-version = "0.10.5"
+version = "0.17.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b8834e42be61ae4f6338b216fbb69837c7f33c3d4d3a139fb073735b25af4d9e"
+checksum = "7f5e4b56d92c7c56cc8a06df0cc06860a8ec6102e9a8a5ee85dff90afbeadf3d"
 dependencies = [
- "cfg-if 0.1.10",
+ "cfg-if 1.0.0",
+ "core-foundation-sys 0.8.2",
  "doc-comment",
  "libc",
  "ntapi",
@@ -2971,9 +2972,9 @@ dependencies = [
 
 [[package]]
 name = "tauri"
-version = "1.0.0-beta-rc.2"
+version = "1.0.0-beta-rc.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d2132faee7c13668314f12a0593e871db264541d0a171afb7a8a45098b6bd9d9"
+checksum = "4230d7f5d01267c68ce01a42cb7726efeba71cfc515387ec0489a69229e926f4"
 dependencies = [
  "base64",
  "bytes",
@@ -3012,9 +3013,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-build"
-version = "1.0.0-beta-rc.0"
+version = "1.0.0-beta-rc.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bafb25a2dd5bc6559250052a56fb67764196a7630445018241a9cde14135e461"
+checksum = "72c0791792e5b01df47ff580f7bdca3600d2e5fd98451471d75458f4dbddf2d8"
 dependencies = [
  "anyhow",
  "proc-macro2",
@@ -3024,9 +3025,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-codegen"
-version = "1.0.0-beta-rc.0"
+version = "1.0.0-beta-rc.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7994828a91bb13ebbdf9b8c2c499822c32f77638edbb47cd531be2a912ba3f3f"
+checksum = "b15e1584330f194c375dff4583bdd9cc9dd31dc47b485e089d0571f9009216ba"
 dependencies = [
  "blake3",
  "proc-macro2",
@@ -3041,9 +3042,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-hotkey"
-version = "0.1.0"
+version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c2a9a9b3222da987b618159943fa405aae379862a5fe643e3e4023ca921ef878"
+checksum = "76abc7ad52ab93215ac8d2f54910e31bcca524f6926f22bd92df003aa5a10c2f"
 dependencies = [
  "log",
  "once_cell",
@@ -3068,9 +3069,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-macros"
-version = "1.0.0-beta-rc.0"
+version = "1.0.0-beta-rc.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "175bc1559445ecb9362e6127df18b96fea3aea49c1a7736e8d4ff3fe55622ed1"
+checksum = "22f61841272de3d9c8955c66ee34a738aa53cd90deaec56005e64acba0fc805a"
 dependencies = [
  "proc-macro2",
  "quote 1.0.9",
@@ -3080,9 +3081,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-utils"
-version = "1.0.0-beta-rc.0"
+version = "1.0.0-beta-rc.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f8c8cdee84c6f8eb8155ff6720f55f61d715b4038aadb1a0b2f37828c4e1c33f"
+checksum = "a896f622a51ae93bd77aa7aa02b4bbd1dd4982932551ea3319f04ffdf82fbe8f"
 dependencies = [
  "phf",
  "proc-macro2",

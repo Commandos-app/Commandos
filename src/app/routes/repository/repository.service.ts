@@ -101,7 +101,7 @@ export class RepositoryService {
         const branches = await getBranches(this.getPath());
         if (branches) {
             const parsedBranches = parseBranches(branches);
-            const upstreamBranches = parsedBranches.filter(f => f.upstream)
+            const upstreamBranches = parsedBranches.filter(f => f.upstream);
             for (let index = 0; index < upstreamBranches.length; index++) {
                 const element = upstreamBranches[index];
                 const ahead = await countRevList(this.getPath(), element.upstream, element.name);
