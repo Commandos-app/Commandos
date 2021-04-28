@@ -167,6 +167,10 @@ export class RepositoryService {
     async getBehindCount(branch: Branch): Promise<number> {
         return await countRevList(this.getPath(), branch.name, branch.upstream);
     }
+
+    clearUIBranches() {
+        this.branches.next(null);
+    }
     //#endregion
 
     //#region Commit

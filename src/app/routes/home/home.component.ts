@@ -36,6 +36,7 @@ export class HomeComponent implements OnInit {
     ngOnInit(): void {
         this.repositoryService.unload();
         this.loadRepos();
+        this.repositoryService.clearUIBranches();
     }
 
     loadRepos(): void {
