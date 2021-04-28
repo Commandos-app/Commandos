@@ -102,10 +102,6 @@ export class RepositoryBranchComponent implements OnInit {
         }
     }
 
-    onNew(): void {
-        this.openModalNew = true;
-    }
-
     async onRename(current: string, newName: string): Promise<void> {
         await this.repositoryService.renameBranch(current, newName);
 
