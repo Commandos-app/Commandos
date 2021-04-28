@@ -19,7 +19,7 @@
                         </cds-button>
                         <cds-icon-button (click)="load()" size="sm" action="flat" cds-layout="m-r:sm"
                             aria-label="refresh">
-                            <cds-icon shape="refresh" size="14"></cds-icon>
+                            <cds-icon shape="refresh" size="14" [class.spin]="isLoading"></cds-icon>
                         </cds-icon-button>
                     </div>
                 </form>
@@ -42,7 +42,7 @@
             <ng-scrollbar class="virtual-scroll" *ngIf="fileTree.length  !== 0 ">
                 <div scrollViewport id="diffoutput"></div>
                 <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height"
-                    *ngIf="isLoading">
+                    *ngIf="isDiffLoading">
                     <cds-progress-circle size="xl"></cds-progress-circle>
                 </div>
             </ng-scrollbar>

@@ -20,7 +20,9 @@ export class RepositoryCommitComponent implements OnInit {
     formDisabled = false;
     commitMessage = '';
     private hasStaged = false;
+    isDiffLoading = false;
     isLoading = false;
+
     isCommiting: LoadingState = 'default';
 
 
@@ -52,6 +54,7 @@ export class RepositoryCommitComponent implements OnInit {
 
 
     async load(): Promise<void> {
+        this.isLoading = true;
         this.logger.info('Reload commit data');
         const files = await this.repositoryService.getStatus();
         const filesUnstaged = this.groupChangedFiles(files.filter(file => !file.isStaged), 'Changes', false);
@@ -60,6 +63,7 @@ export class RepositoryCommitComponent implements OnInit {
         this.fileTree = [...filesStaged, ...filesUnstaged];
         this.formDisabled = this.fileTree.length === 0;
         this.hasStaged = filesStaged.length > 0;
+        this.isLoading = false;
     }
 
     private groupChangedFiles(files: IStatusResult[], title: string, staged: boolean): GroupedChangedFiles {
@@ -150,14 +154,14 @@ export class RepositoryCommitComponent implements OnInit {
     }
 
     async loadDiff(node: TreeObject) {
-        this.isLoading = true;
+        this.isDiffLoading = true;
         const newOrUntracked = node.file.isNew || node.file.isUntracked;
         const changes = await this.repositoryService.getDiffOfFile(node.file.path, newOrUntracked, node.file.isRenamed, node.staged);
 
         const outputFormat = this.storeService.getDiff2HtmlOutputFormat()
         Differ('diffoutput', changes, outputFormat);
 
-        this.isLoading = false;
+        this.isDiffLoading = false;
     }
 
 

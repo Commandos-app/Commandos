@@ -20,13 +20,13 @@
                 </div>
                 <div value class="no-break text-overflow">
                     {{ repositoryService.currentBranchStr}}&nbsp;&nbsp;
-
                 </div>
 
                 <cds-icon-button action-secondary action="flat" class="hover" aria-label="Create new branch"
                     [loadingState]="isSyncing" (click)="sync($event)">
                     <cds-icon shape="sync" [class.spin]="isSyncing"></cds-icon>
                 </cds-icon-button>
+
                 <cds-icon-button action-primary action="flat" class="hover" aria-label="Create new branch"
                     (click)="openNewBranch($event)">
                     <cds-icon shape="plus"></cds-icon>
