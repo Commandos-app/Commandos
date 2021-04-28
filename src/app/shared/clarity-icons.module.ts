@@ -7,7 +7,7 @@ import {
     minusIcon, moonIcon, noteIcon, pencilIcon, playIcon,
     plusIcon, shrinkIcon, sunIcon, timesIcon, trashIcon, undoIcon,
     unknownStatusIcon, uploadCloudIcon, wandIcon, windowCloseIcon, windowMaxIcon, windowMinIcon,
-    windowRestoreIcon, twoWayArrowsIcon, userIcon, refreshIcon, happyFaceIcon, arrowIcon, syncIcon
+    windowRestoreIcon, twoWayArrowsIcon, userIcon, refreshIcon, happyFaceIcon, arrowIcon, syncIcon, pinIcon
 } from '@cds/core/icon';
 
 import '@cds/core/icon/register.js';
@@ -19,7 +19,7 @@ const icons = [
     minusIcon, windowMinIcon, windowMaxIcon, windowRestoreIcon, undoIcon,
     fileIcon, sunIcon, moonIcon, homeIcon, historyIcon,
     trashIcon, downloadIcon, twoWayArrowsIcon, userIcon,
-    refreshIcon, happyFaceIcon, arrowIcon, syncIcon
+    refreshIcon, happyFaceIcon, arrowIcon, syncIcon, pinIcon
 ]
 
 ClarityIcons.addIcons(...icons);
