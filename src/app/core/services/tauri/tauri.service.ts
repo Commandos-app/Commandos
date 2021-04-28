@@ -12,6 +12,8 @@ export class TauriService {
     private windowState = new BehaviorSubject<WindowState>('windowed')
     windowState$ = this.windowState.asObservable();
 
+    isPinned = false;
+
     constructor() {
         this.windowState.subscribe(val => console.log(val))
         window.addEventListener('resize', () => {
@@ -38,5 +40,10 @@ export class TauriService {
 
     async closeClient(): Promise<void> {
         appWindow.close();
+    }
+
+    async tooglePin(): Promise<void> {
+        this.isPinned = !this.isPinned;
+        appWindow.setAlwaysOnTop(this.isPinned);
     }
 }

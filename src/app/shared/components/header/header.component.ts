@@ -30,6 +30,10 @@ export class HeaderComponent implements OnInit {
         this.tauriService.unmaximize();
     }
 
+    pin() {
+        this.tauriService.tooglePin();
+    }
+
     closeClient(): void {
         this.tauriService.closeClient();
     }

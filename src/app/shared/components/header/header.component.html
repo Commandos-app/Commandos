@@ -4,13 +4,21 @@
 </div>
 <app-commander></app-commander>
 
+
+
+<div class="drag-region window-action">
+    <a (click)="pin()" class="action clickable drag-region" aria-label="minimize" role='button'>
+        <cds-icon shape="pin" size="20" [solid]="tauriService.isPinned"></cds-icon>
+    </a>
+</div>
+
 <div class="drag-region window-action">
     <a (click)="minimize()" class="action clickable drag-region" aria-label="minimize" role='button'>
         <cds-icon shape="window-min" size="20"></cds-icon>
     </a>
 </div>
+
 <ng-container *ngIf="tauriService.windowState$ | async as fullscreen">
-    <!--  -->
     <div class="drag-region window-action" *ngIf="fullscreen !== 'fullscreen'">
         <a (click)="maximize()" class="action clickable" aria-label="maximize" role="button">
             <cds-icon shape="window-max" size="20"></cds-icon>
