@@ -35,7 +35,7 @@ export class RepositoryHistoryCommitComponent implements OnInit {
         this.metadata = await this.repositoryService.getChangesMetaDataOfSha(this.sha);
 
         const outputFormat = this.storeService.getDiff2HtmlOutputFormat()
-        Differ('diffoutput', value, outputFormat);
+        Differ('diffoutput', value, { outputFormat });
         this.isLoading = false;
     }
 
