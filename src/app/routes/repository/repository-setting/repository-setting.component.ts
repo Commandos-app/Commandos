@@ -33,7 +33,11 @@ export class RepositorySettingComponent implements OnInit {
         private repositoryService: RepositoryService
     ) { }
 
-    async ngOnInit(): Promise<void> {
+    ngOnInit(): void {
+        this.load();
+    }
+
+    async load(): Promise<void> {
         this.tags = this.storeService.getTags();
         this.selectedTags = this.repositoryService.repositorySetting.tags;
         this.path = this.repositoryService.repositorySetting.path;
@@ -42,6 +46,7 @@ export class RepositorySettingComponent implements OnInit {
         this.origin = await this.repositoryService.getOriginUrl();
         this.settingsForm.form.markAsPristine();
     }
+
 
     removeRepo(): void {
         this.repositoriesSettings.removeRepository(this.repositoryService.currentId);
@@ -68,7 +73,7 @@ export class RepositorySettingComponent implements OnInit {
             await this.repositoryService.unsetLocalUserConfig();
         }
 
-        // TODO Refactor this somehow!
+        // TODO Refactor this somehow! maybe mojs?
         await sleep(300);
         this.saveState = 'success';
         await sleep(1000);
