@@ -18,6 +18,10 @@ export async function measure<T>(
     cmd: string,
     fn: () => Promise<T>
 ): Promise<T> {
+    if (!(window as any).__GITLOGGING__) {
+        return await fn();
+    }
+
     const id = ++markID
 
     const startTime = performance && performance.now ? performance.now() : null
@@ -26,7 +30,7 @@ export async function measure<T>(
     try {
 
         console.log(`%c Executeing %c-${id}-`, 'color: #b71cd0', 'color:red;font-weight: bold', ` ${cmd}`);
-        return await fn()
+        return await fn();
     } finally {
         if (startTime) {
             const rawTime = performance.now() - startTime;
