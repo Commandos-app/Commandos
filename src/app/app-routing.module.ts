@@ -34,7 +34,7 @@ const routes: Routes = [
             paramsInheritanceStrategy: 'always',
             relativeLinkResolution: 'legacy',
             anchorScrolling: 'enabled',
-            useHash: true
+            useHash: false
         }),
     ],
     exports: [RouterModule]
