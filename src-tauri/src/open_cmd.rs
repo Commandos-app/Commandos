@@ -1,8 +1,8 @@
 use std::process::Command;
-use std::str;
+// use std::str;
 
 #[tauri::command]
-pub fn cmd(path: String) {
+pub fn open_cmd(path: String) {
     // println!("{}", path);
 
     if cfg!(target_os = "windows") {

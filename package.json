@@ -1,6 +1,6 @@
 {
     "name": "dos-commander",
-    "version": "0.3.3",
+    "version": "0.4.1",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
@@ -34,7 +34,7 @@
         "@ngneat/until-destroy": "^8.0.4",
         "@ngx-translate/core": "^13.0.0",
         "@ngx-translate/http-loader": "^6.0.0",
-        "@tauri-apps/api": "^1.0.0-beta-rc.3",
+        "@tauri-apps/api": "^1.0.0-beta.1",
         "angular-split": "^5.0.0",
         "dayjs": "^1.10.4",
         "diff2html": "^3.4.0",
@@ -50,7 +50,7 @@
         "@angular-devkit/build-angular": "~0.1102.9",
         "@angular/cli": "~11.2.9",
         "@angular/compiler-cli": "~11.2.10",
-        "@tauri-apps/cli": "^1.0.0-beta-rc.4",
+        "@tauri-apps/cli": "^1.0.0-beta.1",
         "@types/hogan.js": "^3.0.0",
         "@types/jasmine": "~3.6.0",
         "@types/node": "^12.11.1",

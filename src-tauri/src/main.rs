@@ -4,17 +4,14 @@
 )]
 
 mod logger;
-use crate::logger::{init_log, logging_wrapper};
-
-mod cmd;
-use crate::cmd::{cmd_wrapper};
+mod open_cmd;
 
 
 fn main() {
-  init_log();
+    logger::init_log();
 
   tauri::Builder::default()
-    .invoke_handler(tauri::generate_handler![logging, cmd])
+    .invoke_handler(tauri::generate_handler![logger::logging, open_cmd::open_cmd])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
 }
