@@ -5,11 +5,10 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 if (environment.production) {
-    (window as any).__GITLOGGING__ = false;
     enableProdMode();
-} else {
-    (window as any).__GITLOGGING__ = true;
 }
+
+(window as any).__NOGITLOGGING__ = environment.noGitLogging;
 
 platformBrowserDynamic()
     .bootstrapModule(AppModule)

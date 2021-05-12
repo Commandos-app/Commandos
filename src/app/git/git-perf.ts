@@ -18,7 +18,7 @@ export async function measure<T>(
     cmd: string,
     fn: () => Promise<T>
 ): Promise<T> {
-    if (!(window as any).__GITLOGGING__) {
+    if ((window as any).__NOGITLOGGING__) {
         return await fn();
     }
 
