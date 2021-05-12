@@ -7,7 +7,7 @@
         <cds-button status="danger" (click)="onDelete()" [disabled]="selected.size === 0">Delete</cds-button>
     </div> -->
     <ng-scrollbar class="virtual-scroll">
-        <div class="commander-grid commander-branches-grid ">
+        <div class="commander-grid commander-branches-grid" cdkDropListGroup cdkDropListSortingDisabled>
             <div class="commander-row-title commander-branches-row-title sticky" cds-text="body bold">
                 <div></div>
                 <div></div>
@@ -16,163 +16,217 @@
                     <i class="upstream" cds-layout="m-r:md">Upstream</i>
                 </div>
             </div>
-            <div class="commander-row commander-branches-row" *ngFor="let branch of repositoryService.branches$ | async"
-                cds-text="body">
+            <div cdkDropList (cdkDropListDropped)="drop($event)"
+                *ngFor="let branch of repositoryService.branches$ | async">
+                <!-- (cdkDragStarted)="dragStart()" (cdkDragEnded)="dragStop()" -->
+                <div class="commander-row commander-branches-row" cds-text="body" cdkDrag [cdkDragData]="branch">
+                    <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+                    <div class="example-custom-placeholder" *cdkDragPreview>{{branch.name}}</div>
 
-                <div class="action custom-padding">
-                    <cds-icon shape="download" [ngxTippy]="checkoutTemplate" tippyName="template-ref"
-                        [tippyProps]="templateRef"></cds-icon>
-                    <div #checkoutTemplate class="comander-tooltip">
-                        <div class="center-text">
-                            Checkout branch?&nbsp;&nbsp;&nbsp;
+                    <div class="action custom-padding">
+                        <cds-icon shape="download" [ngxTippy]="checkoutTemplate" tippyName="template-ref"
+                            [tippyProps]="templateRef"></cds-icon>
+                        <div #checkoutTemplate class="comander-tooltip">
+                            <div class="center-text">
+                                Checkout branch?&nbsp;&nbsp;&nbsp;
+                            </div>
+                            <cds-icon-button size="sm" status="success" standard-hover (click)="onCheckout(branch.name)"
+                                aria-label="checkout branch">
+                                <cds-icon shape="check" class="clickable"></cds-icon>
+                            </cds-icon-button>
                         </div>
-                        <cds-icon-button size="sm" status="success" standard-hover (click)="onCheckout(branch.name)"
-                            aria-label="checkout branch">
-                            <cds-icon shape="check" class="clickable"></cds-icon>
-                        </cds-icon-button>
                     </div>
-                </div>
-                <div class="action custom-padding ">
-                    <cds-icon shape="note" [ngxTippy]="renameTemplate" tippyName="template-ref"
-                        [tippyProps]="templateRef">
-                    </cds-icon>
+                    <div class="action custom-padding">
+                        <cds-icon shape="note" [ngxTippy]="renameTemplate" tippyName="template-ref"
+                            [tippyProps]="templateRef">
+                        </cds-icon>
 
-                    <div #renameTemplate class="comander-tooltip">
-                        <div class="center-text">
-                            <input class="tooltip-input" [placeholder]="branch.name" #renameInput />
-                            &nbsp;&nbsp;&nbsp;
+                        <div #renameTemplate class="comander-tooltip">
+                            <div class="center-text">
+                                <input class="tooltip-input" [placeholder]="branch.name" #renameInput />
+                                &nbsp;&nbsp;&nbsp;
+                            </div>
+
+                            <cds-icon-button size="sm" status="success" standard-hover
+                                (click)="onRename(branch.name, renameInput.value)" aria-label="rename branch">
+                                <cds-icon shape="check" class="clickable"></cds-icon>
+                            </cds-icon-button>
                         </div>
-
-                        <cds-icon-button size="sm" status="success" standard-hover
-                            (click)="onRename(branch.name, renameInput.value)" aria-label="rename branch">
-                            <cds-icon shape="check" class="clickable"></cds-icon>
-                        </cds-icon-button>
                     </div>
-                </div>
-                <div class="action custom-padding">
-                    <cds-icon shape="trash" [ngxTippy]="deleteTemplate" tippyName="template-ref"
-                        [tippyProps]="templateRef">
-                    </cds-icon>
-                    <div #deleteTemplate class="comander-tooltip">
-                        <div class="center-text">
-                            Delete branch?&nbsp;&nbsp;&nbsp;
+                    <div class="action custom-padding">
+                        <cds-icon shape="trash" [ngxTippy]="deleteTemplate" tippyName="template-ref"
+                            [tippyProps]="templateRef">
+                        </cds-icon>
+                        <div #deleteTemplate class="comander-tooltip">
+                            <div class="center-text">
+                                Delete branch?&nbsp;&nbsp;&nbsp;
+                            </div>
+                            <cds-icon-button size="sm" status="danger" standard-hover (click)="onDelete(branch.name)"
+                                aria-label="delete branch">
+                                <cds-icon shape="check" class="clickable"></cds-icon>
+                            </cds-icon-button>
                         </div>
-                        <cds-icon-button size="sm" status="danger" standard-hover (click)="onDelete(branch.name)"
-                            aria-label="delete branch">
-                            <cds-icon shape="check" class="clickable"></cds-icon>
-                        </cds-icon-button>
                     </div>
-                </div>
-                <div class="lh">
-                    <span cds-layout="m-r:md">{{branch.name}}</span>
-                    <ng-container *ngIf="branch.upstream">
-                        <i class="upstream" cds-layout="m-r:md">{{branch.upstream}}</i>
+                    <div class="lh">
+                        <span cds-layout="m-r:md">{{branch.name}}</span>
+                        <ng-container *ngIf="branch.upstream">
+                            <i class="upstream" cds-layout="m-r:md">{{branch.upstream}}</i>
 
-                        <commander-branch-ahead-behind [branch]="branch"></commander-branch-ahead-behind>
-                    </ng-container>
+                            <commander-branch-ahead-behind [branch]="branch"></commander-branch-ahead-behind>
+                        </ng-container>
+                    </div>
+
                 </div>
             </div>
         </div>
     </ng-scrollbar>
-    <!-- <clr-datagrid class="datagrid-compact" [(clrDgSelected)]="selected">
-        <clr-dg-action-bar>
-            <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-success-outline" (click)="onNew()">
-                    <cds-icon shape="pencil">
-                    </cds-icon> New branch
-                </button>
-                <button type="button" class="btn btn-sm btn-outline" (click)="onRename()"
-                    [disabled]="selected.length !== 1">
-                    <cds-icon shape="pencil"></cds-icon> Rename
-                </button>
-                <button type="button" class="btn btn-sm btn-outline" (click)="onCheckout()"
-                    [disabled]="selected.length !== 1">
-                    <cds-icon shape="pencil"></cds-icon> Checkout
-                </button>
-                <button type="button" class="btn btn-sm btn-danger" (click)="onDelete()"
-                    [disabled]="selected.length === 0">
-                    <cds-icon shape="ban"></cds-icon> Delete
-                </button>
-            </div>
-        </clr-dg-action-bar>
 
-        <clr-dg-column [clrDgField]="'name'">Name
-        </clr-dg-column>
-
-        <clr-dg-row *clrDgItems="let branch of branches" [clrDgItem]="branch">
-            <clr-dg-cell>{{branch.name}}</clr-dg-cell>
-        </clr-dg-row>
-
-        <clr-dg-footer>{{branches.length}} Branches</clr-dg-footer>
-    </clr-datagrid> -->
 </div>
 
 
+<cds-modal [closable]="false" *ngIf="mergeObj.modal">
+    <cds-modal-header>
+        <h3 cds-text="title">Merge
+            <span class="code">{{mergeObj.from?.name}}</span> to
+            <span class="code">{{mergeObj.to?.name}}</span> ?
+        </h3>
+    </cds-modal-header>
+    <cds-modal-content>
+        <cds-form-group layout="horizontal" cds-layout="m-b:lg">
 
 
+            <cds-control layout="horizontal">
+                <label>Merge strategy</label>
+                <ng-select cds-control [items]="mergeStrategy" bindLabel="text" [closeOnSelect]="true"
+                    [(ngModel)]="selectedMergeStrategy" appendTo="body" groupBy="type" (change)="onMergeChange($event)">
+                    <ng-template ng-label-tmp let-item="item">
+                        {{item.title}}
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item">
+                        <div><b>{{item.title}}</b></div>
+                        <div>{{item.subtitle}}</div>
+                    </ng-template>
+                </ng-select>
+            </cds-control>
+            <cds-control layout="horizontal">
+                <label></label>
 
-<!-- <h5>Remote branches</h5>
-<ng-container *ngIf="remoteBranches.length > 0">
-    <clr-datagrid class="datagrid-compact" [(clrDgSelected)]="selected">
+                <div cds-control class="repos-merge-animation">
+                    <svg aria-labelledby="strategyAnimDesc" id="mergeStrategyImage" viewBox="0 0 140 24"
+                        xmlns="http://www.w3.org/2000/svg" *ngIf="selectedMergeStrategy.id === 1">
+                        <rect width="8" height="8" rx="4" class="gray-fill"></rect>
+                        <rect x="44" width="8" height="8" rx="4" class="gray-fill"></rect>
+                        <rect x="44" y="16" width="8" height="8" rx="4" class="blue-fill"></rect>
+                        <rect x="88" y="16" width="8" height="8" rx="4" class="blue-fill"></rect>
+                        <rect x="131" y="1" width="6" height="6" rx="4" class="blue-stroke fade-in-merge"></rect>
+                        <line x1="10" y1="4" x2="42" y2="4" class="gray-stroke"></line>
+                        <path d="M54 4H130" class="gray-stroke grow-right-merge"></path>
+                        <line x1="54" y1="20" x2="86" y2="20" class=" blue-stroke"></line>
+                        <path d="M10 4C26 4 26 20 42 20" class="blue-stroke"></path>
+                        <path d="M98 20C114 20 114 4 130 4" class="blue-stroke grow-right-merge"></path>
+                    </svg>
 
-        <clr-dg-column [clrDgField]="'name'" [clrDgSortOrder]="ascSort">Name
-        </clr-dg-column>
+                    <svg aria-labelledby="strategyAnimDesc" id="mergeStrategyImage" viewBox="0 0 96 24"
+                        xmlns="http://www.w3.org/2000/svg" *ngIf="selectedMergeStrategy.id === 2">
+                        <rect x="88" y="16" width="8" height="8" rx="4" class="fade-fill fade-in-final"></rect>
+                        <line x1="54" y1="20" x2="86" y2="20" class="fade-stroke fade-in-final"></line>
+                        <rect x="44" y="16" width="8" height="8" rx="4" class="fade-fill fade-in-final"></rect>
+                        <path d="M10 4C26 4 26 20 42 20" class="fade-stroke fade-in-final"></path>
+                        <rect width="8" height="8" rx="4" class="gray-fill"></rect>
+                        <rect x="44" width="8" height="8" rx="4" class="gray-fill"></rect>
+                        <line x1="10" y1="4" x2="42" y2="4" class=" gray-stroke"></line>
+                        <rect x="44" y="16" width="8" height="8" rx="4" class="blue-fill slide-right-squash"></rect>
+                        <rect x="88" y="16" width="8" height="8" rx="4" class="blue-fill fade-out-squash2"></rect>
+                        <line x1="54" y1="20" x2="86" y2="20" class="blue-stroke shrink-right-squash"></line>
+                        <path d="M54 4H86" class="light-blue-stroke grow-right-squash"></path>
+                        <path d="M10 4C26 4 26 20 42 20" class="blue-stroke fade-out-squash1"></path>
+                    </svg>
 
-        <clr-dg-row *clrDgItems="let branch of remoteBranches" [clrDgItem]="branch">
-            <clr-dg-cell>{{branch.name}} </clr-dg-cell>
-            <clr-dg-cell>{{branch.target}} </clr-dg-cell>
-        </clr-dg-row>
+                    <svg aria-labelledby="strategyAnimDesc" id="mergeStrategyImage" viewBox="0 0 140 24"
+                        xmlns="http://www.w3.org/2000/svg" *ngIf="selectedMergeStrategy.id === 3">
+                        <rect x="44" y="16" width="8" height="8" rx="4" class="fade-fill fade-in-final"></rect>
+                        <rect x="88" y="16" width="8" height="8" rx="4" class="fade-fill fade-in-final"></rect>
+                        <line x1="54" y1="20" x2="86" y2="20" class="fade-stroke fade-in-final"></line>
+                        <path d="M10 4C26 4 26 20 42 20" class="fade-stroke fade-in-final"></path>
+                        <line x1="10" y1="4" x2="42" y2="4" class="gray-stroke"></line>
+                        <rect width="8" height="8" rx="4" class="gray-fill"></rect>
+                        <rect x="44" width="8" height="8" rx="4" class="gray-fill"></rect>
+                        <rect x="44" y="16" width="8" height="8" rx="4" class="blue-fill slide-right-rebase"></rect>
+                        <rect x="88" y="16" width="8" height="8" rx="4" class="blue-fill slide-right-rebase"></rect>
+                        <line x1="54" y1="20" x2="86" y2="20" class="blue-stroke slide-right-rebase"></line>
+                        <path d="M10 4C26 4 26 20 42 20" class="blue-stroke fade-out-rebase"></path>
+                        <line x1="54" y1="4" x2="86" y2="4" class="blue-stroke fade-in-rebase"></line>
+                    </svg>
 
-        <clr-dg-footer>{{branches.length}} Branches</clr-dg-footer>
-    </clr-datagrid>
-</ng-container>
-<ng-container *ngIf="remoteBranches.length === 0">
-    ---
-</ng-container> -->
-<!-- <clr-modal [(clrModalOpen)]="openModalNew">
-    <h3 class="modal-title">New branch</h3>
-    <div class="modal-body">
-        <form clrForm clrLayout="horizontal">
-            <clr-input-container>
-                <label>Name</label>
-                <input clrInput type="text" name="branchname" [(ngModel)]="newBranch.branchName" />
-            </clr-input-container>
-            <clr-checkbox-container>
-                <clr-checkbox-wrapper>
-                    <input type="checkbox" clrCheckbox name="pushRemote" [(ngModel)]="newBranch.pushRemote" />
-                    <label>Push to Remote</label>
-                </clr-checkbox-wrapper>
-                <clr-checkbox-wrapper>
-                    <input type="checkbox" clrCheckbox name="override" [(ngModel)]="newBranch.checkout" />
-                    <label>Change branch</label>
-                </clr-checkbox-wrapper>
-            </clr-checkbox-container>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-link" (click)="openModalNew = false">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="onCreate()">Create</button>
-    </div>
-</clr-modal> -->
 
-<!-- <clr-modal [(clrModalOpen)]="openModalChange">
-    <h3 class="modal-title">Rename branch '{{changeBranch.oldName}}'</h3>
-    <div class="modal-body">
-        <form clrForm clrLayout="horizontal">
-            <clr-input-container>
-                <label class="no-break">New Name</label>
-                <input clrInput type="text" name="branchname" [(ngModel)]="changeBranch.newName" />
-            </clr-input-container>
-            <clr-checkbox-container>
-                <clr-checkbox-wrapper>
-                    <input type="checkbox" clrCheckbox name="override" [(ngModel)]="changeBranch.checkout" />
-                    <label>Change to branch</label>
-                </clr-checkbox-wrapper>
-            </clr-checkbox-container>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-link" (click)="openModalChange = false">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="onChange()">Rename</button>
-    </div>
-</clr-modal> -->
+                    <svg aria-labelledby="strategyAnimDesc" id="mergeStrategyImage" viewBox="0 0 228 24"
+                        xmlns="http://www.w3.org/2000/svg" *ngIf="selectedMergeStrategy.id === 4">
+                        <rect x="44" y="16" width="8" height="8" rx="4" class="fade-fill fade-in-final"></rect>
+                        <rect x="88" y="16" width="8" height="8" rx="4" class="fade-fill fade-in-final"></rect>
+                        <line x1="54" y1="20" x2="86" y2="20" class="fade-stroke fade-in-final"></line>
+                        <path d="M10 4C26 4 26 20 42 20" class="fade-stroke fade-in-final"></path>
+                        <line x1="10" y1="4" x2="42" y2="4" class="gray-stroke"></line>
+                        <line x1="54" y1="4" x2="86" y2="4" class="gray-stroke"></line>
+                        <line x1="98" y1="4" x2="218" y2="4" class="gray-stroke grow-right-rebaseMerge"></line>
+                        <rect width="8" height="8" rx="4" class="gray-fill"></rect>
+                        <rect x="44" width="8" height="8" rx="4" class="gray-fill"></rect>
+                        <rect x="88" width="8" height="8" rx="4" class="gray-fill"></rect>
+                        <rect x="219" y="1" width="6" height="6" rx="4" class="blue-stroke fade-in-rebaseMerge"></rect>
+                        <rect x="44" y="16" width="8" height="8" rx="4" class="blue-fill slide-right-rebaseMerge">
+                        </rect>
+                        <rect x="88" y="16" width="8" height="8" rx="4" class="blue-fill slide-right-rebaseMerge">
+                        </rect>
+                        <line x1="54" y1="20" x2="86" y2="20" class="blue-stroke slide-right-rebaseMerge"></line>
+                        <path d="M10 4C26 4 26 20 42 20" class="blue-stroke slide-right-rebaseMerge"></path>
+                        <path d="M142 20C158 20 158 4 174 4" class="blue-stroke grow-right-rebaseMerge"></path>
+                    </svg>
+                </div>
+
+            </cds-control>
+            <!-- <ng-container *ngFor="let field of commanderModalService.fields">
+
+                <cds-control layout="horizontal" *ngIf="field.type === 'repositories'">
+                    <label>{{field.label}}:</label>
+                    <ng-select cds-control [items]="items" bindLabel="text" [closeOnSelect]="true" [searchable]="true"
+                        [(ngModel)]="selected" appendTo="body" groupBy="type" (change)="onRepositoriesSelected($event)">
+                        <ng-template ng-label-tmp let-item="item">
+                            {{item.type}}: {{item.text}}
+                        </ng-template>
+                    </ng-select>
+                </cds-control>
+
+                <cds-input *ngIf="field.type === 'repository'">
+                    <label>{{field.label}}:</label>
+                    <input type="text" readonly [(ngModel)]="field.value" />
+                </cds-input>
+
+                <cds-input *ngIf="field.type === 'string'">
+                    <label>{{field.label}}:</label>
+                    <input type="text" required [(ngModel)]="field.value" />
+                </cds-input>
+
+                <cds-checkbox-group *ngIf="field.type === 'bool'">
+                    <label>{{field.label}}:</label>
+                    <cds-checkbox>
+                        <label></label>
+                        <input type="checkbox" checked [(ngModel)]="field.value" />
+                    </cds-checkbox>
+                </cds-checkbox-group>
+
+                <cds-control layout="horizontal" *ngIf="field.type === 'branch'">
+                    <label>{{field.label}}:</label>
+                    <ng-select cds-control [items]="branches" [closeOnSelect]="true" [searchable]="true"
+                        [(ngModel)]="field.value" appendTo="body">
+                    </ng-select>
+                </cds-control>
+
+
+            </ng-container> -->
+        </cds-form-group>
+
+    </cds-modal-content>
+    <cds-modal-actions>
+        <cds-button action="flat" (click)="closeModal()">Cancel</cds-button>
+        <cds-button (click)="merge()">Complete merge</cds-button>
+    </cds-modal-actions>
+</cds-modal>

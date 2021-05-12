@@ -1,3 +1,4 @@
+import { CommanderModalComponent } from './../../../shared/components/commander/commander-modal/commander-modal.component';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CommanderService } from '@shared/services';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
@@ -6,7 +7,10 @@ import { filter, first } from 'rxjs/operators';
 import { NgxTippyProps } from 'ngx-tippy-wrapper';
 import { NgxTippyService } from 'ngx-tippy-wrapper';
 import { Branches } from '@git/model';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
+type MergeStrategy = { id: number, title: string, subtitle: string };
+type MergeStrategies = Array<MergeStrategy>
 
 @UntilDestroy()
 @Component({
@@ -37,6 +41,34 @@ export class RepositoryBranchComponent implements OnInit {
         trigger: 'click',
     };
 
+    mergeObj: any = {
+        modal: false
+    };
+
+    mergeStrategy: MergeStrategies = [
+        {
+            id: 1,
+            title: 'Merge (no fast forward)',
+            subtitle: 'Nonlinear history preserving all commits'
+        },
+        {
+            id: 2,
+            title: 'Squash commit',
+            subtitle: 'Linear history with only a single commit on the target'
+        },
+        {
+            id: 3,
+            title: 'Rebase and fast-forward',
+            subtitle: 'Rebase source commits onto target and fast-forward'
+        },
+        {
+            id: 4,
+            title: 'Semi-linear merge',
+            subtitle: 'Rebase source commits onto target and create a two-parent merge'
+        }
+    ];
+
+    selectedMergeStrategy: MergeStrategy = this.mergeStrategy[0];
 
     constructor(
         public repositoryService: RepositoryService,
@@ -114,5 +146,28 @@ export class RepositoryBranchComponent implements OnInit {
         await this.repositoryService.checkoutBranch(name);
         this.repositoryService.getCurrentBranch();
         this.ngxTippyService.hideAll();
+    }
+
+    drop(event: CdkDragDrop<string[]>) {
+        console.log(`TCL: ~ file: repository-branch.component.ts ~ line 125 ~ RepositoryBranchComponent ~ drop ~ event`, event);
+        if (event.isPointerOverContainer && event.previousContainer !== event.container) {
+            const [from] = event.previousContainer.getSortedItems();
+            const [to] = event.container.getSortedItems();
+            this.mergeObj.modal = true;
+            this.mergeObj.from = from.data;
+            this.mergeObj.to = to.data;
+        }
+    }
+
+    merge() {
+
+    }
+
+    onMergeChange(event: any) {
+
+    }
+
+    closeModal() {
+        this.mergeObj = { modal: false };
     }
 }

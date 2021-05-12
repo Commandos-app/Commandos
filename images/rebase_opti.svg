@@ -1,0 +1,40 @@
+<svg width="210mm" height="297mm" version="1.1" viewBox="0 0 210 297" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <marker id="marker1993" overflow="visible" orient="auto">
+   <path transform="scale(-.6)" d="m8.7186 4.0337-10.926-4.0177 10.926-4.0177c-1.7455 2.3721-1.7354 5.6175-6e-7 8.0354z" fill-rule="evenodd" stroke="#000" stroke-linejoin="round" stroke-width=".625"/>
+  </marker>
+ </defs>
+ <g>
+  <path d="m-4.4219 68.154h95.137" fill="none" stroke="#000" stroke-dasharray="5.292,5.292" stroke-width="1.323"/>
+  <text x="-114.05733" y="70.953079" fill="#000000" font-family="sans-serif" font-size="10.583px" stroke-width=".26458" style="line-height:1.25" xml:space="preserve"><tspan x="-114.05733" y="70.953079" stroke-width=".26458">master</tspan></text>
+  <text x="-75.740852" y="39.672329" fill="#000000" font-family="sans-serif" font-size="10.583px" stroke-width=".26458" style="line-height:1.25" xml:space="preserve"><tspan x="-75.740852" y="39.672329" stroke-width=".26458">feature</tspan></text>
+  <g stroke="#000" stroke-width="1.3229">
+   <path d="m-69.548 68.154h66.694" fill="none"/>
+   <ellipse cx="-46.779" cy="68.154" rx="4.5455" ry="4.4224" fill="#fff"/>
+   <ellipse cx="-25.589" cy="68.154" rx="4.5455" ry="4.4224" fill="#00ffc1"/>
+   <path d="m-6.7574 36.883h43.019" fill="none"/>
+  </g>
+  <g fill="#ffd201" stroke="#000" stroke-width="1.3229">
+   <ellipse cx="-5.1553" cy="36.883" rx="4.5455" ry="4.4224"/>
+   <ellipse cx="16.035" cy="36.883" rx="4.5455" ry="4.4224"/>
+   <ellipse cx="37.202" cy="36.883" rx="4.5455" ry="4.4224"/>
+  </g>
+  <path d="m-40.774 63.653 28.352-21.3" fill="none" marker-end="url(#marker1993)" stroke="#000" stroke-width="1.3229"/>
+  <ellipse cx="-4.4219" cy="68.154" rx="4.5455" ry="4.4224" fill="#00ffc1" stroke="#000" stroke-width="1.3229"/>
+ </g>
+ <g display="none">
+  <path d="m-4.4219 68.154h95.137" fill="none" stroke="#000" stroke-width="1.3229"/>
+  <text x="-114.05733" y="70.953079" fill="#000000" font-family="sans-serif" font-size="10.583px" stroke-width=".26458" style="line-height:1.25" xml:space="preserve"><tspan x="-114.05733" y="70.953079" stroke-width=".26458">master</tspan></text>
+  <g stroke="#000" stroke-width="1.3229">
+   <path d="m-69.548 68.154h66.694" fill="none"/>
+   <ellipse cx="-46.779" cy="68.154" rx="4.5455" ry="4.4224" fill="#fff"/>
+   <ellipse cx="-25.589" cy="68.154" rx="4.5455" ry="4.4224" fill="#00ffc1"/>
+  </g>
+  <g fill="#ffd201" stroke="#000" stroke-width="1.3229">
+   <ellipse cx="16.745" cy="68.154" rx="4.5455" ry="4.4224"/>
+   <ellipse cx="37.935" cy="68.154" rx="4.5455" ry="4.4224"/>
+   <ellipse cx="59.102" cy="68.154" rx="4.5455" ry="4.4224"/>
+  </g>
+  <ellipse cx="-4.4219" cy="68.154" rx="4.5455" ry="4.4224" fill="#00ffc1" stroke="#000" stroke-width="1.3229"/>
+ </g>
+</svg>

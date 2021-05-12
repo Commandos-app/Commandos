@@ -12,6 +12,8 @@
 @import './theme/variables';
 @import './theme/import';
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
 html,
 body {
     margin: 0;
@@ -305,7 +307,7 @@ code {
 
         .commander-row {
             border: 1px solid var(--cds-global-color-gray-400);
-            border-top: 0;
+            margin-top: -1px;
             min-height: 30px;
 
             >div:not(.custom-padding) {
