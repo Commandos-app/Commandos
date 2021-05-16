@@ -1,31 +1,31 @@
 <div class="branding">
     <img [routerLink]="['/home']" src="../../../../assets/logo/commandos_white.svg" class="clickable" height="32">
-    <span [routerLink]="['/home']" class="drag-region default-cursor clickable">ommandos</span>
+    <span [routerLink]="['/home']" class="default-cursor clickable" data-tauri-drag-region>ommandos</span>
 </div>
 <app-commander></app-commander>
 
 
 
-<div class="drag-region window-action">
-    <a (click)="pin()" class="action clickable drag-region" aria-label="minimize" role='button'>
+<div class="window-action" data-tauri-drag-region>
+    <a (click)="pin()" class="action clickable" aria-label="minimize" role='button'>
         <cds-icon shape="pin" size="20" [solid]="tauriService.isPinned"></cds-icon>
     </a>
 </div>
 
-<div class="drag-region window-action">
-    <a (click)="minimize()" class="action clickable drag-region" aria-label="minimize" role='button'>
+<div class="window-action" data-tauri-drag-region>
+    <a (click)="minimize()" class="action clickable" aria-label="minimize" role='button'>
         <cds-icon shape="window-min" size="20"></cds-icon>
     </a>
 </div>
 
 <ng-container *ngIf="tauriService.windowState$ | async as fullscreen">
-    <div class="drag-region window-action" *ngIf="fullscreen !== 'fullscreen'">
+    <div class="window-action" data-tauri-drag-region *ngIf="fullscreen !== 'fullscreen'">
         <a (click)="maximize()" class="action clickable" aria-label="maximize" role="button">
             <cds-icon shape="window-max" size="20"></cds-icon>
         </a>
     </div>
 
-    <div class="drag-region window-action" *ngIf="fullscreen === 'fullscreen'">
+    <div class="window-action" data-tauri-drag-region *ngIf="fullscreen === 'fullscreen'">
         <a (click)="unmaximize()" class="action clickable" aria-label="restore" role="button"
             *ngIf="fullscreen === 'fullscreen'">
             <cds-icon shape="window-restore" size="20"></cds-icon>
@@ -38,8 +38,8 @@
 <!-- <a [routerLink]="['/settings']" routerLinkActive="active" class="action" aria-label="settings">
     <cds-icon shape="cog" size="16"></cds-icon>
 </a> -->
-<div class="drag-region window-action">
-    <a (click)="closeClient()" class="action clickable drag-region" aria-label="close" role='button'>
+<div class="window-action" data-tauri-drag-region>
+    <a (click)="closeClient()" class="action clickable" aria-label="close" role='button'>
         <cds-icon shape="window-close" size="20"></cds-icon>
     </a>
 </div>
