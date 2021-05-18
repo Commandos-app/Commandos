@@ -28,7 +28,6 @@
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.app.json",
-                        "aot": true,
                         "assets": [
                             "src/assets"
                         ],
@@ -37,7 +36,13 @@
                         ],
                         "scripts": [
                             "node_modules/diff2html/bundles/js/diff2html-ui.min.js"
-                        ]
+                        ],
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     },
                     "configurations": {
                         "production": {
@@ -50,9 +55,7 @@
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
-                            "namedChunks": true,
                             "extractLicenses": true,
-                            "vendorChunk": true,
                             "buildOptimizer": true,
                             "budgets": [
                                 {
