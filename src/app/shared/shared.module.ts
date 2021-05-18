@@ -1,3 +1,4 @@
+import { DiffPipe } from './directives/diff.pipe';
 import { BranchAheadBehindComponent } from './components/branch-ahead-behind/branch-ahead-behind.component';
 import { SubnavComponent } from './components/subnav/subnav.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -28,6 +29,7 @@ import { FilterModule } from '@josee9988/filter-pipe-ngx';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
@@ -50,7 +52,8 @@ const components = [
     SplitLayoutComponent,
     BranchAheadBehindComponent,
 
-    DateFormatePipe
+    DateFormatePipe,
+    DiffPipe
 
 ];
 
@@ -66,6 +69,7 @@ const modules = [
     OverlayModule,
     CdkTreeModule,
     ClipboardModule,
+    DragDropModule,
 
     // Clarity
     // CdsModule,

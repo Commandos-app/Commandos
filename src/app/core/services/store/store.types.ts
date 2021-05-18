@@ -3,7 +3,7 @@ export type RepositorySetting = {
     id: number;
     name: string;
     path: string;
-    tags?: Array<string>;
+    tags: Array<string>;
 };
 
 export type RepositoriesSettings = Array<RepositorySetting>;

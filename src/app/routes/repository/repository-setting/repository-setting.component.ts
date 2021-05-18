@@ -19,6 +19,7 @@ export class RepositorySettingComponent implements OnInit {
     path = '';
     name = '';
     origin: string;
+    private oldOrigin: string;
     user: UserConfig = {
         name: '',
         email: '',
@@ -44,6 +45,7 @@ export class RepositorySettingComponent implements OnInit {
         this.name = this.repositoryService.repositorySetting.name;
         this.user = await this.repositoryService.loadUserConfig();
         this.origin = await this.repositoryService.getOriginUrl();
+        this.oldOrigin = this.origin;
         this.settingsForm.form.markAsPristine();
     }
 
@@ -72,6 +74,10 @@ export class RepositorySettingComponent implements OnInit {
         } else {
             await this.repositoryService.unsetLocalUserConfig();
         }
+        debugger;
+        if (this.settingsForm.form.controls.origin.dirty && this.oldOrigin !== this.origin) {
+            await this.saveOrigin();
+        }
 
         // TODO Refactor this somehow! maybe mojs?
         await sleep(300);
@@ -80,6 +86,18 @@ export class RepositorySettingComponent implements OnInit {
         this.saveState = 'default';
 
         this.ngOnInit();
+    }
+
+    private async saveOrigin() {
+        if (this.origin === '') {
+            await this.repositoryService.removeOriginUrl();
+        }
+        if (this.oldOrigin === '' && this.origin !== '') {
+            await this.repositoryService.addOriginUrl(this.origin);
+        }
+        else {
+            await this.repositoryService.changeOriginUrl(this.origin);
+        }
     }
 
     async openDialog(): Promise<void> {

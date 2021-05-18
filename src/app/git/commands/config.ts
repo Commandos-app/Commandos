@@ -60,3 +60,38 @@ export async function getOriginUrl(repository: string) {
     const result = await runGit(args, repository, 'getOriginUrl');
     return result;
 }
+
+export async function addOriginUrl(url: string, repository: string) {
+    const args = [
+        'remote',
+        'add',
+        'origin',
+        url
+    ];
+
+    const result = await runGit(args, repository, 'getOriginUrl');
+    return result;
+}
+
+export async function changeOriginUrl(url: string, repository: string) {
+    const args = [
+        'remote',
+        'set-url',
+        'origin',
+        url
+    ];
+
+    const result = await runGit(args, repository, 'getOriginUrl');
+    return result;
+}
+
+export async function removeOriginUrl(repository: string) {
+    const args = [
+        'remote',
+        'remove',
+        'origin'
+    ];
+
+    const result = await runGit(args, repository, 'getOriginUrl');
+    return result;
+}

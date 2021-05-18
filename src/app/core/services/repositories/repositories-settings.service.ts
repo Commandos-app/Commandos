@@ -22,7 +22,7 @@ export class RepositoriesSettingsService {
             nextId++;
         }
 
-        const repo: RepositorySetting = { id: nextId, name, path };
+        const repo: RepositorySetting = { id: nextId, name, path, tags: [] };
         repos.push(repo);
         this.store.setRepositories(repos);
         this.store.saveSettings();

@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { RepositoryService } from '../../repository.service';
 import { LogItem } from '@git/model';
-import { Differ } from '@shared/functions';
+import { Differ, DifferParse } from '@shared/functions';
+import { DiffFile } from 'diff2html/lib/types';
 
 @Component({
     selector: 'commander-repository-history-commit',
@@ -15,6 +16,7 @@ export class RepositoryHistoryCommitComponent implements OnInit {
     sha!: string;
     isLoading = true;
     metadata: LogItem;
+    data: DiffFile[];
 
     constructor(
         private route: ActivatedRoute,
@@ -35,7 +37,8 @@ export class RepositoryHistoryCommitComponent implements OnInit {
         this.metadata = await this.repositoryService.getChangesMetaDataOfSha(this.sha);
 
         const outputFormat = this.storeService.getDiff2HtmlOutputFormat()
-        Differ('diffoutput', value, { outputFormat });
+        // Differ('diffoutput', value, { outputFormat });
+        this.data = DifferParse(value, { outputFormat });
         this.isLoading = false;
     }
 

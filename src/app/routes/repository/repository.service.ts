@@ -1,4 +1,3 @@
-import { filter } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { RepositoriesSettingsService, RepositorySetting } from '@core/services';
 import { BehaviorSubject } from 'rxjs';
@@ -6,11 +5,11 @@ import { LoggerService } from '@core/services/logger/logger.service';
 import {
     createBranch, deleteLocalBranch, deleteRemoteBranch, getBranches, getCurrentBranch,
     getStatus, renameBranch, stageAll, stageFile, unstageAll,
-    unstageFile, revertFile, checkout, commit, getLogMeta, getLogOfSha, getLogMetadataOfSha, getDiffOfFile, pull, push
+    unstageFile, revertFile, checkout, commit, getLogMeta, getLogOfSha, getLogMetadataOfSha, getDiffOfFile, pull, push,
+    addOriginUrl, changeOriginUrl, getOriginUrl, getUserMail, getUsername, setUserMail, setUsername, removeOriginUrl
 } from '@git/commands';
 import { parseBranches, parseLog, parseStatus } from '@git/parsers';
 import { IStatusResult, LogItem, ChangedFile, Branch, Branches } from '@git/model';
-import { getOriginUrl, getUserMail, getUsername, setUserMail, setUsername } from '@git/commands/config';
 import { countRevList } from '@git/commands/rev-list';
 
 export type NewBranch = {
@@ -19,12 +18,12 @@ export type NewBranch = {
     checkout?: boolean;
     branchName?: string;
 };
+
 export type ChangeBranch = {
     oldName?: string;
     newName?: string;
     checkout?: boolean;
 };
-
 
 export type UserConfig = { name: string; email: string, global: boolean };
 
@@ -260,6 +259,18 @@ export class RepositoryService {
 
     async getOriginUrl(): Promise<string> {
         return getOriginUrl(this.getPath());
+    }
+
+    async changeOriginUrl(url: string): Promise<string> {
+        return changeOriginUrl(url, this.getPath());
+    }
+
+    async removeOriginUrl(): Promise<string> {
+        return removeOriginUrl(this.getPath());
+    }
+
+    async addOriginUrl(url: string): Promise<string> {
+        return addOriginUrl(url, this.getPath());
     }
 
     async saveLocalUserConfig(user: UserConfig): Promise<void> {

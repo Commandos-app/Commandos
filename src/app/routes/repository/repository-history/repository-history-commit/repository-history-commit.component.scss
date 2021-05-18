@@ -7,3 +7,70 @@
     display: grid;
     grid-template-rows: 49px 1px 1fr;
 }
+
+
+.diff {
+    &-item {
+        margin-bottom: 50px;
+
+    }
+
+    &-block {
+        margin-bottom: 20px;
+    }
+
+    &-line {
+        background: #fff;
+        // border-bottom: 1px solid lightgray;
+        display: grid;
+        grid-template-columns: 50px 50px 1fr;
+        font-family: 'Roboto Mono', monospace;
+
+        &-content {
+            padding: 2px 6px;
+            margin-left: 50px;
+        }
+
+
+        &-number {
+            padding: 2px 6px;
+            text-align: right;
+            color: var(--cds-global-color-gray-600);
+            font-size: var(--cds-global-typography-font-size-2);
+        }
+
+        &-new-number {
+            border-right: 1px solid var(--cds-global-color-cool-gray-100);
+        }
+
+        &-old-number {}
+
+
+        &.context {
+            color: var(--cds-global-color-gray-700);
+
+        }
+
+        &.insert {
+            background: var(--cds-alias-status-success-tint);
+
+            .diff-line-content {
+                &::first-letter {
+                    margin-right: 40px;
+                    margin-left: -50px;
+                }
+            }
+        }
+
+        &.delete {
+            background: var(--cds-alias-status-danger-tint);
+
+            .diff-line-content {
+                &::first-letter {
+                    margin-right: 40px;
+                    margin-left: -50px;
+                }
+            }
+        }
+    }
+}

@@ -42,7 +42,7 @@ export class StoreService {
 
     private async getStorePath(): Promise<string> {
         const basePath = await localDataDir();
-        return `${basePath}dos-commander`;
+        return `${basePath}commandos`;
     }
 
     private async checkDirIfExistsOrCreate(path: string): Promise<void> {
