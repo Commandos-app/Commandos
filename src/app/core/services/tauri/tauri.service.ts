@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { appWindow } from '@tauri-apps/api/window.js';
+import { appWindow } from '@tauri-apps/api/window';
 
 type WindowState = 'fullscreen' | 'minimized' | 'windowed';
 

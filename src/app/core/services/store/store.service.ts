@@ -1,7 +1,7 @@
 import { LoggerService } from '../logger/logger.service';
 import { Injectable } from '@angular/core';
-import { createDir, readDir, readTextFile, writeFile } from '@tauri-apps/api/fs.js';
-import { localDataDir } from '@tauri-apps/api/path.js';
+import { createDir, readDir, readTextFile, writeFile } from '@tauri-apps/api/fs';
+import { localDataDir } from '@tauri-apps/api/path';
 import { DiffFormate, RepositoriesSettings, Settings } from './store.types';
 
 @Injectable({

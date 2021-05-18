@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
 import { RepositoriesSettings, RepositoriesSettingsService } from '@core/services';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { fromEvent, merge, Subscription } from 'rxjs';
-import { Command, open } from '@tauri-apps/api/shell.js';
+import { Command, open } from '@tauri-apps/api/shell';
 import { Clipboard } from '@angular/cdk/clipboard';
-import { invoke } from '@tauri-apps/api/tauri.js';
+import { invoke } from '@tauri-apps/api/tauri';
 
 @Component({
     selector: 'app-home',

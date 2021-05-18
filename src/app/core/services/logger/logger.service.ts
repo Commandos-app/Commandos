@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { invoke } from '@tauri-apps/api/tauri.js';
+import { invoke } from '@tauri-apps/api/tauri';
 // import {  } from '@tauri-apps/api';
 // import { Logger, createLogger, format, transports } from 'winston';
 // import DailyRotateFile from 'winston-daily-rotate-file';
