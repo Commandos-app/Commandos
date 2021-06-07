@@ -1,41 +1,46 @@
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { appWindow } from '@tauri-apps/api/window';
+import { appWindow, getCurrent } from '@tauri-apps/api/window';
+import { $ } from 'protractor';
 
-type WindowState = 'fullscreen' | 'minimized' | 'windowed';
+
+type WindowState = 'maximized' | 'minimized' | 'windowed';
 
 @Injectable({
     providedIn: 'root'
 })
 export class TauriService {
 
-    private windowState = new BehaviorSubject<WindowState>('windowed')
+    private windowState = new BehaviorSubject<WindowState>('windowed');
     windowState$ = this.windowState.asObservable();
 
     isPinned = false;
 
     constructor() {
-        this.windowState.subscribe(val => console.log(val))
-        window.addEventListener('resize', () => {
-            if (this.windowState.getValue() === 'fullscreen') {
+        const win = getCurrent();
+        win.listen('tauri://resize', async (e) => {
+            const maxed = await appWindow.isMaximized();
+            console.log(`TCL: ~ file: tauri.service.ts ~ line 23 ~ TauriService ~ win.listen ~ maxed`, maxed);
+
+            if (maxed) {
+                this.windowState.next('maximized');
+            } else {
                 this.windowState.next('windowed');
             }
         });
+
     }
 
     async minimize(): Promise<void> {
         await appWindow.minimize();
-        // this.windowState.next('minimized');
     }
 
     async maximize(): Promise<void> {
         await appWindow.maximize();
-        this.windowState.next('fullscreen');
     }
 
     async unmaximize(): Promise<void> {
         await appWindow.unmaximize();
-        this.windowState.next('windowed');
     }
 
     async closeClient(): Promise<void> {

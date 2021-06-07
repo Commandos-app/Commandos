@@ -138,18 +138,16 @@ export class RepositoryBranchComponent implements OnInit {
         await this.repositoryService.renameBranch(current, newName);
 
         this.repositoryService.getBranches();
-        this.repositoryService.getCurrentBranch();
         this.changeBranch = {};
     }
 
     async onCheckout(name: string): Promise<void> {
         await this.repositoryService.checkoutBranch(name);
-        this.repositoryService.getCurrentBranch();
+        this.repositoryService.getBranches();
         this.ngxTippyService.hideAll();
     }
 
     drop(event: CdkDragDrop<string[]>) {
-        console.log(`TCL: ~ file: repository-branch.component.ts ~ line 125 ~ RepositoryBranchComponent ~ drop ~ event`, event);
         if (event.isPointerOverContainer && event.previousContainer !== event.container) {
             const [from] = event.previousContainer.getSortedItems();
             const [to] = event.container.getSortedItems();

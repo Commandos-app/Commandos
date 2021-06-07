@@ -31,3 +31,25 @@ export function parseBranches<T extends Record<string, string>>(stdout: string):
         throw new Error(`Failed to parse branches`);
     }
 }
+
+
+export function parseCurrentBranch(stdout: string): string {
+
+    if (stdout) {
+        const branches = stdout.split('\n');
+        let [branch] = branches.filter(branch => branch.includes('*'));
+        branch = branch.replace('* ', '');
+        branch = branch.replace('(', '');
+        branch = branch.replace(')', '');
+        if (branch.includes('detached')) {
+            const splitted = branch.split(' ');
+            branch = splitted.pop();
+            branch = `Detached (${branch})`
+        }
+
+        return branch;
+    }
+    else {
+        throw new Error(`Failed to parse current branch!`);
+    }
+}

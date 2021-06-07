@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ErrorService, TauriService } from '@core/services';
 
 @Component({
@@ -8,14 +8,21 @@ import { ErrorService, TauriService } from '@core/services';
 })
 export class HeaderComponent implements OnInit {
 
-
+    isMaximised = false;
 
     constructor(
         public errorService: ErrorService,
-        public tauriService: TauriService
-    ) { }
+        public tauriService: TauriService,
+        private cd: ChangeDetectorRef
+    ) {
+    }
 
     ngOnInit(): void {
+        this.tauriService.windowState$
+            .subscribe((state) => {
+                this.isMaximised = state === 'maximized';
+                this.cd.detectChanges();
+            });
     }
 
     minimize(): void {

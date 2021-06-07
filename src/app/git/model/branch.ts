@@ -4,6 +4,7 @@ export class Branch {
     upstream!: string;
     ahead!: string;
     behind!: string;
+    current!: boolean;
 }
 export type Branches = Array<Branch>;
 

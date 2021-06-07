@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
 
     openTerminal(path: string): void {
 
-        invoke('cmd', { path });
+        invoke('open_cmd', { path });
 
         // const windows = navigator.userAgent.includes('Windows');
         // let cmd = windows ? 'cmd' : 'sh';
@@ -117,7 +117,7 @@ export class HomeComponent implements OnInit {
                 }),
                 take(1)
             )
-            .subscribe(() => this.close())
+            .subscribe(() => this.close());
 
     }
 

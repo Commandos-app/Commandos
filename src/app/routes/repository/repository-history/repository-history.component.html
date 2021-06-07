@@ -4,7 +4,8 @@
         <ng-scrollbar class="virtual-scroll" sidebar>
             <virtual-scroller scrollViewport #scroll [items]="commits">
                 <div *ngFor="let commit of scroll.viewPortItems" class="commander-list-item commander-history-item"
-                    [routerLink]="[commit.sha]" routerLinkActive="commander-list-item-active">
+                    [routerLink]="[commit.sha]" routerLinkActive="commander-list-item-active"
+                    (contextmenu)="openContext($event, commit)">
                     <div class="commander-history-title">
                         {{commit.summary}}
                     </div>
@@ -18,3 +19,19 @@
         <router-outlet content></router-outlet>
     </commander-split-layout>
 </div>
+
+
+<ng-template #userMenu let-commit>
+    <section class="contextmenu" cds-layout="p:xs">
+        <div cds-text="secondary" cds-layout="p:sm">
+            SHA:<b>{{commit.shortSha}}</b>
+        </div>
+        <cds-divider></cds-divider>
+        <div (click)="checkout(commit.sha)" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
+            Checkout
+        </div>
+        <div (click)="copySha(commit.sha)" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
+            Copy SHA
+        </div>
+    </section>
+</ng-template>

@@ -71,13 +71,13 @@ export class SubnavComponent implements OnInit {
 
         const onClose$ = this.commanderModalService.openModal({ title: name, fields: fields! });
         const sub = onClose$
-            .subscribe((params) => {
+            .subscribe(async (params) => {
                 if (params?.formData?.name) {
-                    this.repositoryService.createBranch(params?.formData?.name);
+                    await this.repositoryService.createBranch(params?.formData?.name, params?.formData?.checkout);
                 }
-                sub.unsubscribe();
                 this.commanderService.reloadData();
                 this.commanderModalService.closeModal();
+                sub.unsubscribe();
             });
     }
 

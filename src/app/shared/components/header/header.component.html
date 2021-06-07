@@ -18,16 +18,15 @@
     </a>
 </div>
 
-<ng-container *ngIf="tauriService.windowState$ | async as fullscreen">
-    <div class="window-action" data-tauri-drag-region *ngIf="fullscreen !== 'fullscreen'">
+<ng-container>
+    <div class="window-action" data-tauri-drag-region *ngIf="!isMaximised">
         <a (click)="maximize()" class="action clickable" aria-label="maximize" role="button">
             <cds-icon shape="window-max" size="20"></cds-icon>
         </a>
     </div>
 
-    <div class="window-action" data-tauri-drag-region *ngIf="fullscreen === 'fullscreen'">
-        <a (click)="unmaximize()" class="action clickable" aria-label="restore" role="button"
-            *ngIf="fullscreen === 'fullscreen'">
+    <div class="window-action" data-tauri-drag-region *ngIf="isMaximised">
+        <a (click)="unmaximize()" class="action clickable" aria-label="restore" role="button">
             <cds-icon shape="window-restore" size="20"></cds-icon>
         </a>
     </div>

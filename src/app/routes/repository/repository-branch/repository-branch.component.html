@@ -19,7 +19,8 @@
             <div cdkDropList (cdkDropListDropped)="drop($event)"
                 *ngFor="let branch of repositoryService.branches$ | async">
                 <!-- (cdkDragStarted)="dragStart()" (cdkDragEnded)="dragStop()" -->
-                <div class="commander-row commander-branches-row" cds-text="body" cdkDrag [cdkDragData]="branch">
+                <div class="commander-row commander-branches-row" cds-text="body" cdkDrag [cdkDragData]="branch"
+                    [ngClass]="{'current-branch': branch.current}">
                     <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
                     <div class="example-custom-placeholder" *cdkDragPreview>{{branch.name}}</div>
 
@@ -36,6 +37,7 @@
                             </cds-icon-button>
                         </div>
                     </div>
+
                     <div class="action custom-padding">
                         <cds-icon shape="note" [ngxTippy]="renameTemplate" tippyName="template-ref"
                             [tippyProps]="templateRef">
@@ -53,6 +55,7 @@
                             </cds-icon-button>
                         </div>
                     </div>
+
                     <div class="action custom-padding">
                         <cds-icon shape="trash" [ngxTippy]="deleteTemplate" tippyName="template-ref"
                             [tippyProps]="templateRef">
@@ -67,6 +70,7 @@
                             </cds-icon-button>
                         </div>
                     </div>
+
                     <div class="lh">
                         <span cds-layout="m-r:md">{{branch.name}}</span>
                         <ng-container *ngIf="branch.upstream">

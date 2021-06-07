@@ -8,7 +8,7 @@ import {
     unstageFile, revertFile, checkout, commit, getLogMeta, getLogOfSha, getLogMetadataOfSha, getDiffOfFile, pull, push,
     addOriginUrl, changeOriginUrl, getOriginUrl, getUserMail, getUsername, setUserMail, setUsername, removeOriginUrl
 } from '@git/commands';
-import { parseBranches, parseLog, parseStatus } from '@git/parsers';
+import { parseBranches, parseCurrentBranch, parseLog, parseStatus } from '@git/parsers';
 import { IStatusResult, LogItem, ChangedFile, Branch, Branches } from '@git/model';
 import { countRevList } from '@git/commands/rev-list';
 
@@ -36,7 +36,7 @@ export class RepositoryService {
     repositorySetting!: RepositorySetting;
     // currentBranch: Branch;
     currentBranch!: Branch;
-    currentBranchStr!: string;
+    // currentBranchStr!: string;
 
     private loaded = new BehaviorSubject(false);
     loaded$ = this.loaded.asObservable();
@@ -72,7 +72,7 @@ export class RepositoryService {
         if (!this.loaded.getValue()) {
             this.loaded.next(false);
             // this.getRepository();
-            await this.getCurrentBranch();
+            await this.getBranches();
             this.loaded.next(true);
         }
     }
@@ -85,15 +85,15 @@ export class RepositoryService {
 
     //#region Branches
 
-    async getCurrentBranch(): Promise<string | void> {
-        const currentBranchStr = await getCurrentBranch(this.getPath());
+    // async getCurrentBranch(): Promise<string | void> {
+    //     const currentBranchStr = await getCurrentBranch(this.getPath());
 
-        if (currentBranchStr) {
-            this.currentBranchStr = currentBranchStr;
-        }
+    //     if (currentBranchStr) {
+    //         this.currentBranchStr = currentBranchStr;
+    //     }
 
-        return this.currentBranchStr;
-    }
+    //     return this.currentBranchStr;
+    // }
 
     async getBranches(): Promise<void> {
         // this.branches.next(null);
@@ -108,12 +108,16 @@ export class RepositoryService {
                 element.ahead = ahead;
                 element.behind = behind;
             }
-            const currentBranchStr = await getCurrentBranch(this.getPath());
-            const currentBranch = parsedBranches.find(b => b.name === currentBranchStr);
-
+            const currentBranchStr = await this.getCurrentBranch();
+            let currentBranch = parsedBranches.find(b => b.name === currentBranchStr);
             if (currentBranch) {
-                this.currentBranch = currentBranch;
+                currentBranch.current = true;
+            } else {
+                // Detached
+                currentBranch = new Branch();
+                currentBranch.name = currentBranchStr;
             }
+            this.currentBranch = currentBranch;
 
             this.branches.next(parsedBranches);
         }
@@ -123,10 +127,8 @@ export class RepositoryService {
         this.logger.info(`create branch ${name}`);
         await createBranch(name, this.getPath(), false);
         if (checkout) {
-            this.checkoutBranch(name);
+            await this.checkoutBranch(name);
         }
-
-        this.getCurrentBranch();
     }
 
     async deleteBranch(name: string, includeRemote = false): Promise<void> {
@@ -165,6 +167,12 @@ export class RepositoryService {
 
     async getBehindCount(branch: Branch): Promise<number> {
         return await countRevList(this.getPath(), branch.name, branch.upstream);
+    }
+
+    private async getCurrentBranch(): Promise<string> {
+        const currentBranchStr = await getCurrentBranch(this.getPath());
+        const branch = parseCurrentBranch(currentBranchStr);
+        return branch;
     }
 
     clearUIBranches() {

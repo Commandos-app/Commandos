@@ -5,8 +5,7 @@ import { runGit } from "./base";
 
 export async function getCurrentBranch(repository: string): Promise<string> {
     const args = [
-        'branch',
-        '--show-current'
+        'branch'
     ];
 
     let currentBranch = 'not found';
