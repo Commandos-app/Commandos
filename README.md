@@ -9,3 +9,9 @@
 or  
     `git pull && cd ./api && yarn && yarn build && cd ../tauri/cli/tauri.js && yarn && yarn build
     yarn add ../tauri/api --save`
+
+
+### Save snippets:
+```package.json
+        // "postinstall": "patch-package"
+```
