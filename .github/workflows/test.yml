@@ -38,14 +38,14 @@ jobs:
 
     - name: Cache pnpm modules
       uses: actions/cache@v2
-        env:
-          cache-name: cache-pnpm-modules
-        with:
-          # pnpm cache files are stored in `~/.pnpm-store` on Linux/macOS
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}
-          restore-keys: |
-            {{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}
+      env:
+        cache-name: cache-pnpm-modules
+      with:
+        # pnpm cache files are stored in `~/.pnpm-store` on Linux/macOS
+        path: ~/.pnpm-store
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}
+        restore-keys: |
+          {{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}
 
     # - name: Cache Rust
     #   uses: Swatinem/rust-cache@v1
