@@ -57,8 +57,11 @@ jobs:
       with:
         version: 6.9.1
 
-    - name: install app dependencies and build it
-      run: pnpm install && pnpm run build:prod
+    - name: install app dependencies
+      run: pnpm install 
+
+    # - name: build app
+    #   run: pnpm run build:prod
 
     # - uses: tauri-apps/tauri-action@v0
     #   env:
