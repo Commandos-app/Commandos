@@ -12,36 +12,39 @@ jobs:
 
     runs-on: ${{ matrix.platform }}
     steps:
-    - uses: actions/checkout@v2
+    - run: echo "$HOME"
+    - run: echo "${{HOME}}"
+      
+    # # - uses: actions/checkout@v2
    
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
+    # # - name: Use Node.js ${{ matrix.node-version }}
+    # #   uses: actions/setup-node@v2
+    # #   with:
+    # #     node-version: ${{ matrix.node-version }}
 
-    - name: Cache pnpm modules <Windows>
-      if: matrix.platform == 'windows-latest'
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-pnpm-modules
-      with:
-        # pnpm cache files are stored in `~/.pnpm-store` on Linux/macOS
-        path: ${{ home }}/.pnpm-store
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+    # # - name: Cache pnpm modules <Windows>
+    # #   if: matrix.platform == 'windows-latest'
+    # #   uses: actions/cache@v2
+    # #   env:
+    # #     cache-name: cache-pnpm-modules
+    # #   with:
+    # #     # pnpm cache files are stored in `~/.pnpm-store` on Linux/macOS
+    # #     path: ${{ home }}/.pnpm-store
+    # #     key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+    # #     restore-keys: |
+    # #       ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
 
-    - name: Cache pnpm modules <Linux|MacOs> 
-      if: matrix.platform != 'windows-latest'
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-pnpm-modules
-      with:
-        # pnpm cache files are stored in `~/.pnpm-store` on Linux/macOS
-        path: ~/.pnpm-store
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+    # # - name: Cache pnpm modules <Linux|MacOs> 
+    # #   if: matrix.platform != 'windows-latest'
+    # #   uses: actions/cache@v2
+    # #   env:
+    # #     cache-name: cache-pnpm-modules
+    # #   with:
+    # #     # pnpm cache files are stored in `~/.pnpm-store` on Linux/macOS
+    # #     path: ~/.pnpm-store
+    # #     key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+    # #     restore-keys: |
+    # #       ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
 
     # - name: install Rust stable
     #   uses: actions-rs/toolchain@v1
@@ -60,10 +63,10 @@ jobs:
     #     path: ~/.pnpm-store
     #     key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
-    - name: install pnpm
-      uses: pnpm/action-setup@v2.0.1
-      with:
-        version: 6.9.1
+    # # - name: install pnpm
+    # #   uses: pnpm/action-setup@v2.0.1
+    # #   with:
+    # #     version: 6.9.1
 
     # - name: Cache Rust
     #   uses: Swatinem/rust-cache@v1
@@ -71,8 +74,8 @@ jobs:
     #     working-directory: ./src-tauri
 
 
-    - name: install app dependencies
-      run: pnpm install 
+    # # - name: install app dependencies
+    # #   run: pnpm install 
 
     # - name: build app
     #   run: pnpm run build:prod
