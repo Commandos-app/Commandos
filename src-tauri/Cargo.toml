@@ -26,6 +26,7 @@ log = { version = "0.4.0", features = [ "std" ] }
 
   [dependencies.tauri]
   version = "1.0.0-beta"
+features = ["api-all"]
 
 [features]
 default = [ "custom-protocol" ]
