@@ -36,6 +36,11 @@ jobs:
     #     path: ~/.pnpm-store
     #     key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
+    - name: install pnpm
+      uses: pnpm/action-setup@v2.0.1
+      with:
+        version: 6.9.1
+        
     - name: Cache pnpm modules
       uses: actions/cache@v2
       env:
@@ -52,10 +57,6 @@ jobs:
     #   with: 
     #     working-directory: ./src-tauri
 
-    - name: install pnpm
-      uses: pnpm/action-setup@v2.0.1
-      with:
-        version: 6.9.1
 
     - name: install app dependencies
       run: pnpm install 
