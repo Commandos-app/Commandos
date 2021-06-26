@@ -14,7 +14,7 @@ jobs:
     steps:
     - name: Get pnpm cache directory
       id: pnpm-cache-dir-path
-      run: echo "::set-output name=dir::${HOME}/.pnpm-store"
+      run: echo "::set-output name=dir::${HOME}\.pnpm-store"
       
     - uses: actions/checkout@v2
    
@@ -63,10 +63,10 @@ jobs:
     #     path: ~/.pnpm-store
     #     key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
-    # # - name: install pnpm
-    # #   uses: pnpm/action-setup@v2.0.1
-    # #   with:
-    # #     version: 6.9.1
+    - name: install pnpm
+      uses: pnpm/action-setup@v2.0.1
+      with:
+        version: 6.9.1
 
     # - name: Cache Rust
     #   uses: Swatinem/rust-cache@v1
@@ -74,8 +74,8 @@ jobs:
     #     working-directory: ./src-tauri
 
 
-    # # - name: install app dependencies
-    # #   run: pnpm install 
+    - name: install app dependencies
+      run: pnpm install 
 
     # - name: build app
     #   run: pnpm run build:prod
