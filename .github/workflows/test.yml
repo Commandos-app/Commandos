@@ -19,25 +19,38 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: install Rust stable
-      uses: actions-rs/toolchain@v1
-      with:
-        toolchain: stable
+    # - name: install Rust stable
+    #   uses: actions-rs/toolchain@v1
+    #   with:
+    #     toolchain: stable
 
-    - name: install webkit2gtk (ubuntu only)
-      if: matrix.platform == 'ubuntu-latest'
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y webkit2gtk-4.0
+    # - name: install webkit2gtk (ubuntu only)
+    #   if: matrix.platform == 'ubuntu-latest'
+    #   run: |
+    #     sudo apt-get update
+    #     sudo apt-get install -y webkit2gtk-4.0
 
-    - name: Cache pnpm
-      uses: actions/cache@v2
-      with:
-        path: ~/.pnpm-store
-        key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+    # - name: Cache pnpm
+    #   uses: actions/cache@v2
+    #   with:
+    #     path: ~/.pnpm-store
+    #     key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
-    - name: Cache Rust
-      uses: Swatinem/rust-cache@v1
+    - name: Cache pnpm modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-pnpm-modules
+        with:
+          # pnpm cache files are stored in `~/.pnpm-store` on Linux/macOS
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}
+          restore-keys: |
+            {{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}
+
+    # - name: Cache Rust
+    #   uses: Swatinem/rust-cache@v1
+    #   with: 
+    #     working-directory: ./src-tauri
 
     - name: install pnpm
       uses: pnpm/action-setup@v2.0.1
@@ -47,6 +60,6 @@ jobs:
     - name: install app dependencies and build it
       run: pnpm install && pnpm run build:prod
 
-    - uses: tauri-apps/tauri-action@v0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # - uses: tauri-apps/tauri-action@v0
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
