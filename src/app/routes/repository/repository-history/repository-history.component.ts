@@ -1,3 +1,5 @@
+import { CommanderModalService, CommanderService } from '@shared/services';
+import { FieldDefinition } from '@shared/components';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ChangeDetectorRef, Component, OnInit, ViewChild, TemplateRef, ViewContainerRef } from '@angular/core';
@@ -27,17 +29,19 @@ export class RepositoryHistoryComponent implements OnInit {
         private repositoryService: RepositoryService,
         public overlay: Overlay,
         public viewContainerRef: ViewContainerRef,
-        private clipboard: Clipboard
+        private commanderModalService: CommanderModalService,
+        private clipboard: Clipboard,
+        private commanderService: CommanderService
     ) {
     }
 
     ngOnInit(): void {
         this.repositoryService.loaded$.pipe(filter(x => x), first()).subscribe(() => {
-            this.getHeadCommits();
+            this.getHistory();
         });
     }
 
-    async getHeadCommits(): Promise<void> {
+    async getHistory(): Promise<void> {
         try {
             this.commits = await this.repositoryService.getHistroy();
         } catch (er) {
@@ -48,7 +52,7 @@ export class RepositoryHistoryComponent implements OnInit {
     async checkout(sha: string): Promise<void> {
         await this.repositoryService.checkoutBranch(sha);
         this.repositoryService.getBranches();
-        await this.getHeadCommits();
+        await this.getHistory();
         this.close();
     }
 
@@ -58,7 +62,6 @@ export class RepositoryHistoryComponent implements OnInit {
     }
 
     openContext($event: MouseEvent, commit: any) {
-        console.log(`TCL: ~ file: repository-history.component.ts ~ line 60 ~ RepositoryHistoryComponent ~ openContext ~ commit`, commit);
         $event.preventDefault();
         $event.stopPropagation();
         const { x, y } = $event;
@@ -95,6 +98,24 @@ export class RepositoryHistoryComponent implements OnInit {
                 take(1)
             )
             .subscribe(() => this.close());
+    }
+
+    createBranch(commit: LogItem): void {
+        const fields: Array<FieldDefinition> = [
+            { type: 'repository', label: 'Repository', name: 'repo', value: this.repositoryService.repositorySetting.path },
+            { type: 'string', label: 'Name', name: 'name' },
+        ];
+        const onClose$ = this.commanderModalService.openModal({ title: `Create branch for ${commit.shortSha}`, fields: fields! });
+        const sub = onClose$
+            .subscribe(async (params) => {
+                if (params?.formData?.name) {
+                    await this.repositoryService.createBranchFromSha(params.formData.name, commit.sha);
+                }
+                this.repositoryService.getBranches();
+                await this.getHistory();
+                this.commanderModalService.closeModal();
+                sub.unsubscribe();
+            });
     }
 
     close() {

@@ -30,6 +30,9 @@
         <div (click)="checkout(commit.sha)" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
             Checkout
         </div>
+        <div (click)="createBranch(commit)" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
+            Create branch
+        </div>
         <div (click)="copySha(commit.sha)" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
             Copy SHA
         </div>
