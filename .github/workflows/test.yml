@@ -26,7 +26,7 @@ jobs:
         cache-name: cache-pnpm-modules
       with:
         # pnpm cache files are stored in `~/.pnpm-store` on Linux/macOS
-        path: home/.pnpm-store"
+        path: $HOME/.pnpm-store"
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
