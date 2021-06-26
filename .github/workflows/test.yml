@@ -12,15 +12,16 @@ jobs:
 
     runs-on: ${{ matrix.platform }}
     steps:
-    - run: echo "$HOME"
-    - run: echo "${HOME}"
+    - name: Get pnpm cache directory
+      id: pnpm-cache-dir-path
+      run: echo "::set-output name=dir::$(HOME)/.pnpm-store"
       
-    # # - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
    
-    # # - name: Use Node.js ${{ matrix.node-version }}
-    # #   uses: actions/setup-node@v2
-    # #   with:
-    # #     node-version: ${{ matrix.node-version }}
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
 
     # # - name: Cache pnpm modules <Windows>
     # #   if: matrix.platform == 'windows-latest'
@@ -28,8 +29,7 @@ jobs:
     # #   env:
     # #     cache-name: cache-pnpm-modules
     # #   with:
-    # #     # pnpm cache files are stored in `~/.pnpm-store` on Linux/macOS
-    # #     path: ${{ home }}/.pnpm-store
+    # #     path: ${{ steps.pnpm-cache-dir-path.outputs.dir }}
     # #     key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
     # #     restore-keys: |
     # #       ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
