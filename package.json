@@ -1,6 +1,7 @@
 {
     "name": "commandos",
-    "version": "0.5.0",
+    "version": "0.5.1",
+    "description": "Commandos is a multi git repo client",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "ng": "ng",
