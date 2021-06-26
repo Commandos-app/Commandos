@@ -13,6 +13,7 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
     - run: echo "$HOME"
+    - run: echo "${HOME}"
     - run: echo "${{HOMEPATH}}"
     - run: echo "${{USERPROFILE}}"
       
