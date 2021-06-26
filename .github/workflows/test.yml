@@ -7,7 +7,7 @@ jobs:
       fail-fast: false
       matrix:
        # platform: [macos-latest, ubuntu-latest, windows-latest]
-        platform: [windows-latest, ubuntu-latest]
+        platform: [windows-latest]
         node-version: [14]
 
     runs-on: ${{ matrix.platform }}
@@ -19,7 +19,20 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Cache pnpm modules
+    - name: Cache pnpm modules <Windows>
+      if: matrix.platform == 'windows-latest'
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-pnpm-modules
+      with:
+        # pnpm cache files are stored in `~/.pnpm-store` on Linux/macOS
+        path: %USERPROFILE%/.pnpm-store
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+
+    - name: Cache pnpm modules <Linux|MacOs> 
+      if: matrix.platform != 'windows-latest'
       uses: actions/cache@v2
       env:
         cache-name: cache-pnpm-modules
@@ -29,6 +42,7 @@ jobs:
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+
     # - name: install Rust stable
     #   uses: actions-rs/toolchain@v1
     #   with:
