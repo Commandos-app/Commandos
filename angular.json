@@ -37,6 +37,10 @@
                         "scripts": [
                             "node_modules/diff2html/bundles/js/diff2html-ui.min.js"
                         ],
+                        "allowedCommonJsDependencies": [
+                            "hogan.js",
+                            "dayjs"
+                        ],
                         "vendorChunk": true,
                         "extractLicenses": false,
                         "buildOptimizer": false,

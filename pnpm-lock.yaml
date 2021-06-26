@@ -13,16 +13,16 @@ specifiers:
   '@angular/platform-browser': ~12.0.0
   '@angular/platform-browser-dynamic': ~12.0.0
   '@angular/router': ~12.0.0
-  '@cds/angular': ^5.3.0
+  '@cds/angular': ^5.4.1
   '@cds/city': ^1.1.0
-  '@cds/core': ^5.3.0
+  '@cds/core': ^5.4.1
   '@josee9988/filter-pipe-ngx': ^1.1.0
   '@ng-select/ng-select': ^6.1.0
   '@ngneat/until-destroy': ^8.0.4
   '@ngx-translate/core': ^13.0.0
   '@ngx-translate/http-loader': ^6.0.0
-  '@tauri-apps/api': ^1.0.0-beta.1
-  '@tauri-apps/cli': ^1.0.0-beta.2
+  '@tauri-apps/api': ^1.0.0-beta.3
+  '@tauri-apps/cli': ^1.0.0-beta.3
   '@types/hogan.js': ^3.0.0
   '@types/jasmine': ~3.6.0
   '@types/node': ^12.11.1
@@ -41,9 +41,11 @@ specifiers:
   ngx-scrollbar: ^7.5.4
   ngx-tippy-wrapper: ^2.1.0
   ngx-virtual-scroller: ^4.0.3
+  normalize.css: ^8.0.1
   patch-package: ^6.4.7
   protractor: ~7.0.0
   rxjs: ~6.6.7
+  tippy.js: ^6.3.1
   ts-node: ~8.3.0
   tslib: ^2.0.0
   tslint: ~6.1.0
@@ -60,15 +62,15 @@ dependencies:
   '@angular/platform-browser': 12.0.3_e6522aefa7967bb82b1cfa5655e826d2
   '@angular/platform-browser-dynamic': 12.0.3_972b1c41a9d4cf6a746584aa1b8765a5
   '@angular/router': 12.0.3_6ab57985d2f5de99e7a3dd396fbb49e7
-  '@cds/angular': 5.3.0_8f8275ac34dec2a43b000e6042b1d2ef
+  '@cds/angular': 5.4.1_602e3661d3ff0bc164afcab2404866a6
   '@cds/city': 1.1.0
-  '@cds/core': 5.3.0
+  '@cds/core': 5.4.1
   '@josee9988/filter-pipe-ngx': 1.1.0
   '@ng-select/ng-select': 6.1.0_e478bbf4f4a3f792a7df50eb2f896c5a
   '@ngneat/until-destroy': 8.0.4_@angular+core@12.0.3+rxjs@6.6.7
   '@ngx-translate/core': 13.0.0_@angular+core@12.0.3+rxjs@6.6.7
   '@ngx-translate/http-loader': 6.0.0_3fbaa76475b5acd73ed437a7621a32be
-  '@tauri-apps/api': 1.0.0-beta.1
+  '@tauri-apps/api': 1.0.0-beta.3
   angular-split: 5.0.0_42b62239f238c924e2efd26fc14ae41f
   dayjs: 1.10.5
   diff2html: 3.4.5
@@ -76,8 +78,10 @@ dependencies:
   ngx-scrollbar: 7.5.6_3b089e129ac1fbd9b74db3b5df5e5988
   ngx-tippy-wrapper: 2.1.0_463f8feb7e122cc636d82fa34057b121
   ngx-virtual-scroller: 4.0.3_@angular+core@12.0.3+tslib@2.2.0
+  normalize.css: 8.0.1
   patch-package: 6.4.7
   rxjs: 6.6.7
+  tippy.js: 6.3.1
   tslib: 2.2.0
   zone.js: 0.11.4
 
@@ -85,7 +89,7 @@ devDependencies:
   '@angular-devkit/build-angular': 12.0.3_a23194e047269c90ee8f8b4d700e67b6
   '@angular/cli': 12.0.3
   '@angular/compiler-cli': 12.0.3_c2aa0e8dc4d641c8ac7ddc9e732c2525
-  '@tauri-apps/cli': 1.0.0-beta.2
+  '@tauri-apps/cli': 1.0.0-beta.3
   '@types/hogan.js': 3.0.0
   '@types/jasmine': 3.6.11
   '@types/node': 12.20.14
@@ -1512,16 +1516,16 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@cds/angular/5.3.0_8f8275ac34dec2a43b000e6042b1d2ef:
-    resolution: {integrity: sha512-hjq2NLz6hSrUSqkd7mmaCXVDeAqyLiTuK0gqc7GNGR4UBetK943PoNeO4nOTvom9VFyI0Iq42+K6kSaqsqs73Q==}
+  /@cds/angular/5.4.1_602e3661d3ff0bc164afcab2404866a6:
+    resolution: {integrity: sha512-1HBBIKMT4CjSLKAvf352E8Cd8m8pU/ZL0leB+AT5GerixVA49yrOxQ+1ZVr7c2jrryyBsHu9vHhBms1Yx+fJgA==}
     peerDependencies:
-      '@angular/common': 9.x || 10.x || 11.x
-      '@angular/core': 9.x || 10.x || 11.x
-      '@cds/core': 5.3.0
+      '@angular/common': '>9'
+      '@angular/core': '>9'
+      '@cds/core': 5.4.1
     dependencies:
       '@angular/common': 12.0.3_@angular+core@12.0.3+rxjs@6.6.7
       '@angular/core': 12.0.3_rxjs@6.6.7+zone.js@0.11.4
-      '@cds/core': 5.3.0
+      '@cds/core': 5.4.1
       jsdom: 16.6.0
       tslib: 2.2.0
     transitivePeerDependencies:
@@ -1535,16 +1539,15 @@ packages:
     resolution: {integrity: sha512-S9K+Q39BGOghyLHmR0Wdcmu1i1noSUk8HcvMj+3IaohZw02WFd99aPTQDHJeseXrXZP3CNovaSlePI0R11NcFg==}
     dev: false
 
-  /@cds/core/5.3.0:
-    resolution: {integrity: sha512-nlqLXpiC5sXasAQxBDrPY+BZMzsZSxVAE+zZBmaHfAsJ2lP9mTcdLlCduHGPtRD5QhRuC7yWGKdooE5NOOPF4Q==}
+  /@cds/core/5.4.1:
+    resolution: {integrity: sha512-7RhtrMx5UM6xCU+2l9T7E/MBZ+nDqGGyzOLz9EhscKjurIJQrGTPAIwgomJNZ22W2Gw+S36+v/R62y4uStQFTg==}
     dependencies:
-      '@types/resize-observer-browser': 0.1.5
-      lit-element: 2.5.1
-      lit-html: 1.4.1
+      lit: 2.0.0-rc.2
       ramda: 0.27.1
       tslib: 2.2.0
     optionalDependencies:
       '@cds/city': 1.1.0
+      '@types/resize-observer-browser': 0.1.5
       normalize.css: 8.0.1
     dev: false
 
@@ -1589,6 +1592,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@lit/reactive-element/1.0.0-rc.2:
+    resolution: {integrity: sha512-cujeIl5Ei8FC7UHf4/4Q3bRJOtdTe1vpJV/JEBYCggedmQ+2P8A2oz7eE+Vxi6OJ4nc0X+KZxXnBoH4QrEbmEQ==}
+    dev: false
 
   /@ng-select/ng-select/6.1.0_e478bbf4f4a3f792a7df50eb2f896c5a:
     resolution: {integrity: sha512-uro/zIjL+TRWzbrzNN9IjIusOeLfhCn9cIr5Bq3AsJyxyU7Gdj9kOD5wVrrQ0NVkaQ1BJMcWmUvmYGBXLI6cnA==}
@@ -1767,13 +1774,13 @@ packages:
       defer-to-connect: 2.0.1
     dev: true
 
-  /@tauri-apps/api/1.0.0-beta.1:
-    resolution: {integrity: sha512-WX9Hqf6pXFfpURTdz9VbHctnh4gjsWZDj5tSWqV4mQ2T8TldVmOSKqHpPDcVFibeM1L6oXJfrSgqR68Ho4g3bQ==}
+  /@tauri-apps/api/1.0.0-beta.3:
+    resolution: {integrity: sha512-EtgykB6FVO6/gc51MXXXnNhOp81UUeI9en2CwetVKOMmXyqFSBR9yDP/P7yg658mKDefLaAEnm6eSHQxVMmB3w==}
     engines: {node: '>= 12.13.0', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
     dev: false
 
-  /@tauri-apps/cli/1.0.0-beta.2:
-    resolution: {integrity: sha512-NuzllXugvNSXhzxQx2PjFC/V20gPuDupRtX41xh4CP9Sh20I7f4vI9EnFOacO06rGMVfGgQI0ZXRRcL5pIineA==}
+  /@tauri-apps/cli/1.0.0-beta.3:
+    resolution: {integrity: sha512-Z6XAYAgwTuVjEl+gV8Q9t/5Q0Bup4zAU98Y7Mf/5TkIk5gcl31JbvQjskZ1dBxH92817cobbyNmKjsbSaVJXgg==}
     engines: {node: '>= 12.13.0', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
     hasBin: true
     dependencies:
@@ -1786,14 +1793,14 @@ packages:
       imagemin: 8.0.0
       imagemin-optipng: 8.0.0
       imagemin-zopfli: 7.0.0
-      inquirer: 8.0.0
+      inquirer: 8.1.1
       is-png: 3.0.0
       minimist: 1.2.5
       ms: 2.1.3
       png2icons: 2.0.1
       read-chunk: 3.2.0
       semver: 7.3.5
-      sharp: 0.28.2
+      sharp: 0.28.3
       update-notifier: 5.1.0
     dev: true
 
@@ -1834,7 +1841,7 @@ packages:
     dependencies:
       '@types/http-cache-semantics': 4.0.0
       '@types/keyv': 3.1.1
-      '@types/node': 12.20.14
+      '@types/node': 12.20.15
       '@types/responselike': 1.0.0
     dev: true
 
@@ -1898,7 +1905,7 @@ packages:
   /@types/keyv/3.1.1:
     resolution: {integrity: sha512-MPtoySlAZQ37VoLaPcTHCu1RWJ4llDkULYZIzOYxlhxBqYPB0RsRlmMU0R6tahtFe27mIdkHV+551ZWV4PLmVw==}
     dependencies:
-      '@types/node': 12.20.14
+      '@types/node': 12.20.15
     dev: true
 
   /@types/minimatch/3.0.4:
@@ -1906,6 +1913,10 @@ packages:
 
   /@types/node/12.20.14:
     resolution: {integrity: sha512-iFJOS5Q470FF+r4Ol2pSley7/wCNVqf+jgjhtxLLaJcDs+To2iCxlXIkJXrGLD9w9G/oJ9ibySu7z92DCwr7Pg==}
+    dev: true
+
+  /@types/node/12.20.15:
+    resolution: {integrity: sha512-F6S4Chv4JicJmyrwlDkxUdGNSplsQdGwp1A0AJloEVDirWdZOAiRHhovDlsFkKUrquUXhz1imJhXHsf59auyAg==}
     dev: true
 
   /@types/parse-json/4.0.0:
@@ -1919,11 +1930,12 @@ packages:
   /@types/resize-observer-browser/0.1.5:
     resolution: {integrity: sha512-8k/67Z95Goa6Lznuykxkfhq9YU3l1Qe6LNZmwde1u7802a3x8v44oq0j91DICclxatTr0rNnhXx7+VTIetSrSQ==}
     dev: false
+    optional: true
 
   /@types/responselike/1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
-      '@types/node': 12.20.14
+      '@types/node': 12.20.15
     dev: true
 
   /@types/selenium-webdriver/3.0.17:
@@ -1933,6 +1945,10 @@ packages:
   /@types/source-list-map/0.1.2:
     resolution: {integrity: sha512-K5K+yml8LTo9bWJI/rECfIPrGgxdpeNbj+d53lwN4QjW1MCwlkhUms+gtdzigTeUyBr09+u8BwOIY3MXvHdcsA==}
     dev: true
+
+  /@types/trusted-types/1.0.6:
+    resolution: {integrity: sha512-230RC8sFeHoT6sSUlRO6a8cAnclO06eeiq1QDfiv2FGCLWFvvERWgwIQD4FWqD9A69BN7Lzee4OXwoMVnnsWDw==}
+    dev: false
 
   /@types/tween.js/17.2.0:
     resolution: {integrity: sha512-mOsqurEtFEzwgkVc/jDVE2XrjZBYTbrmDUyCr9GXmnfc6q5otokxFtKvSY/B21zgz9LVRIvRTawKczjKi57wrA==}
@@ -2899,8 +2915,8 @@ packages:
       responselike: 1.0.2
     dev: true
 
-  /cacheable-request/7.0.1:
-    resolution: {integrity: sha512-lt0mJ6YAnsrBErpTMWeu5kl/tg9xMAWjavYTN6VQXM1A/teBITuNcccXsCxF0tDQQJf9DfAaX5O4e0zp0KlfZw==}
+  /cacheable-request/7.0.2:
+    resolution: {integrity: sha512-pouW8/FmiPQbuGpkXQ9BAPv/Mo5xDGANgSNXzTzJ8DrKGuXOssM4wIQRjfanNRh3Yu5cfYPvcorqbhg2KIJtew==}
     engines: {node: '>=8'}
     dependencies:
       clone-response: 1.0.2
@@ -2908,7 +2924,7 @@ packages:
       http-cache-semantics: 4.1.0
       keyv: 4.0.3
       lowercase-keys: 2.0.0
-      normalize-url: 4.5.1
+      normalize-url: 6.1.0
       responselike: 2.0.0
     dev: true
 
@@ -5019,6 +5035,18 @@ packages:
       slash: 3.0.0
     dev: true
 
+  /globby/11.0.4:
+    resolution: {integrity: sha512-9O4MVG9ioZJ08ffbcyVYyLOJLk5JQ688pJ4eMGLpdWLHq/Wr1D9BlriLQyL0E+jbkuePVZXYFj47QM/v093wHg==}
+    engines: {node: '>=10'}
+    dependencies:
+      array-union: 2.1.0
+      dir-glob: 3.0.1
+      fast-glob: 3.2.5
+      ignore: 5.1.8
+      merge2: 1.4.1
+      slash: 3.0.0
+    dev: true
+
   /globby/5.0.0:
     resolution: {integrity: sha1-69hGZ8oNuzMLmbz8aOrCvFQ3Dg0=}
     engines: {node: '>=0.10.0'}
@@ -5051,7 +5079,7 @@ packages:
       '@types/cacheable-request': 6.0.1
       '@types/responselike': 1.0.0
       cacheable-lookup: 5.0.4
-      cacheable-request: 7.0.1
+      cacheable-request: 7.0.2
       decompress-response: 6.0.0
       http2-wrapper: 1.0.3
       lowercase-keys: 2.0.0
@@ -5477,7 +5505,7 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       file-type: 14.7.1
-      globby: 11.0.3
+      globby: 11.0.4
       graceful-fs: 4.2.6
       junk: 3.1.0
       p-pipe: 4.0.0
@@ -5574,6 +5602,26 @@ packages:
       figures: 3.2.0
       lodash: 4.17.21
       mute-stream: 0.0.8
+      run-async: 2.4.1
+      rxjs: 6.6.7
+      string-width: 4.2.2
+      strip-ansi: 6.0.0
+      through: 2.3.8
+    dev: true
+
+  /inquirer/8.1.1:
+    resolution: {integrity: sha512-hUDjc3vBkh/uk1gPfMAD/7Z188Q8cvTGl0nxwaCdwSbzFh6ZKkZh+s2ozVxbE5G9ZNRyeY0+lgbAIOUFsFf98w==}
+    engines: {node: '>=8.0.0'}
+    dependencies:
+      ansi-escapes: 4.3.2
+      chalk: 4.1.1
+      cli-cursor: 3.1.0
+      cli-width: 3.0.0
+      external-editor: 3.1.0
+      figures: 3.2.0
+      lodash: 4.17.21
+      mute-stream: 0.0.8
+      ora: 5.4.1
       run-async: 2.4.1
       rxjs: 6.6.7
       string-width: 4.2.2
@@ -6470,14 +6518,25 @@ packages:
     resolution: {integrity: sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=}
     dev: true
 
-  /lit-element/2.5.1:
-    resolution: {integrity: sha512-ogu7PiJTA33bEK0xGu1dmaX5vhcRjBXCFexPja0e7P7jqLhTpNKYRPmE+GmiCaRVAbiQKGkUgkh/i6+bh++dPQ==}
+  /lit-element/3.0.0-rc.2:
+    resolution: {integrity: sha512-2Z7DabJ3b5K+p5073vFjMODoaWqy5PIaI4y6ADKm+fCGc8OnX9fU9dMoUEBZjFpd/bEFR9PBp050tUtBnT9XTQ==}
     dependencies:
-      lit-html: 1.4.1
+      '@lit/reactive-element': 1.0.0-rc.2
+      lit-html: 2.0.0-rc.3
     dev: false
 
-  /lit-html/1.4.1:
-    resolution: {integrity: sha512-B9btcSgPYb1q4oSOb/PrOT6Z/H+r6xuNzfH4lFli/AWhYwdtrgQkQWBbIc6mdnf6E2IL3gDXdkkqNktpU0OZQA==}
+  /lit-html/2.0.0-rc.3:
+    resolution: {integrity: sha512-Y6P8LlAyQuqvzq6l/Nc4z5/P5M/rVLYKQIRxcNwSuGajK0g4kbcBFQqZmgvqKG+ak+dHZjfm2HUw9TF5N/pkCw==}
+    dependencies:
+      '@types/trusted-types': 1.0.6
+    dev: false
+
+  /lit/2.0.0-rc.2:
+    resolution: {integrity: sha512-BOCuoJR04WaTV8UqTKk09cNcQA10Aq2LCcBOiHuF7TzWH5RNDsbCBP5QM9sLBSotGTXbDug/gFO08jq6TbyEtw==}
+    dependencies:
+      '@lit/reactive-element': 1.0.0-rc.2
+      lit-element: 3.0.0-rc.2
+      lit-html: 2.0.0-rc.3
     dev: false
 
   /load-json-file/1.1.0:
@@ -7212,10 +7271,14 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /normalize-url/6.1.0:
+    resolution: {integrity: sha512-DlL+XwOy3NxAQ8xuC0okPgK46iuVNAK01YN7RueYBqqFeGsBjV9XmCAzAdgt+667bCl5kPh9EqKKDwnaPG1I7A==}
+    engines: {node: '>=10'}
+    dev: true
+
   /normalize.css/8.0.1:
     resolution: {integrity: sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==}
     dev: false
-    optional: true
 
   /npm-bundled/1.1.2:
     resolution: {integrity: sha512-x5DHup0SuyQcmL3s7Rx/YQ8sbw/Hzg0rj48eN0dV7hf5cmQq5PXIeioroH3raV1QC1yh3uTYuMThvEQF3iKgGQ==}
@@ -7453,6 +7516,21 @@ packages:
 
   /ora/5.4.0:
     resolution: {integrity: sha512-1StwyXQGoU6gdjYkyVcqOLnVlbKj+6yPNNOxJVgpt9t4eksKjiriiHuxktLYkgllwk+D6MbC4ihH84L1udRXPg==}
+    engines: {node: '>=10'}
+    dependencies:
+      bl: 4.1.0
+      chalk: 4.1.1
+      cli-cursor: 3.1.0
+      cli-spinners: 2.6.0
+      is-interactive: 1.0.0
+      is-unicode-supported: 0.1.0
+      log-symbols: 4.1.0
+      strip-ansi: 6.0.0
+      wcwidth: 1.0.1
+    dev: true
+
+  /ora/5.4.1:
+    resolution: {integrity: sha512-5b6Y85tPxZZ7QytO+BQzysW31HJku27cRIlkbAXaNx+BdcVi+LlRFmVXzeF6a7JCwJpyw5c4b+YSVImQIrBpuQ==}
     engines: {node: '>=10'}
     dependencies:
       bl: 4.1.0
@@ -9377,8 +9455,8 @@ packages:
       kind-of: 6.0.3
     dev: true
 
-  /sharp/0.28.2:
-    resolution: {integrity: sha512-CdmySbsQVe/+ZM2j9zzvUfWumM0L0iHj1kpxJMFuyWvSuBULebvGCdOLb1f5vbbBrIGroX714Fx1wiWaKniz4A==}
+  /sharp/0.28.3:
+    resolution: {integrity: sha512-21GEP45Rmr7q2qcmdnjDkNP04Ooh5v0laGS5FDpojOO84D1DJwUijLiSq8XNNM6e8aGXYtoYRh3sVNdm8NodMA==}
     engines: {node: '>=10'}
     requiresBuild: true
     dependencies:
