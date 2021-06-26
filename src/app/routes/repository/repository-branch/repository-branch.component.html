@@ -57,18 +57,20 @@
                     </div>
 
                     <div class="action custom-padding">
-                        <cds-icon shape="trash" [ngxTippy]="deleteTemplate" tippyName="template-ref"
-                            [tippyProps]="templateRef">
-                        </cds-icon>
-                        <div #deleteTemplate class="comander-tooltip">
-                            <div class="center-text">
-                                Delete branch?&nbsp;&nbsp;&nbsp;
+                        <ng-container *ngIf="!branch.current">
+                            <cds-icon shape="trash" [ngxTippy]="deleteTemplate" tippyName="template-ref"
+                                [tippyProps]="templateRef">
+                            </cds-icon>
+                            <div #deleteTemplate class="comander-tooltip">
+                                <div class="center-text">
+                                    Delete branch?&nbsp;&nbsp;&nbsp;
+                                </div>
+                                <cds-icon-button size="sm" status="danger" standard-hover
+                                    (click)="onDelete(branch.name)" aria-label="delete branch">
+                                    <cds-icon shape="check" class="clickable"></cds-icon>
+                                </cds-icon-button>
                             </div>
-                            <cds-icon-button size="sm" status="danger" standard-hover (click)="onDelete(branch.name)"
-                                aria-label="delete branch">
-                                <cds-icon shape="check" class="clickable"></cds-icon>
-                            </cds-icon-button>
-                        </div>
+                        </ng-container>
                     </div>
 
                     <div class="lh">

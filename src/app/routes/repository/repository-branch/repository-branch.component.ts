@@ -21,7 +21,6 @@ type MergeStrategies = Array<MergeStrategy>
 export class RepositoryBranchComponent implements OnInit {
 
 
-    branches: Branches = [];
     remoteBranches: Branches = [];
 
     openModalNew = false;
