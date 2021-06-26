@@ -45,7 +45,7 @@ jobs:
         path: ~/.pnpm-store
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}
         restore-keys: |
-          {{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}
+          ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}
 
     # - name: Cache Rust
     #   uses: Swatinem/rust-cache@v1
