@@ -37,7 +37,7 @@ jobs:
     #     key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
     - name: Cache pnpm modules
-        uses: actions/cache@v2
+      uses: actions/cache@v2
         env:
           cache-name: cache-pnpm-modules
         with:
