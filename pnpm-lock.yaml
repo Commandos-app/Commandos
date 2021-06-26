@@ -3,7 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@angular-devkit/build-angular': ~12.1.0
   '@angular/animations': ^12.1.0
-  '@angular/cdk': ^12.0.0
+  '@angular/cdk': ^12.1.0
   '@angular/cli': ~12.1.0
   '@angular/common': ~12.1.0
   '@angular/compiler': ~12.1.0
@@ -54,7 +54,7 @@ specifiers:
 
 dependencies:
   '@angular/animations': 12.1.0_@angular+core@12.1.0
-  '@angular/cdk': 12.0.3_42f589457c41b2d47c62ac1042d5782e
+  '@angular/cdk': 12.1.0_42f589457c41b2d47c62ac1042d5782e
   '@angular/common': 12.1.0_@angular+core@12.1.0+rxjs@6.6.7
   '@angular/compiler': 12.1.0
   '@angular/core': 12.1.0_rxjs@6.6.7+zone.js@0.11.4
@@ -75,7 +75,7 @@ dependencies:
   dayjs: 1.10.5
   diff2html: 3.4.5
   ngx-autosize: 1.8.4_82519688281199bef51c6e31e9df92e3
-  ngx-scrollbar: 7.5.6_433d716e8491b4a3ee429764a0c1d673
+  ngx-scrollbar: 7.5.6_d61ee4b70916abed72b329257069ed09
   ngx-tippy-wrapper: 2.1.0_82519688281199bef51c6e31e9df92e3
   ngx-virtual-scroller: 4.0.3_@angular+core@12.1.0+tslib@2.2.0
   normalize.css: 8.0.1
@@ -290,8 +290,8 @@ packages:
       tslib: 2.3.0
     dev: false
 
-  /@angular/cdk/12.0.3_42f589457c41b2d47c62ac1042d5782e:
-    resolution: {integrity: sha512-E/3eAcDTsuSAaeOajwBwjPtBMVSzZu5BgtXBX+QfC66jWJ4FdX5FUxGDZCwlF/Bbtdkvn0Jq8+UW9RlrS2Hd9Q==}
+  /@angular/cdk/12.1.0_42f589457c41b2d47c62ac1042d5782e:
+    resolution: {integrity: sha512-AkkhEveUDwblJyTd1NvuP7eH7Pwj14hyMmMnzfKBcaImvsSXK/z0T58wzp5vVYUtAQc05MuojwfsJQCev5QwNg==}
     peerDependencies:
       '@angular/common': ^12.0.0 || ^13.0.0-0
       '@angular/core': ^12.0.0 || ^13.0.0-0
@@ -300,7 +300,7 @@ packages:
       '@angular/common': 12.1.0_@angular+core@12.1.0+rxjs@6.6.7
       '@angular/core': 12.1.0_rxjs@6.6.7+zone.js@0.11.4
       rxjs: 6.6.7
-      tslib: 2.2.0
+      tslib: 2.3.0
     optionalDependencies:
       parse5: 5.1.1
     dev: false
@@ -7348,7 +7348,7 @@ packages:
       tslib: 1.14.1
     dev: false
 
-  /ngx-scrollbar/7.5.6_433d716e8491b4a3ee429764a0c1d673:
+  /ngx-scrollbar/7.5.6_d61ee4b70916abed72b329257069ed09:
     resolution: {integrity: sha512-Kx/rs6wHrMTbMFhQX2qNjZj2K7hE/ji1/cf0m49KxaOWV79GDvytMUcGweYsU6WUGPE7ARjR0XULDv0Mvkk4LA==}
     peerDependencies:
       '@angular/cdk': '>=11.0.0'
@@ -7356,7 +7356,7 @@ packages:
       '@angular/core': '>=11.0.0'
       rxjs: '>=6.0.0'
     dependencies:
-      '@angular/cdk': 12.0.3_42f589457c41b2d47c62ac1042d5782e
+      '@angular/cdk': 12.1.0_42f589457c41b2d47c62ac1042d5782e
       '@angular/common': 12.1.0_@angular+core@12.1.0+rxjs@6.6.7
       '@angular/core': 12.1.0_rxjs@6.6.7+zone.js@0.11.4
       bezier-easing: 2.1.0
