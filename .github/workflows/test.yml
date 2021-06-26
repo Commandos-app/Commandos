@@ -30,11 +30,14 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y webkit2gtk-4.0
 
-    - name: Cache .pnpm-store
-      uses: actions/cache@v1
+    - name: Cache pnpm
+      uses: actions/cache@v2
       with:
         path: ~/.pnpm-store
         key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+    - name: Cache Rust
+      uses: Swatinem/rust-cache@v1
 
     - name: install pnpm
       uses: pnpm/action-setup@v2.0.1
