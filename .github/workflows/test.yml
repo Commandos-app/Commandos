@@ -14,7 +14,7 @@ jobs:
     steps:
     - name: Get pnpm cache directory
       id: pnpm-cache-dir-path
-      run: echo "::set-output name=dir::${HOME}\.pnpm-store"
+      run: echo "::set-output name=dir::${HOME}\.pnpm-store\"
       
     - uses: actions/checkout@v2
    
