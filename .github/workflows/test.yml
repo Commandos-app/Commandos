@@ -7,7 +7,7 @@ jobs:
       fail-fast: false
       matrix:
        # platform: [macos-latest, ubuntu-latest, windows-latest]
-        platform: [windows-latest]
+        platform: [ubuntu-latest]
         node-version: [14]
 
     runs-on: ${{ matrix.platform }}
@@ -40,7 +40,7 @@ jobs:
       uses: pnpm/action-setup@v2.0.1
       with:
         version: 6.9.1
-        
+
     - name: Cache pnpm modules
       uses: actions/cache@v2
       env:
