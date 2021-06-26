@@ -7,7 +7,7 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import '~@angular/cdk/overlay-prebuilt.css';
 @import 'tippy.js/dist/tippy.css';
-@import '~highlight.js/styles/github.css';
+// @import '~highlight.js/styles/github.css';
 @import '~diff2html/bundles/css/diff2html.min.css';
 @import './theme/variables';
 @import './theme/import';
@@ -419,7 +419,7 @@ code {
         height: 25px;
         background: rgba(255, 255, 255, 0.2);
         color: white;
-        padding: 4px 6px 0;
+        padding: 0 6px;
 
         &::placeholder {
             color: white;
