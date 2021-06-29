@@ -13,6 +13,7 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
     - name: Get pnpm cache directory
+      if: matrix.platform == 'windows-latest'
       id: pnpm-cache-dir-path
       run: echo "::set-output name=dir::${HOME}\.pnpm-store\"
 
