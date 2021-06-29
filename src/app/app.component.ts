@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ErrorService, LoggerService, GitService, StoreService, SplashScreenResolver } from '@core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { CommanderService, ICommand } from '@shared/services';
+import { listen, emit } from "@tauri-apps/api/event";
 
 @Component({
     selector: 'commander-root',
@@ -25,7 +26,7 @@ export class AppComponent {
         private renderer: Renderer2,
         public commanderModalService: CommanderModalService,
         private storeService: StoreService,
-        
+
     ) {
         this.load();
     }
@@ -52,6 +53,10 @@ export class AppComponent {
         this.registerToggleDarkModeCommand();
         this.registerSettingsCommand();
         this.registerNewRepoCommand();
+
+        listen("tauri://update-available", function (res) {
+            console.log("New version available: ", res);
+        });
     }
 
 

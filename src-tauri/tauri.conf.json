@@ -47,7 +47,11 @@
             }
         },
         "updater": {
-            "active": false
+            "active": false,
+            "endpoints": [
+                "https://releases.myapp.com/{{target}}/{{current_version}}"
+            ],
+            "dialog": false
         },
         "allowlist": {
             "all": true
@@ -65,6 +69,9 @@
                 "decorations": true
             }
         ],
+        "systemTray": {
+            "iconPath": "icons/icon.png"
+        },
         "security": {
             "csp": "default-src blob: data: filesystem: ws: http: https: 'unsafe-eval' 'unsafe-inline'"
         }

@@ -13,6 +13,6 @@ export async function selectFolder() {
             path
         }
     }
-    return null;
+    return { name: null, path: null };
 }
 
