@@ -7,16 +7,11 @@ jobs:
       fail-fast: false
       matrix:
        # platform: [macos-latest, ubuntu-latest, windows-latest]
-        platform: [ubuntu-latest]
+        platform: [windows-latest]
         node-version: [14]
 
     runs-on: ${{ matrix.platform }}
     steps:
-    - name: Get pnpm cache directory
-      if: matrix.platform == 'windows-latest'
-      id: pnpm-cache-dir-path
-      run: echo "::set-output name=dir::${HOME}\.pnpm-store\"
-
     - uses: actions/checkout@v2
 
     - name: Use Node.js ${{ matrix.node-version }}
@@ -30,7 +25,7 @@ jobs:
       env:
         cache-name: cache-pnpm-modules
       with:
-        path: ${{ steps.pnpm-cache-dir-path.outputs.dir }}
+        path: D:\.pnpm-store\
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
