@@ -7,7 +7,7 @@
         "distDir": "../dist/dos-commander",
         "devPath": "http://localhost:4200",
         "beforeDevCommand": "",
-        "beforeBuildCommand": "npm run build:prod",
+        "beforeBuildCommand": "",
         "withGlobalTauri": true
     },
     "tauri": {
