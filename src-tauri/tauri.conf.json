@@ -1,13 +1,13 @@
 {
     "package": {
         "productName": "Commandos",
-        "version": "0.5.0"
+        "version": "0.5.1"
     },
     "build": {
         "distDir": "../dist/dos-commander",
         "devPath": "http://localhost:4200",
         "beforeDevCommand": "",
-        "beforeBuildCommand": "npm run build:prod",
+        "beforeBuildCommand": "",
         "withGlobalTauri": true
     },
     "tauri": {
