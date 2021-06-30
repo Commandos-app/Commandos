@@ -1,74 +1,75 @@
-name: "test-on-pr"
-on: [pull_request]
+# name: "test-on-pr"
+# on: [pull_request]
 
-jobs:
-  test-tauri:
-    strategy:
-      fail-fast: false
-      matrix:
-       # platform: [macos-latest, ubuntu-latest, windows-latest]
-        platform: [windows-latest]
-        node-version: [14]
+# jobs:
+#   test-tauri:
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#        # platform: [macos-latest, ubuntu-latest, windows-latest]
+#         platform: [windows-latest]
+#         node-version: [14]
 
-    runs-on: ${{ matrix.platform }}
-    steps:
-    - uses: actions/checkout@v2
+#     runs-on: ${{ matrix.platform }}
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
+#     steps:
+#     - uses: actions/checkout@v2
 
-    - name: Cache pnpm modules <Windows>
-      if: matrix.platform == 'windows-latest'
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-pnpm-modules
-      with:
-        path: D:\.pnpm-store\
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+#     - name: Use Node.js ${{ matrix.node-version }}
+#       uses: actions/setup-node@v2
+#       with:
+#         node-version: ${{ matrix.node-version }}
 
-    - name: Cache pnpm modules <Linux|MacOs>
-      if: matrix.platform != 'windows-latest'
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-pnpm-modules
-      with:
-        path: ~/.pnpm-store
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+#     - name: Cache pnpm modules <Windows>
+#       if: matrix.platform == 'windows-latest'
+#       uses: actions/cache@v2
+#       env:
+#         cache-name: cache-pnpm-modules
+#       with:
+#         path: D:\.pnpm-store\
+#         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+#         restore-keys: |
+#           ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
 
-    - name: install Rust stable
-      uses: actions-rs/toolchain@v1
-      with:
-        toolchain: stable
+#     - name: Cache pnpm modules <Linux|MacOs>
+#       if: matrix.platform != 'windows-latest'
+#       uses: actions/cache@v2
+#       env:
+#         cache-name: cache-pnpm-modules
+#       with:
+#         path: ~/.pnpm-store
+#         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+#         restore-keys: |
+#           ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
 
-    - name: install webkit2gtk (ubuntu only)
-      if: matrix.platform == 'ubuntu-latest'
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y webkit2gtk-4.0
+#     - name: install Rust stable
+#       uses: actions-rs/toolchain@v1
+#       with:
+#         toolchain: stable
+
+#     - name: install webkit2gtk (ubuntu only)
+#       if: matrix.platform == 'ubuntu-latest'
+#       run: |
+#         sudo apt-get update
+#         sudo apt-get install -y webkit2gtk-4.0
 
 
-    - name: install pnpm
-      uses: pnpm/action-setup@v2.0.1
-      with:
-        version: 6.9.1
+#     - name: install pnpm
+#       uses: pnpm/action-setup@v2.0.1
+#       with:
+#         version: 6.9.1
 
-    - name: Cache Rust
-      uses: Swatinem/rust-cache@v1
-      with:
-        working-directory: ./src-tauri
+#     - name: Cache Rust
+#       uses: Swatinem/rust-cache@v1
+#       with:
+#         working-directory: ./src-tauri
 
-    - name: install app dependencies
-      run: pnpm install
+#     - name: install app dependencies
+#       run: pnpm install
 
-    - name: build app
-      run: pnpm run build:prod
+#     - name: build app
+#       run: pnpm run build:prod
 
-    - uses: tauri-apps/tauri-action@v0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     - uses: tauri-apps/tauri-action@v0
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
