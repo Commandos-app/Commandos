@@ -1,10 +1,10 @@
 {
     "package": {
         "productName": "Commandos",
-        "version": "0.5.1"
+        "version": "0.5.2"
     },
     "build": {
-        "distDir": "../dist/dos-commander",
+        "distDir": "../dist/commandos",
         "devPath": "http://localhost:4200",
         "beforeDevCommand": "",
         "beforeBuildCommand": "",
@@ -58,7 +58,7 @@
         },
         "windows": [
             {
-                "title": "DOS-Commander",
+                "title": "Commandos",
                 "width": 1000,
                 "height": 700,
                 "resizable": true,

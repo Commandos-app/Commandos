@@ -1,6 +1,6 @@
 [package]
 name = "app"
-version = "0.5.1"
+version = "0.5.2"
 description = "Commandos a multi git repo client"
 authors = [ "Dominik Schenk" ]
 license = ""
@@ -10,23 +10,15 @@ edition = "2018"
 build = "src/build.rs"
 
 [build-dependencies]
-tauri-build = { version = "1.0.0-beta.0" }
+tauri-build = { version = "1.0.0-beta.2" }
 
 [dependencies]
 serde_json = "1.0"
 serde_repr = "0.1"
 serde = { version = "1.0", features = [ "derive" ] }
-log4rs = { version = "1.0.0", features = [
-  "rolling_file_appender",
-  "compound_policy",
-  "size_trigger",
-  "fixed_window_roller"
-] }
+log4rs = { version = "1.0.0", features = ["rolling_file_appender", "compound_policy", "size_trigger", "fixed_window_roller"] }
 log = { version = "0.4.0", features = [ "std" ] }
-
-  [dependencies.tauri]
-  version = "1.0.0-beta"
-features = ["api-all"]
+tauri = { version = "1.0.0-beta.4", features = ["api-all", "system-tray"]}
 
 [features]
 default = [ "custom-protocol" ]

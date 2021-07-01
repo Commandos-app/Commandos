@@ -6,7 +6,7 @@
     },
     "newProjectRoot": "projects",
     "projects": {
-        "dos-commander": {
+        "commandos": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -23,7 +23,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/dos-commander",
+                        "outputPath": "dist/commandos",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
@@ -88,18 +88,18 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "dos-commander:build"
+                        "browserTarget": "commandos:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "dos-commander:build:production"
+                            "browserTarget": "commandos:build:production"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "dos-commander:build"
+                        "browserTarget": "commandos:build"
                     }
                 },
                 "test": {
@@ -137,16 +137,16 @@
                     "builder": "@angular-devkit/build-angular:protractor",
                     "options": {
                         "protractorConfig": "e2e/protractor.conf.js",
-                        "devServerTarget": "dos-commander:serve"
+                        "devServerTarget": "commandos:serve"
                     },
                     "configurations": {
                         "production": {
-                            "devServerTarget": "dos-commander:serve:production"
+                            "devServerTarget": "commandos:serve:production"
                         }
                     }
                 }
             }
         }
     },
-    "defaultProject": "dos-commander"
+    "defaultProject": "commandos"
 }

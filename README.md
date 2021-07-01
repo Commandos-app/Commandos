@@ -1,4 +1,4 @@
-# DOS-Commander
+# commandos
 
 ## Debug
 - App: `ng serve`
