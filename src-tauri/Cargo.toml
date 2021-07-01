@@ -1,6 +1,6 @@
 [package]
 name = "app"
-version = "0.5.2"
+version = "0.5.3"
 description = "Commandos a multi git repo client"
 authors = [ "Dominik Schenk" ]
 license = ""

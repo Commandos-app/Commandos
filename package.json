@@ -1,6 +1,6 @@
 {
     "name": "commandos",
-    "version": "0.5.2",
+    "version": "0.5.3",
     "description": "Commandos is a multi git repo client",
     "scripts": {
         "ng": "ng",

@@ -40,7 +40,7 @@ checksum = "15af2628f6890fe2609a3b91bef4c83450512802e59489f9c1cb1fa5df064a61"
 
 [[package]]
 name = "app"
-version = "0.5.2"
+version = "0.5.3"
 dependencies = [
  "log",
  "log4rs",
