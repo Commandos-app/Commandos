@@ -3,7 +3,6 @@
     "version": "0.5.2",
     "description": "Commandos is a multi git repo client",
     "scripts": {
-        "prei-nstall": "npx only-allow pnpm",
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build",
@@ -11,11 +10,11 @@
         "lint": "ng lint",
         "e2e": "ng e2e",
         "tauri": "tauri",
-        "dev": "pnpm run tauri dev",
+        "dev": "npm run tauri dev",
         "build:prod": "ng build --configuration production",
         "build:prod:sme": "ng build --configuration production --sourceMap=true",
-        "build:release": "pnpm run build:prod && pnpm tauri build",
-        "build:release:debug": "pnpm run build:prod && yarn tauri build --debug"
+        "build:release": "yarn run build:prod && yarn tauri build",
+        "build:release:debug": "yarn run build:prod && yarn tauri build --debug"
     },
     "private": true,
     "dependencies": {
