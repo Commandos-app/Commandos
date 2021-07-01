@@ -3,7 +3,7 @@
     "version": "0.5.2",
     "description": "Commandos is a multi git repo client",
     "scripts": {
-        "preinstall": "npx only-allow pnpm",
+        "prei-nstall": "npx only-allow pnpm",
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build",
