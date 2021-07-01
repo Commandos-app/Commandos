@@ -39,7 +39,7 @@ jobs:
     #   with:
     #     working-directory: ./src-tauri
 
-    - Name: Cargo Cache
+    - name: Cargo Cache
       uses: actions/cache@v2
       with:
         path: |
