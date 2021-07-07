@@ -20,6 +20,9 @@ log4rs = { version = "1.0.0", features = ["rolling_file_appender", "compound_pol
 log = { version = "0.4.0", features = [ "std" ] }
 tauri = { version = "1.0.0-beta.4", features = ["api-all", "system-tray"]}
 
+[patch.crates-io]
+wry = { git = "https://github.com/tauri-apps/wry", rev = "923d3461ce93846af8dd548d4e43ebd0fd6111a3" }
+
 [features]
 default = [ "custom-protocol" ]
 custom-protocol = [ "tauri/custom-protocol" ]
