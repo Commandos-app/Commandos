@@ -39,6 +39,7 @@
         "angular-split": "^5.0.0",
         "dayjs": "^1.10.4",
         "diff2html": "^3.4.0",
+        "gitdiff-parser": "^0.2.2",
         "ngx-autosize": "^1.8.4",
         "ngx-scrollbar": "^7.5.4",
         "ngx-tippy-wrapper": "^2.1.0",

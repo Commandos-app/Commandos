@@ -1,5 +1,6 @@
 import * as GitPerf from '../git-perf';
-import { Command } from '@tauri-apps/api/shell';
+import { invoke } from '@tauri-apps/api/tauri';
+// import { Command } from '@tauri-apps/api/shell';
 
 // export async function runGit2(args: string[], path: string, name: string): Promise<any> {
 
@@ -32,6 +33,10 @@ import { Command } from '@tauri-apps/api/shell';
 
 // }
 
+type GitResult = {
+    stdout: string;
+    stderr: string;
+}
 
 
 
@@ -44,9 +49,9 @@ export async function runGit(args: string[], path: string, name: string, global 
     }
     const commandName = `${name}: git ${args.join(' ')}`;
 
-    const cmd = new Command('git', args);
+    const cmd = invoke<GitResult>('git', { args });
 
-    const result = await GitPerf.measure(commandName, () => cmd.execute())
+    const result = await GitPerf.measure(commandName, () => cmd)
         .catch(err => {
             // If this is an exception thrown by Node.js (as opposed to
             // dugite) let's keep the salient details but include the name of

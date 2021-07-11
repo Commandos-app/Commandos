@@ -9,6 +9,7 @@
     -webkit-app-region: drag;
     opacity: 1;
     transition: opacity 1s;
+    z-index: 99999;
 }
 
 #particles-js.full .text {

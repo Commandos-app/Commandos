@@ -40,7 +40,7 @@
                 <cds-icon shape="happy-face" size="xxl"></cds-icon>
             </div>
             <ng-scrollbar class="virtual-scroll" *ngIf="fileTree.length  !== 0 ">
-                <div scrollViewport id="diffoutput"></div>
+                <commander-commandos-diff [data]="fileDiff" scrollViewport></commander-commandos-diff>
                 <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height"
                     *ngIf="isDiffLoading">
                     <cds-progress-circle size="xl"></cds-progress-circle>

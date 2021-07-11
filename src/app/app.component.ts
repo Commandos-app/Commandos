@@ -31,7 +31,8 @@ export class AppComponent {
         this.load();
     }
 
-    load() {
+    async load() {
+        await this.storeService.loadSettings();
         this.gitService.registerGitCommands();
         this.translate.setDefaultLang('de');
         this.translate.use('de');
@@ -108,6 +109,7 @@ export class AppComponent {
 
     private toggleDarkMode(command: ICommand): void {
         this.storeService.setDarkMode(!this.storeService.getDarkMode());
+        this.storeService.saveSettings();
         command.icon = this.getDarkModeIcon();
         this.setDarkMode();
     }

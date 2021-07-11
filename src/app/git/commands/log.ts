@@ -45,8 +45,8 @@ export async function getLogMetadataOfSha(repository: string, sha: string): Prom
 export async function getLogOfSha(repository: string, sha: string): Promise<string> {
 
     const args = [
-        'diff-tree',
-        '-p',
+        'show',
+        // '-p',
         sha,
         // '-m',
         // '-1',

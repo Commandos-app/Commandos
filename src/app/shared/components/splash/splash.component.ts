@@ -31,11 +31,11 @@ export class SplashComponent implements OnInit {
 
     private hideSplashAnimation() {
         // Setting the transition
-        this.opacityChange = 0;
         setTimeout(() => {
             // After the transition is ended the showSplash will be hided
+            this.opacityChange = 0;
             this.showSplash = false;
-        }, 1000);
+        }, 2000);
     }
 
 }

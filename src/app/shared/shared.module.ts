@@ -1,3 +1,4 @@
+import { CommandosDiffComponent } from './components/commandos-diff/commandos-diff.component';
 import { DiffPipe } from './directives/diff.pipe';
 import { BranchAheadBehindComponent } from './components/branch-ahead-behind/branch-ahead-behind.component';
 import { SubnavComponent } from './components/subnav/subnav.component';
@@ -51,6 +52,7 @@ const components = [
     SubnavComponent,
     SplitLayoutComponent,
     BranchAheadBehindComponent,
+    CommandosDiffComponent,
 
     DateFormatePipe,
     DiffPipe

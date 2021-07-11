@@ -4597,6 +4597,11 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
+gitdiff-parser@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/gitdiff-parser/-/gitdiff-parser-0.2.2.tgz#c393ce9caf385860d005ce758a5e03221a7fc6be"
+  integrity sha512-iUE5gWohbUm+hogg9c1Gg/pDoDyGlC15hTdsnW7AqZw9+F9mYAxfnMNDstFxuF+qjiZot2s+3L+K9CLdw1ttvA==
+
 github-from-package@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/github-from-package/-/github-from-package-0.0.0.tgz#97fb5d96bfde8973313f20e8288ef9a167fa64ce"

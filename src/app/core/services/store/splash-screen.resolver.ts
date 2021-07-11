@@ -19,6 +19,7 @@ export class SplashScreenResolver implements Resolve<boolean> {
 
     async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
         await this.storeService.loadSettings();
+
         this.stop();
         return true;
 

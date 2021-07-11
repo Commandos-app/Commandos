@@ -3,6 +3,7 @@
   windows_subsystem = "windows"
 )]
 
+mod git;
 mod logger;
 mod open_cmd;
 // mod system_tray;
@@ -14,7 +15,8 @@ fn main() {
   tauri::Builder::default()
     .invoke_handler(tauri::generate_handler![
       logger::logging,
-      open_cmd::open_cmd
+      open_cmd::open_cmd,
+      git::git
     ])
     //  .system_tray(system_tray::create_tray())
     // .on_system_tray_event(|app, event| match event {})

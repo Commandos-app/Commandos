@@ -25,6 +25,8 @@ export class RepositoryCommitComponent implements OnInit {
 
     isCommiting: LoadingState = 'default';
 
+    fileDiff: string;
+
 
     constructor(
         private storeService: StoreService,
@@ -156,10 +158,10 @@ export class RepositoryCommitComponent implements OnInit {
     async loadDiff(node: TreeObject) {
         this.isDiffLoading = true;
         const newOrUntracked = node.file.isNew || node.file.isUntracked;
-        const changes = await this.repositoryService.getDiffOfFile(node.file.path, newOrUntracked, node.file.isRenamed, node.staged);
+        this.fileDiff = await this.repositoryService.getDiffOfFile(node.file.path, newOrUntracked, node.file.isRenamed, node.staged);
 
-        const outputFormat = this.storeService.getDiff2HtmlOutputFormat()
-        Differ('diffoutput', changes, { outputFormat, drawFileList: false });
+        // const outputFormat = this.storeService.getDiff2HtmlOutputFormat()
+        // Differ('diffoutput', changes, { outputFormat, drawFileList: false });
 
         this.isDiffLoading = false;
     }

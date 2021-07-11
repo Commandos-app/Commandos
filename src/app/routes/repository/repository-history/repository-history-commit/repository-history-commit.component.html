@@ -1,4 +1,4 @@
-<div class="commander-grid-history-detail commander-full-height">
+<div class="commander-grid-history-detail commander-full-height" cds-theme="">
     <div class="commander-grid-history-header" *ngIf="!isLoading">
         <div class="commander-history-title">{{metadata?.summary}}</div>
         <div class="commander-history-author">{{metadata?.author}}<cds-icon shape="minus"></cds-icon>
@@ -7,27 +7,9 @@
             {{metadata?.authorDate | dayJS}}
         </div>
     </div>
-    <cds-divider></cds-divider>
+    <!-- <cds-divider></cds-divider> -->
     <div>
-        <!-- <ng-scrollbar class="virtual-scroll"> -->
-        <!-- scrollViewport -->
-        <!-- <div scrollViewport [innerHtml]="data | diff"></div> -->
-        <div *ngFor="let item of data" class="diff-item">
-            <div class="diff-item-header">
-                <div>File: {{item.newName}}</div>
-                <div>{{item.addedLines}} ++ {{item.deletedLines}} --</div>
-            </div>
-            <div *ngFor="let block of item.blocks" class="diff-block">
-                <div class="diff-block-header">
-                    {{block.header}}
-                </div>
-                <div *ngFor="let line of block.lines" class="diff-line" [ngClass]="line.type">
-                    <div class="diff-line-number diff-line-old-number">{{line.oldNumber}}</div>
-                    <div class="diff-line-number diff-line-new-number">{{line.newNumber}}</div>
-                    <div class="diff-line-content">{{line.content}}</div>
-                </div>
-            </div>
-        </div>
+        <commander-commandos-diff [data]="data"></commander-commandos-diff>
         <!-- <div id="diffoutput"></div> -->
 
         <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height" *ngIf="isLoading">
