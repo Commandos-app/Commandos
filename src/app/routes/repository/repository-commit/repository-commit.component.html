@@ -26,10 +26,11 @@
             </div>
             <cds-divider orientation="horizontal"></cds-divider>
             <ng-scrollbar class="virtual-scroll">
+                <commander-tree-view [treeData]="fileTree" [itemTemplate]="itemTmpl" scrollViewport>
+                </commander-tree-view>
                 <ng-container *ngIf="fileTree.length  === 0 ">
                     <p class="gray-col" cds-text="section" cds-layout="m:md">No changes</p>
                 </ng-container>
-                <commander-tree-view [treeData]="fileTree" [itemTemplate]="itemTmpl"></commander-tree-view>
 
             </ng-scrollbar>
 
@@ -39,14 +40,11 @@
             <div *ngIf="fileTree.length  === 0 " class="center-region">
                 <cds-icon shape="happy-face" size="xxl"></cds-icon>
             </div>
-            <ng-scrollbar track="vertical" class="virtual-scroll" *ngIf="fileTree.length !== 0 ">
-                <commander-commandos-diff [data]="fileDiff" scrollViewport></commander-commandos-diff>
-                <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height"
-                    *ngIf="isDiffLoading">
-                    <cds-progress-circle size="xl"></cds-progress-circle>
-                </div>
-            </ng-scrollbar>
-
+            <commander-commandos-diff [data]="fileDiff" *ngIf="fileTree.length  !== 0 "></commander-commandos-diff>
+            <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height"
+                *ngIf="isDiffLoading">
+                <cds-progress-circle size="xl"></cds-progress-circle>
+            </div>
         </div>
     </commander-split-layout>
 

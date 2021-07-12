@@ -3,6 +3,7 @@
     "version": "0.5.3",
     "description": "Commandos is a multi git repo client",
     "scripts": {
+        "preinstall": "npx only-allow yarn",
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build",
@@ -42,7 +43,9 @@
         "diff2html": "^3.4.0",
         "gitdiff-parser": "ecomfe/gitdiff-parser#7/head",
         "ngx-autosize": "^1.8.4",
+        "ngx-perfect-scrollbar": "^10.1.1",
         "ngx-scrollbar": "^7.5.4",
+        "ngx-slimscroll": "^12.2.0",
         "ngx-tippy-wrapper": "^2.1.0",
         "ngx-virtual-scroller": "^4.0.3",
         "normalize.css": "^8.0.1",

@@ -38,6 +38,8 @@ import { NgxTippyModule } from 'ngx-tippy-wrapper';
 import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 import { AngularSplitModule } from 'angular-split';
 import { SplitLayoutComponent } from './components/split-layout/split-layout.component';
+import { NgSlimScrollModule } from 'ngx-slimscroll';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 
 const components = [
@@ -85,7 +87,8 @@ const modules = [
     FilterModule,
     AngularSplitModule,
 
-    VirtualScrollerModule
+    VirtualScrollerModule,
+    PerfectScrollbarModule
 ];
 
 @NgModule({
