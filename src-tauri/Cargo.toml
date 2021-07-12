@@ -1,5 +1,5 @@
 [package]
-name = "Commandos"
+name = "app"
 version = "0.5.3"
 description = "Commandos is a multi git repo client"
 authors = [ "Dominik Schenk" ]

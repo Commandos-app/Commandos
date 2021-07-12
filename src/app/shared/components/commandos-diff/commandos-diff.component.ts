@@ -9,6 +9,8 @@ import gitDiffParser, { File } from 'gitdiff-parser';
 })
 export class CommandosDiffComponent implements OnInit {
 
+    diff: File[];
+    
     @Input()
     set data(value: string) {
         console.log(`TCL: ~ file: commandos-diff.component.ts ~ line 14 ~ CommandosDiffComponent ~ setdiff ~ value`, value);
@@ -16,7 +18,6 @@ export class CommandosDiffComponent implements OnInit {
         this.diff = gitDiffParser.parse(value);
     }
 
-    diff: File[];
 
     constructor(private storeService: StoreService) { }
 

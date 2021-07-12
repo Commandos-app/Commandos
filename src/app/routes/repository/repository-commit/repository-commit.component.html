@@ -39,7 +39,7 @@
             <div *ngIf="fileTree.length  === 0 " class="center-region">
                 <cds-icon shape="happy-face" size="xxl"></cds-icon>
             </div>
-            <ng-scrollbar class="virtual-scroll" *ngIf="fileTree.length  !== 0 ">
+            <ng-scrollbar track="vertical" class="virtual-scroll" *ngIf="fileTree.length !== 0 ">
                 <commander-commandos-diff [data]="fileDiff" scrollViewport></commander-commandos-diff>
                 <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height"
                     *ngIf="isDiffLoading">

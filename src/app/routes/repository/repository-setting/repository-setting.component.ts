@@ -74,7 +74,7 @@ export class RepositorySettingComponent implements OnInit {
         } else {
             await this.repositoryService.unsetLocalUserConfig();
         }
-        debugger;
+
         if (this.settingsForm.form.controls.origin.dirty && this.oldOrigin !== this.origin) {
             await this.saveOrigin();
         }

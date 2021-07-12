@@ -14,7 +14,8 @@
         "build:prod": "ng build --configuration production",
         "build:prod:sme": "ng build --configuration production --sourceMap=true",
         "build:release": "yarn run build:prod && yarn tauri build",
-        "build:release:debug": "yarn run build:prod && yarn tauri build --debug"
+        "build:release:debug": "yarn run build:prod && yarn tauri build --debug",
+        "postinstall": "patch-package"
     },
     "private": true,
     "dependencies": {
@@ -39,7 +40,7 @@
         "angular-split": "^5.0.0",
         "dayjs": "^1.10.4",
         "diff2html": "^3.4.0",
-        "gitdiff-parser": "^0.2.2",
+        "gitdiff-parser": "ecomfe/gitdiff-parser#7/head",
         "ngx-autosize": "^1.8.4",
         "ngx-scrollbar": "^7.5.4",
         "ngx-tippy-wrapper": "^2.1.0",
