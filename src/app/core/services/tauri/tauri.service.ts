@@ -20,7 +20,6 @@ export class TauriService {
         const win = getCurrent();
         win.listen('tauri://resize', async (e) => {
             const maxed = await appWindow.isMaximized();
-            console.log(`TCL: ~ file: tauri.service.ts ~ line 23 ~ TauriService ~ win.listen ~ maxed`, maxed);
 
             if (maxed) {
                 this.windowState.next('maximized');
