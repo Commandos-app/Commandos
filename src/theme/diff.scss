@@ -40,7 +40,25 @@ table th:not([align]) {
     }
     &-side-by-side {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr; // .diff-line {
+        //     grid-template-columns: 1fr;
+        // }
+        // .diff-line-numbers {
+        //     display: grid;
+        //     grid-template-columns: 50px 50px;
+        //     .diff-line-old-number.delete {
+        //         background: var(--cds-global-color-red-100);
+        //     }
+        //     .diff-line-old-number.insert {
+        //         background: var(--diff-spacer);
+        //     }
+        //     .diff-line-new-number.delete {
+        //         background: var(--diff-spacer);
+        //     }
+        //     .diff-line-new-number.insert {
+        //         background: var(--cds-global-color-green-100);
+        //     }
+        // }
     }
     &-item {
         margin-bottom: 50px;

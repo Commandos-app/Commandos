@@ -16,17 +16,17 @@ export class DiffSideBySideComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    onScrollLeft(e: any, idx: number) {
-        this.onScroll(e, 'right', idx);
+    onScrollLeft(e: any, fileIdx: number, hunkIdx: number) {
+        this.onScroll(e, 'right', fileIdx, hunkIdx);
     }
 
-    onScrollRight(e: any, idx: number) {
-        this.onScroll(e, 'left', idx);
+    onScrollRight(e: any, fileIdx: number, hunkIdx: number) {
+        this.onScroll(e, 'left', fileIdx, hunkIdx);
     }
 
-    private onScroll(event: any, side: string, idx: number) {
+    private onScroll(event: any, side: string, fileIdx: number, hunkIdx: number) {
         let scroll = event.srcElement.scrollLeft;
-        const elem = document.getElementById(`block-${side}-${idx}`);
+        const elem = document.getElementById(`block-${side}-${fileIdx}-${hunkIdx}`);
         elem.scrollLeft = scroll;
     }
 }
