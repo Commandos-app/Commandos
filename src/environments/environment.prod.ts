@@ -1,4 +1,5 @@
 export const environment = {
     production: true,
-    noGitLogging: true
+    noGitLogging: true,
+    splashDuration: 3000
 };

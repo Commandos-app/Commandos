@@ -6751,15 +6751,6 @@ ngx-autosize@^1.8.4:
   dependencies:
     tslib "^1.9.0"
 
-ngx-perfect-scrollbar@^10.1.1:
-  version "10.1.1"
-  resolved "https://registry.yarnpkg.com/ngx-perfect-scrollbar/-/ngx-perfect-scrollbar-10.1.1.tgz#f89832b9109e89bb59d516184638accd028e9735"
-  integrity sha512-f9IaDJGlBzSxnJ3Ki76n2JdzfQngUFyCf0E+CuVLaR5jL0IJDcTu7vOs8wexXunRMTd8xvIv0+sdIxf8hXAGWg==
-  dependencies:
-    perfect-scrollbar "1.5.0"
-    resize-observer-polyfill "^1.5.0"
-    tslib "^2.0.0"
-
 ngx-scrollbar@^7.5.4:
   version "7.5.6"
   resolved "https://registry.yarnpkg.com/ngx-scrollbar/-/ngx-scrollbar-7.5.6.tgz#62453d88630d784d3186d31faca11d5002838c27"
@@ -6767,13 +6758,6 @@ ngx-scrollbar@^7.5.4:
   dependencies:
     bezier-easing "*"
     tslib "^2.0.0"
-
-ngx-slimscroll@^12.2.0:
-  version "12.2.0"
-  resolved "https://registry.yarnpkg.com/ngx-slimscroll/-/ngx-slimscroll-12.2.0.tgz#c5b9f5b263ce4362962379a1178810cb0c529d72"
-  integrity sha512-PwKvc7q+gFNxrEmbGipHoJXLDqRuzWWfa4TlOcnSBw8aylsTRrbW4ZJ69hLoH3pFpk//u8bzxSrZIE/CAChVRw==
-  dependencies:
-    tslib "^2.2.0"
 
 ngx-tippy-wrapper@^2.1.0:
   version "2.1.0"
@@ -7509,11 +7493,6 @@ pend@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/pend/-/pend-1.2.0.tgz#7a57eb550a6783f9115331fcf4663d5c8e007a50"
   integrity sha1-elfrVQpng/kRUzH89GY9XI4AelA=
-
-perfect-scrollbar@1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/perfect-scrollbar/-/perfect-scrollbar-1.5.0.tgz#821d224ed8ff61990c23f26db63048cdc75b6b83"
-  integrity sha512-NrNHJn5mUGupSiheBTy6x+6SXCFbLlm8fVZh9moIzw/LgqElN5q4ncR4pbCBCYuCJ8Kcl9mYM0NgDxvW+b4LxA==
 
 performance-now@^2.1.0:
   version "2.1.0"
@@ -8635,11 +8614,6 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
-
-resize-observer-polyfill@^1.5.0:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
-  integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
 
 resolve-alpn@^1.0.0:
   version "1.1.2"

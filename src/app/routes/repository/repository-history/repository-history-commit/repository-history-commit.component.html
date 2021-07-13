@@ -1,4 +1,4 @@
-<div class="commander-grid-history-detail commander-full-height" cds-theme="">
+<div class="commander-grid-history-detail commander-full-height">
     <div class="commander-grid-history-header" *ngIf="!isLoading">
         <div class="commander-history-title">{{metadata?.summary}}</div>
         <div class="commander-history-author">{{metadata?.author}}<cds-icon shape="minus"></cds-icon>
@@ -8,13 +8,11 @@
         </div>
     </div>
     <cds-divider></cds-divider>
-    <div class="scroll">
-        <commandos-diff [data]="data"></commandos-diff>
-        <!-- <div id="diffoutput"></div> -->
+    <commandos-diff [data]="data"></commandos-diff>
+    <!-- <div id="diffoutput"></div> -->
 
-        <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height" *ngIf="isLoading">
-            <cds-progress-circle size="xl"></cds-progress-circle>
-        </div>
-        <!-- </ng-scrollbar> -->
+    <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height" *ngIf="isLoading">
+        <cds-progress-circle size="xl"></cds-progress-circle>
     </div>
+    <!-- </ng-scrollbar> -->
 </div>

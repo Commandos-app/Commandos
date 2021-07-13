@@ -9,6 +9,7 @@ import { ErrorService, TauriService } from '@core/services';
 export class HeaderComponent implements OnInit {
 
     isMaximised = false;
+    isOpen = false;
 
     constructor(
         public errorService: ErrorService,

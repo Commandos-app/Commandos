@@ -7,10 +7,16 @@
 
 
 <div class="window-action" data-tauri-drag-region>
+    <a (click)="isOpen = !isOpen" cdkOverlayOrigin #trigger="cdkOverlayOrigin" class="action clickable"
+        aria-label="minimize" role='button'>
+        <cds-icon shape="bars" size="20" [solid]="tauriService.isPinned"></cds-icon>
+    </a>
+</div>
+<!-- <div class="window-action" data-tauri-drag-region>
     <a (click)="pin()" class="action clickable" aria-label="minimize" role='button'>
         <cds-icon shape="pin" size="20" [solid]="tauriService.isPinned"></cds-icon>
     </a>
-</div>
+</div> -->
 
 <div class="window-action" data-tauri-drag-region>
     <a (click)="minimize()" class="action clickable" aria-label="minimize" role='button'>
@@ -42,3 +48,12 @@
         <cds-icon shape="window-close" size="20"></cds-icon>
     </a>
 </div>
+
+<ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="isOpen"
+    [cdkConnectedOverlayHasBackdrop]="true" (backdropClick)="isOpen = false">
+    <ul class="example-list">
+        <li>
+            <a [routerLink]="['/about']" routerLinkActive="router-link-active">About</a>
+        </li>
+    </ul>
+</ng-template>

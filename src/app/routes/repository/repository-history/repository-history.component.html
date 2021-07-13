@@ -15,8 +15,11 @@
                 </div>
             </virtual-scroller>
         </ng-scrollbar>
-
-        <router-outlet content></router-outlet>
+        <div content>
+            <router-outlet> </router-outlet>
+            <commandos-select-hint text="select a commit to see the diff" *ngIf="!isChildRouteLoaded">
+            </commandos-select-hint>
+        </div>
     </commander-split-layout>
 </div>
 

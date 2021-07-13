@@ -1,3 +1,4 @@
+import { environment } from '@env/environment';
 import { SplashScreenResolver } from '@core/services';
 import { Component, OnInit } from '@angular/core';
 import { filter, first } from 'rxjs/operators';
@@ -30,12 +31,14 @@ export class SplashComponent implements OnInit {
 
 
     private hideSplashAnimation() {
+
+
         // Setting the transition
         setTimeout(() => {
             // After the transition is ended the showSplash will be hided
             this.opacityChange = 0;
             this.showSplash = false;
-        }, 2000);
+        }, environment.splashDuration);
     }
 
 }

@@ -1,3 +1,4 @@
+import { SelectHintComponent } from './components/select-hint/select-hint.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -43,10 +44,12 @@ const components = [
     SubnavComponent,
     SplitLayoutComponent,
     BranchAheadBehindComponent,
+    SelectHintComponent,
+    // Diff
     DiffComponent,
     DiffLineByLineComponent,
     DiffSideBySideComponent,
-
+    // Pipe
     DateFormatePipe,
     DiffPipe
 

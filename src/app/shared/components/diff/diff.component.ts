@@ -12,12 +12,13 @@ export class DiffComponent implements OnInit {
     diff: File[];
     outputFormat: string;
 
+    @Input() text: string;
+
     @Input()
     set data(value: string) {
         if (value) {
             this.outputFormat = this.storeService.getDiffOutputFormat();
             this.diff = gitDiffParser.parse(value);
-            console.log(`TCL: ~ file: diff.component.ts ~ line 20 ~ DiffComponent ~ setdata ~ this.diff`, this.diff);
         }
     }
 

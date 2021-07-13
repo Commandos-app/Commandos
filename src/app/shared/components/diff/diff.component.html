@@ -1,4 +1,4 @@
-<div class="diff-layout">
+<div class="diff-layout" *ngIf="!!diff">
 
     <div class="diff-switcher">
         <cds-select>
@@ -19,3 +19,4 @@
     <!-- </ng-scrollbar> -->
 
 </div>
+<commandos-select-hint [text]="text" *ngIf="!diff"></commandos-select-hint>

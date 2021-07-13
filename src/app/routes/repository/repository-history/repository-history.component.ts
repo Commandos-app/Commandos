@@ -1,15 +1,19 @@
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { RepositoryHistoryCommitComponent } from './repository-history-commit/repository-history-commit.component';
 import { CommanderModalService, CommanderService } from '@shared/services';
 import { FieldDefinition } from '@shared/components';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ChangeDetectorRef, Component, OnInit, ViewChild, TemplateRef, ViewContainerRef } from '@angular/core';
 import { RepositoryService } from '../repository.service';
-import { filter, first, take } from 'rxjs/operators';
+import { filter, first, map, take, distinctUntilChanged } from 'rxjs/operators';
 import { LogItem } from '@git/model';
 import { fromEvent, merge, Subscription } from 'rxjs';
 import { TemplatePortal } from '@angular/cdk/portal';
+import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
 
 
+@UntilDestroy()
 @Component({
     selector: 'app-repository-history',
     templateUrl: './repository-history.component.html',
@@ -19,26 +23,38 @@ export class RepositoryHistoryComponent implements OnInit {
 
     commits: Array<LogItem>;
     commitsCount = 0;
+    isChildRouteLoaded = false;
 
     @ViewChild('userMenu') userMenu: TemplateRef<any>;
     overlayRef: OverlayRef | null;
     sub: Subscription;
 
     constructor(
-        private cd: ChangeDetectorRef,
+        private route: ActivatedRoute,
+        private router: Router,
         private repositoryService: RepositoryService,
         public overlay: Overlay,
         public viewContainerRef: ViewContainerRef,
         private commanderModalService: CommanderModalService,
-        private clipboard: Clipboard,
-        private commanderService: CommanderService
+        private clipboard: Clipboard
     ) {
+
     }
 
     ngOnInit(): void {
         this.repositoryService.loaded$.pipe(filter(x => x), first()).subscribe(() => {
             this.getHistory();
         });
+
+        this.router.events
+            .pipe(
+                filter(event => event instanceof ActivationEnd),
+                untilDestroyed(this)
+            )
+            .subscribe(_ => {
+                this.isChildRouteLoaded = this.route.children.length > 0;
+            });
+
     }
 
     async getHistory(): Promise<void> {

@@ -1,0 +1,20 @@
+.select-hint {
+    color: var(--cds-global-color-gray-600);
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 50px;
+    flex-direction: row;
+    gap: 30px;
+    padding-top: 150px;
+    align-items: center;
+
+    img {
+        filter: invert(84%) sepia(0%) saturate(763%) hue-rotate(135deg) brightness(85%) contrast(93%);
+        transform: scale(-1, 1);
+        height: 70px;
+    }
+
+    div {
+        padding-top: 15px;
+    }
+}
