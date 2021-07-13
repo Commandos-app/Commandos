@@ -1,14 +1,16 @@
-<ng-scrollbar class="virtual-scroll">
-    <div *ngFor="let item of diff" class="diff-item">
-        <div class="diff-item-header">
-            <div>File: {{item.newPath}}</div>
-            <!-- <div>{{item.addedLines}} ++ {{item.deletedLines}} --</div> -->
-        </div>
+<div *ngFor="let item of diff" class="diff-item">
+    <div class="diff-item-header">
+        <div>File: {{item.newPath}}</div>
+        <!-- <div>{{item.addedLines}} ++ {{item.deletedLines}} --</div> -->
+    </div>
 
-        <div *ngFor="let block of item.hunks" class="diff-block">
+    <ng-container *ngFor="let block of item.hunks">
+        <div class="diff-header">
             <div class="diff-block-header">
                 {{block.content}}
             </div>
+        </div>
+        <div class="diff-block">
             <div *ngFor="let line of block.changes" class="diff-line" [ngClass]="line.type">
                 <div class="diff-line-number diff-line-old-number">{{line.oldLineNumber}}<ng-container
                         *ngIf="line.type === 'delete'">{{line.lineNumber}}</ng-container>
@@ -19,5 +21,5 @@
                 <div class="diff-line-content">{{line.content}}</div>
             </div>
         </div>
-    </div>
-</ng-scrollbar>
+    </ng-container>
+</div>

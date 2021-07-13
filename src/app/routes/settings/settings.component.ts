@@ -40,7 +40,7 @@ export class SettingsComponent implements OnInit {
         this.autoFetch = this.storeService.getAutoFetch();
         this.darkMode = this.storeService.getDarkMode();
         this.paneSize = this.storeService.getPaneSize();
-        this.diffFormate = this.storeService.getDiff2HtmlOutputFormat() === 'side-by-side';
+        this.diffFormate = this.storeService.getDiffOutputFormat() === 'side-by-side';
         this.user = await this.repositoryService.loadGlobalUserConfig();
         this.settingsForm.form.markAsPristine();
     }
@@ -55,7 +55,7 @@ export class SettingsComponent implements OnInit {
         this.storeService.setAutoFetch(this.autoFetch);
         this.storeService.setDarkMode(this.darkMode);
         this.storeService.setPaneSize(this.paneSize);
-        this.storeService.setDiff2HtmlOutputFormat(this.diffFormate ? 'side-by-side' : 'line-by-line');
+        this.storeService.setDiffOutputFormat(this.diffFormate ? 'side-by-side' : 'line-by-line');
 
         if (this.darkMode) {
             this.renderer.setAttribute(this.document.body, 'cds-theme', 'dark');

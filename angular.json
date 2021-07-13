@@ -18,7 +18,7 @@
             },
             "root": "",
             "sourceRoot": "src",
-            "prefix": "commander",
+            "prefix": "commandos",
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",

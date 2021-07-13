@@ -7,9 +7,9 @@
             {{metadata?.authorDate | dayJS}}
         </div>
     </div>
-    <!-- <cds-divider></cds-divider> -->
-    <div>
-        <commander-commandos-diff [data]="data"></commander-commandos-diff>
+    <cds-divider></cds-divider>
+    <div class="scroll">
+        <commandos-diff [data]="data"></commandos-diff>
         <!-- <div id="diffoutput"></div> -->
 
         <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height" *ngIf="isLoading">

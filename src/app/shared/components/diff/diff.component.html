@@ -1,0 +1,21 @@
+<div class="diff-layout">
+
+    <div class="diff-switcher">
+        <cds-select>
+            <label>Mode:</label>
+            <select [ngModel]="outputFormat" (ngModelChange)="formatChange($event)">
+                <option value="line-by-line">Line by Line</option>
+                <option value="side-by-side">Side by Side</option>
+            </select>
+        </cds-select>
+    </div>
+    <!-- <ng-scrollbar class="virtual-scroll diff"> -->
+    <div class="diff">
+        <commandos-diff-line-by-line [diff]="diff" *ngIf="outputFormat === 'line-by-line'">
+        </commandos-diff-line-by-line>
+        <commandos-diff-side-by-side [diff]="diff" *ngIf="outputFormat === 'side-by-side'">
+        </commandos-diff-side-by-side>
+    </div>
+    <!-- </ng-scrollbar> -->
+
+</div>

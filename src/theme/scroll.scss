@@ -5,3 +5,30 @@ ng-scrollbar.virtual-scroll {
         --scrollbar-hover-size: 6px;
     }
 }
+
+.scroll {
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    height: 7px;
+    width: 7px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: var(--cds-global-color-gray-300);
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--cds-global-color-gray-600);
+}

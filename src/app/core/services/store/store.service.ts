@@ -79,6 +79,7 @@ export class StoreService {
         }
         prop = prop.toLowerCase();
         this.data[prop] = value;
+        this.saveSettings();
         // this.store.set(prop.toLowerCase(), value);
     }
 
@@ -97,8 +98,8 @@ export class StoreService {
     // getGridCount = (): number => this.get<number>('gridcount', 10);
     // setGridCount = (value: number): void => this.save<number>('gridcount', value);
 
-    getDiff2HtmlOutputFormat = (): DiffFormate => this.get<DiffFormate>('diff2htmloutputformat', 'line-by-line');
-    setDiff2HtmlOutputFormat = (value: DiffFormate): void => this.set<DiffFormate>('diff2htmloutputformat', value);
+    getDiffOutputFormat = (): DiffFormate => this.get<DiffFormate>('diffoutputformat', 'line-by-line');
+    setDiffOutputFormat = (value: DiffFormate): void => this.set<DiffFormate>('diffoutputformat', value);
 
     getTags = (): Array<string> => this.get<Array<string>>('tags', []);
     setTags = (value: Array<string>): void => this.set<Array<string>>('tags', value);

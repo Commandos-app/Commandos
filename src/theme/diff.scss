@@ -1,5 +1,4 @@
 .d2h-wrapper {
-
     *,
     :after,
     :before,
@@ -16,7 +15,6 @@
 }
 
 [cds-theme=dark] {
-
     .d2h-file-header,
     .d2h-file-stats {
         background: var(--cds-alias-object-app-background);
@@ -37,53 +35,55 @@ table th:not([align]) {
 }
 
 .diff {
+    .ng-scroll-content {
+        width: 100%;
+    }
+    &-side-by-side {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
     &-item {
         margin-bottom: 50px;
         border-top: 1px solid var(--cds-alias-status-disabled-tint);
         border-bottom: 1px solid var(--cds-alias-status-disabled-tint);
-
         &-header {
             padding: 10px;
         }
     }
-
     &-block {
-
-        // overflow: auto; // margin-bottom: 20px;
+        overflow-x: auto;
+        display: grid;
+        grid-template-rows: 23px; // overflow: auto; // margin-bottom: 20px;
         &-header {
-            // position: sticky;
-            // left: 0;
-            padding: 3px 10px;
+            position: sticky;
+            left: 0;
+            padding: 2px 10px;
         }
     }
-
     &-line {
         // border-bottom: 1px solid lightgray;
         display: grid;
         grid-template-columns: 50px 50px 1fr;
         font-family: 'Roboto Mono', monospace;
-
+        height: 23px;
         &-content {
             padding: 2px 6px; // margin-left: 50px;
             white-space: pre;
         }
-
         &-number {
             padding: 2px 6px;
             text-align: right;
             color: var(--cds-global-color-gray-500);
             font-size: var(--cds-global-typography-font-size-2);
         }
-// &-old-number {
-//     position: sticky;
-//     left: 0;
-// }
-
-// &-new-number {
-//     position: sticky;
-//     left: 50px;
-// }
-
+        &-old-number {
+            position: sticky;
+            left: 0;
+        }
+        &-new-number {
+            position: sticky;
+            left: 50px;
+        }
         &.context {
             color: var(--cds-global-color-gray-700);
         }
@@ -92,46 +92,65 @@ table th:not([align]) {
 
 body:not([cds-theme~=dark]) {
     .diff {
+        --diff-spacer: repeating-linear-gradient( -33deg, var(--cds-global-color-gray-100), var(--cds-global-color-gray-100) 10px, var(--cds-global-color-gray-50) 10px, var(--cds-global-color-gray-50) 20px);
         &-item {
             &-header {
                 background: var(--cds-alias-status-neutral-tint);
             }
         }
-
         &-block {
             &-header {
                 background: var(--cds-alias-status-info-tint);
                 color: var(--cds-global-color-gray-700);
             }
+            &.left {
+                .insert {
+                    &.diff-line {
+                        grid-template-columns: 1fr;
+                    }
+                    .diff-line-content {
+                        background: var(--diff-spacer);
+                    }
+                    .diff-line-number {
+                        display: none;
+                    }
+                }
+            }
+            &.right {
+                .delete {
+                    &.diff-line {
+                        grid-template-columns: 1fr;
+                    }
+                    .diff-line-content {
+                        background: var(--diff-spacer);
+                    }
+                    .diff-line-number {
+                        display: none;
+                    }
+                }
+            }
         }
-
         &-line {
             background: var(--cds-alias-object-interaction-background);
-
             &-number {
                 color: var(--cds-global-color-gray-600);
             }
-
             &.insert {
                 .diff-line-content {
                     background: var(--cds-alias-status-success-tint);
                 }
-
                 .diff-line-number {
                     background: var(--cds-global-color-green-100);
                 }
             }
-
             &.delete {
                 .diff-line-content {
                     background: var(--cds-alias-status-danger-tint);
                 }
-
                 .diff-line-number {
                     background: var(--cds-global-color-red-100);
                 }
             }
-
             &.normal {
                 .diff-line-number {
                     background: white;
@@ -148,29 +167,23 @@ body[cds-theme~=dark] {
                 background: var(--cds-global-color-warm-gray-900);
             }
         }
-
         &-line {
             color: var(--cds-global-color-gray-400);
-
             &-number {
                 color: var(--cds-global-color-gray-600);
             }
-
             &.insert {
                 .diff-line-content {
                     background: hsla(93, 80%, 12%);
                 }
-
                 .diff-line-number {
                     background: hsla(93, 80%, 17%, 0.5);
                 }
             }
-
             &.delete {
                 .diff-line-content {
                     background: hsla(9, 100%, 22%, 0.8);
                 }
-
                 .diff-line-number {
                     background: hsla(9, 100%, 22%, 0.6);
                 }

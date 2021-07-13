@@ -13,6 +13,8 @@ build = "src/build.rs"
 tauri-build = { version = "1.0.0-beta.2" }
 
 [dependencies]
+# encoding_rs_io = "0.1"
+# encoding_rs = "0.8"
 serde_json = "1.0"
 serde_repr = "0.1"
 serde = { version = "1.0", features = [ "derive" ] }

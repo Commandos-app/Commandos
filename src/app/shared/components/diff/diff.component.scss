@@ -1,0 +1,17 @@
+cds-select {
+    width: 180px;
+}
+
+.diff {
+    overflow: auto;
+}
+
+.diff-switcher {
+    padding: 2px 10px
+}
+
+.diff-layout {
+    display: grid;
+    grid-template-rows: 29px 1fr;
+    height: 100%;
+}
