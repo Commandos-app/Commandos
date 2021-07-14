@@ -7,7 +7,7 @@
 
 
 <div class="window-action" data-tauri-drag-region>
-    <a (click)="isOpen = !isOpen" cdkOverlayOrigin #trigger="cdkOverlayOrigin" class="action clickable"
+    <a (click)="isOpen = !isOpen" cdkOverlayOrigin #headerMenuTrigger="cdkOverlayOrigin" class="action clickable"
         aria-label="minimize" role='button'>
         <cds-icon shape="bars" size="20" [solid]="tauriService.isPinned"></cds-icon>
     </a>
@@ -49,11 +49,21 @@
     </a>
 </div>
 
-<ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="isOpen"
+<ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="headerMenuTrigger" [cdkConnectedOverlayOpen]="isOpen"
     [cdkConnectedOverlayHasBackdrop]="true" (backdropClick)="isOpen = false">
-    <ul class="example-list">
-        <li>
-            <a [routerLink]="['/about']" routerLinkActive="router-link-active">About</a>
-        </li>
-    </ul>
+    <section class="contextmenu" cds-layout="p:xs">
+
+        <!-- <cds-divider></cds-divider> -->
+        <div (click)="pin()" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
+            Always on top
+        </div>
+        <div (click)="goto('/settings')" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
+            Settings
+        </div>
+        <cds-divider></cds-divider>
+        <div (click)="goto('/about')" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
+            About
+        </div>
+        <!-- <div>Send to</div> -->
+    </section>
 </ng-template>

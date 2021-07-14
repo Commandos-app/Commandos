@@ -136,16 +136,13 @@ export class RepositoryService {
         await createBranchFromSha(name, sha, this.getPath());
     }
 
-    async deleteBranch(name: string, includeRemote = false): Promise<void> {
-        // if is localbranch -> deleteLocalBranch
-        // if is remote -> deleteBranh
-        const isRemote = false;
+    async deleteBranch(branch: Branch, includeRemote = false): Promise<void> {
 
-        if (!isRemote) {
-            const rtn = await deleteLocalBranch(name, this.getPath());
+        if (!branch.isRemote) {
+            await deleteLocalBranch(branch.name, this.getPath());
         }
-        if (includeRemote || isRemote) {
-            await deleteRemoteBranch(name, this.getPath());
+        if (includeRemote || branch.isRemote) {
+            await deleteRemoteBranch(branch.name, this.getPath());
         }
     }
 
@@ -157,11 +154,11 @@ export class RepositoryService {
         await checkout(name, this.getPath());
     }
 
-    async deleteBranches(names: string[]): Promise<void> {
-        for (let index = 0; index < names.length; index++) {
-            const name = names[index];
-            this.logger.info(`delete branch ${name}`);
-            await this.deleteBranch(name);
+    async deleteBranches(branches: Branch[]): Promise<void> {
+        for (let index = 0; index < branches.length; index++) {
+            const brnach = branches[index];
+            this.logger.info(`delete branch ${brnach}`);
+            await this.deleteBranch(brnach);
 
         }
     }

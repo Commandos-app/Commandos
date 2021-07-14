@@ -7,7 +7,9 @@ cds-select {
 }
 
 .diff-switcher {
-    padding: 2px 10px
+    padding: 2px 0;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .diff-layout {
@@ -16,3 +18,7 @@ cds-select {
     height: 100%;
 }
 
+cds-icon-button {
+    --font-size: 20px;
+    --padding: 6px;
+}

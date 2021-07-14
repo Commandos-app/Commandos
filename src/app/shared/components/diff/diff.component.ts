@@ -1,5 +1,5 @@
 import { StoreService } from '@core/services';
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import gitDiffParser, { File } from 'gitdiff-parser';
 
 @Component({
@@ -11,6 +11,7 @@ export class DiffComponent implements OnInit {
 
     diff: File[];
     outputFormat: string;
+    isOpen = false;
 
     @Input() text: string;
 
@@ -22,13 +23,12 @@ export class DiffComponent implements OnInit {
         }
     }
 
-
     constructor(private storeService: StoreService) { }
 
     ngOnInit(): void {
     }
 
-    formatChange($event: any) {
+    setMode($event: any) {
         this.storeService.setDiffOutputFormat($event);
         this.outputFormat = $event;
     }

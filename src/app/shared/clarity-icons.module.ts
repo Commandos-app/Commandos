@@ -7,7 +7,7 @@ import {
     minusIcon, moonIcon, noteIcon, pencilIcon, playIcon,
     plusIcon, shrinkIcon, sunIcon, timesIcon, trashIcon, undoIcon,
     unknownStatusIcon, uploadCloudIcon, wandIcon, windowCloseIcon, windowMaxIcon, windowMinIcon,
-    windowRestoreIcon, twoWayArrowsIcon, userIcon, refreshIcon, happyFaceIcon, arrowIcon, syncIcon, pinIcon, barsIcon
+    windowRestoreIcon, twoWayArrowsIcon, userIcon, refreshIcon, happyFaceIcon, arrowIcon, syncIcon, pinIcon, barsIcon, viewCardsIcon, viewListIcon
 } from '@cds/core/icon';
 
 import '@cds/core/icon/register.js';
@@ -19,7 +19,8 @@ const icons = [
     minusIcon, windowMinIcon, windowMaxIcon, windowRestoreIcon, undoIcon,
     fileIcon, sunIcon, moonIcon, homeIcon, historyIcon,
     trashIcon, downloadIcon, twoWayArrowsIcon, userIcon,
-    refreshIcon, happyFaceIcon, arrowIcon, syncIcon, pinIcon, barsIcon
+    refreshIcon, happyFaceIcon, arrowIcon, syncIcon, pinIcon,
+    barsIcon, viewCardsIcon, viewListIcon
 ]
 
 ClarityIcons.addIcons(...icons);
@@ -30,6 +31,8 @@ ClarityIcons.addIcons(['merge-16', '<svg xmlns="http://www.w3.org/2000/svg" view
 
 ClarityIcons.addIcons(['push-16', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M1 2.5A2.5 2.5 0 013.5 0h8.75a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0V1.5h-8a1 1 0 00-1 1v6.708A2.492 2.492 0 013.5 9h3.25a.75.75 0 010 1.5H3.5a1 1 0 100 2h5.75a.75.75 0 010 1.5H3.5A2.5 2.5 0 011 11.5v-9zm13.23 7.79a.75.75 0 001.06-1.06l-2.505-2.505a.75.75 0 00-1.06 0L9.22 9.229a.75.75 0 001.06 1.061l1.225-1.224v6.184a.75.75 0 001.5 0V9.066l1.224 1.224z"></path></svg>']);
 ClarityIcons.addIcons(['pull-16', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M13 8V6H7V4h6V2l3 3-3 3zM4 2H3v1h1V2zm7 5h1v6c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1v2h-1V1H2v9h9V7zm0 4H1v2h2v-1h3v1h5v-2zM4 6H3v1h1V6zm0-2H3v1h1V4zM3 9h1V8H3v1z"></path></svg>']);
+ClarityIcons.addIcons(['side-by-side', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M3.75 2A1.75 1.75 0 002 3.75v16.5c0 .966.784 1.75 1.75 1.75h5.5A1.75 1.75 0 0011 20.25V3.75A1.75 1.75 0 009.25 2h-5.5zM3.5 3.75a.25.25 0 01.25-.25h5.5a.25.25 0 01.25.25v16.5a.25.25 0 01-.25.25h-5.5a.25.25 0 01-.25-.25V3.75zM14.75 2A1.75 1.75 0 0013 3.75v16.5c0 .966.784 1.75 1.75 1.75h5.5A1.75 1.75 0 0022 20.25V3.75A1.75 1.75 0 0020.25 2h-5.5zm-.25 1.75a.25.25 0 01.25-.25h5.5a.25.25 0 01.25.25v16.5a.25.25 0 01-.25.25h-5.5a.25.25 0 01-.25-.25V3.75z"></path></svg>'])
+ClarityIcons.addIcons(['line-by-line', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M22 3.75A1.75 1.75 0 0020.25 2H3.75A1.75 1.75 0 002 3.75v5.5c0 .966.784 1.75 1.75 1.75h16.5A1.75 1.75 0 0022 9.25v-5.5zm-1.75-.25a.25.25 0 01.25.25v5.5a.25.25 0 01-.25.25H3.75a.25.25 0 01-.25-.25v-5.5a.25.25 0 01.25-.25h16.5zM22 14.75A1.75 1.75 0 0020.25 13H3.75A1.75 1.75 0 002 14.75v5.5c0 .966.784 1.75 1.75 1.75h16.5A1.75 1.75 0 0022 20.25v-5.5zm-1.75-.25a.25.25 0 01.25.25v5.5a.25.25 0 01-.25.25H3.75a.25.25 0 01-.25-.25v-5.5a.25.25 0 01.25-.25h16.5z"></path></svg>'])
 // ClarityIcons.addIcons(['merge-16', '']);
 
 @NgModule({

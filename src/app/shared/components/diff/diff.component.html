@@ -1,13 +1,17 @@
 <div class="diff-layout" *ngIf="!!diff">
 
     <div class="diff-switcher">
-        <cds-select>
-            <label>Mode:</label>
-            <select [ngModel]="outputFormat" (ngModelChange)="formatChange($event)">
-                <option value="line-by-line">Line by Line</option>
-                <option value="side-by-side">Side by Side</option>
-            </select>
-        </cds-select>
+
+        <cds-icon-button size="sm" action="flat" status="primary" standard-hover (click)="setMode('side-by-side')"
+            aria-label="change diff mode" *ngIf="outputFormat === 'line-by-line'" ngxTippy
+            data-tippy-content="Switch to side-by-side mode">
+            <cds-icon shape="side-by-side" class="clickable"></cds-icon>
+        </cds-icon-button>
+        <cds-icon-button size="sm" action="flat" status="primary" standard-hover (click)="setMode('line-by-line')"
+            aria-label="change diff mode" *ngIf="outputFormat === 'side-by-side'" ngxTippy
+            data-tippy-content="Switch to line-by-line mode">
+            <cds-icon shape="line-by-line" class="clickable"></cds-icon>
+        </cds-icon-button>
     </div>
     <!-- <ng-scrollbar class="virtual-scroll diff"> -->
     <div class="diff">

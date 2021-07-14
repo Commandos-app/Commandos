@@ -6,7 +6,7 @@ import { ChangeBranch, NewBranch, RepositoryService } from '../repository.servic
 import { filter, first } from 'rxjs/operators';
 import { NgxTippyProps } from 'ngx-tippy-wrapper';
 import { NgxTippyService } from 'ngx-tippy-wrapper';
-import { Branches } from '@git/model';
+import { Branch, Branches } from '@git/model';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 type MergeStrategy = { id: number, title: string, subtitle: string };
@@ -95,8 +95,8 @@ export class RepositoryBranchComponent implements OnInit {
             });
     }
 
-    async onDelete(name: string): Promise<void> {
-        await this.repositoryService.deleteBranch(name);
+    async onDelete(branch: Branch): Promise<void> {
+        await this.repositoryService.deleteBranch(branch);
 
         this.repositoryService.getBranches();
     }

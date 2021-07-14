@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { ErrorService, TauriService } from '@core/services';
 
 @Component({
@@ -14,7 +15,8 @@ export class HeaderComponent implements OnInit {
     constructor(
         public errorService: ErrorService,
         public tauriService: TauriService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private router: Router
     ) {
     }
 
@@ -44,5 +46,10 @@ export class HeaderComponent implements OnInit {
 
     closeClient(): void {
         this.tauriService.closeClient();
+    }
+
+    goto(page: string) {
+        this.router.navigate([page]);
+        this.isOpen = false;
     }
 }

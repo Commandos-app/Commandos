@@ -67,8 +67,8 @@
                                 <div class="center-text">
                                     Delete branch?&nbsp;&nbsp;&nbsp;
                                 </div>
-                                <cds-icon-button size="sm" status="danger" standard-hover
-                                    (click)="onDelete(branch.name)" aria-label="delete branch">
+                                <cds-icon-button size="sm" status="danger" standard-hover (click)="onDelete(branch)"
+                                    aria-label="delete branch">
                                     <cds-icon shape="check" class="clickable"></cds-icon>
                                 </cds-icon-button>
                             </div>
@@ -76,7 +76,12 @@
                     </div>
 
                     <div class="lh">
-                        <span cds-layout="m-r:md">{{branch.name}}</span>
+                        <span cds-layout="m-r:md" *ngIf="branch.isRemote">
+                            <i>* {{branch.name}}</i>
+                        </span>
+                        <span cds-layout="m-r:md" *ngIf="!branch.isRemote">
+                            {{branch.name}}
+                        </span>
                         <ng-container *ngIf="branch.upstream">
                             <i class="upstream" cds-layout="m-r:md">{{branch.upstream}}</i>
 

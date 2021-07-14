@@ -5,6 +5,7 @@ export class Branch {
     ahead!: string;
     behind!: string;
     current!: boolean;
+    isRemote!: boolean;
 }
 export type Branches = Array<Branch>;
 

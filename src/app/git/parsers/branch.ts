@@ -16,6 +16,10 @@ export function parseBranches<T extends Record<string, string>>(stdout: string):
             const branch = (entry as unknown) as Branch;
             branch.ahead = '0';
             branch.behind = '0';
+            branch.isRemote = branch.ref.includes('remote');
+            if (branch.isRemote) {
+                branch.name = branch.name.replace('origin/', '');
+            }
 
             entries.push(branch);
         }
