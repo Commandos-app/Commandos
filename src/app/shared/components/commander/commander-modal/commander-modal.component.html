@@ -26,7 +26,7 @@
 
                 <cds-input *ngIf="field.type === 'string'">
                     <label>{{field.label}}:</label>
-                    <input type="text" required [(ngModel)]="field.value" />
+                    <input type="text" required [(ngModel)]="field.value" autocomplete="off" />
                 </cds-input>
 
                 <cds-checkbox-group *ngIf="field.type === 'bool'">

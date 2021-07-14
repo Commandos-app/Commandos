@@ -9,6 +9,9 @@ export function parseBranches<T extends Record<string, string>>(stdout: string):
         let entries: Array<Branch> = [];
 
         for (let i = 0; i < records.length; i++) {
+            if (!records[i]) {
+                continue;
+            }
             const data = records[i].split('%x00');
             const entry = {} as { [K in keyof T]: string };
             keys.forEach((key, ix) => (entry[key] = data[ix]));
@@ -17,8 +20,9 @@ export function parseBranches<T extends Record<string, string>>(stdout: string):
             branch.ahead = '0';
             branch.behind = '0';
             branch.isRemote = branch.ref.includes('remote');
+            
             if (branch.isRemote) {
-                branch.name = branch.name.replace('origin/', '');
+                branch.logicalName = branch.name.replace('origin/', '');
             }
 
             entries.push(branch);
@@ -27,6 +31,7 @@ export function parseBranches<T extends Record<string, string>>(stdout: string):
         //remove all upstream if local exists!
         const withUpstreamBranch = entries.filter(e => e.upstream).map(m => m.upstream);
         entries = entries.filter(f => !withUpstreamBranch.includes(f.name));
+        console.log(`TCL: ~ file: branch.ts ~ line 30 ~ entries`, entries);
 
         return entries;
 

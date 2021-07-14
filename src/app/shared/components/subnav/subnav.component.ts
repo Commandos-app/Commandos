@@ -86,6 +86,7 @@ export class SubnavComponent implements OnInit {
         $event.preventDefault();
         $event.stopPropagation();
         await this.repositoryService.sync();
+        await this.commanderService.reloadData();
         await sleep(1000);
         this.isSyncing = false;
     }

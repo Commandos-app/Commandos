@@ -36,10 +36,12 @@ export async function getBranches(repository: string): Promise<any> {
     //     // '%(symref)',
     //     `%${delimiter}`, // indicate end-of-line as %(body) may contain newlines
     // ].join('%00');
+    const patterns = ['refs/heads', 'refs/remotes']
 
     const args = [
         'for-each-ref',
-        `--format=${format}`
+        `--format=${format}`,
+        ...patterns
     ];
 
     return runGit(args, repository, 'getBranches');

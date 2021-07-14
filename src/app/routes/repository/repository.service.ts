@@ -6,7 +6,7 @@ import {
     createBranch, deleteLocalBranch, deleteRemoteBranch, getBranches, getCurrentBranch,
     getStatus, renameBranch, stageAll, stageFile, unstageAll,
     unstageFile, revertFile, checkout, commit, getLogMeta, getLogOfSha, getLogMetadataOfSha, getDiffOfFile, pull, push,
-    addOriginUrl, changeOriginUrl, getOriginUrl, getUserMail, getUsername, setUserMail, setUsername, removeOriginUrl, createBranchFromSha
+    addOriginUrl, changeOriginUrl, getOriginUrl, getUserMail, getUsername, setUserMail, setUsername, removeOriginUrl, createBranchFromSha, pushWithSetUpstream
 } from '@git/commands';
 import { parseBranches, parseCurrentBranch, parseLog, parseStatus } from '@git/parsers';
 import { IStatusResult, LogItem, ChangedFile, Branch, Branches } from '@git/model';
@@ -142,7 +142,7 @@ export class RepositoryService {
             await deleteLocalBranch(branch.name, this.getPath());
         }
         if (includeRemote || branch.isRemote) {
-            await deleteRemoteBranch(branch.name, this.getPath());
+            await deleteRemoteBranch(branch.logicalName, this.getPath());
         }
     }
 
@@ -207,7 +207,11 @@ export class RepositoryService {
     }
 
     async push(): Promise<void> {
-        await push(this.getPath());
+        if (!this.currentBranch.upstream) {
+            await pushWithSetUpstream(this.getPath(), this.currentBranch.name);
+        } else {
+            await push(this.getPath());
+        }
     }
 
     //#endregion

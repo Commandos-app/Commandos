@@ -95,6 +95,7 @@ export class RepositoryBranchComponent implements OnInit {
             });
     }
 
+
     async onDelete(branch: Branch): Promise<void> {
         await this.repositoryService.deleteBranch(branch);
 

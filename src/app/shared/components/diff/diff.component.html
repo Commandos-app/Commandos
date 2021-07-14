@@ -4,12 +4,12 @@
 
         <cds-icon-button size="sm" action="flat" status="primary" standard-hover (click)="setMode('side-by-side')"
             aria-label="change diff mode" *ngIf="outputFormat === 'line-by-line'" ngxTippy
-            data-tippy-content="Switch to side-by-side mode">
+            data-tippy-content="Switch to side-by-side">
             <cds-icon shape="side-by-side" class="clickable"></cds-icon>
         </cds-icon-button>
         <cds-icon-button size="sm" action="flat" status="primary" standard-hover (click)="setMode('line-by-line')"
             aria-label="change diff mode" *ngIf="outputFormat === 'side-by-side'" ngxTippy
-            data-tippy-content="Switch to line-by-line mode">
+            data-tippy-content="Switch to line-by-line">
             <cds-icon shape="line-by-line" class="clickable"></cds-icon>
         </cds-icon-button>
     </div>

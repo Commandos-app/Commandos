@@ -23,3 +23,14 @@ export async function push(repository: string): Promise<void> {
 
     return await runGit(args, repository, 'push');
 }
+
+export async function pushWithSetUpstream(repository: string, name: string): Promise<void> {
+    const args = [
+        'push',
+        '--set-upstream',
+        'origin',
+        name
+    ];
+
+    return await runGit(args, repository, 'pushWithSetUpstream');
+}

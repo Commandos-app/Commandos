@@ -1,6 +1,7 @@
 export class Branch {
     ref!: string;
     name!: string;
+    logicalName!: string;
     upstream!: string;
     ahead!: string;
     behind!: string;
