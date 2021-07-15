@@ -4,7 +4,7 @@ import { SelectedRepositoryTypes } from './../types';
 import { RepositoriesSettings, StoreService } from '@core/services';
 import { RepositoriesSettingsService } from '@core/services';
 import { CommanderModalService } from './commander-modal.service';
-import { Component, HostListener, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, HostListener, OnInit, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { getBranches } from '@git/commands';
 import { parseBranches } from '@git/parsers';
 
@@ -39,6 +39,19 @@ export class CommanderModalComponent implements OnInit {
         this.addAll();
         this.loadTags();
         this.loadRepos();
+        this.checkIfRepoIsSelected();
+    }
+
+    private checkIfRepoIsSelected(): void {
+        const selected = this.commanderModalService.fields.find(field => field.type === 'repository');
+        if (selected) {
+            const repoType: SelectedRepositoryTypes = {
+                type: 'Repository',
+                text: 'Repository',
+                id: this.repositoryService.currentId
+            };
+            this.onRepositoriesSelected(repoType);
+        }
     }
 
     run(): void {

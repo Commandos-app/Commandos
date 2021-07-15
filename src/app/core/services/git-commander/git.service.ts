@@ -2,7 +2,7 @@ import { FieldDefinition, RegisterCommandOptions } from '@shared/components';
 import { ICommand, CommanderService, CommanderModalService } from '@shared/services';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { createBranch, deleteLocalBranch, push, pull, pruneRemote } from '@git/commands';
+import { createBranch, deleteLocalBranch, push, pull, pruneRemote, createBranchFromAnother } from '@git/commands';
 import { RepositorySetting } from '../store/store.types';
 
 
@@ -62,6 +62,7 @@ export class GitService {
         const command = 'executeCreateBranch';
         const fields: Array<FieldDefinition> = [
             { type: 'repositories', label: 'Repositories', name: 'repo' },
+            { type: 'branch', label: 'Base branch', name: 'from' },
             { type: 'string', label: 'Name', name: 'name' }
         ];
         this.registerCommand({ name, command, icon, fields });
@@ -143,7 +144,11 @@ export class GitService {
     }
 
     private async executeCreateBranch(formData: any, repository: RepositorySetting): Promise<any> {
-        return createBranch(formData.name, repository.path);
+        if (formData.from) {
+            return createBranchFromAnother(formData.name, formData.from, repository.path);
+        } else {
+            return createBranch(formData.name, repository.path);
+        }
     }
 
     private async executeSync(formData: any, repository: RepositorySetting): Promise<any> {

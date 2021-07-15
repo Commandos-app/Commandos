@@ -64,6 +64,7 @@ export class SubnavComponent implements OnInit {
         const name = 'Create Branch';
         const fields: Array<FieldDefinition> = [
             { type: 'repository', label: 'Repository', name: 'repo', value: this.repositoryService.repositorySetting.path },
+            { type: 'branch', label: 'Base branch', name: 'from', value: this.repositoryService.currentBranch.name },
             { type: 'string', label: 'Name', name: 'name' },
             { type: 'bool', label: 'Checkout', name: 'checkout' }
         ];
@@ -72,8 +73,11 @@ export class SubnavComponent implements OnInit {
         const onClose$ = this.commanderModalService.openModal({ title: name, fields: fields! });
         const sub = onClose$
             .subscribe(async (params) => {
-                if (params?.formData?.name) {
-                    await this.repositoryService.createBranch(params?.formData?.name, params?.formData?.checkout);
+                if (params?.formData?.name && !params?.formData?.from) {
+                    await this.repositoryService.createBranch(params.formData.name, params.formData?.checkout);
+                }
+                else if (params?.formData?.name && params?.formData?.from) {
+                    await this.repositoryService.createBranchFromAnother(params.formData.name, params.formData.from, params.formData?.checkout);
                 }
                 this.commanderService.reloadData();
                 this.commanderModalService.closeModal();

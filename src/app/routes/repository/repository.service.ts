@@ -6,7 +6,7 @@ import {
     createBranch, deleteLocalBranch, deleteRemoteBranch, getBranches, getCurrentBranch,
     getStatus, renameBranch, stageAll, stageFile, unstageAll,
     unstageFile, revertFile, checkout, commit, getLogMeta, getLogOfSha, getLogMetadataOfSha, getDiffOfFile, pull, push,
-    addOriginUrl, changeOriginUrl, getOriginUrl, getUserMail, getUsername, setUserMail, setUsername, removeOriginUrl, createBranchFromSha, pushWithSetUpstream
+    addOriginUrl, changeOriginUrl, getOriginUrl, getUserMail, getUsername, setUserMail, setUsername, removeOriginUrl, createBranchFromSha, pushWithSetUpstream, createBranchFromAnother
 } from '@git/commands';
 import { parseBranches, parseCurrentBranch, parseLog, parseStatus } from '@git/parsers';
 import { IStatusResult, LogItem, ChangedFile, Branch, Branches } from '@git/model';
@@ -126,6 +126,14 @@ export class RepositoryService {
     async createBranch(name: string, checkout = false): Promise<void> {
         this.logger.info(`create branch: ${name}`);
         await createBranch(name, this.getPath(), false);
+        if (checkout) {
+            await this.checkoutBranch(name);
+        }
+    }
+
+    async createBranchFromAnother(name: string, from: string, checkout = false): Promise<void> {
+        this.logger.info(`create branch from Another: ${name}`);
+        await createBranchFromAnother(name, from, this.getPath());
         if (checkout) {
             await this.checkoutBranch(name);
         }

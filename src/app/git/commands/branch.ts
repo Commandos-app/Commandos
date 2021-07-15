@@ -61,6 +61,16 @@ export async function createBranch(name: string, repository: string, noTrack = f
     return runGit(args, repository, 'createBranch');
 }
 
+export async function createBranchFromAnother(name: string, from: string, repository: string): Promise<any> {
+    const args = [
+        'branch',
+        name,
+        from
+    ];
+
+    return runGit(args, repository, 'createBranch');
+}
+
 export async function createBranchFromSha(name: string, sha: string, repository: string): Promise<any> {
     const args = [
         'checkout',

@@ -20,7 +20,7 @@ export function parseBranches<T extends Record<string, string>>(stdout: string):
             branch.ahead = '0';
             branch.behind = '0';
             branch.isRemote = branch.ref.includes('remote');
-            
+
             if (branch.isRemote) {
                 branch.logicalName = branch.name.replace('origin/', '');
             }
@@ -31,13 +31,12 @@ export function parseBranches<T extends Record<string, string>>(stdout: string):
         //remove all upstream if local exists!
         const withUpstreamBranch = entries.filter(e => e.upstream).map(m => m.upstream);
         entries = entries.filter(f => !withUpstreamBranch.includes(f.name));
-        console.log(`TCL: ~ file: branch.ts ~ line 30 ~ entries`, entries);
 
         return entries;
 
     }
     else {
-        throw new Error(`Failed to parse branches`);
+        throw new Error(`Failed to parse branches!`);
     }
 }
 
