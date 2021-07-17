@@ -1,7 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { appWindow, getCurrent } from '@tauri-apps/api/window';
-import { $ } from 'protractor';
 
 
 type WindowState = 'maximized' | 'minimized' | 'windowed';
