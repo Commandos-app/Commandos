@@ -66,7 +66,7 @@
                 "minWidth": 1000,
                 "minHeight": 700,
                 "visible": true,
-                "decorations": true
+                "decorations": false
             }
         ],
         "systemTray": {
