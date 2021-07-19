@@ -30,6 +30,7 @@ const CREATE_NO_WINDOW: u32 = 0x08000000;
 pub fn git(args: Vec<String>) -> GitResult {
   let mut command = Command::new("git");
   command.args(args);
+  #[cfg(windows)]
   command.creation_flags(CREATE_NO_WINDOW);
   command.stdout(Stdio::piped());
   let output = command.output().expect("failed to execute process");
