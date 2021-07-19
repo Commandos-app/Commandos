@@ -31,9 +31,9 @@ tauri = { version = "1.0.0-beta.5", features = ["api-all"] }
 default = [ "custom-protocol" ]
 custom-protocol = [ "tauri/custom-protocol" ]
 
-# [profile.release]
-# panic = "abort"
-# codegen-units = 1
-# lto = true
-# incremental = false
-# opt-level = "s"
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+incremental = false
+opt-level = "s"
