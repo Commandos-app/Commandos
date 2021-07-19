@@ -1,4 +1,5 @@
 use serde::ser::{Serialize, SerializeStruct, Serializer};
+use std::os::windows::process::CommandExt;
 use std::process::{Command, Stdio};
 
 // Custom type for git commands.
@@ -22,14 +23,16 @@ impl Serialize for GitResult {
   }
 }
 
+const CREATE_NO_WINDOW: u32 = 0x08000000;
+
 // Git command.
 #[tauri::command]
 pub fn git(args: Vec<String>) -> GitResult {
-  let output = Command::new("git")
-    .args(args)
-    .stdout(Stdio::piped())
-    .output()
-    .expect("failed to execute process");
+  let mut command = Command::new("git");
+  command.args(args);
+  command.creation_flags(CREATE_NO_WINDOW);
+  command.stdout(Stdio::piped());
+  let output = command.output().expect("failed to execute process");
 
   let stdout = String::from_utf8_lossy(&output.stdout).to_string(); //.unwrap();
   let stderr = String::from_utf8_lossy(&output.stderr).to_string(); //.unwrap();
