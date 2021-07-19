@@ -1,6 +1,8 @@
 <div class="branding">
     <img [routerLink]="['/home']" src="../../../../assets/logo/commandos_white.svg" class="clickable" height="32">
-    <span [routerLink]="['/home']" class="default-cursor clickable" data-tauri-drag-region>ommandos</span>
+    <span [routerLink]="['/home']" class="default-cursor clickable" data-tauri-drag-region>ommandos
+        <span class="branding-small">{{version}}</span>
+    </span>
 </div>
 <app-commander></app-commander>
 

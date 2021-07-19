@@ -1,3 +1,4 @@
+import { environment } from '@env/environment';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ErrorService, TauriService } from '@core/services';
@@ -11,6 +12,7 @@ export class HeaderComponent implements OnInit {
 
     isMaximised = false;
     isOpen = false;
+    version = '0.0.1';
 
     constructor(
         public errorService: ErrorService,
@@ -18,6 +20,7 @@ export class HeaderComponent implements OnInit {
         private cd: ChangeDetectorRef,
         private router: Router
     ) {
+        this.version = environment.version;
     }
 
     ngOnInit(): void {

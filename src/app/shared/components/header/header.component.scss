@@ -18,6 +18,11 @@
     color: var(--cds-global-color-gray-0);
     // gap: 10px;
     margin-left: 10px;
+
+    .branding-small {
+        font-size: var(--cds-global-typography-caption-font-size);
+
+    }
 }
 
 .example-list {

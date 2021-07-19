@@ -1,15 +1,17 @@
+import { environment } from '@env/environment';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'commandos-about',
-  templateUrl: './about.component.html',
-  styleUrls: ['./about.component.scss']
+    selector: 'commandos-about',
+    templateUrl: './about.component.html',
+    styleUrls: ['./about.component.scss']
 })
 export class AboutComponent implements OnInit {
+    version = 'not set!';
+    constructor() { }
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+        this.version = environment.version;
+    }
 
 }

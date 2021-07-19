@@ -5,7 +5,8 @@
 export const environment = {
     production: false,
     noGitLogging: false,
-    splashDuration: 10
+    splashDuration: 10,
+    version: `v${require('../../package.json').version}-dev`
 };
 
 /*
