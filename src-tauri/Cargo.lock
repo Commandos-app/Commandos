@@ -3460,8 +3460,7 @@ dependencies = [
 [[package]]
 name = "wry"
 version = "0.11.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9272387911b8612688d1e6a90f191ab394561a88634e81b064f98880b4874245"
+source = "git+https://github.com/tauri-apps/wry?branch=fix/cursor-flicker#4123682bcc83753b896485bffb789abd6fcd9dd7"
 dependencies = [
  "cocoa",
  "core-graphics 0.22.2",
