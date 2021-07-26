@@ -3460,7 +3460,7 @@ dependencies = [
 [[package]]
 name = "wry"
 version = "0.11.0"
-source = "git+https://github.com/tauri-apps/wry?branch=fix/cursor-flicker#4123682bcc83753b896485bffb789abd6fcd9dd7"
+source = "git+https://github.com/tauri-apps/wry?rev=e28bcce0884937365013fda3098f64f9956d569f#e28bcce0884937365013fda3098f64f9956d569f"
 dependencies = [
  "cocoa",
  "core-graphics 0.22.2",
