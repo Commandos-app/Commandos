@@ -1,10 +1,25 @@
 <div id="splash" class="full" *ngIf="showSplash" [ngStyle]="{'opacity': opacityChange}" data-tauri-drag-region>
-    <div class="text">
+    <!-- <div class="text" data-tauri-drag-region>
         <div>
             <div>The Commander</div>
-            <div class="small">GIT Experience but different</div>
+            <div ></div>
+        </div>
+    </div> -->
+
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+    <div id="title" data-tauri-drag-region>
+        <div>
+            <div class="brand">
+                <img src="../../../../assets/logo/commandos_white.svg" height="80">
+                <span>ommandos</span>
+            </div>
+            <div class="small">
+                GIT Experience but different
+            </div>
         </div>
     </div>
-    <ng-particles [id]="id" [options]="particlesOptions" (particlesInit)="particlesInit($event)" (particlesLoaded)="setup($event)"></ng-particles>
+
 
 </div>
