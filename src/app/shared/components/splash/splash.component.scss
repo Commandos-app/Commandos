@@ -1,4 +1,4 @@
-#particles-js.full {
+#splash.full {
     position: fixed;
     top: 0;
     left: 0;
@@ -6,13 +6,12 @@
     bottom: 0;
     background: #247bae;
     -webkit-user-select: none;
-    -webkit-app-region: drag;
     opacity: 1;
     transition: opacity 1s;
     z-index: 99999;
 }
 
-#particles-js.full .text {
+#splash.full .text {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -25,11 +24,13 @@
     font-family: Metropolis, "Avenir Next", "Helvetica Neue", Arial, sans-serif;
 }
 
-#particles-js.full .text .small {
+#splash.full .text .small {
     margin-top: 20px;
     font-size: 20px;
 }
 
-#particles-js.full canvas {
-    display: block; // vertical-align: bottom;
+ng-particles {
+    display: block;
+    height: 100%;
+    width: 100%;
 }

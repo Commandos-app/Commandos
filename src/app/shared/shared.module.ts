@@ -31,7 +31,7 @@ import { SubnavComponent } from './components/subnav/subnav.component';
 import { TreeViewComponent } from './components/tree-view/tree-view.component';
 import { DiffPipe } from './directives/diff.pipe';
 import { DateFormatePipe } from './pipe/date-formate.pipe';
-
+import { NgParticlesModule } from "ng-particles";
 
 const components = [
 
@@ -81,7 +81,9 @@ const modules = [
     FilterModule,
     AngularSplitModule,
 
-    VirtualScrollerModule
+    VirtualScrollerModule,
+
+    NgParticlesModule
 ];
 
 @NgModule({

@@ -1,8 +1,10 @@
-<div id="particles-js" class="full" *ngIf="showSplash" [ngStyle]="{'opacity': opacityChange}">
+<div id="splash" class="full" *ngIf="showSplash" [ngStyle]="{'opacity': opacityChange}" data-tauri-drag-region>
     <div class="text">
         <div>
             <div>The Commander</div>
             <div class="small">GIT Experience but different</div>
         </div>
     </div>
+    <ng-particles [id]="id" [options]="particlesOptions" (particlesInit)="particlesInit($event)" (particlesLoaded)="setup($event)"></ng-particles>
+
 </div>
