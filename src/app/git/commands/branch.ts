@@ -1,5 +1,5 @@
 import { branchFormaterObject } from "@git/model";
-import { runGit } from "./base";
+import { GitResult, runGit } from "./base";
 
 
 
@@ -10,7 +10,7 @@ export async function getCurrentBranch(repository: string): Promise<string> {
 
     let currentBranch = 'not found';
 
-    const result = await runGit(args, repository, 'getCurrentBranch');
+    const { stdout: result } = await runGit(args, repository, 'getCurrentBranch');
     if (result) {
         currentBranch = result;
     }
@@ -18,7 +18,7 @@ export async function getCurrentBranch(repository: string): Promise<string> {
     return currentBranch;
 }
 
-export async function getBranches(repository: string): Promise<any> {
+export async function getBranches(repository: string): Promise<GitResult> {
 
 
     const format = Object.values(branchFormaterObject).join('%x00');

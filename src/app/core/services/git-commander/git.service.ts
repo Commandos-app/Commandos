@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { createBranch, deleteLocalBranch, push, pull, pruneRemote, createBranchFromAnother } from '@git/commands';
 import { RepositorySetting } from '../store/store.types';
+import { GitResult } from '@git/commands/base';
 
 
 
@@ -134,12 +135,12 @@ export class GitService {
     }
 
 
-    private executePush(formData: any, repository: RepositorySetting): Promise<void> {
+    private executePush(formData: any, repository: RepositorySetting): Promise<GitResult> {
         return push(repository.path);
 
     }
 
-    private executePull(formData: any, repository: RepositorySetting): Promise<void> {
+    private executePull(formData: any, repository: RepositorySetting): Promise<GitResult> {
         return pull(repository.path);
     }
 

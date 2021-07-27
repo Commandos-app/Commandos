@@ -75,7 +75,7 @@ export class CommanderModalComponent implements OnInit {
             let branchSet = new Set<string>();
             for (let index = 0; index < repos.length; index++) {
                 const repo = repos[index];
-                const branches = await getBranches(repo.path);
+                const { stdout: branches } = await getBranches(repo.path);
                 if (branches) {
                     const parsedBranches = parseBranches(branches);
 

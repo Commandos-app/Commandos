@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { RepositoriesSettingsService, StoreService } from '@core/services';
 import { RepositoryService, UserConfig } from './../repository.service';
 import { NgForm } from '@angular/forms';
+import { stdout } from 'process';
 
 @Component({
     selector: 'app-repository-setting',
@@ -44,7 +45,8 @@ export class RepositorySettingComponent implements OnInit {
         this.path = this.repositoryService.repositorySetting.path;
         this.name = this.repositoryService.repositorySetting.name;
         this.user = await this.repositoryService.loadUserConfig();
-        this.origin = await this.repositoryService.getOriginUrl();
+        const { stdout } = await this.repositoryService.getOriginUrl();
+        this.origin = stdout;
         this.oldOrigin = this.origin;
         this.settingsForm.form.markAsPristine();
     }

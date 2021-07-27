@@ -158,7 +158,8 @@ export class RepositoryCommitComponent implements OnInit {
     async loadDiff(node: TreeObject) {
         this.isDiffLoading = true;
         const newOrUntracked = node.file.isNew || node.file.isUntracked;
-        this.fileDiff = await this.repositoryService.getDiffOfFile(node.file.path, newOrUntracked, node.file.isRenamed, node.staged);
+        const { stdout } = await this.repositoryService.getDiffOfFile(node.file.path, newOrUntracked, node.file.isRenamed, node.staged);
+        this.fileDiff = stdout;
 
         // const outputFormat = this.storeService.getDiff2HtmlOutputFormat()
         // Differ('diffoutput', changes, { outputFormat, drawFileList: false });

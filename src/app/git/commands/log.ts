@@ -1,7 +1,7 @@
 import { logFormaterObject } from "../model";
-import { runGit } from "./base";
+import { GitResult, runGit } from "./base";
 
-export async function getLogMeta(repository: string, branch = 'HEAD', limit = 100): Promise<string> {
+export async function getLogMeta(repository: string, branch = 'HEAD', limit = 100): Promise<GitResult> {
 
     const format = Object.values(logFormaterObject).join('%x00');
 
@@ -17,11 +17,10 @@ export async function getLogMeta(repository: string, branch = 'HEAD', limit = 10
         '--'
     ];
 
-    const result = await runGit(args, repository, 'getLogMeta');
-    return result;
+    return await runGit(args, repository, 'getLogMeta');
 }
 
-export async function getLogMetadataOfSha(repository: string, sha: string): Promise<string> {
+export async function getLogMetadataOfSha(repository: string, sha: string): Promise<GitResult> {
 
     const format = Object.values(logFormaterObject).join('%x00');
 
@@ -38,11 +37,10 @@ export async function getLogMetadataOfSha(repository: string, sha: string): Prom
         '--'
     ];
 
-    const result = await runGit(args, repository, 'getLogMetaDataOfSha');
-    return result;
+    return await runGit(args, repository, 'getLogMetaDataOfSha');
 }
 
-export async function getLogOfSha(repository: string, sha: string): Promise<string> {
+export async function getLogOfSha(repository: string, sha: string): Promise<GitResult> {
 
     const args = [
         'show',
@@ -58,12 +56,11 @@ export async function getLogOfSha(repository: string, sha: string): Promise<stri
         //'--'
     ];
 
-    const result = await runGit(args, repository, 'getLogOfSha');
-    return result;
+    return await runGit(args, repository, 'getLogOfSha');
 }
 
 
-export async function getDiffOfFile(repository: string, path: string, isNew: boolean, isRenamed: boolean, staged: boolean = false): Promise<string> {
+export async function getDiffOfFile(repository: string, path: string, isNew: boolean, isRenamed: boolean, staged: boolean = false): Promise<GitResult> {
 
     const args = [
         'diff',
@@ -85,6 +82,5 @@ export async function getDiffOfFile(repository: string, path: string, isNew: boo
         args.push('--staged');
     }
 
-    const result = await runGit([...args, path], repository, 'getDiffOfFile');
-    return result;
+    return await runGit([...args, path], repository, 'getDiffOfFile');
 }

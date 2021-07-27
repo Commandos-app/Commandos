@@ -33,14 +33,14 @@ import { invoke } from '@tauri-apps/api/tauri';
 
 // }
 
-type GitResult = {
+export type GitResult = {
     stdout: string;
     stderr: string;
 }
 
 
 
-export async function runGit(args: string[], path: string, name: string, global = false): Promise<any> {
+export async function runGit(args: string[], path: string, name: string, global = false): Promise<GitResult> {
 
     if (!global) {
         // unshift adds at first position!
@@ -58,6 +58,6 @@ export async function runGit(args: string[], path: string, name: string, global 
             throw new Error(`Failed to execute ${name}: ${err.code}`);
         });
 
-    return result.stdout;
+    return result;
 }
 

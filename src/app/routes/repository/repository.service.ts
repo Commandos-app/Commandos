@@ -11,6 +11,7 @@ import {
 import { parseBranches, parseCurrentBranch, parseLog, parseStatus } from '@git/parsers';
 import { IStatusResult, LogItem, ChangedFile, Branch, Branches } from '@git/model';
 import { countRevList } from '@git/commands/rev-list';
+import { GitResult } from '@git/commands/base';
 
 export type NewBranch = {
     pushRemote?: boolean;
@@ -97,14 +98,14 @@ export class RepositoryService {
 
     async getBranches(): Promise<void> {
         // this.branches.next(null);
-        const branches = await getBranches(this.getPath());
+        const { stdout: branches } = await getBranches(this.getPath());
         if (branches) {
             const parsedBranches = parseBranches(branches);
             const upstreamBranches = parsedBranches.filter(f => f.upstream);
             for (let index = 0; index < upstreamBranches.length; index++) {
                 const element = upstreamBranches[index];
-                const ahead = await countRevList(this.getPath(), element.upstream, element.name);
-                const behind = await countRevList(this.getPath(), element.name, element.upstream);
+                const { stdout: ahead } = await countRevList(this.getPath(), element.upstream, element.name);
+                const { stdout: behind } = await countRevList(this.getPath(), element.name, element.upstream);
                 element.ahead = ahead;
                 element.behind = behind;
             }
@@ -171,11 +172,11 @@ export class RepositoryService {
         }
     }
 
-    async getAheadCount(branch: Branch): Promise<number> {
+    async getAheadCount(branch: Branch): Promise<GitResult> {
         return await countRevList(this.getPath(), branch.upstream, branch.name);
     }
 
-    async getBehindCount(branch: Branch): Promise<number> {
+    async getBehindCount(branch: Branch): Promise<GitResult> {
         return await countRevList(this.getPath(), branch.name, branch.upstream);
     }
 
@@ -193,7 +194,7 @@ export class RepositoryService {
     //#region Commit
     async getStatus(): Promise<IStatusResult[]> {
         const status = await getStatus(this.getPath());
-        const result = parseStatus(status);
+        const result = parseStatus(status?.stdout);
 
         return result;
     }
@@ -229,23 +230,23 @@ export class RepositoryService {
     //#region History
     async getHistroy(branch = 'HEAD'): Promise<Array<LogItem>> {
         const log = await getLogMeta(this.getPath(), branch);
-        const result = parseLog(log);
+        const result = parseLog(log?.stdout);
 
         return result;
     }
 
-    async getChangesOfSha(sha: string): Promise<string> {
+    async getChangesOfSha(sha: string): Promise<GitResult> {
         return getLogOfSha(this.getPath(), sha);
     }
 
     async getChangesMetaDataOfSha(sha: string): Promise<LogItem> {
         const log = await getLogMetadataOfSha(this.getPath(), sha);
-        const [result] = parseLog(log);
+        const [result] = parseLog(log?.stdout);
 
         return result;
     }
 
-    async getDiffOfFile(path: string, isNew: boolean, isRenamed: boolean, staged: boolean): Promise<string> {
+    async getDiffOfFile(path: string, isNew: boolean, isRenamed: boolean, staged: boolean): Promise<GitResult> {
         return getDiffOfFile(this.getPath(), path, isNew, isRenamed, staged);
     }
 
@@ -254,9 +255,8 @@ export class RepositoryService {
     //#region Config
     async loadUserConfig(): Promise<UserConfig> {
         const user = await this.loadGlobalUserConfig();
-
-        const localName = await getUsername(this.getPath(), false);
-        const localEmail = await getUserMail(this.getPath(), false);
+        const { stdout: localName } = await getUsername(this.getPath(), false);
+        const { stdout: localEmail } = await getUserMail(this.getPath(), false);
 
         if (localName || localEmail) {
             user.global = false;
@@ -269,8 +269,8 @@ export class RepositoryService {
 
     //! Refactor this to a global git service
     async loadGlobalUserConfig(): Promise<UserConfig> {
-        let name = await getUsername(undefined, true);
-        let email = await getUserMail(undefined, true);
+        const { stdout: name } = await getUsername(undefined, true);
+        const { stdout: email } = await getUserMail(undefined, true);
 
         return {
             name,
@@ -279,25 +279,25 @@ export class RepositoryService {
         };
     }
 
-    async getOriginUrl(): Promise<string> {
+    async getOriginUrl(): Promise<GitResult> {
         return getOriginUrl(this.getPath());
     }
 
-    async changeOriginUrl(url: string): Promise<string> {
+    async changeOriginUrl(url: string): Promise<GitResult> {
         return changeOriginUrl(url, this.getPath());
     }
 
-    async removeOriginUrl(): Promise<string> {
+    async removeOriginUrl(): Promise<GitResult> {
         return removeOriginUrl(this.getPath());
     }
 
-    async addOriginUrl(url: string): Promise<string> {
+    async addOriginUrl(url: string): Promise<GitResult> {
         return addOriginUrl(url, this.getPath());
     }
 
     async saveLocalUserConfig(user: UserConfig): Promise<void> {
-        setUsername(this.getPath(), user.name, false);
-        setUserMail(this.getPath(), user.email, false);
+        await setUsername(this.getPath(), user.name, false);
+        await setUserMail(this.getPath(), user.email, false);
     }
 
     async saveGlobalUserConfig(user: UserConfig): Promise<void> {

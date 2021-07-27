@@ -1,8 +1,8 @@
-import { runGit } from "./base";
+import { GitResult, runGit } from "./base";
 
 
 
-async function getStatus(repository: string): Promise<any> {
+async function getStatus(repository: string): Promise<GitResult> {
     const args = [
         '--no-optional-locks',
         'status',

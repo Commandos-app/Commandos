@@ -1,6 +1,6 @@
-import { runGit } from "./base";
+import { GitResult, runGit } from "./base";
 
-export async function pruneRemote(repository: string): Promise<void> {
+export async function pruneRemote(repository: string): Promise<GitResult> {
     const args = [
         'remote',
         'update',

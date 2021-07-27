@@ -39,7 +39,7 @@ export class RepositoryHistoryCommitComponent implements OnInit {
         // Differ('diffoutput', value, { outputFormat });
         // this.data = DifferParse(value, { outputFormat });
         if (value) {
-            this.data = value;
+            this.data = value?.stdout;
         } else {
             this.data = "";
         }

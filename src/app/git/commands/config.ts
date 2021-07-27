@@ -1,6 +1,6 @@
-import { runGit } from './base';
+import { GitResult, runGit } from './base';
 
-export async function getUsername(repository: string, global: boolean): Promise<string> {
+export async function getUsername(repository: string, global: boolean): Promise<GitResult> {
     return getConfig(repository, 'user.name', global, 'getUsername');
 }
 
@@ -9,7 +9,7 @@ export async function setUsername(repository: string, value: string, global: boo
     await setConfig(repository, 'user.name', value, global, 'setUsername');
 }
 
-export async function getUserMail(repository: string, global: boolean): Promise<string> {
+export async function getUserMail(repository: string, global: boolean): Promise<GitResult> {
     return getConfig(repository, 'user.email', global, 'getUserMail');
 }
 
@@ -19,19 +19,18 @@ export async function setUserMail(repository: string, value: string, global: boo
 }
 
 // TODO add method to get complete config an parse into object with global/system/local param
-async function getConfig(repository: string, command: string, global: boolean = false, func: string): Promise<string> {
+async function getConfig(repository: string, command: string, global: boolean = false, func: string): Promise<GitResult> {
     const args = [
         'config',
         global ? '--global' : '--local',
         command
     ];
 
-    const result = await runGit(args, repository, func, global);
-    return result;
+    return await runGit(args, repository, func, global);
 }
 
 // TODO add method to get complete config an parse into object with global/system/local param
-async function setConfig(repository: string, command: string, value: string, global: boolean = false, func: string): Promise<string> {
+async function setConfig(repository: string, command: string, value: string, global: boolean = false, func: string): Promise<GitResult> {
     const args = [
         'config',
         global ? '--global' : '--local'
@@ -47,8 +46,7 @@ async function setConfig(repository: string, command: string, value: string, glo
     }
 
 
-    const result = await runGit(args, repository, func, global);
-    return result;
+    return await runGit(args, repository, func, global);
 }
 
 export async function getOriginUrl(repository: string) {
@@ -57,11 +55,10 @@ export async function getOriginUrl(repository: string) {
         'remote.origin.url'
     ];
 
-    const result = await runGit(args, repository, 'getOriginUrl');
-    return result;
+    return await runGit(args, repository, 'getOriginUrl');
 }
 
-export async function addOriginUrl(url: string, repository: string) {
+export async function addOriginUrl(url: string, repository: string): Promise<GitResult> {
     const args = [
         'remote',
         'add',
@@ -69,11 +66,10 @@ export async function addOriginUrl(url: string, repository: string) {
         url
     ];
 
-    const result = await runGit(args, repository, 'getOriginUrl');
-    return result;
+    return await runGit(args, repository, 'getOriginUrl');
 }
 
-export async function changeOriginUrl(url: string, repository: string) {
+export async function changeOriginUrl(url: string, repository: string): Promise<GitResult> {
     const args = [
         'remote',
         'set-url',
@@ -81,17 +77,15 @@ export async function changeOriginUrl(url: string, repository: string) {
         url
     ];
 
-    const result = await runGit(args, repository, 'getOriginUrl');
-    return result;
+    return await runGit(args, repository, 'getOriginUrl');
 }
 
-export async function removeOriginUrl(repository: string) {
+export async function removeOriginUrl(repository: string): Promise<GitResult> {
     const args = [
         'remote',
         'remove',
         'origin'
     ];
 
-    const result = await runGit(args, repository, 'getOriginUrl');
-    return result;
+    return await runGit(args, repository, 'getOriginUrl');
 }
