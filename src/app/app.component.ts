@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ErrorService, LoggerService, GitService, StoreService, SplashScreenResolver } from '@core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { CommanderService, ICommand } from '@shared/services';
-import { listen, emit } from "@tauri-apps/api/event";
+import { listen } from "@tauri-apps/api/event";
 import { environment } from '@env/environment';
 
 @Component({

@@ -9,7 +9,7 @@ import { filter, first } from 'rxjs/operators';
     styleUrls: ['./splash.component.scss']
 })
 export class SplashComponent implements OnInit {
-    id = "tsparticles";
+    devEnv: boolean = !environment.production;
 
     // The screen starts with the maximum opacity
     opacityChange = 1;
@@ -38,7 +38,9 @@ export class SplashComponent implements OnInit {
         setTimeout(() => {
             // After the transition is ended the showSplash will be hided
             this.opacityChange = 0;
-            this.showSplash = false;
+            setTimeout(() => {
+                this.showSplash = false;
+            }, 1100);
         }, environment.splashDuration);
     }
 

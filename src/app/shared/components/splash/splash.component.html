@@ -1,4 +1,5 @@
-<div id="splash" class="full" *ngIf="showSplash" [ngStyle]="{'opacity': opacityChange}" data-tauri-drag-region>
+<div id="splash" class="full" *ngIf="showSplash" [ngStyle]="{'opacity': opacityChange}" [ngClass]="{'dev': devEnv}"
+    data-tauri-drag-region>
     <div id="title" data-tauri-drag-region>
         <div>
             <div class="brand">
