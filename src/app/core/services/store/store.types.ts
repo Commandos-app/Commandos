@@ -7,7 +7,12 @@ export type RepositorySetting = {
 };
 
 export type RepositoriesSettings = Array<RepositorySetting>;
+export type RepositoriesSettingsGrouped = Array<RepositoriesSettingsGroup>;
 
+export type RepositoriesSettingsGroup = {
+    title?: string;
+    repositories?: RepositoriesSettings;
+}
 export type DiffFormate = 'side-by-side' | 'line-by-line';
 
 export type Tag = {

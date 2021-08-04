@@ -12,7 +12,7 @@
             </ng-container>
 
         </div>
-        <ng-container *ngIf="node.children.length > 0">
+        <ng-container *ngIf="node.children.length > 0 && !node.hideChildren">
             <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ list: node.children, index: index+1 }">
             </ng-container>
         </ng-container>

@@ -99,8 +99,17 @@
         </div>
 
         <div *ngSwitchDefault class="comander-tree-row commander-tree-folder-row">
-            <cds-icon shape="folder-open" solid="true"></cds-icon>
-            <span class="comander-tree-row-text">
+            <ng-container *ngIf="!node.hideChildren">
+                <cds-icon shape="angle" class="commander-tree-arrow" size="sm" direction="down"
+                    (click)="hideChild(node)"></cds-icon>
+                <cds-icon shape="folder-open" solid="true" (click)="hideChild(node)"></cds-icon>
+            </ng-container>
+            <ng-container *ngIf="node.hideChildren">
+                <cds-icon shape="angle" class="commander-tree-arrow" direction="right" (click)="hideChild(node)">
+                </cds-icon>
+                <cds-icon shape="folder" solid="true" (click)="hideChild(node)"></cds-icon>
+            </ng-container>
+            <span cds-text="secondary" class="comander-tree-row-text" (click)="hideChild(node)">
                 {{node.name}}
             </span>
 
