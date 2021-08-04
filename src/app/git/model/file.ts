@@ -9,13 +9,14 @@ export type ChangedFile = {
 
 export type GroupedChangedFile = {
     name: string;
-    type: string;
+    path?: string;
+    type: 'file' | 'path' | 'title';
     children: any[];
 };
 
 export type TreeObject = {
     file: ChangedFile;
-    type: string;
+    type: 'file' | 'path' | 'title';
     path: string;
     name: string;
     staged: boolean;
