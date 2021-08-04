@@ -1,3 +1,4 @@
+import { GroupedChangedFile } from './../../../git/model/file';
 import { IStatusResult, TreeObject, ChangedFile, GroupedChangedFiles } from '@git/model';
 import { LoggerService } from '@core/services/logger/logger.service';
 import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
@@ -6,7 +7,7 @@ import { RepositoryService } from '../repository.service';
 import { filter, first } from 'rxjs/operators';
 import { interval } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { basename, Differ, sleep, LoadingState } from '@shared/functions';
+import { basename, sleep, LoadingState } from '@shared/functions';
 
 @UntilDestroy()
 @Component({
@@ -61,16 +62,77 @@ export class RepositoryCommitComponent implements OnInit {
         const files = await this.repositoryService.getStatus();
         const filesUnstaged = this.groupChangedFiles(files.filter(file => !file.isStaged), 'Changes', false);
         const filesStaged = this.groupChangedFiles(files.filter(file => file.isStaged), 'Staged Changes', true);
+        const filesUnstagedSorted = this.sortFileTree(filesUnstaged);
+        const filesStagedSorted = this.sortFileTree(filesStaged);
 
-        this.fileTree = [...filesStaged, ...filesUnstaged];
+        const fileTree = [filesStagedSorted, filesUnstagedSorted];
+        // const fileTree = [filesStaged, filesUnstaged];
+        this.fileTree = this.flattenTree(fileTree);
+
         this.formDisabled = this.fileTree.length === 0;
-        this.hasStaged = filesStaged.length > 0;
+        this.hasStaged = filesStagedSorted?.children?.length > 0;
         this.isLoading = false;
     }
 
-    private groupChangedFiles(files: IStatusResult[], title: string, staged: boolean): GroupedChangedFiles {
+    private flattenTree(fileTree: GroupedChangedFiles): GroupedChangedFiles {
+        const gen = this.getFiles(fileTree);
+        const flattened = [];
+        for (let file of gen) {
+            this.checkPath(file, gen);
+            if (file.type === 'title') {
+                flattened.push(file);
+            }
+        }
+
+        return flattened;
+    }
+
+    private checkPath(file: GroupedChangedFile, gen: Generator<GroupedChangedFile, any, undefined>) {
+        if (file.type === 'path' && file.children.length > 0 && !file.children.some(x => x.type === 'file')) {
+            let { value: nextFile } = gen.next();
+            if (nextFile.type === 'path') {
+                file.name = `${file.name}/${nextFile.name}`;
+                file.path = `${file.path}${nextFile.path}`;
+                file.children = [...nextFile.children];
+                // this.checkPath(file, gen);
+            }
+        }
+    }
+
+    private * getFiles(fileTree: GroupedChangedFiles): Generator<GroupedChangedFile, any, undefined> {
+        for (const file of fileTree) {
+            yield file;
+            if (file.children) {
+                yield* this.getFiles(file.children);
+            }
+        }
+    }
+
+    private sortFileTree(file: GroupedChangedFile): GroupedChangedFile {
+        file.children?.sort((a, b) => {
+            if (a.type === b.type) {
+                return a.name.localeCompare(b.name);
+            }
+            if (a.type === 'path' && b.type === 'file') {
+                return -1;
+            }
+            return a.name.localeCompare(b.name);
+        });
+
+        if (file.children) {
+            for (const child of file.children) {
+                if (child.children) {
+                    this.sortFileTree(child);
+                }
+            }
+        }
+
+        return file;
+    }
+
+    private groupChangedFiles(files: IStatusResult[], title: string, staged: boolean): GroupedChangedFile {
         if (files.length === 0) {
-            return [];
+            return {} as GroupedChangedFile;
         }
 
         const result: Array<any> = [];
@@ -100,6 +162,7 @@ export class RepositoryCommitComponent implements OnInit {
                             // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
                             // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
                             obj.path = `${file.path.substring(0, file.path.indexOf(name) + name.length)}/`;
+                            obj.type = 'path';
                         }
                         res.result.push(obj);
                     }
@@ -110,7 +173,7 @@ export class RepositoryCommitComponent implements OnInit {
 
         });
 
-        return [{ name: title, type: 'title', children: result }];
+        return { name: title, type: 'title', children: result };
     }
 
     @HostListener('window:keyup.control.enter', ['$event'])
