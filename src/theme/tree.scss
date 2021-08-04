@@ -53,6 +53,7 @@
     display: grid !important;
     grid-template-columns: 16px 1fr 0 0 auto;
     box-sizing: border-box !important;
+    margin-left: 16px;
     &:hover {
         grid-template-columns: 16px 1fr 24px 24px auto;
     }
@@ -60,7 +61,7 @@
 
 .commander-tree-folder-row {
     display: grid !important;
-    grid-template-columns: 16px 1fr auto;
+    grid-template-columns: 16px 16px 1fr auto;
 }
 
 .comander-tree-title {
@@ -76,6 +77,7 @@
 
 .commander-tree-item {
     --base-padding: 10px;
+    cursor: pointer;
     &:hover {
         background: var(--cds-global-color-gray-100);
     }

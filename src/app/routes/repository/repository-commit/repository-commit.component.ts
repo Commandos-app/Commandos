@@ -168,4 +168,8 @@ export class RepositoryCommitComponent implements OnInit {
     }
 
 
+    hideChild(node: any) {
+        node.hideChildren = !node.hideChildren;
+    }
+
 }
