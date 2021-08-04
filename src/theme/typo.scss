@@ -6,3 +6,11 @@
 .no-break {
     white-space: nowrap;
 }
+
+a[cds-text="link"] {
+    cursor: pointer;
+}
+
+// [cds-text="subsection"] {
+//     margin: 10px 0 10px;
+// }

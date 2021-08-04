@@ -1,15 +1,16 @@
 import { filter, take } from 'rxjs/operators';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { RepositorySetting } from '@core/services';
+import { RepositoriesSettingsGroup, RepositoriesSettingsGrouped, RepositorySetting } from '@core/services';
 import { RepositoryService } from './../repository/repository.service';
 import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { RepositoriesSettings, RepositoriesSettingsService } from '@core/services';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { fromEvent, merge, Subscription } from 'rxjs';
-import { Command, open } from '@tauri-apps/api/shell';
+import { open } from '@tauri-apps/api/shell';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { invoke } from '@tauri-apps/api/tauri';
+import { groupBy } from '@shared/functions';
 
 @Component({
     selector: 'app-home',
@@ -18,7 +19,9 @@ import { invoke } from '@tauri-apps/api/tauri';
 })
 export class HomeComponent implements OnInit {
 
-    repositories: RepositoriesSettings = [];
+    private repositories: RepositoriesSettings = [];
+    repositoriesGrouped: RepositoriesSettingsGrouped = [];
+
     @ViewChild('userMenu') userMenu: TemplateRef<any>;
     overlayRef: OverlayRef | null;
     sub: Subscription;
@@ -37,6 +40,7 @@ export class HomeComponent implements OnInit {
         this.repositoryService.unload();
         this.loadRepos();
         this.repositoryService.clearUIBranches();
+        this.groupNone();
     }
 
     loadRepos(): void {
@@ -121,6 +125,21 @@ export class HomeComponent implements OnInit {
 
     }
 
+    groupFolder() {
+        this.repositoriesGrouped = groupBy(this.repositories, (t: any) => t.path.substring(0, t.path.lastIndexOf('/')));
+    }
+
+    groupTags() {
+        this.repositoriesGrouped = groupBy(this.repositories, (t: any) => t.tags[0]);
+    }
+
+    groupNone() {
+        const group: RepositoriesSettingsGroup = {
+            repositories: this.repositories
+        }
+        this.repositoriesGrouped = [group];
+    }
+
     close() {
         this.sub && this.sub.unsubscribe();
         if (this.overlayRef) {
@@ -128,4 +147,5 @@ export class HomeComponent implements OnInit {
             this.overlayRef = null;
         }
     }
+
 }
