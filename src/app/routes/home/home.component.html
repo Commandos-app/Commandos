@@ -1,13 +1,16 @@
 <div class="parent" cds-layout="vertical align:stretch p:lg" *ngIf="repositoriesGrouped?.length > 0;else noRepos">
     <p cds-text="heading" cds-layout="m-t:none m-b:lg">{{ 'PAGES.HOME.TITLE' | translate }}</p>
     <p cds-text="secondary" cds-layout="m-b:sm">Group by:
-        <a (click)="groupNone()" cds-text="link">None</a> |
-        <a (click)="groupFolder()" cds-text="link">Folder</a> |
-        <a (click)="groupTags()" cds-text="link">Tags</a>
+        <a (click)="group('none')" cds-text="link">None</a> |
+        <a (click)="group('folder')" cds-text="link">Folder</a> |
+        <a (click)="group('tags')" cds-text="link">Tags</a>
     </p>
     <ng-scrollbar class="virtual-scroll">
         <ng-container *ngFor="let group of repositoriesGrouped">
-            <p cds-text="subsection" cds-layout="m-t:lg m-b:md" *ngIf="group.title">{{group.title}}</p>
+            <p cds-text="subsection" cds-layout="m-t:lg m-b:md" *ngIf="group.title">
+                <b cds-layout="p-r:md">{{group.title}}</b>
+                <small *ngIf="group.path"><i>{{group.path}}</i></small>
+            </p>
             <div class="commander-grid commander-overview-grid ">
                 <div class="commander-row-title commander-overview-row-title sticky" cds-text="body bold">
                     <div>Name</div>

@@ -2,7 +2,8 @@ import { LoggerService } from '../logger/logger.service';
 import { Injectable } from '@angular/core';
 import { createDir, readDir, readTextFile, writeFile } from '@tauri-apps/api/fs';
 import { localDataDir } from '@tauri-apps/api/path';
-import { DiffFormate, RepositoriesSettings, Settings } from './store.types';
+import { DiffFormate, GroupByOptions, RepositoriesSettings, Settings } from './store.types';
+import { sortByProperty } from '@shared/functions';
 
 @Injectable({
     providedIn: 'root'
@@ -25,6 +26,7 @@ export class StoreService {
 
     async saveSettings(): Promise<void> {
         const path = await this.getStorePath();
+        this.data.repositories.sort(sortByProperty('name'));
         var data = JSON.stringify(this.data, null, 2);
         writeFile({ path: `${path}\\${this.fileName}`, contents: data });
     }
@@ -94,6 +96,9 @@ export class StoreService {
 
     getAutoFetch = (): boolean => this.get<boolean>('autofetch', true);
     setAutoFetch = (value: boolean): void => this.set<boolean>('autofetch', value);
+
+    getRepoGroupBy = (): GroupByOptions => this.get<GroupByOptions>('repogroupby', 'none');
+    setRepoGroupBy = (value: GroupByOptions): void => this.set<GroupByOptions>('repogroupby', value);
 
     // getGridCount = (): number => this.get<number>('gridcount', 10);
     // setGridCount = (value: number): void => this.save<number>('gridcount', value);

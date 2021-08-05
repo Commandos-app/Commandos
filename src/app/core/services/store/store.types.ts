@@ -11,6 +11,7 @@ export type RepositoriesSettingsGrouped = Array<RepositoriesSettingsGroup>;
 
 export type RepositoriesSettingsGroup = {
     title?: string;
+    path?: string;
     repositories?: RepositoriesSettings;
 }
 export type DiffFormate = 'side-by-side' | 'line-by-line';
@@ -31,3 +32,6 @@ export type settings = {
 }
 
 export type Settings = Partial<settings>;
+
+
+export type GroupByOptions = 'none' | 'tags' | 'folder';
