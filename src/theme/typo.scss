@@ -14,3 +14,13 @@ a[cds-text="link"] {
 // [cds-text="subsection"] {
 //     margin: 10px 0 10px;
 // }
+
+.tab {
+    text-decoration: none;
+    padding-bottom: 3px;
+    border-bottom: 3px solid transparent;
+
+    &.active {
+        border-bottom: 3px solid black;
+    }
+}

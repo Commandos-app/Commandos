@@ -1,0 +1,31 @@
+cds-button {
+    &:hover:not([standard-hover]) {
+        border-radius: 5px;
+        --background: var(--cds-alias-status-info);
+        --color: var(--cds-global-typography-color-100);
+    }
+
+    &.active {
+        border-radius: 5px;
+        --background: var(--cds-alias-status-info);
+        --color: var(--cds-global-typography-color-100);
+    }
+
+    &.tab {
+        --background: transparent;
+        --color: var(--cds-alias-status-info, var(--cds-global-color-blue-700, #0079ad));
+
+
+        &:hover {
+            --background: transparent;
+            --color: var(--cds-alias-status-info, var(--cds-global-color-blue-700, #0079ad));
+            border-bottom: 2px solid var(--cds-alias-status-info, var(--cds-global-color-blue-700, #0079ad));
+            border-radius: 0;
+        }
+
+        &.active {
+            border-bottom: 2px solid var(--cds-alias-status-info, var(--cds-global-color-blue-700, #0079ad));
+            border-radius: 0;
+        }
+    }
+}

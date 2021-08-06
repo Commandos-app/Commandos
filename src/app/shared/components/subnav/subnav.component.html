@@ -3,7 +3,7 @@
         <app-button-control title="Current repository" [value]="repositoryService.repositorySetting?.name"
             startIcon="home" endIcon="plus" (onClick)="goToHome()">
             <cds-icon-button action-primary action="flat" [routerLink]="['/add-repository']" routerLinkActive="active"
-                aria-label="Add Repository">
+                [routerLinkActiveOptions]="{ exact: false }" aria-label="Add Repository">
                 <cds-icon shape="plus"></cds-icon>
             </cds-icon-button>
         </app-button-control>

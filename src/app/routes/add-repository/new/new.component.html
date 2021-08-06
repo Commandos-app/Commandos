@@ -1,0 +1,42 @@
+<p cds-text="heading" cds-layout="m-t:none m-b:lg">Add new repository</p>
+<form #form="ngForm" cds-layout="m-t:md">
+    <cds-form-group layout="horizontal" cds-layout="m-b:lg">
+
+        <cds-input-group layout="vertical">
+            <label>Path</label>
+            <cds-input cds-layout="m-r:xs">
+                <label>Path</label>
+                <input type="text" name="path" required [(ngModel)]="path" />
+                <cds-control-message status="error" *ngIf="form.controls['path']?.touched && path.length === 0">Path
+                    not selected
+                </cds-control-message>
+            </cds-input>
+            <cds-file cds-layout="align:shrink">
+                <label>Select path</label>
+                <input type="folder" (click)="openDialog()" />
+            </cds-file>
+        </cds-input-group>
+
+        <cds-input>
+            <label>Repository Name</label>
+            <input type="text" name="name" required [(ngModel)]="name" />
+            <cds-control-message status="error" *ngIf="form.controls['name']?.touched && name.length === 0">Name of
+                repository not
+                defined
+            </cds-control-message>
+        </cds-input>
+
+        <cds-checkbox-group>
+            <label>Init Git Repository</label>
+            <cds-checkbox>
+                <label></label>
+                <input type="checkbox" name="repoInit" [(ngModel)]="initGitRepo" />
+            </cds-checkbox>
+        </cds-checkbox-group>
+
+    </cds-form-group>
+    <cds-button (click)="saveRepo()" [disabled]="form.invalid || !form.dirty">
+        Add
+    </cds-button>
+
+</form>

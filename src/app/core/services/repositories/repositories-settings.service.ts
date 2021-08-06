@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { cloneRepository } from '@git/commands';
 import { StoreService } from '../store/store.service';
 import { RepositoriesSettings, RepositorySetting } from '../store/store.types';
 
@@ -27,6 +28,11 @@ export class RepositoriesSettingsService {
         this.store.setRepositories(repos);
         this.store.saveSettings();
         return nextId;
+    }
+
+    async cloneRepository(url: string, name: string, path: string) {
+        await cloneRepository(url, path);
+        return this.addRepository({ name, path });
     }
 
     removeRepository(id: number): void {

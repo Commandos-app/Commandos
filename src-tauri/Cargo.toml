@@ -23,7 +23,7 @@ log4rs = { version = "1.0.0", features = [
   "fixed_window_roller"
 ] }
 log = { version = "0.4.0", features = [ "std" ] }
-tauri = { version = "1.0.0-beta.5", features = ["api-all"] }
+tauri = { version = "1.0.0-beta.5", features = ["api-all", "updater"] }
 # , "system-tray", "menu"
 
 [patch.crates-io]

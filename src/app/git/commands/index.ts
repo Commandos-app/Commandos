@@ -6,5 +6,5 @@ export * from './prune';
 export * from './remote';
 export * from './status';
 export * from './workspace';
-
+export * from './repository';
 

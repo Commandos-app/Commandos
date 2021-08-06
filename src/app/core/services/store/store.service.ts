@@ -100,6 +100,9 @@ export class StoreService {
     getRepoGroupBy = (): GroupByOptions => this.get<GroupByOptions>('repogroupby', 'none');
     setRepoGroupBy = (value: GroupByOptions): void => this.set<GroupByOptions>('repogroupby', value);
 
+    getDefaultPath = (): string => this.get<string>('defaultpath', '');
+    setDefaultPath = (value: string): void => this.set<string>('defaultpath', value);
+
     // getGridCount = (): number => this.get<number>('gridcount', 10);
     // setGridCount = (value: number): void => this.save<number>('gridcount', value);
 

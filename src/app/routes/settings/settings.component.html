@@ -37,6 +37,19 @@
                     It is recommended to have a size of 300.
                 </cds-control-message>
             </cds-input>
+
+            <cds-input-group layout="vertical">
+                <label>Default clone path</label>
+                <cds-input cds-layout="m-r:xs">
+                    <label>Path</label>
+                    <input type="text" name="path" [(ngModel)]="defaultPath" />
+                </cds-input>
+                <cds-file cds-layout="align:shrink">
+                    <label>Select path</label>
+                    <input type="folder" (click)="openDialog()" />
+                </cds-file>
+            </cds-input-group>
+
         </cds-form-group>
         <p cds-text="title" cds-layout="m-t:none m-b:lg">Git global user</p>
         <cds-form-group card layout="horizontal" cds-layout="m-b:lg">

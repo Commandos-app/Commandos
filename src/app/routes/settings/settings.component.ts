@@ -5,6 +5,7 @@ import { DOCUMENT } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { UserConfig, RepositoryService } from '@routes/repository/repository.service';
 import { sleep, LoadingState } from '@shared/functions';
+import { selectFolder } from '@shared/functions';
 
 @Component({
     selector: 'app-settings',
@@ -21,11 +22,13 @@ export class SettingsComponent implements OnInit {
     paneSize: number;
     darkMode: boolean;
     diffFormate: boolean;
+    defaultPath: string;
     user: UserConfig = {
         name: '',
         email: '',
         global: true
     };
+
     saveState: LoadingState = 'default';
 
     constructor(
@@ -40,6 +43,7 @@ export class SettingsComponent implements OnInit {
         this.autoFetch = this.storeService.getAutoFetch();
         this.darkMode = this.storeService.getDarkMode();
         this.paneSize = this.storeService.getPaneSize();
+        this.defaultPath = this.storeService.getDefaultPath();
         this.diffFormate = this.storeService.getDiffOutputFormat() === 'side-by-side';
         this.user = await this.repositoryService.loadGlobalUserConfig();
         this.settingsForm.form.markAsPristine();
@@ -55,6 +59,7 @@ export class SettingsComponent implements OnInit {
         this.storeService.setAutoFetch(this.autoFetch);
         this.storeService.setDarkMode(this.darkMode);
         this.storeService.setPaneSize(this.paneSize);
+        this.storeService.setDefaultPath(this.defaultPath);
         this.storeService.setDiffOutputFormat(this.diffFormate ? 'side-by-side' : 'line-by-line');
 
         if (this.darkMode) {
@@ -73,6 +78,15 @@ export class SettingsComponent implements OnInit {
         this.saveState = 'default';
 
         this.ngOnInit();
+    }
+
+
+    async openDialog(): Promise<void> {
+        const { path } = await selectFolder();
+        if (path) {
+            this.defaultPath = path;
+            this.settingsForm.form.markAsDirty();
+        }
     }
 
 }
