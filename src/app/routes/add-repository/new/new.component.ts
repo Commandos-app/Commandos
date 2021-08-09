@@ -54,7 +54,7 @@ export class NewComponent implements OnInit {
 
     // eslint-disable-next-line @typescript-eslint/require-await
     private async initializeGitRepo() {
-        this.logger.warn('TODO Implement initializeGitRepo');
+        return this.repositoryService.initRepository(this.path);
         // return this.electron.git.Repository.init(this.branchPath, 0);
     }
 

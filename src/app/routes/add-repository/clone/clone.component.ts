@@ -47,7 +47,7 @@ export class CloneComponent implements OnInit {
         let name = basename(path);
         name = name.replace('.git', '');
         this.path = `${this.path}/${name}`;
-        this.name = name.charAt(0).toUpperCase() + name.slice(1);;
+        this.name = name.charAt(0).toUpperCase() + name.slice(1);
     }
 
 
@@ -62,7 +62,7 @@ export class CloneComponent implements OnInit {
 
     async clone(): Promise<void> {
         this.logger.info(`Cloning repository ${this.url} to ${this.path}`);
-        const nextId = await this.repositoriesSettingsService.cloneRepository(this.url, this.name, this.path);
+        const nextId = await this.repositoryService.cloneRepository(this.url, this.name, this.path);
 
         this.router.navigate(['/repository', nextId]);
     }

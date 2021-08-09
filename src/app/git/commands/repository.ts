@@ -3,10 +3,9 @@ import { GitResult, runGit } from "./base";
 
 
 
-export async function initRepository(url: string, path: string): Promise<GitResult> {
+export async function initRepository(path: string): Promise<GitResult> {
     const args = [
         'init',
-        url,
         path
     ];
 

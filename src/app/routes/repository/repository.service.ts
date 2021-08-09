@@ -6,7 +6,7 @@ import {
     createBranch, deleteLocalBranch, deleteRemoteBranch, getBranches, getCurrentBranch,
     getStatus, renameBranch, stageAll, stageFile, unstageAll,
     unstageFile, revertFile, checkout, commit, getLogMeta, getLogOfSha, getLogMetadataOfSha, getDiffOfFile, pull, push,
-    addOriginUrl, changeOriginUrl, getOriginUrl, getUserMail, getUsername, setUserMail, setUsername, removeOriginUrl, createBranchFromSha, pushWithSetUpstream, createBranchFromAnother
+    addOriginUrl, changeOriginUrl, getOriginUrl, getUserMail, getUsername, setUserMail, setUsername, removeOriginUrl, createBranchFromSha, pushWithSetUpstream, createBranchFromAnother, initRepository
 } from '@git/commands';
 import { parseBranches, parseCurrentBranch, parseLog, parseStatus } from '@git/parsers';
 import { IStatusResult, LogItem, ChangedFile, Branch, Branches } from '@git/model';
@@ -27,6 +27,8 @@ export type ChangeBranch = {
 };
 
 export type UserConfig = { name: string; email: string, global: boolean };
+
+import { cloneRepository } from '@git/commands';
 
 @Injectable({
     providedIn: 'root'
@@ -225,6 +227,19 @@ export class RepositoryService {
 
     //#endregion
 
+    //#region Repository
+
+
+    async cloneRepository(url: string, name: string, path: string) {
+        await cloneRepository(url, path);
+        return this.repositoriesSettingsService.addRepository({ name, path });
+    }
+
+    async initRepository(url: string): Promise<GitResult> {
+        return await initRepository(url);
+    }
+
+    //#endregion
 
 
     //#region History
