@@ -2,7 +2,7 @@ import { FieldDefinition, RegisterCommandOptions } from '@shared/components';
 import { ICommand, CommanderService, CommanderModalService } from '@shared/services';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { createBranch, deleteLocalBranch, push, pull, pruneRemote, createBranchFromAnother } from '@git/commands';
+import { createBranch, deleteLocalBranch, push, pull, pruneRemote, createBranchFromAnother, checkout } from '@git/commands';
 import { RepositorySetting } from '../store/store.types';
 import { GitResult } from '@git/commands/base';
 
@@ -28,6 +28,7 @@ export class GitService {
         this.registerSyncCommand();
         this.registerDeleteBranchCommand();
         this.registerCreateBranchCommand();
+        this.registerCheckoutBranchCommand();
         // this.registerMergeCommand();
         this.registerPruneRemoteCommand();
     }
@@ -64,7 +65,8 @@ export class GitService {
         const fields: Array<FieldDefinition> = [
             { type: 'repositories', label: 'Repositories', name: 'repo' },
             { type: 'branch', label: 'Base branch', name: 'from' },
-            { type: 'string', label: 'Name', name: 'name' }
+            { type: 'string', label: 'Name', name: 'name' },
+            { type: 'bool', label: 'Checkout', name: 'checkout' }
         ];
         this.registerCommand({ name, command, icon, fields });
     }
@@ -73,6 +75,17 @@ export class GitService {
         const name = 'Delete branch';
         const icon = 'trash';
         const command = 'executeDeleteBranch';
+        const fields: Array<FieldDefinition> = [
+            { type: 'repositories', label: 'Repositories', name: 'repo' },
+            { type: 'branch', label: 'Branch', name: 'name' }
+        ];
+        this.registerCommand({ name, command, icon, fields });
+    }
+
+    private registerCheckoutBranchCommand() {
+        const name = 'Checkout Branch';
+        const icon = 'checkout-16';
+        const command = 'executeCheckoutBranch';
         const fields: Array<FieldDefinition> = [
             { type: 'repositories', label: 'Repositories', name: 'repo' },
             { type: 'branch', label: 'Branch', name: 'name' }
@@ -146,10 +159,20 @@ export class GitService {
 
     private async executeCreateBranch(formData: any, repository: RepositorySetting): Promise<any> {
         if (formData.from) {
-            return createBranchFromAnother(formData.name, formData.from, repository.path);
+            await createBranchFromAnother(formData.name, formData.from, repository.path);
         } else {
-            return createBranch(formData.name, repository.path);
+            await createBranch(formData.name, repository.path);
         }
+
+        if (formData.checkout) {
+            this.executeCheckoutBranch(formData, repository);
+        }
+
+    }
+
+    private async executeCheckoutBranch(formData: any, repository: RepositorySetting): Promise<any> {
+        checkout(formData.name, repository.path);
+
     }
 
     private async executeSync(formData: any, repository: RepositorySetting): Promise<any> {
