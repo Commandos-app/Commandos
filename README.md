@@ -1,17 +1,10 @@
-# commandos
+# Commandos
+Commandos is a new GIT client with a lot of nice features.   
+One of the main features is to execute a git command in multiple repositories.
 
-## Debug
-- App: `ng serve`
-- Tauri: yarn tauri dev
+  
 
-## build tauri dev branch
-`powershell -ExecutionPolicy Bypass -File .\.scripts\setup.ps1`  
-or  
-    `git pull && cd ./api && yarn && yarn build && cd ../tauri/cli/tauri.js && yarn && yarn build
-    yarn add ../tauri/api --save`
+Commandos is currently in __Alpha__ version!
 
 
-### Save snippets:
-```package.json
-        // "postinstall": "patch-package"
-```
+> more comming soon

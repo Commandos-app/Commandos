@@ -11,7 +11,10 @@ use log4rs::{
   filter::threshold::ThresholdFilter,
 };
 use serde_repr::Deserialize_repr;
-use tauri::api::{path::{resolve_path, BaseDirectory::LocalData}, PackageInfo};
+use tauri::{
+  api::path::{resolve_path, BaseDirectory::LocalData},
+  PackageInfo,
+};
 
 #[derive(Deserialize_repr, Debug)]
 #[repr(u16)]
@@ -24,8 +27,16 @@ pub enum LogLevel {
 }
 
 pub fn init_log() {
-  let log_path =
-    resolve_path(&Default::default(), &PackageInfo { name: "app".into(), version: "1.0.0".into() },"commandos\\log", Some(LocalData)).expect("failed to resolve path");
+  let log_path = resolve_path(
+    &Default::default(),
+    &PackageInfo {
+      name: "app".into(),
+      version: "1.0.0".into(),
+    },
+    "commandos\\log",
+    Some(LocalData),
+  )
+  .expect("failed to resolve path");
   //   println!("{}", log_path.as_path().display().to_string());
   let path_str = log_path.as_path().display().to_string();
   let log_file_pattern = path_str.clone() + "\\log_{}.log";
