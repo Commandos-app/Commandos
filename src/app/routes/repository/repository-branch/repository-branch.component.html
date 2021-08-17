@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div cdkDropList (cdkDropListDropped)="drop($event)"
-                *ngFor="let branch of repositoryService.branches$ | async">
+                *ngFor="let branch of repositoryService.branches$ | async; let idx = index">
                 <!-- (cdkDragStarted)="dragStart()" (cdkDragEnded)="dragStop()" -->
                 <div class="commander-row commander-branches-row" cds-text="body" cdkDrag [cdkDragData]="branch"
                     [ngClass]="{'current-branch': branch.current}">
@@ -26,8 +26,8 @@
 
                     <div class="action custom-padding">
                         <ng-container *ngIf="!branch.current">
-                            <cds-icon shape="download" [ngxTippy]="checkoutTemplate" tippyName="template-ref"
-                                [tippyProps]="templateRef"></cds-icon>
+                            <cds-icon shape="download" [ngxTippy]="checkoutTemplate"
+                                tippyName="template-ref-checkout-{{idx}}" [tippyProps]="templateRef"></cds-icon>
                             <div #checkoutTemplate class="comander-tooltip">
                                 <div class="center-text">
                                     Checkout branch?&nbsp;&nbsp;&nbsp;
@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="action custom-padding">
-                        <cds-icon shape="note" [ngxTippy]="renameTemplate" tippyName="template-ref"
+                        <cds-icon shape="note" [ngxTippy]="renameTemplate" tippyName="template-ref-rename-{{idx}}"
                             [tippyProps]="templateRef">
                         </cds-icon>
 
@@ -60,7 +60,7 @@
 
                     <div class="action custom-padding">
                         <ng-container *ngIf="!branch.current">
-                            <cds-icon shape="trash" [ngxTippy]="deleteTemplate" tippyName="template-ref"
+                            <cds-icon shape="trash" [ngxTippy]="deleteTemplate" tippyName="template-ref-delete-{{idx}}"
                                 [tippyProps]="templateRef">
                             </cds-icon>
                             <div #deleteTemplate class="comander-tooltip">
