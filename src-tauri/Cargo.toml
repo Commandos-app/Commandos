@@ -23,11 +23,10 @@ log4rs = { version = "1.0.0", features = [
   "fixed_window_roller"
 ] }
 log = { version = "0.4.0", features = [ "std" ] }
-tauri = { version = "1.0.0-beta.5", features = ["api-all", "updater"] }
-# , "system-tray", "menu"
 
-[patch.crates-io]
-wry = { git = "https://github.com/tauri-apps/wry", rev = "e28bcce0884937365013fda3098f64f9956d569f" }
+  [dependencies.tauri]
+  version = "1.0.0-beta.7"
+features = ["api-all", "updater"]
 
 [features]
 default = [ "custom-protocol" ]
