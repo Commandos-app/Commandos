@@ -12,7 +12,9 @@ export class StoreService {
     //  private store: Store;
 
     private fileName = 'store.json'
-    private data: Settings = {};
+    private data: Settings = {
+        repositories: []
+    };
 
     constructor(
         private logger: LoggerService
