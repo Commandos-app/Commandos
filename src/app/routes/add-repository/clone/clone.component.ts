@@ -38,7 +38,7 @@ export class CloneComponent implements OnInit {
 
     ngOnInit(): void {
         this.repositoryService.unload();
-        this.path = this.storeService.getDefaultPath();
+        this.path = this.storeService.DefaultPath;
 
     }
 

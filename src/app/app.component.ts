@@ -63,7 +63,7 @@ export class AppComponent {
 
 
     private setDarkMode() {
-        if (this.storeService.getDarkMode()) {
+        if (this.storeService.DarkMode) {
             this.renderer.setAttribute(this.document.body, 'cds-theme', 'dark');
         }
         else {
@@ -109,13 +109,13 @@ export class AppComponent {
     }
 
     private toggleDarkMode(command: ICommand): void {
-        this.storeService.setDarkMode(!this.storeService.getDarkMode());
+        this.storeService.DarkMode = !this.storeService.DarkMode;
         this.storeService.saveSettings();
         command.icon = this.getDarkModeIcon();
         this.setDarkMode();
     }
 
     private getDarkModeIcon(): string {
-        return this.storeService.getDarkMode() ? 'sun' : 'moon';
+        return this.storeService.DarkMode ? 'sun' : 'moon';
     }
 }

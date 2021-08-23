@@ -24,7 +24,7 @@ export class RepositoriesSettingsService {
 
         const repo: RepositorySetting = { id: nextId, name, path, tags: [] };
         repos.push(repo);
-        this.store.setRepositories(repos);
+        this.store.Repositories = repos;
         this.store.saveSettings();
         return nextId;
     }
@@ -32,15 +32,15 @@ export class RepositoriesSettingsService {
     removeRepository(id: number): void {
         const repos = this.getRepositories();
         const newRepos = repos.filter(r => r.id !== id);
-        this.store.setRepositories(newRepos);
+        this.store.Repositories = newRepos;
     }
 
     getRepositories(): RepositoriesSettings {
-        return this.store.getRepositories();
+        return this.store.Repositories;
     }
 
     getRepositoriesByTag(tag: string): RepositoriesSettings {
-        const repos = this.store.getRepositories();
+        const repos = this.store.Repositories;
         return repos.filter(r => r.tags && r.tags.includes(tag));
     }
 
@@ -54,13 +54,13 @@ export class RepositoriesSettingsService {
         const repos = this.getRepositories();
         const repo = repos.find(r => r.id === id);
         repo.tags = tags;
-        this.store.setRepositories(repos);
+        this.store.Repositories = repos;
     }
 
     saveRepo(repo: RepositorySetting): void {
         const allRepos = this.getRepositories();
         const idxRepo = allRepos.findIndex(r => r.id === repo.id);
         allRepos[idxRepo] = repo;
-        this.store.setRepositories(allRepos);
+        this.store.Repositories = allRepos;
     }
 }

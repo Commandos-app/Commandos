@@ -1,7 +1,7 @@
 {
     "package": {
         "productName": "Commandos",
-        "version": "0.7.2"
+        "version": "0.7.3"
     },
     "build": {
         "distDir": "../dist/commandos",
@@ -49,7 +49,7 @@
         "updater": {
             "active": true,
             "endpoints": [
-                "https://commandos-updater.deno.dev/{{target}}/{{current_version}}"
+                "https://updater.commandos.dev/{{target}}/{{current_version}}"
             ],
             "dialog": true,
             "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDY5QzE0QTk4NjlBODA5NjAKUldSZ0NhaHBtRXJCYWRRaGhUanovZGxkM296ZWQ1dmhCam8yVk5Lc2REMjdFd2F5TnpkL0V0TUgK"
@@ -64,8 +64,8 @@
                 "height": 700,
                 "resizable": true,
                 "fullscreen": false,
-                "minWidth": 1000,
-                "minHeight": 700,
+                "minWidth": 800,
+                "minHeight": 400,
                 "visible": true,
                 "decorations": false
             }

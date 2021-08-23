@@ -1,6 +1,6 @@
 import * as GitPerf from '../git-perf';
 import { invoke } from '@tauri-apps/api/tauri';
-// import { Command } from '@tauri-apps/api/shell';
+import { Command } from '@tauri-apps/api/shell';
 
 // export async function runGit2(args: string[], path: string, name: string): Promise<any> {
 
@@ -49,11 +49,11 @@ export async function runGit(args: string[], path: string, name: string, global 
     }
     const commandName = `${name}: git ${args.join(' ')}`;
 
-    // const cmd = new Command('git', args);
-    // const result = await GitPerf.measure(commandName, () => cmd.execute())
-    const cmd = invoke<GitResult>('git', { args });
+    const cmd = new Command('git', args);
+    const result = await GitPerf.measure(commandName, () => cmd.execute())
+        // const cmd = invoke<GitResult>('git', { args });
 
-    const result = await GitPerf.measure(commandName, () => cmd)
+        // const result = await GitPerf.measure(commandName, () => cmd)
         .catch(err => {
             throw new Error(`Failed to execute ${name}: ${err.code}`);
         });
