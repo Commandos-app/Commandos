@@ -40,11 +40,11 @@ export class SettingsComponent implements OnInit {
     ) { }
 
     async ngOnInit(): Promise<void> {
-        this.autoFetch = this.storeService.getAutoFetch();
-        this.darkMode = this.storeService.getDarkMode();
-        this.paneSize = this.storeService.getPaneSize();
-        this.defaultPath = this.storeService.getDefaultPath();
-        this.diffFormate = this.storeService.getDiffOutputFormat() === 'side-by-side';
+        this.autoFetch = this.storeService.AutoFetch;
+        this.darkMode = this.storeService.DarkMode;
+        this.paneSize = this.storeService.PaneSize;
+        this.defaultPath = this.storeService.DefaultPath;
+        this.diffFormate = this.storeService.DiffOutputFormat === 'side-by-side';
         this.user = await this.repositoryService.loadGlobalUserConfig();
         this.settingsForm.form.markAsPristine();
     }
@@ -56,11 +56,11 @@ export class SettingsComponent implements OnInit {
 
     async save(): Promise<void> {
         this.saveState = 'loading';
-        this.storeService.setAutoFetch(this.autoFetch);
-        this.storeService.setDarkMode(this.darkMode);
-        this.storeService.setPaneSize(this.paneSize);
-        this.storeService.setDefaultPath(this.defaultPath);
-        this.storeService.setDiffOutputFormat(this.diffFormate ? 'side-by-side' : 'line-by-line');
+        this.storeService.AutoFetch = this.autoFetch;
+        this.storeService.DarkMode = this.darkMode;
+        this.storeService.PaneSize = this.paneSize;
+        this.storeService.DefaultPath = this.defaultPath;
+        this.storeService.DiffOutputFormat = this.diffFormate ? 'side-by-side' : 'line-by-line';
 
         if (this.darkMode) {
             this.renderer.setAttribute(this.document.body, 'cds-theme', 'dark');

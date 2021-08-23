@@ -41,7 +41,7 @@ export class RepositoryCommitComponent implements OnInit {
         this.repositoryService.loaded$.pipe(filter(x => x), first()).subscribe(() => {
             this.load();
         });
-        if (this.storeService.getAutoFetch()) {
+        if (this.storeService.AutoFetch) {
             interval(10000)
                 .pipe(
                     untilDestroyed(this),

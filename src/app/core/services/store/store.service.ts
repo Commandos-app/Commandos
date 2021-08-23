@@ -4,12 +4,22 @@ import { createDir, readDir, readTextFile, writeFile } from '@tauri-apps/api/fs'
 import { localDataDir } from '@tauri-apps/api/path';
 import { DiffFormate, GroupByOptions, RepositoriesSettings, Settings } from './store.types';
 import { sortByProperty } from '@shared/functions';
+import { Store } from './store.decorator';
 
 @Injectable({
     providedIn: 'root'
 })
 export class StoreService {
-    //  private store: Store;
+
+    @Store([]) Repositories: RepositoriesSettings;
+    @Store(false) DarkMode: boolean;
+    @Store(300) PaneSize: number
+    @Store(true) AutoFetch: boolean;
+    @Store('none') RepoGroupBy: GroupByOptions;
+    @Store('') DefaultPath: string
+    @Store('line-by-line') DiffOutputFormat: DiffFormate;
+    @Store([]) Tags: Array<string>;
+
 
     private fileName = 'store.json'
     private data: Settings = {
@@ -86,32 +96,5 @@ export class StoreService {
         this.saveSettings();
         // this.store.set(prop.toLowerCase(), value);
     }
-
-    getRepositories = (): RepositoriesSettings => this.get<RepositoriesSettings>('repositories', []);
-    setRepositories = (value: RepositoriesSettings): void => this.set<RepositoriesSettings>('repositories', value);
-
-    getDarkMode = (): boolean => this.get<boolean>('darkmode', false);
-    setDarkMode = (value: boolean): void => this.set<boolean>('darkmode', value);
-
-    getPaneSize = (): number => this.get<number>('panesize', 300);
-    setPaneSize = (value: number): void => this.set<number>('panesize', value);
-
-    getAutoFetch = (): boolean => this.get<boolean>('autofetch', true);
-    setAutoFetch = (value: boolean): void => this.set<boolean>('autofetch', value);
-
-    getRepoGroupBy = (): GroupByOptions => this.get<GroupByOptions>('repogroupby', 'none');
-    setRepoGroupBy = (value: GroupByOptions): void => this.set<GroupByOptions>('repogroupby', value);
-
-    getDefaultPath = (): string => this.get<string>('defaultpath', '');
-    setDefaultPath = (value: string): void => this.set<string>('defaultpath', value);
-
-    // getGridCount = (): number => this.get<number>('gridcount', 10);
-    // setGridCount = (value: number): void => this.save<number>('gridcount', value);
-
-    getDiffOutputFormat = (): DiffFormate => this.get<DiffFormate>('diffoutputformat', 'line-by-line');
-    setDiffOutputFormat = (value: DiffFormate): void => this.set<DiffFormate>('diffoutputformat', value);
-
-    getTags = (): Array<string> => this.get<Array<string>>('tags', []);
-    setTags = (value: Array<string>): void => this.set<Array<string>>('tags', value);
 
 }

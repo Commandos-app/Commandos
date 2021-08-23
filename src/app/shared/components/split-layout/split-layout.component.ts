@@ -15,7 +15,7 @@ export class SplitLayoutComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.paneSize = this.storeService.getPaneSize();
+        this.paneSize = this.storeService.PaneSize;
     }
 
 }

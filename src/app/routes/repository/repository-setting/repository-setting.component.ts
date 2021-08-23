@@ -40,7 +40,7 @@ export class RepositorySettingComponent implements OnInit {
     }
 
     async load(): Promise<void> {
-        this.tags = this.storeService.getTags();
+        this.tags = this.storeService.Tags;
         this.selectedTags = this.repositoryService.repositorySetting.tags;
         this.path = this.repositoryService.repositorySetting.path;
         this.name = this.repositoryService.repositorySetting.name;
@@ -68,7 +68,7 @@ export class RepositorySettingComponent implements OnInit {
 
         const tagSet = new Set([...this.tags, ...this.selectedTags!]);
         const newTags = [...tagSet];
-        this.storeService.setTags(newTags);
+        this.storeService.Tags = newTags;
         await this.storeService.saveSettings();
 
         if (!this.user.global) {

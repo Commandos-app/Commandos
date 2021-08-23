@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
         this.repositoryService.unload();
         this.loadRepos();
         this.repositoryService.clearUIBranches();
-        const groupValue = this.storeService.getRepoGroupBy();
+        const groupValue = this.storeService.RepoGroupBy;
         this.group(groupValue);
     }
 
@@ -133,8 +133,7 @@ export class HomeComponent implements OnInit {
             case 'tags': this.groupTags(); break;
             case 'folder': this.groupFolder(); break;
         }
-        this.storeService.setRepoGroupBy(type);
-
+        this.storeService.RepoGroupBy = type;
     }
 
     private groupFolder() {

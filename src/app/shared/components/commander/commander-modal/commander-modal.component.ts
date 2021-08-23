@@ -112,7 +112,7 @@ export class CommanderModalComponent implements OnInit {
     }
 
     private loadTags(): void {
-        const tags = this.storeService.getTags();
+        const tags = this.storeService.Tags;
         const mapedTags = tags.map<SelectedRepositoryTypes>(tag => ({ type: 'Tag', text: tag }));
 
         this.items.push(...mapedTags);

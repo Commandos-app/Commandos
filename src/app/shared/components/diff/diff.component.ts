@@ -18,7 +18,7 @@ export class DiffComponent implements OnInit {
     @Input()
     set data(value: string) {
         if (value) {
-            this.outputFormat = this.storeService.getDiffOutputFormat();
+            this.outputFormat = this.storeService.DiffOutputFormat;
             this.diff = gitDiffParser.parse(value);
         }
     }
@@ -29,7 +29,7 @@ export class DiffComponent implements OnInit {
     }
 
     setMode($event: any) {
-        this.storeService.setDiffOutputFormat($event);
+        this.storeService.DiffOutputFormat = $event;
         this.outputFormat = $event;
     }
 
