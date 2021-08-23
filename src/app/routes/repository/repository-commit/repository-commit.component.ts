@@ -88,13 +88,13 @@ export class RepositoryCommitComponent implements OnInit {
     }
 
     private checkPath(file: GroupedChangedFile, gen: Generator<GroupedChangedFile, any, undefined>) {
-        if (file.type === 'path' && file.children.length > 0 && !file.children.some(x => x.type === 'file')) {
+        if (file.type === 'path' && file.children.length === 1) {
             let { value: nextFile } = gen.next();
             if (nextFile.type === 'path') {
                 file.name = `${file.name}/${nextFile.name}`;
                 file.path = `${file.path}${nextFile.path}`;
                 file.children = [...nextFile.children];
-                // this.checkPath(file, gen);
+                this.checkPath(file, gen);
             }
         }
     }
