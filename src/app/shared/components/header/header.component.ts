@@ -11,7 +11,7 @@ import { ErrorService, TauriService } from '@core/services';
 export class HeaderComponent implements OnInit {
 
     isMaximised = false;
-    isOpen = false;
+    isMenuOpen = false;
     version = '0.0.1';
 
     constructor(
@@ -45,6 +45,7 @@ export class HeaderComponent implements OnInit {
 
     pin() {
         this.tauriService.tooglePin();
+        this.isMenuOpen = false;
     }
 
     closeClient(): void {
@@ -53,6 +54,6 @@ export class HeaderComponent implements OnInit {
 
     goto(page: string) {
         this.router.navigate([page]);
-        this.isOpen = false;
+        this.isMenuOpen = false;
     }
 }

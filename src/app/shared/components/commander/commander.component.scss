@@ -5,15 +5,18 @@
 .command-input-container {
     padding: 8px;
     text-align: center;
+
     .command-input {
-        width: 50%;
+        width: 60%;
         margin: 0 auto;
         background: rgba(255, 255, 255, 0.2);
         display: grid;
         grid-template-columns: 34px auto;
+
         cds-icon {
             margin: 9px;
         }
+
         input {
             border: 0; //1px solid rgba(0, 0, 0, 0.1);
             background: transparent;
@@ -37,6 +40,7 @@
 .command {
     padding: 2px 10px;
     cursor: pointer;
+
     &.selected {
         background: var(--cds-alias-object-border-color-shade); // #e8e8e8;
     }
