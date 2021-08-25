@@ -1,7 +1,7 @@
 import { logFormaterObject } from "../model";
 import { GitResult, runGit } from "./base";
 
-export async function getLogMeta(repository: string, branch = 'HEAD', limit = 100): Promise<GitResult> {
+export async function getLogMeta(repository: string, branch = 'HEAD', limit = 100, skip: number = 0): Promise<GitResult> {
 
     const format = Object.values(logFormaterObject).join('%x00');
 
@@ -9,6 +9,7 @@ export async function getLogMeta(repository: string, branch = 'HEAD', limit = 10
         'log',
         branch,
         '--date=iso-local',
+        `--skip=${skip}`,
         `--max-count=${limit}`,
         '-z',
         `--format=${format}`,

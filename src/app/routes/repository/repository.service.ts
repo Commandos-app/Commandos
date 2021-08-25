@@ -243,8 +243,8 @@ export class RepositoryService {
 
 
     //#region History
-    async getHistroy(branch = 'HEAD'): Promise<Array<LogItem>> {
-        const log = await getLogMeta(this.getPath(), branch);
+    async getHistroy(branch = 'HEAD', skip: number = 0): Promise<Array<LogItem>> {
+        const log = await getLogMeta(this.getPath(), branch, 20, skip);
         const result = parseLog(log?.stdout);
 
         return result;
