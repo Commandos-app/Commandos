@@ -232,7 +232,6 @@ export class RepositoryService {
             await push(this.getPath());
         }
     }
-
     //#endregion
 
     //#region Repository
@@ -244,7 +243,6 @@ export class RepositoryService {
     async initRepository(url: string): Promise<GitResult> {
         return await initRepository(url);
     }
-
     //#endregion
 
     //#region History
