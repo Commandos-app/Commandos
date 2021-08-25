@@ -1,7 +1,8 @@
-import { GroupedChangedFile } from './../../../git/model/file';
+import { NgForm } from '@angular/forms';
+import { GroupedChangedFile } from '@git/model/file';
 import { IStatusResult, TreeObject, ChangedFile, GroupedChangedFiles } from '@git/model';
 import { LoggerService } from '@core/services/logger/logger.service';
-import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { StoreService } from '@core/services';
 import { RepositoryService } from '../repository.service';
 import { filter, first } from 'rxjs/operators';
@@ -16,6 +17,8 @@ import { basename, sleep, LoadingState } from '@shared/functions';
     styleUrls: ['./repository-commit.component.scss']
 })
 export class RepositoryCommitComponent implements OnInit {
+
+    @ViewChild('myForm') commitForm: NgForm;
 
     fileTree: GroupedChangedFiles = [];
     formDisabled = false;
@@ -195,6 +198,7 @@ export class RepositoryCommitComponent implements OnInit {
         await this.load();
 
         this.repositoryService.loadAheadBehindOfCurrentBranch();
+        this.commitForm.resetForm();
         // TODO Refactor this somehow!
         await sleep(300);
         this.isCommiting = 'success';
