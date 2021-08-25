@@ -25,8 +25,8 @@ log4rs = { version = "1.0.0", features = [
 log = { version = "0.4.0", features = [ "std" ] }
 
   [dependencies.tauri]
-  version = "1.0.0-beta.7"
-features = ["api-all", "updater"]
+  version = "1.0.0-beta.8"
+  features = ["api-all", "updater"]
 
 [features]
 default = [ "custom-protocol" ]
