@@ -5,7 +5,7 @@ import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router'
 import { Component, OnInit } from '@angular/core';
 import { filter, first } from 'rxjs/operators';
 import { RepositoriesSettingsService } from '@core/services';
-import { sleep } from '@shared/functions';
+import { sleep, LoadingState } from '@shared/functions';
 import { FieldDefinition } from '..';
 
 type NewBranch = {
@@ -27,7 +27,7 @@ export class SubnavComponent implements OnInit {
     currentId = 0;
     branches: branches = [];
     repositories: any[];
-    isSyncing: boolean = false;
+    isSyncing: LoadingState = 'default';
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -86,14 +86,14 @@ export class SubnavComponent implements OnInit {
     }
 
     async sync($event: Event) {
-        this.isSyncing = true;
+        this.isSyncing = 'loading';
         $event.preventDefault();
         $event.stopPropagation();
         await this.repositoryService.sync();
         this.commanderService.reloadData();
         this.repositoryService.loadAheadBehindOfCurrentBranch();
         await sleep(1000);
-        this.isSyncing = false;
+        this.isSyncing = 'default';
     }
 
     private getPathArray(route: ActivatedRouteSnapshot): Array<string | undefined> {

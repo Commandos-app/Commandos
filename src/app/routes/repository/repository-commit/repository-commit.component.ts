@@ -25,8 +25,7 @@ export class RepositoryCommitComponent implements OnInit {
     commitMessage = '';
     private hasStaged = false;
     isDiffLoading = false;
-    isLoading = false;
-
+    isLoading: LoadingState = 'default';
     isCommiting: LoadingState = 'default';
 
     fileDiff: string;
@@ -60,7 +59,7 @@ export class RepositoryCommitComponent implements OnInit {
 
 
     async load(): Promise<void> {
-        this.isLoading = true;
+        this.isLoading = 'loading';
         this.logger.info('Reload commit data');
         const files = await this.repositoryService.getStatus();
         const filesUnstaged = this.groupChangedFiles(files.filter(file => !file.isStaged), 'Changes', false);
@@ -74,7 +73,7 @@ export class RepositoryCommitComponent implements OnInit {
 
         this.formDisabled = this.fileTree.length === 0;
         this.hasStaged = filesStagedSorted?.children?.length > 0;
-        this.isLoading = false;
+        this.isLoading = 'default';
     }
 
     private flattenTree(fileTree: GroupedChangedFiles): GroupedChangedFiles {
