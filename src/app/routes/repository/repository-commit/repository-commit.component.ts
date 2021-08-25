@@ -194,7 +194,7 @@ export class RepositoryCommitComponent implements OnInit {
         this.commitMessage = '';
         await this.load();
 
-        // this.repositoryService.
+        this.repositoryService.loadAheadBehindOfCurrentBranch();
         // TODO Refactor this somehow!
         await sleep(300);
         this.isCommiting = 'success';
