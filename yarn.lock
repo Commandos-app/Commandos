@@ -1121,10 +1121,10 @@
     "@babel/helper-validator-identifier" "^7.14.5"
     to-fast-properties "^2.0.0"
 
-"@cds/angular@^5.4.1":
-  version "5.4.1"
-  resolved "https://registry.yarnpkg.com/@cds/angular/-/angular-5.4.1.tgz#cd04ad221e191714cb42cb9e623f35d54d6c70e0"
-  integrity sha512-1HBBIKMT4CjSLKAvf352E8Cd8m8pU/ZL0leB+AT5GerixVA49yrOxQ+1ZVr7c2jrryyBsHu9vHhBms1Yx+fJgA==
+"@cds/angular@^5.5.2":
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/@cds/angular/-/angular-5.5.2.tgz#bd573f9b75da754d03c7c3436e11de86d280c574"
+  integrity sha512-v6+IUuiQSAosbzEmbEIv16AZkm71gUQ2zdMtW/R+eK+pyM0Ogp7tmQ3iwHGla8dpd3+VB9zdWHPB139pLAS1bA==
   dependencies:
     jsdom "^16.5.3"
     tslib "^2.0.0"
@@ -1134,10 +1134,10 @@
   resolved "https://registry.yarnpkg.com/@cds/city/-/city-1.1.0.tgz#5b7323750d3d64671ce2e3a804bcf260fbea1154"
   integrity sha512-S9K+Q39BGOghyLHmR0Wdcmu1i1noSUk8HcvMj+3IaohZw02WFd99aPTQDHJeseXrXZP3CNovaSlePI0R11NcFg==
 
-"@cds/core@^5.4.1":
-  version "5.4.1"
-  resolved "https://registry.yarnpkg.com/@cds/core/-/core-5.4.1.tgz#4dc56b160c1a6ab7c968de9fcc1ff1d64f780d0e"
-  integrity sha512-7RhtrMx5UM6xCU+2l9T7E/MBZ+nDqGGyzOLz9EhscKjurIJQrGTPAIwgomJNZ22W2Gw+S36+v/R62y4uStQFTg==
+"@cds/core@^5.5.2":
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/@cds/core/-/core-5.5.2.tgz#916631e1c815e226d3b2f8137b4d13f889183131"
+  integrity sha512-QdHQ7VEStmJd8KYQNFFak5yWnj8asZ8mXLJPN/y76xenlkYrIl3P1Ui6QsjCjLcBUfprsCILX1yyyr4gcY1nmw==
   dependencies:
     lit "2.0.0-rc.2"
     ramda "^0.27.1"
@@ -1145,7 +1145,7 @@
   optionalDependencies:
     "@cds/city" "^1.1.0"
     "@types/resize-observer-browser" "^0.1.5"
-    normalize.css "^8.0.1"
+    modern-normalize "1.1.0"
 
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
@@ -6752,6 +6752,11 @@ mkdirp@^1.0.3, mkdirp@^1.0.4, mkdirp@~1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
+
+modern-normalize@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/modern-normalize/-/modern-normalize-1.1.0.tgz#da8e80140d9221426bd4f725c6e11283d34f90b7"
+  integrity sha512-2lMlY1Yc1+CUy0gw4H95uNN7vjbpoED7NNRSBHE25nWfLBdmMzFCsPshlzbxHz+gYMcBEUN8V4pU16prcdPSgA==
 
 ms@2.0.0:
   version "2.0.0"
