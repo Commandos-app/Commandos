@@ -1,6 +1,6 @@
 {
     "name": "commandos",
-    "version": "0.7.4",
+    "version": "0.7.5",
     "description": "Commandos is a multi git repo client",
     "scripts": {
         "preinstall": "npx only-allow yarn",
@@ -16,7 +16,8 @@
         "build:prod:sme": "ng build --configuration production --sourceMap=true",
         "build:release": "yarn run build:prod && yarn tauri build",
         "build:release:debug": "yarn run build:prod && yarn tauri build --debug",
-        "postinstall": "patch-package"
+        "postinstall": "patch-package",
+        "release": "standard-version"
     },
     "private": true,
     "dependencies": {
@@ -70,6 +71,7 @@
         "karma-jasmine": "~4.0.0",
         "karma-jasmine-html-reporter": "^1.5.0",
         "protractor": "~7.0.0",
+        "standard-version": "^9.3.1",
         "ts-node": "~8.3.0",
         "tslint": "~6.1.0",
         "typescript": "~4.2.4"
