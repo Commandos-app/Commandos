@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### Features
 
 * added loading more history entries ([91d8c46](https://github.com/Commandos-app/Commandos/commit/91d8c46b24a8666969765112d68a11060281d4d1)), closes [#16](https://github.com/Commandos-app/Commandos/issues/16)
-* colapsable tree view ([a2f4ee7](https://github.com/Commandos-app/Commandos/commit/a2f4ee73b7175cf6587124c7c64058fd888ca39b))
+* collapsible tree view ([a2f4ee7](https://github.com/Commandos-app/Commandos/commit/a2f4ee73b7175cf6587124c7c64058fd888ca39b))
 
 
 ### Bug Fixes
