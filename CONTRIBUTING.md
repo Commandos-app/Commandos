@@ -5,7 +5,7 @@ email, or any other method with the owners of this repository before making a ch
 
 Please note we have a [code of conduct](CODE_OFCONDUCT.md), please follow it in all your interactions with the project.
 
-<br />
+
 
 ## Commit guidelines
 We use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) to ensure that our commits are in a consistent format.
@@ -23,7 +23,7 @@ The commit message should be structured as follows:
 ```
 ---
 
-<br />
+
 The commit contains the following structural elements, to communicate intent to the
 consumers of your library:
 
@@ -37,11 +37,11 @@ A BREAKING CHANGE can be part of commits of any _type_.
   [git trailer format](https://git-scm.com/docs/git-interpret-trailers).
 
 Additional types are not mandated by the Conventional Commits specification, and have no implicit effect in Semantic Versioning (unless they include a BREAKING CHANGE).
-<br /><br />
+
 A scope may be provided to a commit's type, to provide additional contextual information and is contained within parenthesis, e.g., `feat(parser): add ability to parse arrays`.
 
 
-<br />
+
 
 ## Pull Request Process
 
