@@ -3,7 +3,7 @@
     <commander-split-layout>
         <div class="commander-commit-area" sidebar>
             <div class="commander-commit-message-box" cds-layout="m-b:sm">
-                <form #form="ngForm">
+                <form #myForm="ngForm">
                     <cds-form-group layout="vertical">
                         <cds-textarea cds-layout="vertical p-l:xs p-r:xs">
                             <label></label>
@@ -18,8 +18,8 @@
                             Commit
                         </cds-button>
                         <cds-icon-button (click)="load()" size="sm" action="flat" cds-layout="m-r:sm"
-                            aria-label="refresh">
-                            <cds-icon shape="refresh" size="14" [class.spin]="isLoading"></cds-icon>
+                            aria-label="refresh" [loadingState]="isLoading">
+                            <cds-icon shape="refresh" size="14"></cds-icon>
                         </cds-icon-button>
                     </div>
                 </form>

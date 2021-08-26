@@ -1,7 +1,8 @@
-import { GroupedChangedFile } from './../../../git/model/file';
+import { NgForm } from '@angular/forms';
+import { GroupedChangedFile } from '@git/model/file';
 import { IStatusResult, TreeObject, ChangedFile, GroupedChangedFiles } from '@git/model';
 import { LoggerService } from '@core/services/logger/logger.service';
-import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { StoreService } from '@core/services';
 import { RepositoryService } from '../repository.service';
 import { filter, first } from 'rxjs/operators';
@@ -17,13 +18,14 @@ import { basename, sleep, LoadingState } from '@shared/functions';
 })
 export class RepositoryCommitComponent implements OnInit {
 
+    @ViewChild('myForm') commitForm: NgForm;
+
     fileTree: GroupedChangedFiles = [];
     formDisabled = false;
     commitMessage = '';
     private hasStaged = false;
     isDiffLoading = false;
-    isLoading = false;
-
+    isLoading: LoadingState = 'default';
     isCommiting: LoadingState = 'default';
 
     fileDiff: string;
@@ -57,7 +59,7 @@ export class RepositoryCommitComponent implements OnInit {
 
 
     async load(): Promise<void> {
-        this.isLoading = true;
+        this.isLoading = 'loading';
         this.logger.info('Reload commit data');
         const files = await this.repositoryService.getStatus();
         const filesUnstaged = this.groupChangedFiles(files.filter(file => !file.isStaged), 'Changes', false);
@@ -71,7 +73,7 @@ export class RepositoryCommitComponent implements OnInit {
 
         this.formDisabled = this.fileTree.length === 0;
         this.hasStaged = filesStagedSorted?.children?.length > 0;
-        this.isLoading = false;
+        this.isLoading = 'default';
     }
 
     private flattenTree(fileTree: GroupedChangedFiles): GroupedChangedFiles {
@@ -194,6 +196,8 @@ export class RepositoryCommitComponent implements OnInit {
         this.commitMessage = '';
         await this.load();
 
+        this.repositoryService.loadAheadBehindOfCurrentBranch();
+        this.commitForm.resetForm();
         // TODO Refactor this somehow!
         await sleep(300);
         this.isCommiting = 'success';

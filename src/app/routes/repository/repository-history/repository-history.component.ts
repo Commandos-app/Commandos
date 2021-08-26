@@ -11,6 +11,7 @@ import { LogItem } from '@git/model';
 import { fromEvent, merge, Subscription } from 'rxjs';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
+import { IPageInfo } from 'ngx-virtual-scroller';
 
 
 @UntilDestroy()
@@ -22,8 +23,9 @@ import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
 export class RepositoryHistoryComponent implements OnInit {
 
     commits: Array<LogItem>;
-    commitsCount = 0;
     isChildRouteLoaded = false;
+    private skip = 0;
+    private allLoaded = false;
 
     @ViewChild('userMenu') userMenu: TemplateRef<any>;
     overlayRef: OverlayRef | null;
@@ -132,6 +134,15 @@ export class RepositoryHistoryComponent implements OnInit {
                 this.commanderModalService.closeModal();
                 sub.unsubscribe();
             });
+    }
+
+    async lastHistoryReached(event: IPageInfo) {
+        if (!this.allLoaded && this.commits && event.endIndex === this.commits.length - 1) {
+            this.skip += 20;
+            const newCommits = await this.repositoryService.getHistroy('HEAD', this.skip);
+            this.commits = [...this.commits, ...newCommits];
+            this.allLoaded = newCommits.length === 0
+        }
     }
 
     close() {

@@ -2,7 +2,7 @@
 
     <commander-split-layout>
         <ng-scrollbar class="virtual-scroll" sidebar>
-            <virtual-scroller scrollViewport #scroll [items]="commits">
+            <virtual-scroller scrollViewport #scroll [items]="commits" (vsEnd)="lastHistoryReached($event)">
                 <div *ngFor="let commit of scroll.viewPortItems" class="commander-list-item commander-history-item"
                     [routerLink]="[commit.sha]" routerLinkActive="commander-list-item-active"
                     (contextmenu)="openContext($event, commit)">

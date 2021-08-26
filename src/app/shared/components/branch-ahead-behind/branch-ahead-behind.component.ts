@@ -1,6 +1,5 @@
-import { Branch } from '@git/model';
-import { RepositoryService } from '@routes/repository/repository.service';
 import { Component, Input, OnInit } from '@angular/core';
+import { Branch } from '@git/model';
 
 @Component({
     selector: 'commander-branch-ahead-behind',
@@ -14,7 +13,6 @@ export class BranchAheadBehindComponent implements OnInit {
     @Input() branch: Branch;
 
     constructor(
-        private repositoryService: RepositoryService
     ) { }
 
     ngOnInit(): void {
