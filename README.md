@@ -7,7 +7,6 @@ Commandos is currently only available on Windows, we plan to add macOS and Linux
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-blue.svg)](https://conventionalcommits.org)
 
-<br />
 
 ## Table of Contents
 
@@ -15,9 +14,7 @@ Commandos is currently only available on Windows, we plan to add macOS and Linux
 - [Contributing](#contributing)
 - [Support + Feedback](#support--feedback)
 - [License](#license)
-   
 
-<br />
 
 ## Installation
 
@@ -34,9 +31,6 @@ npm run tauri dev
 npm ng serve
 ```
 
-<br />
-
-
 ## Contributing
 
 We appreciate feedback and contribution to this repo! Before you get started, please see the following:
@@ -44,14 +38,10 @@ We appreciate feedback and contribution to this repo! Before you get started, pl
 - [Contribution guide](CONTRIBUTING.md)
 
 
-<br />
-
 ## Support + Feedback
 
 Use Github issues to report bugs, or to ask questions.
 
-   
-<br />
 
 ## License
 
