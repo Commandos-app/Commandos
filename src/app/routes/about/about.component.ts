@@ -1,4 +1,4 @@
-import { environment } from '@env/environment';
+import { TauriService } from '@core/services';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
     version = 'not set!';
-    constructor() { }
+    constructor(
+        public tauriService: TauriService
+    ) { }
 
     ngOnInit(): void {
-        this.version = environment.version;
+        this.loadVersion();
     }
+
+    async loadVersion() {
+        const version = await this.tauriService.getVersion();
+        this.version = `v${version}`;
+    }
+
 
 }

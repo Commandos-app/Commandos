@@ -20,8 +20,8 @@ export class HeaderComponent implements OnInit {
         private cd: ChangeDetectorRef,
         private router: Router
     ) {
-        this.version = environment.version;
     }
+
 
     ngOnInit(): void {
         this.tauriService.windowState$
@@ -29,6 +29,12 @@ export class HeaderComponent implements OnInit {
                 this.isMaximised = state === 'maximized';
                 this.cd.detectChanges();
             });
+        this.loadVersion();
+    }
+
+    async loadVersion() {
+        const version = await this.tauriService.getVersion();
+        this.version = `v${version}${environment.versionPostfix}`;
     }
 
     minimize(): void {

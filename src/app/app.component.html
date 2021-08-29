@@ -22,3 +22,4 @@
     </footer> -->
 </div>
 <app-commander-modal *ngIf="commanderModalService.open"></app-commander-modal>
+<commandos-update-modal *ngIf="update && update.shouldUpdate" [update]="update"></commandos-update-modal>

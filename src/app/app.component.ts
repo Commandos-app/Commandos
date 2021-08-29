@@ -1,12 +1,11 @@
-import { CommanderModalService } from '@shared/services';
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
-import { ErrorService, LoggerService, GitService, StoreService, SplashScreenResolver } from '@core/services';
-import { TranslateService } from '@ngx-translate/core';
-import { CommanderService, ICommand } from '@shared/services';
-import { listen } from "@tauri-apps/api/event";
+import { ErrorService, GitService, LoggerService, StoreService, TauriService } from '@core/services';
 import { environment } from '@env/environment';
+import { TranslateService } from '@ngx-translate/core';
+import { CommanderModalService, CommanderService, ICommand } from '@shared/services';
+import { UpdateResult } from '@tauri-apps/api/updater';
 
 @Component({
     selector: 'commander-root',
@@ -15,6 +14,7 @@ import { environment } from '@env/environment';
 })
 export class AppComponent {
     devEnv: boolean = !environment.production;
+    update: UpdateResult;
 
     constructor(
         private translate: TranslateService,
@@ -27,6 +27,7 @@ export class AppComponent {
         private renderer: Renderer2,
         public commanderModalService: CommanderModalService,
         private storeService: StoreService,
+        private tauriService: TauriService
 
     ) {
         this.load();
@@ -56,9 +57,8 @@ export class AppComponent {
         this.registerSettingsCommand();
         this.registerNewRepoCommand();
 
-        listen("tauri://update-available", function (res) {
-            console.log("New version available: ", res);
-        });
+        this.update = await this.tauriService.checkUpdate();
+        console.log(`TCL: ~ file: app.component.ts ~ line 61 ~ AppComponent ~ load ~ this.update`, this.update);
     }
 
 

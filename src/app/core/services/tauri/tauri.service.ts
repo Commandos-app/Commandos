@@ -1,7 +1,8 @@
-import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { getVersion } from '@tauri-apps/api/app';
+import { checkUpdate, UpdateResult } from "@tauri-apps/api/updater";
 import { appWindow, getCurrent } from '@tauri-apps/api/window';
-
+import { BehaviorSubject } from 'rxjs';
 
 type WindowState = 'maximized' | 'minimized' | 'windowed';
 
@@ -48,5 +49,18 @@ export class TauriService {
     async tooglePin(): Promise<void> {
         this.isPinned = !this.isPinned;
         appWindow.setAlwaysOnTop(this.isPinned);
+    }
+
+    async getVersion(): Promise<string> {
+        return getVersion();
+    }
+
+    async checkUpdate(): Promise<UpdateResult> {
+        try {
+            return checkUpdate();
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
     }
 }
