@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SecurityContext } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { relaunch } from "@tauri-apps/api/process";
 import { installUpdate, UpdateResult } from '@tauri-apps/api/updater';
@@ -15,12 +15,16 @@ export class UpdateModalComponent implements OnInit {
     version: string;
     manifest: string;
 
+    @Output() close = new EventEmitter();
 
     @Input()
     public set update(value: UpdateResult) {
         this.version = value.manifest.version;
         const manifest = marked(value.manifest.body);
         this.manifest = this.domSanitizer.sanitize(SecurityContext.HTML, manifest);
+        this.manifest += this.manifest;
+        this.manifest += this.manifest;
+        this.manifest += this.manifest;
     }
 
 
@@ -37,6 +41,6 @@ export class UpdateModalComponent implements OnInit {
     }
 
     cancel() {
-
+        this.close.emit();
     }
 }

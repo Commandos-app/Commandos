@@ -15,6 +15,7 @@ import { UpdateResult } from '@tauri-apps/api/updater';
 export class AppComponent {
     devEnv: boolean = !environment.production;
     update: UpdateResult;
+    hasUpdate: boolean = false;
 
     constructor(
         private translate: TranslateService,
@@ -58,9 +59,12 @@ export class AppComponent {
         this.registerNewRepoCommand();
 
         this.update = await this.tauriService.checkUpdate();
-        console.log(`TCL: ~ file: app.component.ts ~ line 61 ~ AppComponent ~ load ~ this.update`, this.update);
+        this.hasUpdate = this.update.shouldUpdate;
     }
 
+    closeUpdate() {
+        this.hasUpdate = false;
+    }
 
     private setDarkMode() {
         if (this.storeService.DarkMode) {
