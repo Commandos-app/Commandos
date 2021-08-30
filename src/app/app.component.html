@@ -23,3 +23,6 @@
 </div>
 <app-commander-modal *ngIf="commanderModalService.open"></app-commander-modal>
 <commandos-update-modal *ngIf="hasUpdate" [update]="update" (close)="closeUpdate()"></commandos-update-modal>
+<div class="commandos-notification-container">
+    <commandos-notification></commandos-notification>
+</div>

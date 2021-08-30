@@ -5,6 +5,7 @@ import { ErrorService, GitService, LoggerService, StoreService, TauriService } f
 import { environment } from '@env/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { CommanderModalService, CommanderService, ICommand } from '@shared/services';
+import { listen } from '@tauri-apps/api/event';
 import { UpdateResult } from '@tauri-apps/api/updater';
 
 @Component({
@@ -58,8 +59,15 @@ export class AppComponent {
         this.registerSettingsCommand();
         this.registerNewRepoCommand();
 
+        listen<UpdateResult>("tauri://update-available", (res) => {
+            console.log(`TCL: ~ file: app.component.ts ~ line 63 ~ AppComponent ~ load ~ res`, res);
+
+        });
+
         this.update = await this.tauriService.checkUpdate();
+        console.log(`TCL: ~ file: app.component.ts ~ line 68 ~ AppComponent ~ load ~ this.update`, this.update);
         this.hasUpdate = this.update.shouldUpdate;
+
     }
 
     closeUpdate() {

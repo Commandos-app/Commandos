@@ -4,6 +4,7 @@
     padding: 2px 5px;
     border-radius: 3px;
     cursor: pointer;
+
     &:hover {
         background-color: rgba(0, 0, 0, 0.1);
     }
@@ -18,6 +19,7 @@
 .commander-layout {
     height: 100vh;
     overflow: hidden;
+
     .commander-header {
         background: var(--cds-global-color-blue-900);
         color: var(--cds-global-color-gray-0);
@@ -25,21 +27,25 @@
         flex-grow: initial;
         border-left: 1px solid var(--cds-global-color-blue-900);
         border-right: 1px solid var(--cds-global-color-blue-900);
+
         &.dev {
             background: var(--cds-global-color-red-900);
             border-left: 1px solid var(--cds-global-color-red-900);
             border-right: 1px solid var(--cds-global-color-red-900);
         }
     }
+
     .commander-navigation {
         border-left: 1px solid var(--cds-alias-object-border-color);
         border-right: 1px solid var(--cds-alias-object-border-color);
     }
+
     .commander-global-content {
         border-bottom: 1px solid var(--cds-alias-object-border-color);
         border-left: 1px solid var(--cds-alias-object-border-color);
         border-right: 1px solid var(--cds-alias-object-border-color);
     }
+
     .commander-footer {
         height: var(--commander-footer-height);
         flex-grow: initial;
@@ -47,10 +53,18 @@
         border-left: 1px solid var(--cds-alias-object-border-color);
         border-right: 1px solid var(--cds-alias-object-border-color);
     }
+
     .commander-scrollable-content {
         overflow-y: auto;
         justify-content: start;
         align-items: start;
         height: 100%;
     }
+}
+
+
+.commandos-notification-container {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
 }

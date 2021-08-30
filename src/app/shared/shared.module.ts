@@ -1,3 +1,4 @@
+import { NotificationComponent } from './components/notification/notification.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -46,6 +47,7 @@ const components = [
     BranchAheadBehindComponent,
     SelectHintComponent,
     UpdateModalComponent,
+    NotificationComponent,
     // Diff
     DiffComponent,
     DiffLineByLineComponent,
