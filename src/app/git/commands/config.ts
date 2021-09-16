@@ -63,7 +63,7 @@ export async function addOriginUrl(url: string, repository: string): Promise<Git
         'remote',
         'add',
         'origin',
-        url
+        url.trim()
     ];
 
     return await runGit(args, repository, 'getOriginUrl');
@@ -74,7 +74,7 @@ export async function changeOriginUrl(url: string, repository: string): Promise<
         'remote',
         'set-url',
         'origin',
-        url
+        url.trim()
     ];
 
     return await runGit(args, repository, 'getOriginUrl');

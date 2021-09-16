@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { createDir, readDir, readTextFile, writeFile } from '@tauri-apps/api/fs';
 import { localDataDir } from '@tauri-apps/api/path';
 import { DiffFormate, GroupByOptions, RepositoriesSettings, Settings } from './store.types';
-import { sortByProperty } from '@shared/functions';
-import { Store } from './store.decorator';
+import { sortByProperty, Store } from '@shared/functions';
 
 @Injectable({
     providedIn: 'root'
@@ -68,7 +67,7 @@ export class StoreService {
                 this.logger.warn(`Tring to create the settings folder ${e}`);
                 this.createDir(path);
             }
-            catch (e2) {
+            catch (e2: any) {
                 this.logger.error(e2);
             }
         }

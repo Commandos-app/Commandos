@@ -75,7 +75,7 @@
         <div cds-layout="horizontal gap:sm">
             <cds-button (click)="save()" [loadingState]="saveState" [disabled]="form.invalid || !form.dirty">Save
             </cds-button>
-            <cds-button status="success" (click)="openDevTools()">Open DevTools</cds-button>
+            <cds-button status="success" (click)="openDevTools()" *ngIf="devMode">Open DevTools</cds-button>
         </div>
     </form>
 

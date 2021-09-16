@@ -1,3 +1,4 @@
+import { NotificationService } from './../notification/notification.service';
 import { environment } from '@env/environment';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
@@ -18,10 +19,11 @@ export class HeaderComponent implements OnInit {
         public errorService: ErrorService,
         public tauriService: TauriService,
         private cd: ChangeDetectorRef,
-        private router: Router
+        private router: Router,
+        private notificationService: NotificationService
     ) {
-        this.version = environment.version;
     }
+
 
     ngOnInit(): void {
         this.tauriService.windowState$
@@ -29,6 +31,12 @@ export class HeaderComponent implements OnInit {
                 this.isMaximised = state === 'maximized';
                 this.cd.detectChanges();
             });
+        this.loadVersion();
+    }
+
+    async loadVersion() {
+        const version = await this.tauriService.getVersion();
+        this.version = `v${version}${environment.versionPostfix}`;
     }
 
     minimize(): void {
@@ -56,4 +64,14 @@ export class HeaderComponent implements OnInit {
         this.router.navigate([page]);
         this.isMenuOpen = false;
     }
+
+    async checkUpdate() {
+        try {
+            await this.tauriService.checkUpdate();
+        } catch {
+            this.isMenuOpen = false;
+            this.notificationService.addNotification('info', 'Commandos ist up to date :-D', 5000);
+        }
+    }
+
 }

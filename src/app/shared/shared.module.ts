@@ -1,4 +1,4 @@
-import { SelectHintComponent } from './components/select-hint/select-hint.component';
+import { NotificationComponent } from './components/notification/notification.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -25,10 +25,12 @@ import { DiffLineByLineComponent } from './components/diff/diff-line-by-line/dif
 import { DiffSideBySideComponent } from './components/diff/diff-side-by-side/diff-side-by-side.component';
 import { DiffComponent } from './components/diff/diff.component';
 import { HeaderComponent } from './components/header/header.component';
+import { SelectHintComponent } from './components/select-hint/select-hint.component';
 import { SplashComponent } from './components/splash/splash.component';
 import { SplitLayoutComponent } from './components/split-layout/split-layout.component';
 import { SubnavComponent } from './components/subnav/subnav.component';
 import { TreeViewComponent } from './components/tree-view/tree-view.component';
+import { UpdateModalComponent } from './components/update-modal/update-modal.component';
 import { DiffPipe } from './directives/diff.pipe';
 import { DateFormatePipe } from './pipe/date-formate.pipe';
 
@@ -44,6 +46,8 @@ const components = [
     SplitLayoutComponent,
     BranchAheadBehindComponent,
     SelectHintComponent,
+    UpdateModalComponent,
+    NotificationComponent,
     // Diff
     DiffComponent,
     DiffLineByLineComponent,

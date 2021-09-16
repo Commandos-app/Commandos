@@ -5,3 +5,5 @@ export * from './diff';
 export * from './sleep';
 export * from './group';
 export * from './sort';
+export * from './decorators/localstorage';
+export * from './decorators/store';

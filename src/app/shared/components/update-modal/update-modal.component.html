@@ -1,0 +1,12 @@
+<cds-modal [closable]="false" #content>
+    <cds-modal-header>
+        <h3 cds-text="title">Commandos update v{{version}}</h3>
+    </cds-modal-header>
+    <cds-modal-content>
+        <div class="markdown" [innerHtml]="manifest"></div>
+    </cds-modal-content>
+    <cds-modal-actions>
+        <cds-button action="flat" (click)="cancel()">Keep current Version</cds-button>
+        <cds-button (click)="startUpdate()">Update Commandos</cds-button>
+    </cds-modal-actions>
+</cds-modal>

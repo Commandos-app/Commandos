@@ -1,3 +1,4 @@
+import { environment } from '@env/environment';
 
 import { Component, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ErrorService, StoreService } from '@core/services';
@@ -15,6 +16,7 @@ import { selectFolder } from '@shared/functions';
 export class SettingsComponent implements OnInit {
 
     @ViewChild('form') settingsForm: NgForm;
+    devMode = !environment.production;
 
     gridCounts = [25, 50, 100];
     gridCount: number;

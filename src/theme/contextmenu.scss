@@ -1,6 +1,7 @@
 .contextmenu {
     box-shadow: var(--cds-alias-object-shadow-100);
     background: var(--cds-alias-object-container-background);
+
     .contextmenu-action {
         &:hover {
             background: var(--cds-alias-status-info);
