@@ -68,7 +68,7 @@ export class StoreService {
                 this.logger.warn(`Tring to create the settings folder ${e}`);
                 this.createDir(path);
             }
-            catch (e2) {
+            catch (e2: any) {
                 this.logger.error(e2);
             }
         }

@@ -8,7 +8,7 @@ import { RepositoryService } from '../repository.service';
 import { filter, first } from 'rxjs/operators';
 import { interval } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { basename, sleep, LoadingState } from '@shared/functions';
+import { basename, sleep, LoadingState, LocalStorage } from '@shared/functions';
 
 @UntilDestroy()
 @Component({
@@ -22,7 +22,8 @@ export class RepositoryCommitComponent implements OnInit {
 
     fileTree: GroupedChangedFiles = [];
     formDisabled = false;
-    commitMessage = '';
+
+    @LocalStorage('commitMessage') commitMessage: string;
     private hasStaged = false;
     isDiffLoading = false;
     isLoading: LoadingState = 'default';

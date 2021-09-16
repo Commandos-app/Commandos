@@ -5,3 +5,4 @@ export * from './diff';
 export * from './sleep';
 export * from './group';
 export * from './sort';
+export * from './localstorage.decorator';
