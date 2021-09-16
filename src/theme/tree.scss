@@ -11,6 +11,7 @@
 
 .commander-tree-node {
     display: block;
+
     div {
         line-height: 25px;
     }
@@ -29,6 +30,7 @@
     align-items: center;
     height: 26px;
     padding: 0 5px;
+
     .comander-tree-row-text {
         margin: 0 5px 0 5px;
         white-space: nowrap;
@@ -36,14 +38,17 @@
         overflow: hidden;
         line-height: 25+px;
     }
+
     cds-icon-button {
         visibility: hidden;
     }
+
     &:hover {
         cds-icon-button {
             visibility: visible;
         }
     }
+
     +cds-divider {
         --color: rgba(0, 0, 0, 0.05);
     }
@@ -54,6 +59,7 @@
     grid-template-columns: 16px 1fr 0 0 auto;
     box-sizing: border-box !important;
     margin-left: 16px;
+
     &:hover {
         grid-template-columns: 16px 1fr 24px 24px auto;
     }
@@ -78,6 +84,7 @@
 .commander-tree-item {
     --base-padding: 10px;
     cursor: pointer;
+
     &:hover {
         background: var(--cds-global-color-gray-100);
     }
