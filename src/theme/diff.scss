@@ -92,6 +92,7 @@ table th:not([align]) {
         grid-template-columns: 50px 50px 1fr;
         font-family: 'Roboto Mono', monospace;
         height: 23px;
+        user-select: none;
 
         &-content {
             padding: 2px 6px;
