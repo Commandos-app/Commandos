@@ -10,7 +10,6 @@ export function LocalStorage(key: string) {
         };
 
         const setter = function (newVal: string) {
-            console.log(`TCL: ~ file: localstorage.ts ~ line 13 ~ setter ~ newVal`, newVal);
             newVal = newVal ? newVal : '';
             localStorage.setItem(key, newVal);
         };
