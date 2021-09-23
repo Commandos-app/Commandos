@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.6](https://github.com/Commandos-app/Commandos/compare/v0.7.5...v0.7.6) (2021-09-17)
+
+
+### Features
+
+* Added Custom Update modal ([9489149](https://github.com/Commandos-app/Commandos/commit/9489149c142c24febdbd32460ecdad1e0393f914))
+* Added notification service ([f1c2fe1](https://github.com/Commandos-app/Commandos/commit/f1c2fe180147d380047f8a50069ecaff7fbe57c2))
+* hide dev Tools button in Prod mode ([68764dd](https://github.com/Commandos-app/Commandos/commit/68764ddcbdc468a1bc6a13bc75aae0800cec596e))
+* save commit message for later use ([591033f](https://github.com/Commandos-app/Commandos/commit/591033f533aa5b3a0dac768fc2935f00b1d71cd6)), closes [#32](https://github.com/Commandos-app/Commandos/issues/32)
+* show custom update modal ([5f4bbb9](https://github.com/Commandos-app/Commandos/commit/5f4bbb9bce073369647b7d8919ed2161ee707dd7))
+
+
+### Bug Fixes
+
+*  Remove leading and trailing spaces from origin at saving ([1651d32](https://github.com/Commandos-app/Commandos/commit/1651d32907b0ad41642774dfaf1580f799e3ea21)), closes [#29](https://github.com/Commandos-app/Commandos/issues/29)
+* diff user-select on wrong class ([ef5f97d](https://github.com/Commandos-app/Commandos/commit/ef5f97d4fc7f574416e4708ac053a49b285df961))
+* do not save null values to LocalStorage ([be7d7ef](https://github.com/Commandos-app/Commandos/commit/be7d7ef1a2409c1d497737a0a9e8fe7fc4ced42b))
+* insert scrollbar into update modal ([5602c98](https://github.com/Commandos-app/Commandos/commit/5602c9888c36a7811aed1d2ad5c31cb9e44d9fbd))
+* make line numbers not selectable ([361af9b](https://github.com/Commandos-app/Commandos/commit/361af9b8eac6ae256b6162eac6b677aeae732b6c)), closes [#31](https://github.com/Commandos-app/Commandos/issues/31)
+
 ### 0.7.5 (2021-08-26)
 
 
