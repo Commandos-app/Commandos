@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RepositoryService } from '@routes/repository/repository.service';
+import { sleep } from '@shared/functions';
 
 @Component({
     selector: 'commandos-footer',
@@ -8,6 +9,8 @@ import { RepositoryService } from '@routes/repository/repository.service';
 })
 export class FooterComponent implements OnInit {
 
+    isSync = false;
+
     constructor(
         public repositoryService: RepositoryService
     ) { }
@@ -15,7 +18,10 @@ export class FooterComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    sync() {
-        this.repositoryService.sync();
+    async sync() {
+        this.isSync = true;
+        await this.repositoryService.sync();
+        await sleep(2000);
+        this.isSync = false;
     }
 }
