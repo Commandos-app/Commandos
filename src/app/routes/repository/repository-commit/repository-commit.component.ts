@@ -95,7 +95,6 @@ export class RepositoryCommitComponent implements OnInit {
             let { value: nextFile } = gen.next();
             if (nextFile.type === 'path') {
                 file.name = `${file.name}/${nextFile.name}`;
-                file.path = `${file.path}${nextFile.path}`;
                 file.children = [...nextFile.children];
                 this.checkPath(file, gen);
             }
