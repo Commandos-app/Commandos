@@ -14,9 +14,7 @@
             <app-button-control [routerLink]="['/repository', repositoryService.currentId, 'branches']"
                 routerLinkActive="button-active" startIcon="branch">
                 <div title>
-                    Current branch <commander-branch-ahead-behind [noColor]="true"
-                        [branch]="repositoryService.currentBranch" cds-layout="m-l:sm">
-                    </commander-branch-ahead-behind>
+                    Current branch
                 </div>
                 <div value class="no-break text-overflow">
                     {{ repositoryService.currentBranch?.name}}&nbsp;&nbsp;

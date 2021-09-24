@@ -1,3 +1,4 @@
+import { FooterComponent } from './components/footer/footer.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -42,6 +43,7 @@ const components = [
     TreeViewComponent,
     SplashComponent,
     HeaderComponent,
+    FooterComponent,
     SubnavComponent,
     SplitLayoutComponent,
     BranchAheadBehindComponent,
