@@ -23,13 +23,14 @@ export class RepositoryCommitComponent implements OnInit {
     fileTree: GroupedChangedFiles = [];
     formDisabled = false;
 
-    private commitMessageKey = `commitMessage-${this.repositoryService.currentId}`;
     get commitMessage(): string {
-        return localStorage.getItem(this.commitMessageKey);
+        return localStorage.getItem(`commitMessage-${this.repositoryService.currentId}`);
     }
 
     set commitMessage(value: string) {
-        localStorage.setItem(this.commitMessageKey, value);
+        // Form resetting does change this value to null!
+        value = value ?? '';
+        localStorage.setItem(`commitMessage-${this.repositoryService.currentId}`, value);
     }
 
 
