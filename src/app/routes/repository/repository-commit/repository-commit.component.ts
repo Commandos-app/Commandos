@@ -28,6 +28,8 @@ export class RepositoryCommitComponent implements OnInit {
     }
 
     set commitMessage(value: string) {
+        // Form resetting does change this value to null!
+        value = value ?? '';
         localStorage.setItem(`commitMessage-${this.repositoryService.currentId}`, value);
     }
 
