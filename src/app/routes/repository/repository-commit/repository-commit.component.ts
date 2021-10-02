@@ -1,14 +1,14 @@
-import { NgForm } from '@angular/forms';
-import { GroupedChangedFile } from '@git/model/file';
-import { IStatusResult, TreeObject, ChangedFile, GroupedChangedFiles } from '@git/model';
-import { LoggerService } from '@core/services/logger/logger.service';
 import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { StoreService } from '@core/services';
-import { RepositoryService } from '../repository.service';
-import { filter, first } from 'rxjs/operators';
-import { interval } from 'rxjs';
+import { LoggerService } from '@core/services/logger/logger.service';
+import { ChangedFile, GroupedChangedFiles, IStatusResult, TreeObject } from '@git/model';
+import { GroupedChangedFile } from '@git/model/file';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { basename, sleep, LoadingState, LocalStorage } from '@shared/functions';
+import { basename, LoadingState, sleep } from '@shared/functions';
+import { interval } from 'rxjs';
+import { filter, first } from 'rxjs/operators';
+import { RepositoryService } from '../repository.service';
 
 type ViewMode = 'tree' | 'list';
 
@@ -36,7 +36,6 @@ export class RepositoryCommitComponent implements OnInit {
         value = value ?? '';
         localStorage.setItem(`commitMessage-${this.repositoryService.currentId}`, value);
     }
-
 
     private hasStaged = false;
     isDiffLoading = false;
@@ -76,19 +75,34 @@ export class RepositoryCommitComponent implements OnInit {
     async load(): Promise<void> {
         this.isLoading = 'loading';
         this.logger.info('Reload commit data');
+
         const files = await this.repositoryService.getStatus();
-        const filesUnstaged = this.groupChangedFiles(files.filter(file => !file.isStaged), 'Changes', false);
-        const filesStaged = this.groupChangedFiles(files.filter(file => file.isStaged), 'Staged Changes', true);
-        const filesUnstagedSorted = this.sortFileTree(filesUnstaged);
-        const filesStagedSorted = this.sortFileTree(filesStaged);
 
-        const fileTree = [filesStagedSorted, filesUnstagedSorted];
-        // const fileTree = [filesStaged, filesUnstaged];
-        this.fileTree = this.flattenTree(fileTree);
+        if (this.viewMode === 'tree') {
+            const filesUnstaged = this.groupChangedFiles(files.filter(file => !file.isStaged), 'Changes', false);
+            const filesStaged = this.groupChangedFiles(files.filter(file => file.isStaged), 'Staged Changes', true);
+            const filesUnstagedSorted = this.sortFileTree(filesUnstaged);
+            const filesStagedSorted = this.sortFileTree(filesStaged);
 
-        this.formDisabled = this.fileTree.length === 0;
-        this.hasStaged = filesStagedSorted?.children?.length > 0;
-        this.isLoading = 'default';
+            const fileTree = [filesStagedSorted, filesUnstagedSorted];
+            this.fileTree = this.flattenTree(fileTree);
+
+            this.formDisabled = this.fileTree.length === 0;
+            this.hasStaged = filesStagedSorted?.children?.length > 0;
+            this.isLoading = 'default';
+        } else {
+
+            const filesUnstaged = this.groupChangedFilesFlat(files.filter(file => !file.isStaged), 'Changes', false);
+            const filesStaged = this.groupChangedFilesFlat(files.filter(file => file.isStaged), 'Staged Changes', true);
+            const filesUnstagedSorted = this.sortFileTree(filesUnstaged);
+            const filesStagedSorted = this.sortFileTree(filesStaged);
+
+            this.fileTree = [filesStagedSorted, filesUnstagedSorted];
+
+            this.formDisabled = this.fileTree.length === 0;
+            this.hasStaged = files.some(file => file.isStaged);
+            this.isLoading = 'default';
+        }
     }
 
     private flattenTree(fileTree: GroupedChangedFiles): GroupedChangedFiles {
@@ -192,6 +206,41 @@ export class RepositoryCommitComponent implements OnInit {
         return { name: title, type: 'title', children: result };
     }
 
+    private groupChangedFilesFlat(files: IStatusResult[], title: string, staged: boolean): GroupedChangedFile {
+        if (files.length === 0) {
+            return {} as GroupedChangedFile;
+        }
+
+        const result: Array<any> = [];
+
+        files.forEach((file: IStatusResult) => {
+
+            const changedFile: ChangedFile = {
+                name: basename(file.path),
+                ...file
+            };
+
+            if (file.isRenamed) {
+                changedFile.oldName = file.oldPath;
+            }
+
+            const obj: TreeObject = {
+                name: basename(file.path),
+                path: file.path,
+                staged,
+                children: [],
+                type: 'file',
+                file: changedFile,
+
+            };
+
+
+            result.push(obj);
+        });
+
+        return { name: title, type: 'title', children: result };
+    }
+
     @HostListener('window:keyup.control.enter', ['$event'])
     async commit(): Promise<void> {
         // const { name, email } = await this.repositoryService.loadConfig();
@@ -250,10 +299,12 @@ export class RepositoryCommitComponent implements OnInit {
 
     changeToListView() {
         this.viewMode = 'list';
+        this.load();
     }
 
     changeToTreeView() {
         this.viewMode = 'tree';
+        this.load();
     }
 
     hideChild(node: any) {
