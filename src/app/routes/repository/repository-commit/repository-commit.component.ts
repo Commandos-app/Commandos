@@ -10,6 +10,8 @@ import { interval } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { basename, sleep, LoadingState, LocalStorage } from '@shared/functions';
 
+type ViewMode = 'tree' | 'list';
+
 @UntilDestroy()
 @Component({
     selector: 'app-repository-commit',
@@ -22,6 +24,8 @@ export class RepositoryCommitComponent implements OnInit {
 
     fileTree: GroupedChangedFiles = [];
     formDisabled = false;
+    viewMode: ViewMode = 'tree';
+
 
     get commitMessage(): string {
         return localStorage.getItem(`commitMessage-${this.repositoryService.currentId}`);
@@ -244,6 +248,13 @@ export class RepositoryCommitComponent implements OnInit {
         this.isDiffLoading = false;
     }
 
+    changeToListView() {
+        this.viewMode = 'list';
+    }
+
+    changeToTreeView() {
+        this.viewMode = 'tree';
+    }
 
     hideChild(node: any) {
         node.hideChildren = !node.hideChildren;

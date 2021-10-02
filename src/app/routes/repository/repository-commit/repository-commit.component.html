@@ -13,6 +13,20 @@
                     </cds-form-group>
 
                     <div cds-layout="horizontal gap:sm align-items:bottom align:right m-t:xs m-r:sm">
+
+                        <cds-icon-button *ngIf="viewMode === 'tree';else TreeView" (click)="changeToListView()"
+                            size="sm" action="flat" cds-layout="m-l:xs m-r:auto" aria-label="change to listview"
+                            [loadingState]="isLoading">
+                            <cds-icon shape="view-list" size="14"></cds-icon>
+                        </cds-icon-button>
+
+                        <ng-template #TreeView>
+                            <cds-icon-button (click)="changeToTreeView()" size="sm" action="flat"
+                                cds-layout="m-l:xs m-r:auto" aria-label="change to treeview" [loadingState]="isLoading">
+                                <cds-icon shape="tree-view" size="14"></cds-icon>
+                            </cds-icon-button>
+                        </ng-template>
+
                         <cds-button action="flat" status="success" [loadingState]="isCommiting" size="sm"
                             (click)="commit()" [disabled]="formDisabled">
                             Commit
