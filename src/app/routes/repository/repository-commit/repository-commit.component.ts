@@ -23,7 +23,16 @@ export class RepositoryCommitComponent implements OnInit {
     fileTree: GroupedChangedFiles = [];
     formDisabled = false;
 
-    @LocalStorage('commitMessage') commitMessage: string;
+    private commitMessageKey = `commitMessage-${this.repositoryService.currentId}`;
+    get commitMessage(): string {
+        return localStorage.getItem(this.commitMessageKey);
+    }
+
+    set commitMessage(value: string) {
+        localStorage.setItem(this.commitMessageKey, value);
+    }
+
+
     private hasStaged = false;
     isDiffLoading = false;
     isLoading: LoadingState = 'default';
