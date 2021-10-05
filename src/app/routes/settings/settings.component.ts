@@ -1,7 +1,7 @@
 import { environment } from '@env/environment';
 
 import { Component, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { ErrorService, StoreService } from '@core/services';
+import { ErrorService, StoreService, ViewMode } from '@core/services';
 import { DOCUMENT } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { UserConfig, RepositoryService } from '@routes/repository/repository.service';
@@ -25,6 +25,7 @@ export class SettingsComponent implements OnInit {
     darkMode: boolean;
     diffFormate: boolean;
     defaultPath: string;
+    viewMode: ViewMode;
     user: UserConfig = {
         name: '',
         email: '',
@@ -47,6 +48,7 @@ export class SettingsComponent implements OnInit {
         this.paneSize = this.storeService.PaneSize;
         this.defaultPath = this.storeService.DefaultPath;
         this.diffFormate = this.storeService.DiffOutputFormat === 'side-by-side';
+        this.viewMode = this.storeService.ViewMode;
         this.user = await this.repositoryService.loadGlobalUserConfig();
         this.settingsForm.form.markAsPristine();
     }
@@ -63,6 +65,7 @@ export class SettingsComponent implements OnInit {
         this.storeService.PaneSize = this.paneSize;
         this.storeService.DefaultPath = this.defaultPath;
         this.storeService.DiffOutputFormat = this.diffFormate ? 'side-by-side' : 'line-by-line';
+        this.storeService.ViewMode = this.viewMode;
 
         if (this.darkMode) {
             this.renderer.setAttribute(this.document.body, 'cds-theme', 'dark');
