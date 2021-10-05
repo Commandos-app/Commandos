@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { StoreService } from '@core/services';
+import { StoreService, ViewMode } from '@core/services';
 import { LoggerService } from '@core/services/logger/logger.service';
 import { ChangedFile, GroupedChangedFiles, IStatusResult, TreeObject } from '@git/model';
 import { GroupedChangedFile } from '@git/model/file';
@@ -10,7 +10,6 @@ import { interval } from 'rxjs';
 import { filter, first } from 'rxjs/operators';
 import { RepositoryService } from '../repository.service';
 
-type ViewMode = 'tree' | 'list';
 
 @UntilDestroy()
 @Component({
@@ -24,7 +23,7 @@ export class RepositoryCommitComponent implements OnInit {
 
     fileTree: GroupedChangedFiles = [];
     formDisabled = false;
-    viewMode: ViewMode = 'tree';
+    viewMode: ViewMode = this.storeService.ViewMode;
 
 
     get commitMessage(): string {
@@ -299,11 +298,13 @@ export class RepositoryCommitComponent implements OnInit {
 
     changeToListView() {
         this.viewMode = 'list';
+        this.storeService.ViewMode = 'list';
         this.load();
     }
 
     changeToTreeView() {
         this.viewMode = 'tree';
+        this.storeService.ViewMode = 'tree';
         this.load();
     }
 
