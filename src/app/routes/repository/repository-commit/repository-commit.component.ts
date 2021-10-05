@@ -96,12 +96,14 @@ export class RepositoryCommitComponent implements OnInit {
             const filesUnstagedSorted = this.sortFileTree(filesUnstaged);
             const filesStagedSorted = this.sortFileTree(filesStaged);
 
-            this.fileTree = [filesStagedSorted, filesUnstagedSorted];
+            const fileTree = [filesStagedSorted, filesUnstagedSorted];
+            this.fileTree = fileTree.filter(x => !!x.name);
 
             this.formDisabled = this.fileTree.length === 0;
             this.hasStaged = files.some(file => file.isStaged);
             this.isLoading = 'default';
         }
+        console.log(this.fileTree);
     }
 
     private flattenTree(fileTree: GroupedChangedFiles): GroupedChangedFiles {
