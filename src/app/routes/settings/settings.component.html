@@ -1,7 +1,7 @@
 <div cds-layout="vertical align:stretch p:lg">
     <form #form="ngForm" cds-layout="m-t:md">
         <p cds-text="title" cds-layout="m-t:none m-b:lg">Settings</p>
-        <cds-form-group card layout="horizontal" cds-layout="m-b:lg">
+        <cds-form-group card layout="compact" cds-layout="m-b:lg">
 
             <cds-checkbox-group>
                 <label>Dark Mode</label>
@@ -18,6 +18,19 @@
                     <input type="checkbox" name="sidebyside" [(ngModel)]="diffFormate" />
                 </cds-checkbox>
             </cds-checkbox-group>
+
+            <cds-radio-group>
+                <label>View mode</label>
+                <cds-radio>
+                    <label>Tree view</label>
+                    <input type="radio" name="viewmode" value="tree" [(ngModel)]="viewMode" />
+                </cds-radio>
+
+                <cds-radio>
+                    <label>List view</label>
+                    <input type="radio" name="viewmode" value="list" [(ngModel)]="viewMode" />
+                </cds-radio>
+            </cds-radio-group>
 
             <cds-checkbox-group>
                 <label>Auto Fetch (10 sec)</label>
@@ -52,7 +65,7 @@
 
         </cds-form-group>
         <p cds-text="title" cds-layout="m-t:none m-b:lg">Git global user</p>
-        <cds-form-group card layout="horizontal" cds-layout="m-b:lg">
+        <cds-form-group card layout="compact" cds-layout="m-b:lg">
 
             <cds-input>
                 <label>Name</label>

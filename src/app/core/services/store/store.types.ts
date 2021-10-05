@@ -35,3 +35,5 @@ export type Settings = Partial<settings>;
 
 
 export type GroupByOptions = 'none' | 'tags' | 'folder';
+
+export type ViewMode = 'tree' | 'list';
