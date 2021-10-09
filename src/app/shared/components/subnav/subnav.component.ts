@@ -1,3 +1,4 @@
+import { Clipboard } from '@angular/cdk/clipboard';
 import { CommanderService } from './../commander/commander.service';
 import { CommanderModalService } from '@shared/services';
 import { RepositoryService } from '@routes/repository/repository.service';
@@ -7,6 +8,8 @@ import { filter, first } from 'rxjs/operators';
 import { RepositoriesSettingsService } from '@core/services';
 import { sleep, LoadingState } from '@shared/functions';
 import { FieldDefinition } from '..';
+import { invoke } from '@tauri-apps/api';
+import { open } from '@tauri-apps/api/shell';
 
 type NewBranch = {
     pushRemote?: boolean;
@@ -28,6 +31,7 @@ export class SubnavComponent implements OnInit {
     branches: branches = [];
     repositories: any[];
     isSyncing: LoadingState = 'default';
+    isMenuOpen = false;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -35,6 +39,7 @@ export class SubnavComponent implements OnInit {
         public repositoryService: RepositoryService,
         public repositoriesSettingsService: RepositoriesSettingsService,
         private commanderModalService: CommanderModalService,
+        private clipboard: Clipboard,
         private commanderService: CommanderService
     ) { }
 
@@ -119,6 +124,34 @@ export class SubnavComponent implements OnInit {
         return data;
     }
 
+    openCmd(): void {
+        const path = this.repositoryService.getPath();
+        console.log(`TCL: ~ file: subnav.component.ts ~ line 128 ~ SubnavComponent ~ openCmd ~ path`, path);
+        open(path);
+        this.close();
+    }
+
+    openCode(): void {
+        const path = this.repositoryService.getPath();
+        open(path, 'code');
+        this.close();
+    }
+
+    openTerminal(): void {
+        const path = this.repositoryService.getPath();
+        invoke('open_cmd', { path });
+        this.close();
+    }
+
+    copyPath(): void {
+        const path = this.repositoryService.getPath();
+        this.clipboard.copy(path);
+        this.close();
+    }
+
+    close() {
+        this.isMenuOpen = false;
+    }
 
     goToHome(): void {
         this.router.navigate(['/home']);
