@@ -1,8 +1,8 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NgModule } from '@angular/core';
 import { ErrorPageRoutingModule } from './error-page-routing.module';
 import { ErrorPageComponent } from './error-page.component';
+
 
 
 @NgModule({
@@ -11,6 +11,5 @@ import { ErrorPageComponent } from './error-page.component';
         CommonModule,
         ErrorPageRoutingModule
     ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ErrorPageModule { }

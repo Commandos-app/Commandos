@@ -1,34 +1,17 @@
 
+import { HttpClient } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { SharedModule } from '@shared/shared.module';
-
-import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 // NG Translate
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import { SharedModule } from '@shared/shared.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import '@cds/core/alert/register.js';
-import '@cds/core/button/register.js';
-import '@cds/core/checkbox/register.js';
-import '@cds/core/forms/register.js';
-import '@cds/core/input/register.js';
-import '@cds/core/select/register.js';
-import '@cds/core/textarea/register.js';
-import '@cds/core/tag/register.js';
-import '@cds/core/modal/register.js';
-import '@cds/core/radio/register.js';
 
-//preview
-import '@cds/core/file/register.js';
-import '@cds/core/divider/register.js';
-import '@cds/core/accordion/register.js';
-import '@cds/core/progress-circle/register.js';
+
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -54,6 +37,5 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ],
     providers: [],
     bootstrap: [AppComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }
