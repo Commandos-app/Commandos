@@ -23,12 +23,12 @@ Follow the instruction to install rust: https://tauri.studio/en/docs/getting-sta
 
 After this, you can install all dependencies:
 ```bash
-npm install
+yarn install
 ```
 To run the app, run these commands:
 ```bash
-npm run tauri dev
-npm ng serve
+yarn tauri dev
+yarn start
 ```
 
 ## Contributing
