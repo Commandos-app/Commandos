@@ -59,7 +59,6 @@ export class HomeComponent implements OnInit {
     // }
 
     openCmd(path: string): void {
-        console.log(`TCL: ~ file: home.component.ts ~ line 62 ~ HomeComponent ~ openCmd ~ path`, path);
         open(path);
         this.close();
     }

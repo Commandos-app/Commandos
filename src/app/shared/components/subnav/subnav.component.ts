@@ -126,7 +126,6 @@ export class SubnavComponent implements OnInit {
 
     openCmd(): void {
         const path = this.repositoryService.getPath();
-        console.log(`TCL: ~ file: subnav.component.ts ~ line 128 ~ SubnavComponent ~ openCmd ~ path`, path);
         open(path);
         this.close();
     }
