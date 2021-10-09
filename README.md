@@ -18,6 +18,8 @@ Commandos is currently only available on Windows, we plan to add macOS and Linux
 
 ## Installation
 
+To manage dependencies, Commandos uses the [yarn](https://yarnpkg.com/) manager. Feel free to use an matching alternative.
+
 Use the prebuild binaries, or if you like to build it yourself:
 Follow the instruction to install rust: https://tauri.studio/en/docs/getting-started/intro
 
