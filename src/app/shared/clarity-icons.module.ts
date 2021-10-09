@@ -1,16 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import {
-    banIcon,
-    ClarityIcons, cogIcon, downloadCloudIcon, downloadIcon, fileIcon, folderIcon, folderOpenIcon,
-    historyIcon, homeIcon,
-    minusIcon, moonIcon, noteIcon, pencilIcon, playIcon,
-    plusIcon, shrinkIcon, sunIcon, timesIcon, trashIcon, undoIcon,
-    unknownStatusIcon, uploadCloudIcon, wandIcon, windowCloseIcon, windowMaxIcon, windowMinIcon,
-    windowRestoreIcon, twoWayArrowsIcon, userIcon, refreshIcon, happyFaceIcon, arrowIcon, syncIcon, pinIcon, barsIcon, viewCardsIcon, viewListIcon, treeViewIcon
+    arrowIcon, banIcon, barsIcon, ClarityIcons, cogIcon, downloadCloudIcon, downloadIcon, fileIcon, folderIcon, folderOpenIcon, happyFaceIcon, historyIcon, homeIcon,
+    minusIcon, moonIcon, noteIcon, pencilIcon, pinIcon, playIcon,
+    plusIcon, refreshIcon, shrinkIcon, sunIcon, syncIcon, timesIcon, trashIcon, treeViewIcon, twoWayArrowsIcon, undoIcon,
+    unknownStatusIcon, uploadCloudIcon, userIcon, viewCardsIcon, viewListIcon, wandIcon, windowCloseIcon, windowMaxIcon, windowMinIcon,
+    windowRestoreIcon
 } from '@cds/core/icon';
 
-import '@cds/core/icon/register.js';
 
 const icons = [
     playIcon, plusIcon, shrinkIcon, noteIcon, timesIcon,
