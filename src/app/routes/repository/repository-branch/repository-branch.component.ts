@@ -141,8 +141,8 @@ export class RepositoryBranchComponent implements OnInit {
         this.changeBranch = {};
     }
 
-    async onCheckout(name: string): Promise<void> {
-        await this.repositoryService.checkoutBranch(name);
+    async onCheckout(branch: Branch): Promise<void> {
+        await this.repositoryService.checkoutBranch(branch.logicalName);
         this.repositoryService.getBranches();
         this.ngxTippyService.hideAll();
     }

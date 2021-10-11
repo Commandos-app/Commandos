@@ -21,8 +21,9 @@ export function parseBranches<T extends Record<string, string>>(stdout: string):
             branch.behind = '0';
             branch.isRemote = branch.ref.includes('remote');
 
+            branch.logicalName = branch.name;
             if (branch.isRemote) {
-                branch.logicalName = branch.name.replace('origin/', '');
+                branch.logicalName = branch.logicalName.replace('origin/', '');
             }
 
             entries.push(branch);
