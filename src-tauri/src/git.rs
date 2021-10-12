@@ -1,5 +1,4 @@
 use serde::ser::{Serialize, SerializeStruct, Serializer};
-use std::os::windows::process::CommandExt;
 use std::process::{Command, Stdio};
 
 // Custom type for git commands.
