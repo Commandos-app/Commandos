@@ -59,13 +59,11 @@ export class AppComponent {
         this.registerSettingsCommand();
         this.registerNewRepoCommand();
 
-        listen<UpdateResult>("tauri://update-available", (res) => {
-            console.log(`TCL: ~ file: app.component.ts ~ line 63 ~ AppComponent ~ load ~ res`, res);
+        // listen<UpdateResult>("tauri://update-available", (res) => {
 
-        });
+        // });
 
         this.update = await this.tauriService.checkUpdate();
-        console.log(`TCL: ~ file: app.component.ts ~ line 68 ~ AppComponent ~ load ~ this.update`, this.update);
         this.hasUpdate = this.update.shouldUpdate;
 
     }

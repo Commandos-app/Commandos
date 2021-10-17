@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import {
+    applicationIcon,
     arrowIcon, banIcon, barsIcon, ClarityIcons, cogIcon, downloadCloudIcon, downloadIcon, fileIcon, folderIcon, folderOpenIcon, happyFaceIcon, historyIcon, homeIcon,
     minusIcon, moonIcon, noteIcon, pencilIcon, pinIcon, playIcon,
     plusIcon, refreshIcon, shrinkIcon, sunIcon, syncIcon, timesIcon, trashIcon, treeViewIcon, twoWayArrowsIcon, undoIcon,
@@ -17,7 +18,8 @@ const icons = [
     fileIcon, sunIcon, moonIcon, homeIcon, historyIcon,
     trashIcon, downloadIcon, twoWayArrowsIcon, userIcon,
     refreshIcon, happyFaceIcon, arrowIcon, syncIcon, pinIcon,
-    barsIcon, viewCardsIcon, viewListIcon, treeViewIcon
+    barsIcon, viewCardsIcon, viewListIcon, treeViewIcon,
+    applicationIcon
 ]
 
 ClarityIcons.addIcons(...icons);

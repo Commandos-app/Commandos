@@ -352,7 +352,7 @@ export class RepositoryService {
     }
     //#endregion
 
-    private getPath(): string {
+    getPath(): string {
         return this.repositorySetting?.path?.replace(/\\\\/g, '/');
     }
 
