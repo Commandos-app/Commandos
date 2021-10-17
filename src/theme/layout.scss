@@ -5,3 +5,9 @@
 [cds-layout~="m-l:auto"] {
     margin-left: auto !important;
 }
+
+.overflow-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

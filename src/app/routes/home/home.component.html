@@ -19,8 +19,8 @@
                 </div>
                 <div class="commander-row commander-overview-row" *ngFor="let repo of group.repositories"
                     cds-text="body" (click)="openRepository(repo.id)" (contextmenu)="openContext($event, repo)">
-                    <div class="lh">{{repo.name}}</div>
-                    <div class="lh">{{repo.path}}</div>
+                    <div class="lh overflow-ellipsis">{{repo.name}}</div>
+                    <div class="lh overflow-ellipsis">{{repo.path}}</div>
                     <div>
                         <div cds-layout="horizontal gap:sm">
                             <cds-tag readonly *ngFor="let tag of repo.tags" color="gray">{{tag}}</cds-tag>
