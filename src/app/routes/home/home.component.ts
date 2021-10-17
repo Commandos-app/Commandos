@@ -11,6 +11,7 @@ import { open } from '@tauri-apps/api/shell';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { invoke } from '@tauri-apps/api/tauri';
 import { groupBy, sortByProperty } from '@shared/functions';
+import { FilterPipe } from '@josee9988/filter-pipe-ngx';
 
 
 @Component({
@@ -27,6 +28,17 @@ export class HomeComponent implements OnInit {
     overlayRef: OverlayRef | null;
     sub: Subscription;
 
+    private filterText: string;
+    get searchText(): string {
+        return this.filterText;
+    }
+
+    set searchText(value: string) {
+        this.filterText = value;
+        this.handleGroupAndFilter(this.storeService.RepoGroupBy);
+    }
+
+
     constructor(
         private router: Router,
         private repos: RepositoriesSettingsService,
@@ -42,7 +54,7 @@ export class HomeComponent implements OnInit {
         this.loadRepos();
         this.repositoryService.clearUIBranches();
         const groupValue = this.storeService.RepoGroupBy;
-        this.group(groupValue);
+        this.handleGroupAndFilter(groupValue);
     }
 
     loadRepos(): void {
@@ -127,17 +139,31 @@ export class HomeComponent implements OnInit {
 
     }
 
-    group(type: GroupByOptions) {
+    handleGroupAndFilter(type: GroupByOptions) {
+        const repos = this.filterRepositories();
+        this.group(type, repos);
+    }
+
+    filterRepositories(): RepositoriesSettings {
+        let repos = new FilterPipe().transform(this.repositories, this.filterText);
+        if (repos.length === 0) {
+            repos = this.repositories;
+        }
+        return repos;
+    }
+
+    private group(type: GroupByOptions, repos: RepositoriesSettings) {
         switch (type) {
-            case 'none': this.groupNone(); break;
-            case 'tags': this.groupTags(); break;
-            case 'folder': this.groupFolder(); break;
+            case 'none': this.groupNone(repos); break;
+            case 'tags': this.groupTags(repos); break;
+            case 'folder': this.groupFolder(repos); break;
         }
         this.storeService.RepoGroupBy = type;
     }
 
-    private groupFolder() {
-        const repositoriesGrouped = groupBy(this.repositories, (t: any) => t.path.substring(0, t.path.lastIndexOf('/')));
+
+    private groupFolder(repos: RepositoriesSettings) {
+        const repositoriesGrouped = groupBy(repos, (t: any) => t.path.substring(0, t.path.lastIndexOf('/')));
         this.repositoriesGrouped = repositoriesGrouped.map(r => ({
             title: r.title.substring(r.title.lastIndexOf('/') + 1, r.title.length),
             path: r.title,
@@ -145,14 +171,14 @@ export class HomeComponent implements OnInit {
         }));
     }
 
-    private groupTags() {
-        const repositoriesGrouped = groupBy(this.repositories, (t: any) => t.tags[0] ?? '---');
+    private groupTags(repos: RepositoriesSettings) {
+        const repositoriesGrouped = groupBy(repos, (t: any) => t.tags[0] ?? '---');
         this.repositoriesGrouped = repositoriesGrouped.sort(sortByProperty('title'));
     }
 
-    private groupNone() {
+    private groupNone(repos: RepositoriesSettings) {
         const group: RepositoriesSettingsGroup = {
-            repositories: this.repositories
+            repositories: repos
         }
         group.repositories.sort(sortByProperty('name'));
         this.repositoriesGrouped = [group];
