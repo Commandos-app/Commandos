@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { CdsAccordionModule, CdsAlertModule, CdsButtonModule, CdsCheckboxModule, CdsDividerModule, CdsFileModule, CdsFormsModule, CdsIconModule, CdsInputModule, CdsModalModule, CdsProgressCircleModule, CdsRadioModule, CdsSelectModule, CdsTagModule, CdsTextareaModule } from '@cds/angular';
+import { CdsAccordionModule, CdsAlertModule, CdsButtonModule, CdsCheckboxModule, CdsDividerModule, CdsFileModule, CdsFormsModule, CdsIconModule, CdsInputModule, CdsModalModule, CdsProgressCircleModule, CdsRadioModule, CdsSearchModule, CdsSelectModule, CdsTagModule, CdsTextareaModule } from '@cds/angular';
 import { FilterModule } from '@josee9988/filter-pipe-ngx';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TranslateModule } from '@ngx-translate/core';
@@ -76,7 +76,8 @@ const clarity = [
     CdsAccordionModule,
     CdsProgressCircleModule,
     CdsIconModule,
-    CdsRadioModule
+    CdsRadioModule,
+    CdsSearchModule
 ];
 
 const modules = [

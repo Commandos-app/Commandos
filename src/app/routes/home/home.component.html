@@ -8,11 +8,11 @@
                 <a (click)="handleGroupAndFilter('tags')" cds-text="link">Tags</a>
             </p>
         </div>
-        <div>
-            <cds-input control-width="shrink">
+        <div class="grid-item-end">
+            <cds-search control-width="shrink">
                 <label></label>
-                <input placeholder="placeholder text" [(ngModel)]="searchText" />
-            </cds-input>
+                <input type="search" [(ngModel)]="searchText" />
+            </cds-search>
 
         </div>
     </div>
