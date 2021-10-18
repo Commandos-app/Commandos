@@ -139,13 +139,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "commander",
+      "commandos",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "commander",
+      "commandos",
       "kebab-case"
     ]
   }

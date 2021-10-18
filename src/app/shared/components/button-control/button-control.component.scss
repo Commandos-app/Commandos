@@ -1,7 +1,7 @@
-.commander-button-control {
+.commandos-button-control {
     position: relative;
 
-    .commander-button-control-area {
+    .commandos-button-control-area {
         display: grid;
         grid-template-columns: 40px 1fr;
         width: 250px;
@@ -16,20 +16,20 @@
             color: var(--cds-global-typography-color-500, var(--cds-global-color-gray-1000, black));
         }
 
-        .commander-button-control-icon {
-            // line-height: var(--commander-button-control-sub-header-height);
+        .commandos-button-control-icon {
+            // line-height: var(--commandos-button-control-sub-header-height);
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        .commander-button-control-title {
+        .commandos-button-control-title {
             color: var(--cds-global-color-cool-gray-600);
             font-weight: var(--cds-global-typography-font-weight-light);
             font-size: var(--cds-global-typography-font-size-2);
         }
 
-        .commander-button-control-value {
+        .commandos-button-control-value {
             color: var(--color);
             width: 200px; // needed for overflow to work
             text-overflow: ellipsis;
@@ -38,7 +38,7 @@
 
 
 
-        .commander-button-control-text {
+        .commandos-button-control-text {
             padding-left: 7px;
             display: flex;
             flex-direction: column;
@@ -48,15 +48,15 @@
         }
     }
 
-    &.commander-button-control-hover {
+    &.commandos-button-control-hover {
         &:hover {
             background: var(--cds-alias-object-app-background, var(--cds-global-color-gray-50, #fafafa));
             color: var(--cds-global-typography-color-500, var(--cds-global-color-gray-1000, black));
         }
     }
 
-    .commander-button-control-action {
-        // text-align: center; // line-height: var(--commander-button-control-sub-header-height);
+    .commandos-button-control-action {
+        // text-align: center; // line-height: var(--commandos-button-control-sub-header-height);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -72,7 +72,7 @@
         }
     }
 
-    .commander-button-control-window {
+    .commandos-button-control-window {
         width: 100%; // background: var(--cds-global-color-warm-gray-100);
         background: var(--cds-alias-object-app-background, var(--cds-global-color-gray-50, #fafafa));
         color: var(--cds-global-typography-color-500, var(--cds-global-color-gray-1000, black));

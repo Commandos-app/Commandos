@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { CommanderModalOptions, CommandParams, FieldDefinition } from '../types';
+import { commandosModalOptions, CommandParams, FieldDefinition } from '../types';
 
 @Injectable({
     providedIn: 'root'
 })
-export class CommanderModalService {
+export class commandosModalService {
 
     open = false;
     title = 'not Set!';
@@ -15,7 +15,7 @@ export class CommanderModalService {
 
     constructor() { }
 
-    openModal(options: CommanderModalOptions): Observable<CommandParams> {
+    openModal(options: commandosModalOptions): Observable<CommandParams> {
         this.open = true;
         this.title = options.title;
         if (options.fields) {

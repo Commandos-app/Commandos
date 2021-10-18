@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Branch } from '@git/model';
 
 @Component({
-    selector: 'commander-branch-ahead-behind',
+    selector: 'commandos-branch-ahead-behind',
     templateUrl: './branch-ahead-behind.component.html',
     styleUrls: ['./branch-ahead-behind.component.scss']
 })

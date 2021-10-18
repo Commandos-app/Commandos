@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StoreService } from '@core/services';
 
 @Component({
-    selector: 'commander-split-layout',
+    selector: 'commandos-split-layout',
     templateUrl: './split-layout.component.html',
     styleUrls: ['./split-layout.component.scss']
 })

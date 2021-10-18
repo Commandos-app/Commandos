@@ -1,4 +1,4 @@
-.commander-history-item {
+.commandos-history-item {
     // padding: 0 10px;
     cursor: pointer;
     width: 100%;
@@ -11,7 +11,7 @@
     justify-content: center;
 }
 
-.commander-history-title {
+.commandos-history-title {
     padding: 0 10px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -21,7 +21,7 @@
     font-weight: var(--cds-global-typography-font-weight-bold); // line-height: var(--cds-global-typography-secondary-line-height);
 }
 
-.commander-history-author {
+.commandos-history-author {
     padding: 0 10px;
     line-height: 18px;
     color: var(--cds-global-color-construction-500);
@@ -30,11 +30,11 @@
     letter-spacing: var(--cds-global-typography-smallcaption-letter-spacing);
 }
 
-.commander-grid-history-header {
+.commandos-grid-history-header {
     padding-top: 6px;
     padding-bottom: 5px;
 
-    .commander-history-title {
+    .commandos-history-title {
         font-size: var(--cds-global-typography-subsection-font-size);
     }
 }

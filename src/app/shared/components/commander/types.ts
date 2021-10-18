@@ -20,7 +20,7 @@ export type RegisterCommandOptions = {
     command: AvailableCommands;
 };
 
-export type CommanderModalOptions = {
+export type commandosModalOptions = {
     title: string;
     fields: Array<FieldDefinition>;
 }

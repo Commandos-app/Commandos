@@ -47,7 +47,7 @@ body {
     margin: 0 !important;
 }
 
-.commander-content {
+.commandos-content {
     router-outlet {
         &+* {
             width: 100%;
@@ -55,15 +55,15 @@ body {
     }
 }
 
-.commander-tabs {
+.commandos-tabs {
     .active {
         box-shadow: 0 -.15rem 0 var(--cds-alias-status-info, var(--cds-global-color-blue-700, #0079ad)) inset;
     }
 }
 
-.commander-button-control-backdrop {
+.commandos-button-control-backdrop {
     background: rgba(0, 0, 0, .32);
-    top: calc(var(--commander-header-height) + var(--commander-sub-header-height));
+    top: calc(var(--commandos-header-height) + var(--commandos-sub-header-height));
 }
 
 [cds-text*=body] {
@@ -219,8 +219,8 @@ code {
     .d2h-file-wrapper {
         border: none;
     }
-    .commander-navigation {
-        height: var(--commander-sub-header-height);
+    .commandos-navigation {
+        height: var(--commandos-sub-header-height);
         background: var(--cds-global-color-warm-gray-100);
         flex-grow: initial;
     }
@@ -241,17 +241,17 @@ code {
     }
     .subnav-grid {
     }
-    .commander-grid {
+    .commandos-grid {
         color: var(--cds-global-typography-color-500, var(--cds-global-color-gray-1000, black));
         background: #fff;
-        .commander-row-title {
+        .commandos-row-title {
             background: var(--cds-alias-object-app-background);
             border: 1px solid #ccc;
             >div:not(.custom-padding) {
                 padding: 4px 10px 2px;
             }
         }
-        .commander-row {
+        .commandos-row {
             border: 1px solid var(--cds-global-color-gray-400);
             margin-top: -1px;
             min-height: 30px;
@@ -264,44 +264,44 @@ code {
             }
         }
     }
-    .commander-list-item {
+    .commandos-list-item {
         background: #fff;
         &:hover {
             background: var(--cds-global-color-gray-100);
             cursor: pointer;
         }
-        &.commander-list-item-active {
+        &.commandos-list-item-active {
             background: var(--cds-global-color-gray-300);
         }
     }
-    .commander-full-height,
+    .commandos-full-height,
     virtual-scroller {
         max-height: 100%;
         height: 100%;
     }
-    .commander-flex {
+    .commandos-flex {
         display: flex;
     }
     &[cds-theme=dark] {
-        .commander-navigation {
+        .commandos-navigation {
             background: var(--cds-global-color-blue-900);
         }
-        .commander-header {
+        .commandos-header {
             background: var(--cds-global-color-blue-1000);
         }
-        .commander-button-control-backdrop {
+        .commandos-button-control-backdrop {
             background: rgba(255, 255, 255, .15);
         }
         svg {
             color: currentColor;
             fill: currentColor;
         }
-        .commander-grid {
+        .commandos-grid {
             background: var(--cds-alias-object-app-background);
-            .commander-row-title {
+            .commandos-row-title {
                 border: 1px solid var(--cds-global-color-blue-800); // background: var(--cds-global-color-blue-900);
             }
-            .commander-row {
+            .commandos-row {
                 border: 1px solid var(--cds-global-color-blue-800);
                 border-top: 0;
                 background: var(--cds-global-color-blue-1000);
@@ -310,12 +310,12 @@ code {
                 }
             }
         }
-        .commander-list-item {
+        .commandos-list-item {
             background: var(--cds-global-color-blue-1000);
             &:hover {
                 background: var(--cds-global-color-blue-900);
             }
-            &.commander-list-item-active {
+            &.commandos-list-item-active {
                 background: var(--cds-global-color-blue-800);
             }
         }

@@ -1,7 +1,7 @@
 import { filter, take } from 'rxjs/operators';
-import { CommanderModalService } from './commander-modal/commander-modal.service';
+import { commandosModalService } from './commandos-modal/commandos-modal.service';
 import { LoggerService } from '@core/services';
-import { CommanderService, ICommand } from './commander.service';
+import { commandosService, ICommand } from './commandos.service';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { ConnectedPosition, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { Component, HostListener, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
@@ -11,11 +11,11 @@ import { fromEvent, merge, Subscription } from 'rxjs';
 
 
 @Component({
-    selector: 'app-commander',
-    templateUrl: './commander.component.html',
-    styleUrls: ['./commander.component.scss']
+    selector: 'app-commandos',
+    templateUrl: './commandos.component.html',
+    styleUrls: ['./commandos.component.scss']
 })
-export class CommanderComponent implements OnInit {
+export class commandosComponent implements OnInit {
     public sub: Subscription;
 
     @ViewChild('commandInputContainer', { read: ViewContainerRef }) commandInputContainerRef: ViewContainerRef;
@@ -25,7 +25,7 @@ export class CommanderComponent implements OnInit {
 
     @HostListener('window:keydown.arrowdown', ['$event.target'])
     arrowDownListener(): void {
-        if (this.commanderModalService.preventKeyboardShortcuts()) { return; }
+        if (this.commandosModalService.preventKeyboardShortcuts()) { return; }
         const max = this.commands.length - 1;
         const val = this.selected + 1;
         this.selected = val > max ? 0 : val;
@@ -33,7 +33,7 @@ export class CommanderComponent implements OnInit {
 
     @HostListener('window:keydown.arrowup', ['$event.target'])
     arrowUpListener(): void {
-        if (this.commanderModalService.preventKeyboardShortcuts()) { return; }
+        if (this.commandosModalService.preventKeyboardShortcuts()) { return; }
         const max = this.commands.length - 1;
         const val = this.selected - 1;
         this.selected = val >= 0 ? val : max;
@@ -41,7 +41,7 @@ export class CommanderComponent implements OnInit {
 
     @HostListener('window:resize', ['$event.target'])
     onResizeListener(): void {
-        if (this.commanderModalService.preventKeyboardShortcuts()) { return; }
+        if (this.commandosModalService.preventKeyboardShortcuts()) { return; }
         if (this.overlayRef) {
             const width = this.commandInputContainerRef.element.nativeElement.clientWidth;
             this.overlayRef.updateSize({ width });
@@ -58,7 +58,7 @@ export class CommanderComponent implements OnInit {
 
     @HostListener('window:keyup.enter', ['$event'])
     runCommandListener(): void {
-        if (this.commanderModalService.preventKeyboardShortcuts()) { return; }
+        if (this.commandosModalService.preventKeyboardShortcuts()) { return; }
         if (this.overlayRef) {
             this.runCommandSelected();
         }
@@ -69,7 +69,7 @@ export class CommanderComponent implements OnInit {
     handleKeyDownListener($event: Event): void {
         $event.preventDefault();
         $event.stopPropagation();
-        if (this.commanderModalService.preventKeyboardShortcuts()) { return; }
+        if (this.commandosModalService.preventKeyboardShortcuts()) { return; }
         if (!this.overlayRef) {
             //new FlexibleConnectedPositionStrategy(this.commandInput.element);
             const width = this.commandInputContainerRef.element.nativeElement.clientWidth;
@@ -84,8 +84,8 @@ export class CommanderComponent implements OnInit {
                 hasBackdrop: true,
 
             });
-            const commander = new TemplatePortal(this.commandsRef, this.viewContainerRef);
-            this.overlayRef.attach(commander);
+            const commandos = new TemplatePortal(this.commandsRef, this.viewContainerRef);
+            this.overlayRef.attach(commandos);
             this.selected = 0;
             this.commandInputRef.element.nativeElement.focus();
 
@@ -134,9 +134,9 @@ export class CommanderComponent implements OnInit {
         private overlay: Overlay,
         private viewContainerRef: ViewContainerRef,
         private router: Router,
-        public commanderService: CommanderService,
+        public commandosService: commandosService,
         private logger: LoggerService,
-        private commanderModalService: CommanderModalService
+        private commandosModalService: commandosModalService
     ) { }
 
     ngOnInit(): void {
@@ -154,7 +154,7 @@ export class CommanderComponent implements OnInit {
     }
 
     private filterCommands() {
-        this.commands = new FilterPipe().transform(this.commanderService.commands, this.filterText);
+        this.commands = new FilterPipe().transform(this.commandosService.commands, this.filterText);
     }
 
     runCommand(command: ICommand): void {

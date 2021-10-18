@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { filter, first } from 'rxjs/operators';
 
 @Component({
-    selector: 'commander-splash',
+    selector: 'commandos-splash',
     templateUrl: './splash.component.html',
     styleUrls: ['./splash.component.scss']
 })

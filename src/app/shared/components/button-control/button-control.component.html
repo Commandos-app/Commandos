@@ -1,24 +1,24 @@
-<div cds-layout="horizontal wrap:none" class="commander-button-control commander-button-control-hover">
-    <div class="commander-button-control-area" #commandButtonControlContainer>
-        <div class="commander-button-control-icon" (click)="onClick.emit()">
+<div cds-layout="horizontal wrap:none" class="commandos-button-control commandos-button-control-hover">
+    <div class="commandos-button-control-area" #commandButtonControlContainer>
+        <div class="commandos-button-control-icon" (click)="onClick.emit()">
             <ng-content select="[icon]"></ng-content>
             <cds-icon [shape]="startIcon" size="24" *ngIf="startIcon"></cds-icon>
         </div>
-        <div class="commander-button-control-text" (click)="onClick.emit()">
-            <div class="commander-button-control-title">
+        <div class="commandos-button-control-text" (click)="onClick.emit()">
+            <div class="commandos-button-control-title">
                 <ng-container *ngIf="title">{{title}}</ng-container>
                 <ng-content select="[title]"></ng-content>
             </div>
-            <div class="commander-button-control-value" cds-text="body">
+            <div class="commandos-button-control-value" cds-text="body">
                 <ng-container *ngIf="value">{{value}}</ng-container>
                 <ng-content select="[value]"></ng-content>
             </div>
         </div>
     </div>
-    <div class="commander-button-control-action">
+    <div class="commandos-button-control-action">
         <ng-content select="[action-secondary]"></ng-content>
     </div>
-    <div class="commander-button-control-action last">
+    <div class="commandos-button-control-action last">
         <ng-content select="[action-primary]"></ng-content>
     </div>
 </div>

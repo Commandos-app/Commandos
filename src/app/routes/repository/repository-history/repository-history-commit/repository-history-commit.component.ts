@@ -8,7 +8,7 @@ import { DiffFile } from 'diff2html/lib/types';
 import gitDiffParser, { File } from 'gitdiff-parser';
 
 @Component({
-    selector: 'commander-repository-history-commit',
+    selector: 'commandos-repository-history-commit',
     templateUrl: './repository-history-commit.component.html',
     styleUrls: ['./repository-history-commit.component.scss']
 })

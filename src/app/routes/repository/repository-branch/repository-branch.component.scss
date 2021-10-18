@@ -1,15 +1,15 @@
-.commander-branches-grid {
+.commandos-branches-grid {
     width: 100%;
-    --commander-branches-grid-template-columns: 25px 25px 25px 1fr;
+    --commandos-branches-grid-template-columns: 25px 25px 25px 1fr;
 
-    .commander-branches-row-title {
+    .commandos-branches-row-title {
         display: grid;
-        grid-template-columns: var(--commander-branches-grid-template-columns);
+        grid-template-columns: var(--commandos-branches-grid-template-columns);
     }
 
-    .commander-branches-row {
+    .commandos-branches-row {
         display: grid;
-        grid-template-columns: var(--commander-branches-grid-template-columns);
+        grid-template-columns: var(--commandos-branches-grid-template-columns);
 
         .lh {
             line-height: 25px;
@@ -94,13 +94,13 @@
 //         display: grid;
 //     }
 
-//     .commander-row {
+//     .commandos-row {
 //         display: none;
 //     }
 
 //     .cdk-drag-dragging {
 
-//         .commander-row {
+//         .commandos-row {
 //             display: grid;
 //         }
 

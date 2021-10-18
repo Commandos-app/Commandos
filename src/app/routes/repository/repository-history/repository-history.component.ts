@@ -1,6 +1,6 @@
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { RepositoryHistoryCommitComponent } from './repository-history-commit/repository-history-commit.component';
-import { CommanderModalService, CommanderService } from '@shared/services';
+import { commandosModalService, commandosService } from '@shared/services';
 import { FieldDefinition } from '@shared/components';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
@@ -37,7 +37,7 @@ export class RepositoryHistoryComponent implements OnInit {
         private repositoryService: RepositoryService,
         public overlay: Overlay,
         public viewContainerRef: ViewContainerRef,
-        private commanderModalService: CommanderModalService,
+        private commandosModalService: commandosModalService,
         private clipboard: Clipboard
     ) {
 
@@ -123,7 +123,7 @@ export class RepositoryHistoryComponent implements OnInit {
             { type: 'repository', label: 'Repository', name: 'repo', value: this.repositoryService.repositorySetting.path },
             { type: 'string', label: 'Name', name: 'name' },
         ];
-        const onClose$ = this.commanderModalService.openModal({ title: `Create branch for ${commit.shortSha}`, fields: fields! });
+        const onClose$ = this.commandosModalService.openModal({ title: `Create branch for ${commit.shortSha}`, fields: fields! });
         const sub = onClose$
             .subscribe(async (params) => {
                 if (params?.formData?.name) {
@@ -131,7 +131,7 @@ export class RepositoryHistoryComponent implements OnInit {
                 }
                 this.repositoryService.getBranches();
                 await this.getHistory();
-                this.commanderModalService.closeModal();
+                this.commandosModalService.closeModal();
                 sub.unsubscribe();
             });
     }

@@ -11,13 +11,13 @@
                 <b cds-layout="p-r:md">{{group.title}}</b>
                 <small *ngIf="group.path"><i>{{group.path}}</i></small>
             </p>
-            <div class="commander-grid commander-overview-grid ">
-                <div class="commander-row-title commander-overview-row-title sticky" cds-text="body bold">
+            <div class="commandos-grid commandos-overview-grid ">
+                <div class="commandos-row-title commandos-overview-row-title sticky" cds-text="body bold">
                     <div>Name</div>
                     <div>Folder</div>
                     <div>Tags</div>
                 </div>
-                <div class="commander-row commander-overview-row" *ngFor="let repo of group.repositories"
+                <div class="commandos-row commandos-overview-row" *ngFor="let repo of group.repositories"
                     cds-text="body" (click)="openRepository(repo.id)" (contextmenu)="openContext($event, repo)">
                     <div class="lh overflow-ellipsis">{{repo.name}}</div>
                     <div class="lh overflow-ellipsis">{{repo.path}}</div>

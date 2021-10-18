@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CommanderModalComponent } from './commander-modal.component';
+import { commandosModalComponent } from './commandos-modal.component';
 
-describe('CommanderModalComponent', () => {
-  let component: CommanderModalComponent;
-  let fixture: ComponentFixture<CommanderModalComponent>;
+describe('commandosModalComponent', () => {
+  let component: commandosModalComponent;
+  let fixture: ComponentFixture<commandosModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CommanderModalComponent ]
+      declarations: [ commandosModalComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CommanderModalComponent);
+    fixture = TestBed.createComponent(commandosModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,12 +1,12 @@
 <cds-modal [closable]="false">
     <cds-modal-header>
-        <h3 cds-text="title">Command: {{commanderModalService.title}}</h3>
+        <h3 cds-text="title">Command: {{commandosModalService.title}}</h3>
     </cds-modal-header>
     <cds-modal-content>
         <form class="modal-form" #modalForm>
             <cds-form-group layout="horizontal" cds-layout="m-b:lg">
 
-                <ng-container *ngFor="let field of commanderModalService.fields">
+                <ng-container *ngFor="let field of commandosModalService.fields">
 
                     <cds-control layout="horizontal" *ngIf="field.type === 'repositories'">
                         <label>{{field.label}}:</label>
@@ -50,7 +50,7 @@
         </form>
     </cds-modal-content>
     <cds-modal-actions>
-        <cds-button action="flat" (click)="commanderModalService.closeModal()">Cancel</cds-button>
+        <cds-button action="flat" (click)="commandosModalService.closeModal()">Cancel</cds-button>
         <cds-button (click)="run()" [disabled]="modalForm.invalid">Run Command</cds-button>
     </cds-modal-actions>
 </cds-modal>

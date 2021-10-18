@@ -7,8 +7,8 @@
         <cds-button status="danger" (click)="onDelete()" [disabled]="selected.size === 0">Delete</cds-button>
     </div> -->
     <ng-scrollbar class="virtual-scroll">
-        <div class="commander-grid commander-branches-grid" cdkDropListGroup cdkDropListSortingDisabled>
-            <div class="commander-row-title commander-branches-row-title sticky" cds-text="body bold">
+        <div class="commandos-grid commandos-branches-grid" cdkDropListGroup cdkDropListSortingDisabled>
+            <div class="commandos-row-title commandos-branches-row-title sticky" cds-text="body bold">
                 <div></div>
                 <div></div>
                 <div></div>
@@ -19,7 +19,7 @@
             <div cdkDropList (cdkDropListDropped)="drop($event)"
                 *ngFor="let branch of repositoryService.branches$ | async; let idx = index">
                 <!-- (cdkDragStarted)="dragStart()" (cdkDragEnded)="dragStop()" -->
-                <div class="commander-row commander-branches-row" cds-text="body" cdkDrag [cdkDragData]="branch"
+                <div class="commandos-row commandos-branches-row" cds-text="body" cdkDrag [cdkDragData]="branch"
                     [ngClass]="{'current-branch': branch.current}">
                     <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
                     <div class="example-custom-placeholder" *cdkDragPreview>{{branch.name}}</div>
@@ -85,7 +85,7 @@
                         <ng-container *ngIf="branch.upstream">
                             <i class="upstream" cds-layout="m-r:md">{{branch.upstream}}</i>
 
-                            <commander-branch-ahead-behind [branch]="branch"></commander-branch-ahead-behind>
+                            <commandos-branch-ahead-behind [branch]="branch"></commandos-branch-ahead-behind>
                         </ng-container>
                     </div>
 
@@ -196,7 +196,7 @@
                 </div>
 
             </cds-control>
-            <!-- <ng-container *ngFor="let field of commanderModalService.fields">
+            <!-- <ng-container *ngFor="let field of commandosModalService.fields">
 
                 <cds-control layout="horizontal" *ngIf="field.type === 'repositories'">
                     <label>{{field.label}}:</label>

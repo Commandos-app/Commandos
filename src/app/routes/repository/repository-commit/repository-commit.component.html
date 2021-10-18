@@ -1,8 +1,8 @@
-<div class="commander-grid-commit commander-full-height">
+<div class="commandos-grid-commit commandos-full-height">
 
-    <commander-split-layout>
-        <div class="commander-commit-area" sidebar>
-            <div class="commander-commit-message-box" cds-layout="m-b:sm">
+    <commandos-split-layout>
+        <div class="commandos-commit-area" sidebar>
+            <div class="commandos-commit-message-box" cds-layout="m-b:sm">
                 <form #myForm="ngForm">
                     <cds-form-group layout="vertical">
                         <cds-textarea cds-layout="vertical p-l:xs p-r:xs">
@@ -39,8 +39,8 @@
             </div>
             <cds-divider orientation="horizontal"></cds-divider>
             <ng-scrollbar class="virtual-scroll">
-                <commander-tree-view [treeData]="fileTree" [itemTemplate]="itemTmpl" scrollViewport>
-                </commander-tree-view>
+                <commandos-tree-view [treeData]="fileTree" [itemTemplate]="itemTmpl" scrollViewport>
+                </commandos-tree-view>
                 <ng-container *ngIf="fileTree.length  === 0 ">
                     <p class="gray-col" cds-text="section" cds-layout="m:md">No changes</p>
                 </ng-container>
@@ -49,18 +49,18 @@
 
         </div>
 
-        <div class="commander-full-height" content>
+        <div class="commandos-full-height" content>
             <div *ngIf="fileTree.length  === 0 " class="center-region">
                 <cds-icon shape="happy-face" size="xxl"></cds-icon>
             </div>
             <commandos-diff [data]="fileDiff" *ngIf="fileTree.length  !== 0" text="select a file to see the diff">
             </commandos-diff>
-            <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height"
+            <div cds-layout="horizontal gap:sm align:center" class="commandos-flex commandos-full-height"
                 *ngIf="isDiffLoading">
                 <cds-progress-circle size="xl"></cds-progress-circle>
             </div>
         </div>
-    </commander-split-layout>
+    </commandos-split-layout>
 
 </div>
 
@@ -72,7 +72,7 @@
             <b>{{node.name}}</b>
         </div>
 
-        <div *ngSwitchCase="'file'" class="comander-tree-row commander-tree-file-row">
+        <div *ngSwitchCase="'file'" class="comander-tree-row commandos-tree-file-row">
             <cds-icon shape="file"></cds-icon>
 
             <span cds-text="secondary" class="comander-tree-row-text clickable" (click)="loadDiff(node)">
@@ -114,14 +114,14 @@
             </b>
         </div>
 
-        <div *ngSwitchDefault class="comander-tree-row commander-tree-folder-row">
+        <div *ngSwitchDefault class="comander-tree-row commandos-tree-folder-row">
             <ng-container *ngIf="!node.hideChildren">
-                <cds-icon shape="angle" class="commander-tree-arrow" size="sm" direction="down"
+                <cds-icon shape="angle" class="commandos-tree-arrow" size="sm" direction="down"
                     (click)="hideChild(node)"></cds-icon>
                 <cds-icon shape="folder-open" solid="true" (click)="hideChild(node)"></cds-icon>
             </ng-container>
             <ng-container *ngIf="node.hideChildren">
-                <cds-icon shape="angle" class="commander-tree-arrow" direction="right" (click)="hideChild(node)">
+                <cds-icon shape="angle" class="commandos-tree-arrow" direction="right" (click)="hideChild(node)">
                 </cds-icon>
                 <cds-icon shape="folder" solid="true" (click)="hideChild(node)"></cds-icon>
             </ng-container>

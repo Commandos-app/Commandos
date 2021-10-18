@@ -11,7 +11,7 @@ export interface ICommand {
 @Injectable({
     providedIn: 'root'
 })
-export class CommanderService {
+export class commandosService {
 
     commands: ICommand[] = [];
 

@@ -2102,7 +2102,7 @@ aria-query@^3.0.0:
   integrity sha1-ZbP8wcoRVajJrmTW7uKX8V1RM8w=
   dependencies:
     ast-types-flow "0.0.7"
-    commander "^2.11.0"
+    commandos "^2.11.0"
 
 arr-diff@^4.0.0:
   version "4.0.0"
@@ -3011,14 +3011,14 @@ combined-stream@^1.0.6, combined-stream@^1.0.8, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@^2.11.0, commander@^2.12.1, commander@^2.20.0, commander@^2.8.1:
+commandos@^2.11.0, commandos@^2.12.1, commandos@^2.20.0, commandos@^2.8.1:
   version "2.20.3"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
+  resolved "https://registry.yarnpkg.com/commandos/-/commandos-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
   integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
 
-commander@^7.1.0:
+commandos@^7.1.0:
   version "7.2.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-7.2.0.tgz#a36cb57d0b501ce108e4d20559a150a391d97ab7"
+  resolved "https://registry.yarnpkg.com/commandos/-/commandos-7.2.0.tgz#a36cb57d0b501ce108e4d20559a150a391d97ab7"
   integrity sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==
 
 commondir@^1.0.1:
@@ -9338,7 +9338,7 @@ seek-bzip@^1.0.5:
   resolved "https://registry.yarnpkg.com/seek-bzip/-/seek-bzip-1.0.6.tgz#35c4171f55a680916b52a07859ecf3b5857f21c4"
   integrity sha512-e1QtP3YL5tWww8uKaOCQ18UxIT2laNBXHjV/S2WYCiK4udiv8lkG89KRIoCjUagnAmCBurjF4zEVX2ByBbnCjQ==
   dependencies:
-    commander "^2.8.1"
+    commandos "^2.8.1"
 
 select-hose@^2.0.0:
   version "2.0.0"
@@ -10108,7 +10108,7 @@ svgo@^2.3.0:
   dependencies:
     "@trysound/sax" "0.1.1"
     chalk "^4.1.0"
-    commander "^7.1.0"
+    commandos "^7.1.0"
     css-select "^4.1.3"
     css-tree "^1.1.2"
     csso "^4.2.0"
@@ -10205,7 +10205,7 @@ terser@5.7.1, terser@^5.7.0:
   resolved "https://registry.yarnpkg.com/terser/-/terser-5.7.1.tgz#2dc7a61009b66bb638305cb2a824763b116bf784"
   integrity sha512-b3e+d5JbHAe/JSjwsC3Zn55wsBIM7AsHLjKxT31kGCldgbpFePaFo+PiddtO6uwRZWRw7sPXmAN8dTW61xmnSg==
   dependencies:
-    commander "^2.20.0"
+    commandos "^2.20.0"
     source-map "~0.7.2"
     source-map-support "~0.5.19"
 
@@ -10418,7 +10418,7 @@ tslint@~6.1.0:
     "@babel/code-frame" "^7.0.0"
     builtin-modules "^1.1.1"
     chalk "^2.3.0"
-    commander "^2.12.1"
+    commandos "^2.12.1"
     diff "^4.0.1"
     glob "^7.1.1"
     js-yaml "^3.13.1"

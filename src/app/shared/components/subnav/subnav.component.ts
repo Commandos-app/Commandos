@@ -1,6 +1,6 @@
 import { Clipboard } from '@angular/cdk/clipboard';
-import { CommanderService } from './../commander/commander.service';
-import { CommanderModalService } from '@shared/services';
+import { commandosService } from './../commandos/commandos.service';
+import { commandosModalService } from '@shared/services';
 import { RepositoryService } from '@routes/repository/repository.service';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -38,9 +38,9 @@ export class SubnavComponent implements OnInit {
         private router: Router,
         public repositoryService: RepositoryService,
         public repositoriesSettingsService: RepositoriesSettingsService,
-        private commanderModalService: CommanderModalService,
+        private commandosModalService: commandosModalService,
         private clipboard: Clipboard,
-        private commanderService: CommanderService
+        private commandosService: commandosService
     ) { }
 
     ngOnInit(): void {
@@ -75,7 +75,7 @@ export class SubnavComponent implements OnInit {
         ];
 
 
-        const onClose$ = this.commanderModalService.openModal({ title: name, fields: fields! });
+        const onClose$ = this.commandosModalService.openModal({ title: name, fields: fields! });
         const sub = onClose$
             .subscribe(async (params) => {
                 if (params?.formData?.name && !params?.formData?.from) {
@@ -84,8 +84,8 @@ export class SubnavComponent implements OnInit {
                 else if (params?.formData?.name && params?.formData?.from) {
                     await this.repositoryService.createBranchFromAnother(params.formData.name, params.formData.from, params.formData?.checkout);
                 }
-                this.commanderService.reloadData();
-                this.commanderModalService.closeModal();
+                this.commandosService.reloadData();
+                this.commandosModalService.closeModal();
                 sub.unsubscribe();
             });
     }
@@ -95,7 +95,7 @@ export class SubnavComponent implements OnInit {
         $event.preventDefault();
         $event.stopPropagation();
         await this.repositoryService.sync();
-        this.commanderService.reloadData();
+        this.commandosService.reloadData();
         this.repositoryService.loadAheadBehindOfCurrentBranch();
         await sleep(1000);
         this.isSyncing = 'default';

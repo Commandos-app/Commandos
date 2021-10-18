@@ -1,27 +1,27 @@
-<commander-splash></commander-splash>
-<div class="commander-layout commander-app-layout" cds-layout="vertical align:stretch">
-    <header class="commander-header" [ngClass]="{'dev': devEnv}">
+<commandos-splash></commandos-splash>
+<div class="commandos-layout commandos-app-layout" cds-layout="vertical align:stretch">
+    <header class="commandos-header" [ngClass]="{'dev': devEnv}">
         <app-header></app-header>
     </header>
-    <div class="commander-navigation" cds-layout="">
+    <div class="commandos-navigation" cds-layout="">
         <app-subnav></app-subnav>
     </div>
-    <div cds-layout="horizontal align:vertical-stretch wrap:none" class="commander-global-content">
-        <!-- <nav class="commander-sidenav" cds-layout="">
+    <div cds-layout="horizontal align:vertical-stretch wrap:none" class="commandos-global-content">
+        <!-- <nav class="commandos-sidenav" cds-layout="">
             <app-sidenav></app-sidenav>
         </nav> -->
-        <!-- <cds-divider class="commander-divider" orientation="vertical"></cds-divider> -->
+        <!-- <cds-divider class="commandos-divider" orientation="vertical"></cds-divider> -->
         <div cds-layout="vertical align:stretch">
-            <div class="commander-content commander-scrollable-content">
+            <div class="commandos-content commandos-scrollable-content">
                 <router-outlet></router-outlet>
             </div>
         </div>
     </div>
-    <footer class="commander-footer">
+    <footer class="commandos-footer">
         <commandos-footer></commandos-footer>
     </footer>
 </div>
-<app-commander-modal *ngIf="commanderModalService.open"></app-commander-modal>
+<app-commandos-modal *ngIf="commandosModalService.open"></app-commandos-modal>
 <commandos-update-modal *ngIf="hasUpdate" [update]="update" (close)="closeUpdate()"></commandos-update-modal>
 <div class="commandos-notification-container">
     <commandos-notification></commandos-notification>

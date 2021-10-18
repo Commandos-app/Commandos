@@ -3,7 +3,7 @@ import { RepositoryService } from '@routes/repository/repository.service';
 import { SelectedRepositoryTypes } from './../types';
 import { RepositoriesSettings, StoreService } from '@core/services';
 import { RepositoriesSettingsService } from '@core/services';
-import { CommanderModalService } from './commander-modal.service';
+import { commandosModalService } from './commandos-modal.service';
 import { Component, HostListener, OnInit, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { getBranches } from '@git/commands';
 import { parseBranches } from '@git/parsers';
@@ -11,11 +11,11 @@ import { parseBranches } from '@git/parsers';
 type FormData = { [key: string]: any };
 
 @Component({
-    selector: 'app-commander-modal',
-    templateUrl: './commander-modal.component.html',
-    styleUrls: ['./commander-modal.component.scss']
+    selector: 'app-commandos-modal',
+    templateUrl: './commandos-modal.component.html',
+    styleUrls: ['./commandos-modal.component.scss']
 })
-export class CommanderModalComponent implements OnInit {
+export class commandosModalComponent implements OnInit {
 
     items: Array<SelectedRepositoryTypes> = [];
     branches: Array<string> = [];
@@ -23,12 +23,12 @@ export class CommanderModalComponent implements OnInit {
 
     @HostListener('window:keydown.esc', ['$event.target'])
     closeModalListener(): void {
-        this.commanderModalService.closeModal();
+        this.commandosModalService.closeModal();
     }
 
 
     constructor(
-        public commanderModalService: CommanderModalService,
+        public commandosModalService: commandosModalService,
         private repositoriesSettingsService: RepositoriesSettingsService,
         private storeService: StoreService,
         public repositoryService: RepositoryService,
@@ -43,7 +43,7 @@ export class CommanderModalComponent implements OnInit {
     }
 
     private checkIfRepoIsSelected(): void {
-        const selected = this.commanderModalService.fields.find(field => field.type === 'repository');
+        const selected = this.commandosModalService.fields.find(field => field.type === 'repository');
         if (selected) {
             const repoType: SelectedRepositoryTypes = {
                 type: 'Repository',
@@ -58,13 +58,13 @@ export class CommanderModalComponent implements OnInit {
         const repos = this.loadSelectedRepos(this.selected);
         const formData: FormData = {};
 
-        this.commanderModalService.fields
+        this.commandosModalService.fields
             .forEach((field) => {
                 formData[field.name] = field.value;
             });
 
         const param = { repos, formData };
-        this.commanderModalService.run(param);
+        this.commandosModalService.run(param);
     }
 
     async onRepositoriesSelected(event: SelectedRepositoryTypes): Promise<void> {

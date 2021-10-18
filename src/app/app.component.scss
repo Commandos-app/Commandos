@@ -16,14 +16,14 @@
     align-items: start;
 }
 
-.commander-layout {
+.commandos-layout {
     height: 100vh;
     overflow: hidden;
 
-    .commander-header {
+    .commandos-header {
         background: var(--cds-global-color-blue-900);
         color: var(--cds-global-color-gray-0);
-        height: var(--commander-header-height);
+        height: var(--commandos-header-height);
         flex-grow: initial;
         border-left: 1px solid var(--cds-global-color-blue-900);
         border-right: 1px solid var(--cds-global-color-blue-900);
@@ -35,26 +35,26 @@
         }
     }
 
-    .commander-navigation {
+    .commandos-navigation {
         border-left: 1px solid var(--cds-alias-object-border-color);
         border-right: 1px solid var(--cds-alias-object-border-color);
     }
 
-    .commander-global-content {
+    .commandos-global-content {
         border-bottom: 1px solid var(--cds-alias-object-border-color);
         border-left: 1px solid var(--cds-alias-object-border-color);
         border-right: 1px solid var(--cds-alias-object-border-color);
     }
 
-    .commander-footer {
-        height: var(--commander-footer-height);
+    .commandos-footer {
+        height: var(--commandos-footer-height);
         flex-grow: initial;
         border-bottom: 1px solid var(--cds-alias-object-border-color);
         border-left: 1px solid var(--cds-alias-object-border-color);
         border-right: 1px solid var(--cds-alias-object-border-color);
     }
 
-    .commander-scrollable-content {
+    .commandos-scrollable-content {
         overflow-y: auto;
         justify-content: start;
         align-items: start;

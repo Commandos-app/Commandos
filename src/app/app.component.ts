@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import { ErrorService, GitService, LoggerService, StoreService, TauriService } from '@core/services';
 import { environment } from '@env/environment';
 import { TranslateService } from '@ngx-translate/core';
-import { CommanderModalService, CommanderService, ICommand } from '@shared/services';
+import { commandosModalService, commandosService, ICommand } from '@shared/services';
 import { listen } from '@tauri-apps/api/event';
 import { UpdateResult } from '@tauri-apps/api/updater';
 
 @Component({
-    selector: 'commander-root',
+    selector: 'commandos-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
@@ -21,13 +21,13 @@ export class AppComponent {
     constructor(
         private translate: TranslateService,
         private logger: LoggerService,
-        private commanderService: CommanderService,
+        private commandosService: commandosService,
         private gitService: GitService,
         private router: Router,
         private errorService: ErrorService,
         @Inject(DOCUMENT) private document: Document,
         private renderer: Renderer2,
-        public commanderModalService: CommanderModalService,
+        public commandosModalService: commandosModalService,
         private storeService: StoreService,
         private tauriService: TauriService
 
@@ -41,7 +41,7 @@ export class AppComponent {
         this.translate.setDefaultLang('de');
         this.translate.use('de');
 
-        this.logger.info(`Starting The Commander`);
+        this.logger.info(`Starting The commandos`);
 
 
         // if (!process.env.LOCAL_GIT_DIRECTORY) {
@@ -54,7 +54,7 @@ export class AppComponent {
 
         this.setDarkMode();
 
-        // Register commands for Commander
+        // Register commands for commandos
         this.registerToggleDarkModeCommand();
         this.registerSettingsCommand();
         this.registerNewRepoCommand();
@@ -87,7 +87,7 @@ export class AppComponent {
             icon: 'cog',
             callback: () => { this.openSettings() }
         };
-        this.commanderService.registerCommand(command);
+        this.commandosService.registerCommand(command);
     }
 
     private openSettings(): void {
@@ -101,7 +101,7 @@ export class AppComponent {
             icon: 'plus',
             callback: () => { this.openAddRepo() }
         };
-        this.commanderService.registerCommand(command);
+        this.commandosService.registerCommand(command);
     }
 
     private openAddRepo(): void {
@@ -115,7 +115,7 @@ export class AppComponent {
             icon: this.getDarkModeIcon(),
             callback: () => { this.toggleDarkMode(command) }
         }
-        this.commanderService.registerCommand(command);
+        this.commandosService.registerCommand(command);
     }
 
     private toggleDarkMode(command: ICommand): void {

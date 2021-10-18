@@ -1,4 +1,4 @@
-import { CommanderService } from './../commander/commander.service';
+import { commandosService } from './../commandos/commandos.service';
 import { Component, OnInit } from '@angular/core';
 import { RepositoryService } from '@routes/repository/repository.service';
 import { sleep } from '@shared/functions';
@@ -14,7 +14,7 @@ export class FooterComponent implements OnInit {
 
     constructor(
         public repositoryService: RepositoryService,
-        private commanderService: CommanderService
+        private commandosService: commandosService
     ) { }
 
     ngOnInit(): void {
@@ -23,7 +23,7 @@ export class FooterComponent implements OnInit {
     async sync() {
         this.isSync = true;
         await this.repositoryService.sync();
-        this.commanderService.reloadData();
+        this.commandosService.reloadData();
         this.repositoryService.loadAheadBehindOfCurrentBranch();
         await sleep(1000);
         this.isSync = false;

@@ -1,5 +1,5 @@
 import { FieldDefinition, RegisterCommandOptions } from '@shared/components';
-import { ICommand, CommanderService, CommanderModalService } from '@shared/services';
+import { ICommand, commandosService, commandosModalService } from '@shared/services';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { createBranch, deleteLocalBranch, push, pull, pruneRemote, createBranchFromAnother, checkout } from '@git/commands';
@@ -18,8 +18,8 @@ export class GitService {
     private sub!: Subscription;
 
     constructor(
-        private commanderService: CommanderService,
-        private commanderModalService: CommanderModalService
+        private commandosService: commandosService,
+        private commandosModalService: commandosModalService
     ) { }
 
     registerGitCommands(): void {
@@ -117,13 +117,13 @@ export class GitService {
             direction: options.direction,
             callback: () => { this.runCommand(options) }
         };
-        this.commanderService.registerCommand(command);
+        this.commandosService.registerCommand(command);
     }
 
     private runCommand(options: RegisterCommandOptions) {
         this.unsubscribe();
 
-        const onClose$ = this.commanderModalService.openModal({ title: options.name, fields: options.fields! });
+        const onClose$ = this.commandosModalService.openModal({ title: options.name, fields: options.fields! });
         this.sub = onClose$
             .subscribe((params) => {
                 if (params.repos && params.repos.length > 0 && this[options.command]) {
@@ -131,9 +131,9 @@ export class GitService {
                         this[options.command](params.formData, params.repos[i]);
                     }
                 }
-                this.commanderService.reloadData();
+                this.commandosService.reloadData();
                 this.unsubscribe();
-                this.commanderModalService.closeModal();
+                this.commandosModalService.closeModal();
             });
 
     }

@@ -19,8 +19,8 @@ import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 import { ClarityIconsModule } from './clarity-icons.module';
 import { BranchAheadBehindComponent } from './components/branch-ahead-behind/branch-ahead-behind.component';
 import { ButtonControlComponent } from './components/button-control/button-control.component';
-import { CommanderModalComponent } from './components/commander/commander-modal/commander-modal.component';
-import { CommanderComponent } from './components/commander/commander.component';
+import { commandosModalComponent } from './components/commandos/commandos-modal/commandos-modal.component';
+import { commandosComponent } from './components/commandos/commandos.component';
 import { DiffLineByLineComponent } from './components/diff/diff-line-by-line/diff-line-by-line.component';
 import { DiffSideBySideComponent } from './components/diff/diff-side-by-side/diff-side-by-side.component';
 import { DiffComponent } from './components/diff/diff.component';
@@ -38,8 +38,8 @@ import { DateFormatePipe } from './pipe/date-formate.pipe';
 
 const components = [
 
-    CommanderComponent,
-    CommanderModalComponent,
+    commandosComponent,
+    commandosModalComponent,
     ButtonControlComponent,
     TreeViewComponent,
     SplashComponent,

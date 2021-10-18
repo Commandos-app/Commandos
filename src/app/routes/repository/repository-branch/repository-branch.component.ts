@@ -1,6 +1,6 @@
-import { CommanderModalComponent } from './../../../shared/components/commander/commander-modal/commander-modal.component';
+import { commandosModalComponent } from './../../../shared/components/commandos/commandos-modal/commandos-modal.component';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { CommanderService } from '@shared/services';
+import { commandosService } from '@shared/services';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ChangeBranch, NewBranch, RepositoryService } from '../repository.service';
 import { filter, first } from 'rxjs/operators';
@@ -72,7 +72,7 @@ export class RepositoryBranchComponent implements OnInit {
     constructor(
         public repositoryService: RepositoryService,
         private ngxTippyService: NgxTippyService,
-        private commanderService: CommanderService,
+        private commandosService: commandosService,
         private cd: ChangeDetectorRef
     ) { }
 
@@ -88,7 +88,7 @@ export class RepositoryBranchComponent implements OnInit {
                 //     this.cd.detectChanges();
                 // }, 200);
             });
-        this.commanderService.onReload$.pipe(untilDestroyed(this))
+        this.commandosService.onReload$.pipe(untilDestroyed(this))
             .subscribe(() => {
                 this.repositoryService.getBranches();
                 // this.cd.detectChanges();
