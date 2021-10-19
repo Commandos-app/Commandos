@@ -1,6 +1,17 @@
 <div class="parent" cds-layout="vertical align:stretch p:lg" *ngIf="repositoriesGrouped?.length > 0;else noRepos">
-    <p cds-text="heading" cds-layout="m-t:none m-b:lg">{{ 'PAGES.HOME.TITLE' | translate }}</p>
     <div class="commandos-grid-home-meta">
+        <p cds-text="heading" cds-layout="m-t:none m-b:lg">
+            {{ 'PAGES.HOME.TITLE' | translate }}
+        </p>
+        <div class="grid-item-end">
+            <cds-search control-width="shrink">
+                <label></label>
+                <input type="search" [(ngModel)]="searchText" />
+            </cds-search>
+        </div>
+    </div>
+
+    <!-- <div>
         <div>
             <p cds-text="secondary" cds-layout="m-b:sm">Group by:
                 <a (click)="handleGroupAndFilter('none')" cds-text="link">None</a> |
@@ -8,14 +19,8 @@
                 <a (click)="handleGroupAndFilter('tags')" cds-text="link">Tags</a>
             </p>
         </div>
-        <div class="grid-item-end">
-            <cds-search control-width="shrink">
-                <label></label>
-                <input type="search" [(ngModel)]="searchText" />
-            </cds-search>
 
-        </div>
-    </div>
+    </div> -->
 
     <ng-scrollbar class="virtual-scroll">
         <ng-container *ngFor="let group of repositoriesGrouped">
@@ -31,8 +36,8 @@
                 </div>
                 <div class="commander-row commander-overview-row" *ngFor="let repo of group.repositories"
                     cds-text="body" (click)="openRepository(repo.id)" (contextmenu)="openContext($event, repo)">
-                    <div class="lh overflow-ellipsis">{{repo.name}}</div>
-                    <div class="lh overflow-ellipsis">{{repo.path}}</div>
+                    <div class="lh overflow-ellipsis" [innerHTML]="repo.name"></div>
+                    <div class="lh overflow-ellipsis" [innerHTML]="repo.path"></div>
                     <div>
                         <div cds-layout="horizontal gap:sm">
                             <cds-tag readonly *ngFor="let tag of repo.tags" color="gray">{{tag}}</cds-tag>
@@ -47,7 +52,8 @@
 
 <ng-template #noRepos>
     <div class="center-region text-center">
-        <p>Thank you for using Commandos!<br>
+        <p>
+            Thank you for using Commandos!<br>
             Start adding repositories to Commandos, to use the awesome features!<br>
             <br>
             <cds-button [routerLink]="['/add-repository']">Add Repository</cds-button>

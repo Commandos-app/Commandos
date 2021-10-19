@@ -11,8 +11,8 @@ import { open } from '@tauri-apps/api/shell';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { invoke } from '@tauri-apps/api/tauri';
 import { groupBy, sortByProperty } from '@shared/functions';
-import { FilterPipe } from '@josee9988/filter-pipe-ngx';
-
+import { FilterByPipe } from 'ngx-pipes';
+import Fuse from 'fuse.js'
 
 @Component({
     selector: 'app-home',
@@ -27,8 +27,9 @@ export class HomeComponent implements OnInit {
     @ViewChild('userMenu') userMenu: TemplateRef<any>;
     overlayRef: OverlayRef | null;
     sub: Subscription;
+    private fuse: Fuse<RepositorySetting>;
 
-    private filterText: string;
+    private filterText: string = '';
     get searchText(): string {
         return this.filterText;
     }
@@ -37,7 +38,6 @@ export class HomeComponent implements OnInit {
         this.filterText = value;
         this.handleGroupAndFilter(this.storeService.RepoGroupBy);
     }
-
 
     constructor(
         private router: Router,
@@ -53,8 +53,10 @@ export class HomeComponent implements OnInit {
         this.repositoryService.unload();
         this.loadRepos();
         this.repositoryService.clearUIBranches();
-        const groupValue = this.storeService.RepoGroupBy;
-        this.handleGroupAndFilter(groupValue);
+        // for now it is deactivated.
+        // const groupValue = this.storeService.RepoGroupBy;
+        this.createFuzzySearch();
+        this.handleGroupAndFilter('none');
     }
 
     loadRepos(): void {
@@ -139,24 +141,37 @@ export class HomeComponent implements OnInit {
 
     }
 
-    handleGroupAndFilter(type: GroupByOptions) {
-        const repos = this.filterRepositories();
-        this.group(type, repos);
+
+    toggleFolderGroup() {
+        const type = this.storeService.RepoGroupBy === 'tags' ? 'none' : 'tags';
+        this.handleGroupAndFilter(type);
+    }
+
+    toggleTagsGroup() {
+        const type = this.storeService.RepoGroupBy === 'tags' ? 'none' : 'tags';
+        this.handleGroupAndFilter(type);
     }
 
     filterRepositories(): RepositoriesSettings {
-        let repos = new FilterPipe().transform(this.repositories, this.filterText);
+
+        let search = highlight(this.fuse.search(this.searchText));
+        console.log(`TCL: ~ file: home.component.ts ~ line 158 ~ HomeComponent ~ filterRepositories ~ seach`, search);
+        let repos: any = search; //.map(item => item.item);
+        // let repos = new FilterByPipe().transform<RepositoriesSettings>(this.repositories, ['name', 'path', 'tags'], this.searchText);
         if (repos.length === 0) {
             repos = this.repositories;
         }
         return repos;
     }
 
-    private group(type: GroupByOptions, repos: RepositoriesSettings) {
+
+    private handleGroupAndFilter(type: GroupByOptions) {
+        const repos = this.filterRepositories();
         switch (type) {
             case 'none': this.groupNone(repos); break;
             case 'tags': this.groupTags(repos); break;
             case 'folder': this.groupFolder(repos); break;
+            default: this.groupNone(repos); break;
         }
         this.storeService.RepoGroupBy = type;
     }
@@ -164,10 +179,10 @@ export class HomeComponent implements OnInit {
 
     private groupFolder(repos: RepositoriesSettings) {
         const repositoriesGrouped = groupBy(repos, (t: any) => t.path.substring(0, t.path.lastIndexOf('/')));
-        this.repositoriesGrouped = repositoriesGrouped.map(r => ({
-            title: r.title.substring(r.title.lastIndexOf('/') + 1, r.title.length),
-            path: r.title,
-            repositories: r.repositories
+        this.repositoriesGrouped = repositoriesGrouped.map(group => ({
+            title: group.title.substring(group.title.lastIndexOf('/') + 1, group.title.length),
+            path: group.title,
+            repositories: group.repositories
         }));
     }
 
@@ -184,6 +199,26 @@ export class HomeComponent implements OnInit {
         this.repositoriesGrouped = [group];
     }
 
+    private createFuzzySearch() {
+        const options = {
+            // isCaseSensitive: false,
+            includeScore: true,
+            // shouldSort: true,
+            includeMatches: true,
+            // findAllMatches: false,
+            // minMatchCharLength: 1,
+            // location: 0,
+            threshold: 0.3,
+            // distance: 100,
+            // useExtendedSearch: false,
+            ignoreLocation: true,
+            // ignoreFieldNorm: false,
+            keys: ['name', 'path']
+        };
+        this.fuse = new Fuse(this.repositories, options);
+    }
+
+
     close() {
         this.sub && this.sub.unsubscribe();
         if (this.overlayRef) {
@@ -193,3 +228,51 @@ export class HomeComponent implements OnInit {
     }
 
 }
+
+
+const highlight = (fuseSearchResult: any, highlightClassName: string = 'commandos-highlight') => {
+    const set = (obj: any, path: string, value: any) => {
+        const pathValue = path.split('.');
+        let i;
+
+        for (i = 0; i < pathValue.length - 1; i++) {
+            obj = obj[pathValue[i]];
+        }
+
+        obj[pathValue[i]] = value;
+    };
+
+    const generateHighlightedText = (inputText: string, regions: number[] = []) => {
+        let content = '';
+        let nextUnhighlightedRegionStartingIndex = 0;
+
+        regions.forEach((region: any) => {
+            const lastRegionNextIndex = region[1] + 1;
+
+            content += [
+                inputText.substring(nextUnhighlightedRegionStartingIndex, region[0]),
+                `<b class="${highlightClassName}">`,
+                inputText.substring(region[0], lastRegionNextIndex),
+                '</b>',
+            ].join('');
+
+            nextUnhighlightedRegionStartingIndex = lastRegionNextIndex;
+        });
+
+        content += inputText.substring(nextUnhighlightedRegionStartingIndex);
+
+        return content;
+    };
+
+    return fuseSearchResult
+        .filter(({ matches }: any) => matches && matches.length)
+        .map(({ item, matches }: any) => {
+            const highlightedItem = { ...item };
+
+            matches.forEach((match: any) => {
+                set(highlightedItem, match.key, generateHighlightedText(match.value, match.indices));
+            });
+
+            return highlightedItem;
+        });
+};

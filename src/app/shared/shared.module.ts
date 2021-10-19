@@ -7,7 +7,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { CdsAccordionModule, CdsAlertModule, CdsButtonModule, CdsCheckboxModule, CdsDividerModule, CdsFileModule, CdsFormsModule, CdsIconModule, CdsInputModule, CdsModalModule, CdsProgressCircleModule, CdsRadioModule, CdsSearchModule, CdsSelectModule, CdsTagModule, CdsTextareaModule } from '@cds/angular';
+import {
+    CdsAccordionModule, CdsAlertModule, CdsButtonModule, CdsCheckboxModule, CdsDividerModule,
+    CdsFileModule, CdsFormsModule, CdsIconModule, CdsInputModule, CdsModalModule,
+    CdsProgressCircleModule, CdsRadioModule, CdsSearchModule, CdsSelectModule,
+    CdsTagModule, CdsTextareaModule
+} from '@cds/angular';
 import { FilterModule } from '@josee9988/filter-pipe-ngx';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TranslateModule } from '@ngx-translate/core';
@@ -35,6 +40,8 @@ import { TreeViewComponent } from './components/tree-view/tree-view.component';
 import { UpdateModalComponent } from './components/update-modal/update-modal.component';
 import { DiffPipe } from './directives/diff.pipe';
 import { DateFormatePipe } from './pipe/date-formate.pipe';
+import { NgPipesModule } from 'ngx-pipes';
+
 
 const components = [
 
@@ -105,6 +112,8 @@ const modules = [
     AutosizeModule,
     FilterModule,
     AngularSplitModule,
+
+    NgPipesModule,
 
     VirtualScrollerModule,
 ];
