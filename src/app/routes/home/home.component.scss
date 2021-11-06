@@ -35,3 +35,17 @@
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
 }
+
+.commandos-meta-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.action-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 2px;
+}

@@ -6,7 +6,7 @@ import {
     minusIcon, moonIcon, noteIcon, pencilIcon, pinIcon, playIcon,
     plusIcon, refreshIcon, shrinkIcon, sunIcon, syncIcon, timesIcon, trashIcon, treeViewIcon, twoWayArrowsIcon, undoIcon,
     unknownStatusIcon, uploadCloudIcon, userIcon, viewCardsIcon, viewListIcon, wandIcon, windowCloseIcon, windowMaxIcon, windowMinIcon,
-    windowRestoreIcon
+    windowRestoreIcon, filterIcon, sliderIcon
 } from '@cds/core/icon';
 
 
@@ -19,7 +19,7 @@ const icons = [
     trashIcon, downloadIcon, twoWayArrowsIcon, userIcon,
     refreshIcon, happyFaceIcon, arrowIcon, syncIcon, pinIcon,
     barsIcon, viewCardsIcon, viewListIcon, treeViewIcon,
-    applicationIcon
+    applicationIcon, filterIcon, sliderIcon
 ]
 
 ClarityIcons.addIcons(...icons);

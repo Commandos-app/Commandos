@@ -14,6 +14,11 @@ import { groupBy, sortByProperty } from '@shared/functions';
 import { FilterByPipe } from 'ngx-pipes';
 import Fuse from 'fuse.js'
 
+
+type tag = {
+    selected: boolean,
+    name: string
+}
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
@@ -39,6 +44,12 @@ export class HomeComponent implements OnInit {
         this.handleGroupAndFilter(this.storeService.RepoGroupBy);
     }
 
+    isFilterOpen = false;
+    isGroupOpen = false;
+    tags: tag[] = [];
+    emptyTag: tag = { selected: false, name: 'empty' };
+    selectedGroup = this.storeService.RepoGroupBy;
+
     constructor(
         private router: Router,
         private repos: RepositoriesSettingsService,
@@ -55,8 +66,10 @@ export class HomeComponent implements OnInit {
         this.repositoryService.clearUIBranches();
         // for now it is deactivated.
         // const groupValue = this.storeService.RepoGroupBy;
-        this.createFuzzySearch();
         this.handleGroupAndFilter('none');
+        const test = this.storeService.get<string[]>('tags', []);
+        this.tags = test.map(tag => ({ selected: false, name: tag }));
+        this.tags.push(this.emptyTag);
     }
 
     loadRepos(): void {
@@ -143,7 +156,7 @@ export class HomeComponent implements OnInit {
 
 
     toggleFolderGroup() {
-        const type = this.storeService.RepoGroupBy === 'tags' ? 'none' : 'tags';
+        const type = this.storeService.RepoGroupBy === 'folder' ? 'none' : 'folder';
         this.handleGroupAndFilter(type);
     }
 
@@ -152,20 +165,39 @@ export class HomeComponent implements OnInit {
         this.handleGroupAndFilter(type);
     }
 
-    filterRepositories(): RepositoriesSettings {
+    toggle(tag: tag) {
+        tag.selected = !tag.selected;
+        this.handleGroupAndFilter(this.storeService.RepoGroupBy);
+    }
 
-        let search = highlight(this.fuse.search(this.searchText));
-        console.log(`TCL: ~ file: home.component.ts ~ line 158 ~ HomeComponent ~ filterRepositories ~ seach`, search);
+    clearTagFilter() {
+        this.tags.forEach(tag => tag.selected = false);
+        this.handleGroupAndFilter(this.storeService.RepoGroupBy);
+    }
+
+    filterRepositories(): RepositoriesSettings {
+        const selectedTags = this.tags.filter(tag => tag.selected).map(tag => tag.name);
+        let reposFiltredByTags = this.repositories.filter(repo => {
+            return selectedTags.some(tag => repo.tags.includes(tag) || (this.emptyTag.selected && repo.tags.length === 0));
+        });
+
+        if (reposFiltredByTags.length === 0) {
+            reposFiltredByTags = this.repositories;
+        }
+
+        this.createFuzzySearch(reposFiltredByTags);
+        const searchResult = this.fuse.search(this.searchText);
+        const search = highlight(searchResult);
         let repos: any = search; //.map(item => item.item);
         // let repos = new FilterByPipe().transform<RepositoriesSettings>(this.repositories, ['name', 'path', 'tags'], this.searchText);
         if (repos.length === 0) {
-            repos = this.repositories;
+            repos = reposFiltredByTags;
         }
         return repos;
     }
 
 
-    private handleGroupAndFilter(type: GroupByOptions) {
+    handleGroupAndFilter(type: GroupByOptions) {
         const repos = this.filterRepositories();
         switch (type) {
             case 'none': this.groupNone(repos); break;
@@ -173,6 +205,7 @@ export class HomeComponent implements OnInit {
             case 'folder': this.groupFolder(repos); break;
             default: this.groupNone(repos); break;
         }
+        this.selectedGroup = type;
         this.storeService.RepoGroupBy = type;
     }
 
@@ -199,19 +232,19 @@ export class HomeComponent implements OnInit {
         this.repositoriesGrouped = [group];
     }
 
-    private createFuzzySearch() {
+    private createFuzzySearch(repos: RepositoriesSettings = this.repositories) {
         const options = {
             // isCaseSensitive: false,
             includeScore: true,
             // shouldSort: true,
             includeMatches: true,
             // findAllMatches: false,
-            // minMatchCharLength: 1,
+            //minMatchCharLength: 2,
             // location: 0,
-            threshold: 0.3,
-            // distance: 100,
+            //threshold: 0.3,
+            //distance: 100,
             // useExtendedSearch: false,
-            ignoreLocation: true,
+            //ignoreLocation: true,
             // ignoreFieldNorm: false,
             keys: ['name', 'path']
         };
