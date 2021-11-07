@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
     isFilterOpen = false;
     isGroupOpen = false;
     tags: tag[] = [];
-    emptyTag: tag = { selected: false, name: 'empty' };
+    emptyTag: tag = { selected: false, name: 'No tags' };
     selectedGroup = this.storeService.RepoGroupBy;
 
     constructor(
@@ -187,6 +187,9 @@ export class HomeComponent implements OnInit {
 
         this.createFuzzySearch(reposFiltredByTags);
         const searchResult = this.fuse.search(this.searchText);
+        searchResult.forEach(repo => {
+            repo.item.pathOrig = repo.item.path;
+        });
         const search = highlight(searchResult);
         let repos: any = search; //.map(item => item.item);
         // let repos = new FilterByPipe().transform<RepositoriesSettings>(this.repositories, ['name', 'path', 'tags'], this.searchText);
@@ -217,6 +220,7 @@ export class HomeComponent implements OnInit {
             path: group.title,
             repositories: group.repositories
         }));
+        console.log(this.repositoriesGrouped);
     }
 
     private groupTags(repos: RepositoriesSettings) {

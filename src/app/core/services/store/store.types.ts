@@ -3,6 +3,7 @@ export type RepositorySetting = {
     id: number;
     name: string;
     path: string;
+    pathOrig?: string;
     tags: Array<string>;
 };
 
@@ -12,6 +13,7 @@ export type RepositoriesSettingsGrouped = Array<RepositoriesSettingsGroup>;
 export type RepositoriesSettingsGroup = {
     title?: string;
     path?: string;
+    pathOrig?: string;
     repositories?: RepositoriesSettings;
 }
 export type DiffFormate = 'side-by-side' | 'line-by-line';

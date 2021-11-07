@@ -4,7 +4,7 @@
             {{ 'PAGES.HOME.TITLE' | translate }}
         </p>
         <div class="grid-item-end commandos-meta-bar">
-            <a
+            <!-- <a
                 (click)="isGroupOpen = !isGroupOpen"
                 cdkOverlayOrigin
                 #groupTrigger="cdkOverlayOrigin"
@@ -12,7 +12,7 @@
                 aria-label="minimize"
                 role="button">
                 <cds-icon shape="slider" size="20"></cds-icon>
-            </a>
+            </a> -->
             <a
                 (click)="isFilterOpen = !isFilterOpen"
                 cdkOverlayOrigin
@@ -45,9 +45,9 @@
         <ng-container *ngFor="let group of repositoriesGrouped">
             <p cds-text="subsection" cds-layout="m-t:lg m-b:md" *ngIf="group.title">
                 <b cds-layout="p-r:md">{{ group.title }}</b>
-                <small *ngIf="group.path"
-                    ><i>{{ group.path }}</i></small
-                >
+                <small *ngIf="group.path">
+                    <i>{{ group.path }}</i>
+                </small>
             </p>
             <div class="commander-grid commander-overview-grid">
                 <div class="commander-row-title commander-overview-row-title sticky" cds-text="body bold">
@@ -105,7 +105,7 @@
             <div cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">About</div> -->
         </section>
     </ng-template>
-    <ng-template
+    <!-- <ng-template
         cdkConnectedOverlay
         [cdkConnectedOverlayOrigin]="groupTrigger"
         [cdkConnectedOverlayOpen]="isGroupOpen"
@@ -141,7 +141,7 @@
                 Clear Group
             </div>
         </section>
-    </ng-template>
+    </ng-template> -->
 </div>
 
 <ng-template #noRepos>
