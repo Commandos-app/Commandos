@@ -1469,9 +1469,9 @@
   integrity sha512-nSD5AA2AZkKuXuvGs8IK7K5ZczLAogfDd26zT9l6S7WzvqALdVWcW5vMUiTnZyj5SPcNwNNANj0koeV1ieqTFQ==
 
 "@ng-select/ng-select@^7.2.0":
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-7.3.0.tgz#ebc418c83ce249ad54f6f1ac3bf2473d9fe2ae5a"
-  integrity sha512-YZCdBjhe4QDFFCxnNd/B6abWcVVop8EAYt2UE6TimTM5jR/77ankSOrfiojXv4w/OkIIq4uETHMdQn5NjDcaYQ==
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-7.4.0.tgz#553ff25f887ec602e5f54b6818d65e40f7422cb0"
+  integrity sha512-Mn+gUA5KV2740zQHr4Zkc1tyTqeDE67tm4Cz4+miONWIPFP9KfxQ26goRDS8vT43zbDefalPQWH1thX+8NBRGg==
   dependencies:
     tslib "^2.0.0"
 
@@ -1736,9 +1736,9 @@
     "@types/node" "*"
 
 "@types/marked@^3.0.0":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@types/marked/-/marked-3.0.1.tgz#748645ecde30d8cf7861c3e1c360c6f694172f92"
-  integrity sha512-jry/WUAC511P2NBCeiCkfTRCN2VXobeeQa8p8gImOYsRfnuIVfeEsqOJ1pk+CzCwfMCdv3dkTQRCYaNkkFGtxw==
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@types/marked/-/marked-3.0.2.tgz#4a639575542ae7715fabbe450b08118e9093eb35"
+  integrity sha512-mGYI9qFs+i5eYaytWKBbtEMbIkrXGKuhsDpDcj70ogKS2gk1NmgEy9Z3VEKz922Lfms6eITXXqv5idlX7C/irw==
 
 "@types/minimist@^1.2.0":
   version "1.2.2"
@@ -1751,9 +1751,9 @@
   integrity sha512-PYGcJHL9mwl1Ek3PLiYgyEKtwTMmkMw4vbiyz/ps3pfdRYLVv+SN7qHVAImrjdAXxgluDEw6Ph4lyv+m9UpRmA==
 
 "@types/node@^12.11.1":
-  version "12.20.33"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.20.33.tgz#24927446e8b7669d10abacedd16077359678f436"
-  integrity sha512-5XmYX2GECSa+CxMYaFsr2mrql71Q4EvHjKS+ox/SiwSdaASMoBIWE6UmZqFO+VX1jIcsYLStI4FFoB6V7FeIYw==
+  version "12.20.36"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.20.36.tgz#5bd54d2383e714fc4d2c258107ee70c5bad86d0c"
+  integrity sha512-+5haRZ9uzI7rYqzDznXgkuacqb6LJhAti8mzZKWxIXn/WEtvB+GHVJ7AuMwcN1HMvXOSJcrvA6PPoYHYOYYebA==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.1"
@@ -6114,9 +6114,9 @@ map-obj@^4.0.0:
   integrity sha512-hdN1wVrZbb29eBGiGjJbeP8JbKjq1urkHJ/LIP/NY48MZ1QVXUsQBV1G1zvYFHn1XE06cwjBsOI2K3Ulnj1YXQ==
 
 marked@^3.0.2:
-  version "3.0.7"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-3.0.7.tgz#343aad9e91b96249b495c99c512ea09cfe06de1e"
-  integrity sha512-ctKqbnLuNbsHbI26cfMyOlKgXGfl1orOv1AvWWDX7AkgfMOwCWvmuYc+mVLeWhQ9W6hdWVBynOs96VkcscKo0Q==
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-3.0.8.tgz#2785f0dc79cbdc6034be4bb4f0f0a396bd3f8aeb"
+  integrity sha512-0gVrAjo5m0VZSJb4rpL59K1unJAMb/hm8HRXqasD8VeC8m91ytDPMritgFSlKonfdt+rRYYpP/JfLxgIX8yoSw==
 
 matcher@^3.0.0:
   version "3.0.0"
@@ -6447,9 +6447,9 @@ ngx-autosize@^1.8.4:
     tslib "^1.9.0"
 
 ngx-pipes@^2.7.5:
-  version "2.7.5"
-  resolved "https://registry.yarnpkg.com/ngx-pipes/-/ngx-pipes-2.7.5.tgz#22e2e4b7015ae9103210dfa2dacd6f4ae4411639"
-  integrity sha512-hlxHzu+snGJ038Z+HdkgEZRlZeE7suDTLWJD1yUP11eAM+xLPJAur1QtvvtZTHRHutOc7Wij1keBtuWIS9D0JQ==
+  version "2.7.6"
+  resolved "https://registry.yarnpkg.com/ngx-pipes/-/ngx-pipes-2.7.6.tgz#d7e26f9d5080c05ad914834cf93e563631e1c5b8"
+  integrity sha512-FAeMd1mI8jCnnrhUuNLXs+PaVT1ujhA0QD3KRBDuzGFcbnP7NMXR2EJ5KYbV39LDNuRCluhpfwZudQu/NvrVuA==
   dependencies:
     tslib "^2.0.0"
 
@@ -9063,14 +9063,7 @@ timed-out@^4.0.0, timed-out@^4.0.1:
   resolved "https://registry.yarnpkg.com/timed-out/-/timed-out-4.0.1.tgz#f32eacac5a175bea25d7fab565ab3ed8741ef56f"
   integrity sha1-8y6srFoXW+ol1/q1Zas+2HQe9W8=
 
-tippy.js@^6.3.1:
-  version "6.3.2"
-  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-6.3.2.tgz#c03a0b88f170dffeba42f569771801dddc1f6340"
-  integrity sha512-35XVQI7Zl/jHZ51+8eHu/vVRXBjWYGobPm5G9FxOchj4r5dWhghKGS0nm0ARUKZTF96V7pPn7EbXS191NTwldw==
-  dependencies:
-    "@popperjs/core" "^2.9.0"
-
-tippy.js@^6.3.2:
+tippy.js@^6.3.1, tippy.js@^6.3.2:
   version "6.3.5"
   resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-6.3.5.tgz#cbc99d34f87ccc127e6460032b86c8d47971d38f"
   integrity sha512-B9hAQ5KNF+jDJRg6cRysV6Y3J+5fiNfD60GuXR5TP0sfrcltpgdzVc7f1wMtjQ3W0+Xsy80CDvk0Z+Vr0cM4sQ==
