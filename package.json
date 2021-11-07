@@ -1,6 +1,6 @@
 {
     "name": "commandos",
-    "version": "0.7.6",
+    "version": "0.7.7",
     "description": "Commandos is a multi git repo client",
     "scripts": {
         "preinstall": "npx only-allow yarn",
