@@ -4,11 +4,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.8.1](https://github.com/Commandos-app/Commandos/compare/v0.7.9...v0.8.1) (2021-11-07)
 
-### [0.7.9](https://github.com/Commandos-app/Commandos/compare/v0.7.8...v0.7.9) (2021-11-07)
-
-### [0.7.8](https://github.com/Commandos-app/Commandos/compare/v0.7.5...v0.7.8) (2021-11-07)
-
-
 ### Features
 
 * added Button to switch layout ([485ae2d](https://github.com/Commandos-app/Commandos/commit/485ae2da6cb07260b97fc20333e65535c17e9830))
@@ -30,7 +25,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-*  Remove leading and trailing spaces from origin at saving ([1651d32](https://github.com/Commandos-app/Commandos/commit/1651d32907b0ad41642774dfaf1580f799e3ea21)), closes [#29](https://github.com/Commandos-app/Commandos/issues/29)
+* Remove leading and trailing spaces from origin at saving ([1651d32](https://github.com/Commandos-app/Commandos/commit/1651d32907b0ad41642774dfaf1580f799e3ea21)), closes [#29](https://github.com/Commandos-app/Commandos/issues/29)
 * diff user-select on wrong class ([ef5f97d](https://github.com/Commandos-app/Commandos/commit/ef5f97d4fc7f574416e4708ac053a49b285df961))
 * do not save null values to LocalStorage ([be7d7ef](https://github.com/Commandos-app/Commandos/commit/be7d7ef1a2409c1d497737a0a9e8fe7fc4ced42b))
 * filter position ([4d70c55](https://github.com/Commandos-app/Commandos/commit/4d70c5561ef189e71ab54c72e3fb97aa4527c411))
