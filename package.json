@@ -49,7 +49,7 @@
         "ngx-autosize": "^1.8.4",
         "ngx-pipes": "^2.7.5",
         "ngx-scrollbar": "^7.5.4",
-        "ngx-tippy-wrapper": "^3.0.1",
+        "ngx-tippy-wrapper": "4.0.0",
         "ngx-virtual-scroller": "^4.0.3",
         "normalize.css": "^8.0.1",
         "patch-package": "^6.4.7",
