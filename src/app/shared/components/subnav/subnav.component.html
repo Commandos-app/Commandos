@@ -14,9 +14,7 @@
             <app-button-control [routerLink]="['/repository', repositoryService.currentId, 'branches']"
                 routerLinkActive="button-active" startIcon="branch">
                 <div title>
-                    Current branch <commander-branch-ahead-behind [noColor]="true"
-                        [branch]="repositoryService.currentBranch" cds-layout="m-l:sm">
-                    </commander-branch-ahead-behind>
+                    Current branch
                 </div>
                 <div value class="no-break text-overflow">
                     {{ repositoryService.currentBranch?.name}}&nbsp;&nbsp;
@@ -57,6 +55,37 @@
         </div>
         <div class="spacer"></div>
         <div>
+            <cds-icon-button (click)="isMenuOpen = !isMenuOpen" action="flat" class="icon-button"
+                aria-label="application opener" cdkOverlayOrigin #applicationOpener="cdkOverlayOrigin">
+                <cds-icon shape="application" size="24"></cds-icon>
+            </cds-icon-button>
+
+            <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="applicationOpener"
+                [cdkConnectedOverlayOpen]="isMenuOpen" [cdkConnectedOverlayHasBackdrop]="true"
+                (backdropClick)="isMenuOpen = false">
+                <section class="contextmenu" cds-layout="p:xs">
+                    <div (click)="openCmd()" cds-text="secondary" cds-layout="p:sm"
+                        class="clickable contextmenu-action">
+                        Open in Explorer
+                    </div>
+                    <div (click)="openCode()" cds-text="secondary" cds-layout="p:sm"
+                        class="clickable contextmenu-action">
+                        Open in VSCode
+                    </div>
+                    <div (click)="openTerminal()" cds-text="secondary" cds-layout="p:sm"
+                        class="clickable contextmenu-action">
+                        Open in Terminal
+                    </div>
+                    <cds-divider></cds-divider>
+                    <div (click)="copyPath()" cds-text="secondary" cds-layout="p:sm"
+                        class="clickable contextmenu-action">
+                        Copy Path
+                    </div>
+                </section>
+            </ng-template>
+        </div>
+        <div class="spacer"></div>
+        <div>
             <cds-icon-button action="flat" class="icon-button"
                 [routerLink]="['/repository', repositoryService.currentId, 'setting']" routerLinkActive="active"
                 aria-label="repository setting">
@@ -69,5 +98,6 @@
         </div>
     </ng-container>
     <div></div>
+
 
 </div>

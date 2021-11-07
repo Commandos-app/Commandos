@@ -11,8 +11,14 @@ import { open } from '@tauri-apps/api/shell';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { invoke } from '@tauri-apps/api/tauri';
 import { groupBy, sortByProperty } from '@shared/functions';
+import { FilterByPipe } from 'ngx-pipes';
+import Fuse from 'fuse.js'
 
 
+type tag = {
+    selected: boolean,
+    name: string
+}
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
@@ -26,6 +32,23 @@ export class HomeComponent implements OnInit {
     @ViewChild('userMenu') userMenu: TemplateRef<any>;
     overlayRef: OverlayRef | null;
     sub: Subscription;
+    private fuse: Fuse<RepositorySetting>;
+
+    private filterText: string = '';
+    get searchText(): string {
+        return this.filterText;
+    }
+
+    set searchText(value: string) {
+        this.filterText = value;
+        this.handleGroupAndFilter(this.storeService.RepoGroupBy);
+    }
+
+    isFilterOpen = false;
+    isGroupOpen = false;
+    tags: tag[] = [];
+    emptyTag: tag = { selected: false, name: 'No tags' };
+    selectedGroup = this.storeService.RepoGroupBy;
 
     constructor(
         private router: Router,
@@ -41,8 +64,12 @@ export class HomeComponent implements OnInit {
         this.repositoryService.unload();
         this.loadRepos();
         this.repositoryService.clearUIBranches();
-        const groupValue = this.storeService.RepoGroupBy;
-        this.group(groupValue);
+        // for now it is deactivated.
+        // const groupValue = this.storeService.RepoGroupBy;
+        this.handleGroupAndFilter('none');
+        const test = this.storeService.get<string[]>('tags', []);
+        this.tags = test.map(tag => ({ selected: false, name: tag }));
+        this.tags.push(this.emptyTag);
     }
 
     loadRepos(): void {
@@ -127,36 +154,107 @@ export class HomeComponent implements OnInit {
 
     }
 
-    group(type: GroupByOptions) {
-        switch (type) {
-            case 'none': this.groupNone(); break;
-            case 'tags': this.groupTags(); break;
-            case 'folder': this.groupFolder(); break;
+
+    toggleFolderGroup() {
+        const type = this.storeService.RepoGroupBy === 'folder' ? 'none' : 'folder';
+        this.handleGroupAndFilter(type);
+    }
+
+    toggleTagsGroup() {
+        const type = this.storeService.RepoGroupBy === 'tags' ? 'none' : 'tags';
+        this.handleGroupAndFilter(type);
+    }
+
+    toggle(tag: tag) {
+        tag.selected = !tag.selected;
+        this.handleGroupAndFilter(this.storeService.RepoGroupBy);
+    }
+
+    clearTagFilter() {
+        this.tags.forEach(tag => tag.selected = false);
+        this.handleGroupAndFilter(this.storeService.RepoGroupBy);
+    }
+
+    filterRepositories(): RepositoriesSettings {
+        const selectedTags = this.tags.filter(tag => tag.selected).map(tag => tag.name);
+        let reposFiltredByTags = this.repositories.filter(repo => {
+            return selectedTags.some(tag => repo.tags.includes(tag) || (this.emptyTag.selected && repo.tags.length === 0));
+        });
+
+        if (reposFiltredByTags.length === 0) {
+            reposFiltredByTags = this.repositories;
         }
+
+        this.createFuzzySearch(reposFiltredByTags);
+        const searchResult = this.fuse.search(this.searchText);
+        searchResult.forEach(repo => {
+            repo.item.pathOrig = repo.item.path;
+        });
+        const search = highlight(searchResult);
+        let repos: any = search; //.map(item => item.item);
+        // let repos = new FilterByPipe().transform<RepositoriesSettings>(this.repositories, ['name', 'path', 'tags'], this.searchText);
+        if (repos.length === 0) {
+            repos = reposFiltredByTags;
+        }
+        return repos;
+    }
+
+
+    handleGroupAndFilter(type: GroupByOptions) {
+        const repos = this.filterRepositories();
+        switch (type) {
+            case 'none': this.groupNone(repos); break;
+            case 'tags': this.groupTags(repos); break;
+            case 'folder': this.groupFolder(repos); break;
+            default: this.groupNone(repos); break;
+        }
+        this.selectedGroup = type;
         this.storeService.RepoGroupBy = type;
     }
 
-    private groupFolder() {
-        const repositoriesGrouped = groupBy(this.repositories, (t: any) => t.path.substring(0, t.path.lastIndexOf('/')));
-        this.repositoriesGrouped = repositoriesGrouped.map(r => ({
-            title: r.title.substring(r.title.lastIndexOf('/') + 1, r.title.length),
-            path: r.title,
-            repositories: r.repositories
+
+    private groupFolder(repos: RepositoriesSettings) {
+        const repositoriesGrouped = groupBy(repos, (t: any) => t.path.substring(0, t.path.lastIndexOf('/')));
+        this.repositoriesGrouped = repositoriesGrouped.map(group => ({
+            title: group.title.substring(group.title.lastIndexOf('/') + 1, group.title.length),
+            path: group.title,
+            repositories: group.repositories
         }));
+        console.log(this.repositoriesGrouped);
     }
 
-    private groupTags() {
-        const repositoriesGrouped = groupBy(this.repositories, (t: any) => t.tags[0] ?? '---');
+    private groupTags(repos: RepositoriesSettings) {
+        const repositoriesGrouped = groupBy(repos, (t: any) => t.tags[0] ?? '---');
         this.repositoriesGrouped = repositoriesGrouped.sort(sortByProperty('title'));
     }
 
-    private groupNone() {
+    private groupNone(repos: RepositoriesSettings) {
         const group: RepositoriesSettingsGroup = {
-            repositories: this.repositories
+            repositories: repos
         }
         group.repositories.sort(sortByProperty('name'));
         this.repositoriesGrouped = [group];
     }
+
+    private createFuzzySearch(repos: RepositoriesSettings = this.repositories) {
+        const options = {
+            // isCaseSensitive: false,
+            includeScore: true,
+            // shouldSort: true,
+            includeMatches: true,
+            // findAllMatches: false,
+            //minMatchCharLength: 2,
+            // location: 0,
+            //threshold: 0.3,
+            //distance: 100,
+            // useExtendedSearch: false,
+            //ignoreLocation: true,
+            // ignoreFieldNorm: false,
+            keys: ['name', 'path']
+        };
+        this.fuse = new Fuse(this.repositories, options);
+    }
+
 
     close() {
         this.sub && this.sub.unsubscribe();
@@ -167,3 +265,51 @@ export class HomeComponent implements OnInit {
     }
 
 }
+
+
+const highlight = (fuseSearchResult: any, highlightClassName: string = 'commandos-highlight') => {
+    const set = (obj: any, path: string, value: any) => {
+        const pathValue = path.split('.');
+        let i;
+
+        for (i = 0; i < pathValue.length - 1; i++) {
+            obj = obj[pathValue[i]];
+        }
+
+        obj[pathValue[i]] = value;
+    };
+
+    const generateHighlightedText = (inputText: string, regions: number[] = []) => {
+        let content = '';
+        let nextUnhighlightedRegionStartingIndex = 0;
+
+        regions.forEach((region: any) => {
+            const lastRegionNextIndex = region[1] + 1;
+
+            content += [
+                inputText.substring(nextUnhighlightedRegionStartingIndex, region[0]),
+                `<b class="${highlightClassName}">`,
+                inputText.substring(region[0], lastRegionNextIndex),
+                '</b>',
+            ].join('');
+
+            nextUnhighlightedRegionStartingIndex = lastRegionNextIndex;
+        });
+
+        content += inputText.substring(nextUnhighlightedRegionStartingIndex);
+
+        return content;
+    };
+
+    return fuseSearchResult
+        .filter(({ matches }: any) => matches && matches.length)
+        .map(({ item, matches }: any) => {
+            const highlightedItem = { ...item };
+
+            matches.forEach((match: any) => {
+                set(highlightedItem, match.key, generateHighlightedText(match.value, match.indices));
+            });
+
+            return highlightedItem;
+        });
+};

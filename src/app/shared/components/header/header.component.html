@@ -1,27 +1,32 @@
 <div class="branding">
-    <img [routerLink]="['/home']" src="../../../../assets/logo/commandos_white.svg" class="clickable" height="32">
-    <span [routerLink]="['/home']" class="default-cursor clickable" data-tauri-drag-region>ommandos
-        <span class="branding-small">{{version}}</span>
+    <img [routerLink]="['/home']" src="../../../../assets/logo/commandos_white.svg" class="clickable" height="32" />
+    <span [routerLink]="['/home']" class="default-cursor clickable" data-tauri-drag-region
+        >ommandos
+        <span class="branding-small">{{ version }}</span>
     </span>
 </div>
 <app-commander></app-commander>
 
-
 <div class="window-action" data-tauri-drag-region *ngIf="tauriService.isPinned">
-    <a (click)="pin()" class="action clickable" aria-label="unpin" role='button'>
+    <a (click)="pin()" class="action clickable" aria-label="unpin" role="button">
         <cds-icon shape="pin" size="20" [solid]="tauriService.isPinned"></cds-icon>
     </a>
 </div>
 
 <div class="window-action" data-tauri-drag-region>
-    <a (click)="isMenuOpen = !isMenuOpen" cdkOverlayOrigin #headerMenuTrigger="cdkOverlayOrigin"
-        class="action clickable" aria-label="minimize" role='button'>
+    <a
+        (click)="isMenuOpen = !isMenuOpen"
+        cdkOverlayOrigin
+        #headerMenuTrigger="cdkOverlayOrigin"
+        class="action clickable"
+        aria-label="minimize"
+        role="button">
         <cds-icon shape="bars" size="20" solid="true"></cds-icon>
     </a>
 </div>
 
 <div class="window-action" data-tauri-drag-region>
-    <a (click)="minimize()" class="action clickable" aria-label="minimize" role='button'>
+    <a (click)="minimize()" class="action clickable" aria-label="minimize" role="button">
         <cds-icon shape="window-min" size="20"></cds-icon>
     </a>
 </div>
@@ -41,19 +46,20 @@
 </ng-container>
 
 <div class="window-action" data-tauri-drag-region>
-    <a (click)="closeClient()" class="action clickable" aria-label="close" role='button'>
+    <a (click)="closeClient()" class="action clickable" aria-label="close" role="button">
         <cds-icon shape="window-close" size="20"></cds-icon>
     </a>
 </div>
 
-<ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="headerMenuTrigger" [cdkConnectedOverlayOpen]="isMenuOpen"
-    [cdkConnectedOverlayHasBackdrop]="true" (backdropClick)="isMenuOpen = false">
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="headerMenuTrigger"
+    [cdkConnectedOverlayOpen]="isMenuOpen"
+    [cdkConnectedOverlayHasBackdrop]="true"
+    (backdropClick)="isMenuOpen = false">
     <section class="contextmenu" cds-layout="p:xs">
-
         <!-- <cds-divider></cds-divider> -->
-        <div (click)="pin()" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
-            Always on top
-        </div>
+        <div (click)="pin()" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">Always on top</div>
         <div (click)="goto('/settings')" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
             Settings
         </div>
@@ -61,9 +67,7 @@
             Check for updates
         </div>
         <cds-divider></cds-divider>
-        <div (click)="goto('/about')" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
-            About
-        </div>
+        <div (click)="goto('/about')" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">About</div>
         <!-- <div>Send to</div> -->
     </section>
 </ng-template>

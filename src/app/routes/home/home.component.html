@@ -1,29 +1,71 @@
-<div class="parent" cds-layout="vertical align:stretch p:lg" *ngIf="repositoriesGrouped?.length > 0;else noRepos">
-    <p cds-text="heading" cds-layout="m-t:none m-b:lg">{{ 'PAGES.HOME.TITLE' | translate }}</p>
-    <p cds-text="secondary" cds-layout="m-b:sm">Group by:
-        <a (click)="group('none')" cds-text="link">None</a> |
-        <a (click)="group('folder')" cds-text="link">Folder</a> |
-        <a (click)="group('tags')" cds-text="link">Tags</a>
-    </p>
+<div class="parent" cds-layout="vertical align:stretch p:lg" *ngIf="repositoriesGrouped?.length > 0; else noRepos">
+    <div class="commandos-grid-home-meta" cds-layout="m-b:lg">
+        <p cds-text="heading" cds-layout="m-t:none">
+            {{ 'PAGES.HOME.TITLE' | translate }}
+        </p>
+        <div class="grid-item-end commandos-meta-bar">
+            <!-- <a
+                (click)="isGroupOpen = !isGroupOpen"
+                cdkOverlayOrigin
+                #groupTrigger="cdkOverlayOrigin"
+                class="action clickable"
+                aria-label="minimize"
+                role="button">
+                <cds-icon shape="slider" size="20"></cds-icon>
+            </a> -->
+            <a
+                (click)="isFilterOpen = !isFilterOpen"
+                cdkOverlayOrigin
+                #filterTrigger="cdkOverlayOrigin"
+                class="action clickable"
+                aria-label="minimize"
+                role="button"
+                cds-layout="m-l:lg">
+                <cds-icon shape="filter" size="20"></cds-icon>
+            </a>
+            <cds-search control-width="shrink">
+                <label></label>
+                <input type="search" [(ngModel)]="searchText" />
+            </cds-search>
+        </div>
+    </div>
+
+    <!-- <div>
+        <div>
+            <p cds-text="secondary" cds-layout="m-b:sm">Group by:
+                <a (click)="handleGroupAndFilter('none')" cds-text="link">None</a> |
+                <a (click)="handleGroupAndFilter('folder')" cds-text="link">Folder</a> |
+                <a (click)="handleGroupAndFilter('tags')" cds-text="link">Tags</a>
+            </p>
+        </div>
+
+    </div> -->
+
     <ng-scrollbar class="virtual-scroll">
         <ng-container *ngFor="let group of repositoriesGrouped">
             <p cds-text="subsection" cds-layout="m-t:lg m-b:md" *ngIf="group.title">
-                <b cds-layout="p-r:md">{{group.title}}</b>
-                <small *ngIf="group.path"><i>{{group.path}}</i></small>
+                <b cds-layout="p-r:md">{{ group.title }}</b>
+                <small *ngIf="group.path">
+                    <i>{{ group.path }}</i>
+                </small>
             </p>
-            <div class="commander-grid commander-overview-grid ">
+            <div class="commander-grid commander-overview-grid">
                 <div class="commander-row-title commander-overview-row-title sticky" cds-text="body bold">
                     <div>Name</div>
                     <div>Folder</div>
                     <div>Tags</div>
                 </div>
-                <div class="commander-row commander-overview-row" *ngFor="let repo of group.repositories"
-                    cds-text="body" (click)="openRepository(repo.id)" (contextmenu)="openContext($event, repo)">
-                    <div class="lh">{{repo.name}}</div>
-                    <div class="lh">{{repo.path}}</div>
+                <div
+                    class="commander-row commander-overview-row"
+                    *ngFor="let repo of group.repositories"
+                    cds-text="body"
+                    (click)="openRepository(repo.id)"
+                    (contextmenu)="openContext($event, repo)">
+                    <div class="lh overflow-ellipsis" [innerHTML]="repo.name"></div>
+                    <div class="lh overflow-ellipsis" [innerHTML]="repo.path"></div>
                     <div>
                         <div cds-layout="horizontal gap:sm">
-                            <cds-tag readonly *ngFor="let tag of repo.tags" color="gray">{{tag}}</cds-tag>
+                            <cds-tag readonly *ngFor="let tag of repo.tags" color="gray">{{ tag }}</cds-tag>
                         </div>
                     </div>
                 </div>
@@ -31,13 +73,83 @@
         </ng-container>
     </ng-scrollbar>
 
+    <ng-template
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="filterTrigger"
+        [cdkConnectedOverlayOpen]="isFilterOpen"
+        [cdkConnectedOverlayHasBackdrop]="true"
+        (backdropClick)="isFilterOpen = false">
+        <section class="contextmenu" cds-layout="p:xs">
+            <div cds-text="secondary" cds-layout="p:sm" class="">Filter by:</div>
+            <cds-divider></cds-divider>
+            <div class="action-list">
+                <div
+                    *ngFor="let tag of tags"
+                    (click)="toggle(tag)"
+                    cds-text="secondary"
+                    cds-layout="p:sm"
+                    class="clickable contextmenu-action"
+                    [ngClass]="{ active: tag.selected }">
+                    {{ tag.name }}
+                </div>
+            </div>
+            <cds-divider></cds-divider>
+            <div (click)="clearTagFilter()" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
+                Clear filter
+            </div>
+
+            <!-- <cds-divider></cds-divider> -->
+            <!-- <div cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">Settings</div>
+            <div cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">Check for updates</div>
+            <cds-divider></cds-divider>
+            <div cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">About</div> -->
+        </section>
+    </ng-template>
+    <!-- <ng-template
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="groupTrigger"
+        [cdkConnectedOverlayOpen]="isGroupOpen"
+        [cdkConnectedOverlayHasBackdrop]="true"
+        (backdropClick)="isGroupOpen = false">
+        <section class="contextmenu" cds-layout="p:xs">
+            <div cds-text="secondary" cds-layout="p:sm" class="">Group by:</div>
+            <cds-divider></cds-divider>
+            <div class="action-list">
+                <div
+                    (click)="toggleFolderGroup()"
+                    cds-text="secondary"
+                    cds-layout="p:sm"
+                    [ngClass]="{ active: selectedGroup === 'folder' }"
+                    class="clickable contextmenu-action">
+                    Folder
+                </div>
+                <div
+                    (click)="toggleTagsGroup()"
+                    cds-text="secondary"
+                    cds-layout="p:sm"
+                    [ngClass]="{ active: selectedGroup === 'tags' }"
+                    class="clickable contextmenu-action">
+                    Tags
+                </div>
+            </div>
+            <cds-divider></cds-divider>
+            <div
+                (click)="handleGroupAndFilter('none')"
+                cds-text="secondary"
+                cds-layout="p:sm"
+                class="clickable contextmenu-action">
+                Clear Group
+            </div>
+        </section>
+    </ng-template> -->
 </div>
 
 <ng-template #noRepos>
     <div class="center-region text-center">
-        <p>Thank you for using Commandos!<br>
-            Start adding repositories to Commandos, to use the awesome features!<br>
-            <br>
+        <p>
+            Thank you for using Commandos!<br />
+            Start adding repositories to Commandos, to use the awesome features!<br />
+            <br />
             <cds-button [routerLink]="['/add-repository']">Add Repository</cds-button>
         </p>
     </div>
@@ -52,8 +164,7 @@
         <div (click)="openCode(repo.path)" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
             Open in VSCode
         </div>
-        <div (click)="openTerminal(repo.path)" cds-text="secondary" cds-layout="p:sm"
-            class="clickable contextmenu-action">
+        <div (click)="openTerminal(repo.path)" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
             Open in Terminal
         </div>
         <cds-divider></cds-divider>

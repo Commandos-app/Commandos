@@ -2,6 +2,101 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.8.1](https://github.com/Commandos-app/Commandos/compare/v0.7.9...v0.8.1) (2021-11-07)
+
+### Features
+
+* added Button to switch layout ([485ae2d](https://github.com/Commandos-app/Commandos/commit/485ae2da6cb07260b97fc20333e65535c17e9830))
+* Added Custom Update modal ([9489149](https://github.com/Commandos-app/Commandos/commit/9489149c142c24febdbd32460ecdad1e0393f914))
+* added footer component ([d19d992](https://github.com/Commandos-app/Commandos/commit/d19d992b05047e8b00c4a3ba552154cb54e2ed73))
+* Added notification service ([f1c2fe1](https://github.com/Commandos-app/Commandos/commit/f1c2fe180147d380047f8a50069ecaff7fbe57c2))
+* added sync indicator to footer ([db32869](https://github.com/Commandos-app/Commandos/commit/db32869301e9e3bbca89cc08741cac452dc2d260))
+* change @cds/core to @cds/angular ([7144f80](https://github.com/Commandos-app/Commandos/commit/7144f80d4902eafbb0cd16390b482cc5686ee969))
+* group + filter implemented ([82f745d](https://github.com/Commandos-app/Commandos/commit/82f745ddcff74071ca4fb7f2997e5e8466eaa771))
+* hide dev Tools button in Prod mode ([68764dd](https://github.com/Commandos-app/Commandos/commit/68764ddcbdc468a1bc6a13bc75aae0800cec596e))
+* open Apps form subnav ([b2bfcad](https://github.com/Commandos-app/Commandos/commit/b2bfcade1d4312e776395fb0a038b451e0ce5a94))
+* save commit message for later use ([591033f](https://github.com/Commandos-app/Commandos/commit/591033f533aa5b3a0dac768fc2935f00b1d71cd6)), closes [#32](https://github.com/Commandos-app/Commandos/issues/32)
+* save messages per repo ([95883ee](https://github.com/Commandos-app/Commandos/commit/95883eeab68f4bebcb5b8e4254b7dd16807af81c)), closes [#34](https://github.com/Commandos-app/Commandos/issues/34)
+* save view mode in settings ([4c44a67](https://github.com/Commandos-app/Commandos/commit/4c44a67d5b4e65dfb1acda493b2d3978ddef8e61))
+* save ViewMode ([21504f3](https://github.com/Commandos-app/Commandos/commit/21504f3eb0151900b478f5699ea88a7b14b5e1a1))
+* show custom update modal ([5f4bbb9](https://github.com/Commandos-app/Commandos/commit/5f4bbb9bce073369647b7d8919ed2161ee707dd7))
+* show treeview in listview ([c790cf2](https://github.com/Commandos-app/Commandos/commit/c790cf28f2f498cc06905c9baf5a5ae64d15fdd9))
+
+
+### Bug Fixes
+
+* Remove leading and trailing spaces from origin at saving ([1651d32](https://github.com/Commandos-app/Commandos/commit/1651d32907b0ad41642774dfaf1580f799e3ea21)), closes [#29](https://github.com/Commandos-app/Commandos/issues/29)
+* diff user-select on wrong class ([ef5f97d](https://github.com/Commandos-app/Commandos/commit/ef5f97d4fc7f574416e4708ac053a49b285df961))
+* do not save null values to LocalStorage ([be7d7ef](https://github.com/Commandos-app/Commandos/commit/be7d7ef1a2409c1d497737a0a9e8fe7fc4ced42b))
+* filter position ([4d70c55](https://github.com/Commandos-app/Commandos/commit/4d70c5561ef189e71ab54c72e3fb97aa4527c411))
+* filtering list for false values ([d8a2a3c](https://github.com/Commandos-app/Commandos/commit/d8a2a3cec1ddcd2796d5f57708649ea7b1a6f711))
+* Grouped folder can now be staged ([3d56922](https://github.com/Commandos-app/Commandos/commit/3d569223e9c370fdcce53fa35198a4227e19e5ce)), closes [#20](https://github.com/Commandos-app/Commandos/issues/20)
+* insert scrollbar into update modal ([5602c98](https://github.com/Commandos-app/Commandos/commit/5602c9888c36a7811aed1d2ad5c31cb9e44d9fbd))
+* make line numbers not selectable ([361af9b](https://github.com/Commandos-app/Commandos/commit/361af9b8eac6ae256b6162eac6b677aeae732b6c)), closes [#31](https://github.com/Commandos-app/Commandos/issues/31)
+* null value on form resetting ([e833b33](https://github.com/Commandos-app/Commandos/commit/e833b33c5d3a73a96967040e78783794108522df))
+* reading and writing of message ([e7cda98](https://github.com/Commandos-app/Commandos/commit/e7cda982f9cb3f0744e9722772bbcf3e554648fe))
+* show ellipsis when repo name is long ([a2539cc](https://github.com/Commandos-app/Commandos/commit/a2539cc7cfe4125d3a42e6ab9facd1cdb65ac128)), closes [#52](https://github.com/Commandos-app/Commandos/issues/52)
+* showing correct push/pull numbers ([ac8339c](https://github.com/Commandos-app/Commandos/commit/ac8339c6b4db14c2060c5685ed0e1d880708e82f))
+* styling ahead/behind component ([f85be07](https://github.com/Commandos-app/Commandos/commit/f85be07198378eacb618497b18f0c3781ba4266d))
+
+### [0.7.7](https://github.com/Commandos-app/Commandos/compare/v0.7.5...v0.7.7) (2021-11-07)
+
+
+### Features
+
+* added Button to switch layout ([485ae2d](https://github.com/Commandos-app/Commandos/commit/485ae2da6cb07260b97fc20333e65535c17e9830))
+* Added Custom Update modal ([9489149](https://github.com/Commandos-app/Commandos/commit/9489149c142c24febdbd32460ecdad1e0393f914))
+* added footer component ([d19d992](https://github.com/Commandos-app/Commandos/commit/d19d992b05047e8b00c4a3ba552154cb54e2ed73))
+* Added notification service ([f1c2fe1](https://github.com/Commandos-app/Commandos/commit/f1c2fe180147d380047f8a50069ecaff7fbe57c2))
+* added sync indicator to footer ([db32869](https://github.com/Commandos-app/Commandos/commit/db32869301e9e3bbca89cc08741cac452dc2d260))
+* change @cds/core to @cds/angular ([7144f80](https://github.com/Commandos-app/Commandos/commit/7144f80d4902eafbb0cd16390b482cc5686ee969))
+* group + filter implemented ([82f745d](https://github.com/Commandos-app/Commandos/commit/82f745ddcff74071ca4fb7f2997e5e8466eaa771))
+* hide dev Tools button in Prod mode ([68764dd](https://github.com/Commandos-app/Commandos/commit/68764ddcbdc468a1bc6a13bc75aae0800cec596e))
+* open Apps form subnav ([b2bfcad](https://github.com/Commandos-app/Commandos/commit/b2bfcade1d4312e776395fb0a038b451e0ce5a94))
+* save commit message for later use ([591033f](https://github.com/Commandos-app/Commandos/commit/591033f533aa5b3a0dac768fc2935f00b1d71cd6)), closes [#32](https://github.com/Commandos-app/Commandos/issues/32)
+* save messages per repo ([95883ee](https://github.com/Commandos-app/Commandos/commit/95883eeab68f4bebcb5b8e4254b7dd16807af81c)), closes [#34](https://github.com/Commandos-app/Commandos/issues/34)
+* save view mode in settings ([4c44a67](https://github.com/Commandos-app/Commandos/commit/4c44a67d5b4e65dfb1acda493b2d3978ddef8e61))
+* save ViewMode ([21504f3](https://github.com/Commandos-app/Commandos/commit/21504f3eb0151900b478f5699ea88a7b14b5e1a1))
+* show custom update modal ([5f4bbb9](https://github.com/Commandos-app/Commandos/commit/5f4bbb9bce073369647b7d8919ed2161ee707dd7))
+* show treeview in listview ([c790cf2](https://github.com/Commandos-app/Commandos/commit/c790cf28f2f498cc06905c9baf5a5ae64d15fdd9))
+
+
+### Bug Fixes
+
+*  Remove leading and trailing spaces from origin at saving ([1651d32](https://github.com/Commandos-app/Commandos/commit/1651d32907b0ad41642774dfaf1580f799e3ea21)), closes [#29](https://github.com/Commandos-app/Commandos/issues/29)
+* diff user-select on wrong class ([ef5f97d](https://github.com/Commandos-app/Commandos/commit/ef5f97d4fc7f574416e4708ac053a49b285df961))
+* do not save null values to LocalStorage ([be7d7ef](https://github.com/Commandos-app/Commandos/commit/be7d7ef1a2409c1d497737a0a9e8fe7fc4ced42b))
+* filter position ([4d70c55](https://github.com/Commandos-app/Commandos/commit/4d70c5561ef189e71ab54c72e3fb97aa4527c411))
+* filtering list for false values ([d8a2a3c](https://github.com/Commandos-app/Commandos/commit/d8a2a3cec1ddcd2796d5f57708649ea7b1a6f711))
+* Grouped folder can now be staged ([3d56922](https://github.com/Commandos-app/Commandos/commit/3d569223e9c370fdcce53fa35198a4227e19e5ce)), closes [#20](https://github.com/Commandos-app/Commandos/issues/20)
+* insert scrollbar into update modal ([5602c98](https://github.com/Commandos-app/Commandos/commit/5602c9888c36a7811aed1d2ad5c31cb9e44d9fbd))
+* make line numbers not selectable ([361af9b](https://github.com/Commandos-app/Commandos/commit/361af9b8eac6ae256b6162eac6b677aeae732b6c)), closes [#31](https://github.com/Commandos-app/Commandos/issues/31)
+* null value on form resetting ([e833b33](https://github.com/Commandos-app/Commandos/commit/e833b33c5d3a73a96967040e78783794108522df))
+* reading and writing of message ([e7cda98](https://github.com/Commandos-app/Commandos/commit/e7cda982f9cb3f0744e9722772bbcf3e554648fe))
+* show ellipsis when repo name is long ([a2539cc](https://github.com/Commandos-app/Commandos/commit/a2539cc7cfe4125d3a42e6ab9facd1cdb65ac128)), closes [#52](https://github.com/Commandos-app/Commandos/issues/52)
+* showing correct push/pull numbers ([ac8339c](https://github.com/Commandos-app/Commandos/commit/ac8339c6b4db14c2060c5685ed0e1d880708e82f))
+* styling ahead/behind component ([f85be07](https://github.com/Commandos-app/Commandos/commit/f85be07198378eacb618497b18f0c3781ba4266d))
+
+### [0.7.6](https://github.com/Commandos-app/Commandos/compare/v0.7.5...v0.7.6) (2021-09-17)
+
+
+### Features
+
+* Added Custom Update modal ([9489149](https://github.com/Commandos-app/Commandos/commit/9489149c142c24febdbd32460ecdad1e0393f914))
+* Added notification service ([f1c2fe1](https://github.com/Commandos-app/Commandos/commit/f1c2fe180147d380047f8a50069ecaff7fbe57c2))
+* hide dev Tools button in Prod mode ([68764dd](https://github.com/Commandos-app/Commandos/commit/68764ddcbdc468a1bc6a13bc75aae0800cec596e))
+* save commit message for later use ([591033f](https://github.com/Commandos-app/Commandos/commit/591033f533aa5b3a0dac768fc2935f00b1d71cd6)), closes [#32](https://github.com/Commandos-app/Commandos/issues/32)
+* show custom update modal ([5f4bbb9](https://github.com/Commandos-app/Commandos/commit/5f4bbb9bce073369647b7d8919ed2161ee707dd7))
+
+
+### Bug Fixes
+
+*  Remove leading and trailing spaces from origin at saving ([1651d32](https://github.com/Commandos-app/Commandos/commit/1651d32907b0ad41642774dfaf1580f799e3ea21)), closes [#29](https://github.com/Commandos-app/Commandos/issues/29)
+* diff user-select on wrong class ([ef5f97d](https://github.com/Commandos-app/Commandos/commit/ef5f97d4fc7f574416e4708ac053a49b285df961))
+* do not save null values to LocalStorage ([be7d7ef](https://github.com/Commandos-app/Commandos/commit/be7d7ef1a2409c1d497737a0a9e8fe7fc4ced42b))
+* insert scrollbar into update modal ([5602c98](https://github.com/Commandos-app/Commandos/commit/5602c9888c36a7811aed1d2ad5c31cb9e44d9fbd))
+* make line numbers not selectable ([361af9b](https://github.com/Commandos-app/Commandos/commit/361af9b8eac6ae256b6162eac6b677aeae732b6c)), closes [#31](https://github.com/Commandos-app/Commandos/issues/31)
+
 ### 0.7.5 (2021-08-26)
 
 

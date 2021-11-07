@@ -24,3 +24,11 @@ a[cds-text="link"] {
         border-bottom: 3px solid black;
     }
 }
+
+.helper-text {
+    color: var(--cds-global-color-gray-500);
+}
+
+.commandos-highlight {
+    color: var(--cds-global-color-blue-600);
+}

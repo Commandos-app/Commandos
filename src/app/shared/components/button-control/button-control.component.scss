@@ -31,6 +31,9 @@
 
         .commander-button-control-value {
             color: var(--color);
+            width: 200px; // needed for overflow to work
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
 
 

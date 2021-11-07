@@ -5,6 +5,6 @@ export function groupBy(x: any, f: Function) {
         a[key].push(b);
         return a;
     }, {});
-
+    console.log(groupedObj);
     return Object.keys(groupedObj).map(key => ({ title: key, repositories: groupedObj[key] }));
 }

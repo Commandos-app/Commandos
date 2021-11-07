@@ -1,13 +1,18 @@
-import { NotificationComponent } from './components/notification/notification.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import {
+    CdsAccordionModule, CdsAlertModule, CdsButtonModule, CdsCheckboxModule, CdsDividerModule,
+    CdsFileModule, CdsFormsModule, CdsIconModule, CdsInputModule, CdsModalModule,
+    CdsProgressCircleModule, CdsRadioModule, CdsSearchModule, CdsSelectModule,
+    CdsTagModule, CdsTextareaModule
+} from '@cds/angular';
 import { FilterModule } from '@josee9988/filter-pipe-ngx';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TranslateModule } from '@ngx-translate/core';
@@ -24,7 +29,9 @@ import { CommanderComponent } from './components/commander/commander.component';
 import { DiffLineByLineComponent } from './components/diff/diff-line-by-line/diff-line-by-line.component';
 import { DiffSideBySideComponent } from './components/diff/diff-side-by-side/diff-side-by-side.component';
 import { DiffComponent } from './components/diff/diff.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { NotificationComponent } from './components/notification/notification.component';
 import { SelectHintComponent } from './components/select-hint/select-hint.component';
 import { SplashComponent } from './components/splash/splash.component';
 import { SplitLayoutComponent } from './components/split-layout/split-layout.component';
@@ -33,6 +40,8 @@ import { TreeViewComponent } from './components/tree-view/tree-view.component';
 import { UpdateModalComponent } from './components/update-modal/update-modal.component';
 import { DiffPipe } from './directives/diff.pipe';
 import { DateFormatePipe } from './pipe/date-formate.pipe';
+import { NgPipesModule } from 'ngx-pipes';
+
 
 const components = [
 
@@ -42,6 +51,7 @@ const components = [
     TreeViewComponent,
     SplashComponent,
     HeaderComponent,
+    FooterComponent,
     SubnavComponent,
     SplitLayoutComponent,
     BranchAheadBehindComponent,
@@ -56,6 +66,25 @@ const components = [
     DateFormatePipe,
     DiffPipe
 
+];
+
+const clarity = [
+    CdsAlertModule,
+    CdsButtonModule,
+    CdsCheckboxModule,
+    CdsFormsModule,
+    CdsInputModule,
+    CdsSelectModule,
+    CdsTextareaModule,
+    CdsTagModule,
+    CdsModalModule,
+    CdsFileModule,
+    CdsDividerModule,
+    CdsAccordionModule,
+    CdsProgressCircleModule,
+    CdsIconModule,
+    CdsRadioModule,
+    CdsSearchModule
 ];
 
 const modules = [
@@ -84,6 +113,8 @@ const modules = [
     FilterModule,
     AngularSplitModule,
 
+    NgPipesModule,
+
     VirtualScrollerModule,
 ];
 
@@ -93,15 +124,16 @@ const modules = [
     ],
     imports: [
         ...modules,
+        ...clarity,
         NgScrollbarModule.withConfig({
             visibility: 'hover'
         })
     ],
     exports: [
         ...modules,
+        ...clarity,
         ...components,
         NgScrollbarModule
     ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SharedModule { }
