@@ -1,18 +1,16 @@
-import { filter, take } from 'rxjs/operators';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { GroupByOptions, RepositoriesSettingsGroup, RepositoriesSettingsGrouped, RepositorySetting, StoreService } from '@core/services';
-import { RepositoryService } from './../repository/repository.service';
 import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { RepositoriesSettings, RepositoriesSettingsService } from '@core/services';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { fromEvent, merge, Subscription } from 'rxjs';
-import { open } from '@tauri-apps/api/shell';
-import { Clipboard } from '@angular/cdk/clipboard';
-import { invoke } from '@tauri-apps/api/tauri';
+import { GroupByOptions, RepositoriesSettings, RepositoriesSettingsGroup, RepositoriesSettingsGrouped, RepositoriesSettingsService, RepositorySetting, StoreService } from '@core/services';
 import { groupBy, sortByProperty } from '@shared/functions';
-import { FilterByPipe } from 'ngx-pipes';
-import Fuse from 'fuse.js'
+import { open } from '@tauri-apps/api/shell';
+import { invoke } from '@tauri-apps/api/tauri';
+import Fuse from 'fuse.js';
+import { fromEvent, merge, Subscription } from 'rxjs';
+import { filter, take } from 'rxjs/operators';
+import { RepositoryService } from './../repository/repository.service';
 
 
 type tag = {
@@ -69,6 +67,7 @@ export class HomeComponent implements OnInit {
         this.handleGroupAndFilter('none');
         const test = this.storeService.get<string[]>('tags', []);
         this.tags = test.map(tag => ({ selected: false, name: tag }));
+        this.tags.sort((a, b) => a.name.localeCompare(b.name));
         this.tags.push(this.emptyTag);
     }
 
