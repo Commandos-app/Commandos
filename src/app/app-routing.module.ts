@@ -21,6 +21,7 @@ const routes: Routes = [
             { path: 'add-repository', loadChildren: () => import('./routes/add-repository/add-repository.module').then(m => m.AddRepositoryModule) },
             { path: 'repository', loadChildren: () => import('./routes/repository/repository.module').then(m => m.RepositoryModule) },
             { path: 'about', loadChildren: () => import('./routes/about/about.module').then(m => m.AboutModule) },
+            { path: 'changelog', loadChildren: () => import('./routes/changelog/changelog.module').then(m => m.ChangelogModule) },
             { path: '**', loadChildren: () => import('./routes/error-page/error-page.module').then(m => m.ErrorPageModule) },
 
         ],
