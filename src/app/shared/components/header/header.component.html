@@ -57,17 +57,23 @@
     [cdkConnectedOverlayOpen]="isMenuOpen"
     [cdkConnectedOverlayHasBackdrop]="true"
     (backdropClick)="isMenuOpen = false">
-    <section class="contextmenu" cds-layout="p:xs">
+    <section class="contextmenu" cds-layout="p:md">
         <!-- <cds-divider></cds-divider> -->
-        <div (click)="pin()" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">Always on top</div>
-        <div (click)="goto('/settings')" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
+        <div (click)="pin()" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">
+            Always on top
+        </div>
+        <div (click)="goto('/settings')" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">
             Settings
         </div>
-        <div (click)="checkUpdate()" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
+        <div (click)="checkUpdate()" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">
             Check for updates
         </div>
-        <cds-divider></cds-divider>
-        <div (click)="goto('/about')" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">About</div>
+        <div (click)="goto('/changelog')" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">
+            Changelog
+        </div>
+        <div (click)="goto('/about')" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">
+            About
+        </div>
         <!-- <div>Send to</div> -->
     </section>
 </ng-template>

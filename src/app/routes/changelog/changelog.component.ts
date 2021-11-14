@@ -1,7 +1,7 @@
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, SecurityContext } from '@angular/core';
-import marked from 'marked';
+import { marked } from 'marked';
 
 
 @Component({

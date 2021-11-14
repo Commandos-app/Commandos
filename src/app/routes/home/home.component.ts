@@ -47,6 +47,7 @@ export class HomeComponent implements OnInit {
     tags: tag[] = [];
     emptyTag: tag = { selected: false, name: 'No tags' };
     selectedGroup = this.storeService.RepoGroupBy;
+    isGroupFilterActive = false;
 
     constructor(
         private router: Router,
@@ -176,11 +177,13 @@ export class HomeComponent implements OnInit {
 
     filterRepositories(): RepositoriesSettings {
         const selectedTags = this.tags.filter(tag => tag.selected).map(tag => tag.name);
+        this.isGroupFilterActive = selectedTags.length > 0;
         let reposFiltredByTags = this.repositories.filter(repo => {
             return selectedTags.some(tag => repo.tags.includes(tag) || (this.emptyTag.selected && repo.tags.length === 0));
         });
 
         if (reposFiltredByTags.length === 0) {
+            this.isGroupFilterActive = false;
             reposFiltredByTags = this.repositories;
         }
 

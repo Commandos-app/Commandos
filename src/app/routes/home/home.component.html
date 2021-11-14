@@ -21,7 +21,7 @@
                 aria-label="minimize"
                 role="button"
                 cds-layout="m-l:lg">
-                <cds-icon shape="filter" size="20"></cds-icon>
+                <cds-icon shape="filter" size="20" [solid]="isGroupFilterActive"></cds-icon>
             </a>
             <cds-search control-width="shrink">
                 <label></label>
@@ -79,24 +79,22 @@
         [cdkConnectedOverlayOpen]="isFilterOpen"
         [cdkConnectedOverlayHasBackdrop]="true"
         (backdropClick)="isFilterOpen = false">
-        <section class="contextmenu" cds-layout="p:xs">
-            <div cds-text="secondary" cds-layout="p:sm" class="">Filter by:</div>
-            <cds-divider></cds-divider>
+        <section class="contextmenu" cds-layout="p:md">
+            <h4 class="contextmenu-header" cds-text="secondary" cds-layout="p:sm" class="">Filter by:</h4>
             <div class="action-list">
                 <div
                     *ngFor="let tag of tags"
                     (click)="toggle(tag)"
                     cds-text="secondary"
-                    cds-layout="p:sm"
+                    cds-layout="p-x:md p-y:sm"
                     class="clickable contextmenu-action"
                     [ngClass]="{ active: tag.selected }">
                     {{ tag.name }}
                 </div>
             </div>
-            <cds-divider></cds-divider>
-            <div (click)="clearTagFilter()" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
+            <h4 (click)="clearTagFilter()" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
                 Clear filter
-            </div>
+            </h4>
 
             <!-- <cds-divider></cds-divider> -->
             <!-- <div cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">Settings</div>
@@ -111,7 +109,7 @@
         [cdkConnectedOverlayOpen]="isGroupOpen"
         [cdkConnectedOverlayHasBackdrop]="true"
         (backdropClick)="isGroupOpen = false">
-        <section class="contextmenu" cds-layout="p:xs">
+        <section class="contextmenu" cds-layout="p:md">
             <div cds-text="secondary" cds-layout="p:sm" class="">Group by:</div>
             <cds-divider></cds-divider>
             <div class="action-list">
@@ -156,19 +154,22 @@
 </ng-template>
 
 <ng-template #userMenu let-repo>
-    <section class="contextmenu" cds-layout="p:xs">
-        <div (click)="openCmd(repo.path)" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
+    <section class="contextmenu" cds-layout="p:md">
+        <div (click)="openCmd(repo.path)" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">
             Open in Explorer
         </div>
         <!-- <cds-divider></cds-divider> -->
-        <div (click)="openCode(repo.path)" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
+        <div (click)="openCode(repo.path)" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">
             Open in VSCode
         </div>
-        <div (click)="openTerminal(repo.path)" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
+        <div
+            (click)="openTerminal(repo.path)"
+            cds-text="secondary"
+            cds-layout="p-x:md p-y:sm"
+            class="clickable contextmenu-action">
             Open in Terminal
         </div>
-        <cds-divider></cds-divider>
-        <div (click)="copyPath(repo.path)" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
+        <div (click)="copyPath(repo.path)" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">
             Copy Path
         </div>
         <!-- <div>Send to</div> -->

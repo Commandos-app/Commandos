@@ -15,7 +15,7 @@ export class CommanderService {
 
     commands: ICommand[] = [];
 
-    private onReload = new Subject();
+    private onReload = new Subject<void>();
     onReload$ = this.onReload.asObservable();
 
     constructor() { }
