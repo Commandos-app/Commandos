@@ -41,7 +41,6 @@
         "@tauri-apps/api": "^1.0.0-beta.8",
         "angular-split": "^5.0.0",
         "dayjs": "^1.10.7",
-        "diff2html": "^3.4.13",
         "fuse.js": "^6.4.6",
         "gitdiff-parser": "ecomfe/gitdiff-parser#7/head",
         "marked": "^4.0.3",

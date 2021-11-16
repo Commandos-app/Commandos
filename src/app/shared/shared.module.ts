@@ -38,7 +38,6 @@ import { SplitLayoutComponent } from './components/split-layout/split-layout.com
 import { SubnavComponent } from './components/subnav/subnav.component';
 import { TreeViewComponent } from './components/tree-view/tree-view.component';
 import { UpdateModalComponent } from './components/update-modal/update-modal.component';
-import { DiffPipe } from './directives/diff.pipe';
 import { DateFormatePipe } from './pipe/date-formate.pipe';
 import { NgPipesModule } from 'ngx-pipes';
 
@@ -63,8 +62,7 @@ const components = [
     DiffLineByLineComponent,
     DiffSideBySideComponent,
     // Pipe
-    DateFormatePipe,
-    DiffPipe
+    DateFormatePipe
 
 ];
 

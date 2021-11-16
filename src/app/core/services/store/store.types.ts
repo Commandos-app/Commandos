@@ -29,7 +29,6 @@ export type settings = {
     autofetch: boolean;
     gridcount: string;
     tags: Array<string>;
-    diff2htmloutputformat: DiffFormate;
     [key: string]: any;
 }
 

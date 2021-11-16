@@ -1,11 +1,8 @@
 
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { RepositoryService } from '../../repository.service';
+import { ActivatedRoute } from '@angular/router';
 import { LogItem } from '@git/model';
-import { Differ, DifferParse } from '@shared/functions';
-import { DiffFile } from 'diff2html/lib/types';
-import gitDiffParser, { File } from 'gitdiff-parser';
+import { RepositoryService } from '../../repository.service';
 
 @Component({
     selector: 'commander-repository-history-commit',
