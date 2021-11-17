@@ -14,7 +14,6 @@ export class StoreService {
     @Store(false) DarkMode: boolean;
     @Store(300) PaneSize: number
     @Store(true) AutoFetch: boolean;
-    @Store('none') RepoGroupBy: GroupByOptions;
     @Store('') DefaultPath: string
     @Store('line-by-line') DiffOutputFormat: DiffFormate;
     @Store([]) Tags: Array<string>;
