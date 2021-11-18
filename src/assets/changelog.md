@@ -1,3 +1,8 @@
+# Version 0.8.1
+
+### Bug Fixes
+* Context menu actions work now, when filtring with text.
+
 # Version 0.8.0
 ### Features
 
