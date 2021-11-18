@@ -28,19 +28,10 @@
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.app.json",
-                        "assets": [
-                            "src/assets"
-                        ],
-                        "styles": [
-                            "src/styles.scss"
-                        ],
-                        "scripts": [
-                            "node_modules/diff2html/bundles/js/diff2html-ui.min.js"
-                        ],
-                        "allowedCommonJsDependencies": [
-                            "hogan.js",
-                            "dayjs"
-                        ],
+                        "assets": ["src/assets"],
+                        "styles": ["src/styles.scss"],
+                        "scripts": [],
+                        "allowedCommonJsDependencies": ["hogan.js", "dayjs"],
                         "vendorChunk": true,
                         "extractLicenses": false,
                         "buildOptimizer": false,
@@ -110,15 +101,9 @@
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.spec.json",
                         "karmaConfig": "karma.conf.js",
-                        "assets": [
-                            "src/assets"
-                        ],
-                        "styles": [
-                            "src/styles.scss"
-                        ],
-                        "scripts": [
-                            "node_modules/diff2html/bundles/js/diff2html-ui.min.js"
-                        ]
+                        "assets": ["src/assets"],
+                        "styles": ["src/styles.scss"],
+                        "scripts": []
                     }
                 },
                 "e2e": {

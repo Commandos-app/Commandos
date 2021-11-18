@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outp
 import { DomSanitizer } from '@angular/platform-browser';
 import { relaunch } from "@tauri-apps/api/process";
 import { installUpdate, UpdateResult } from '@tauri-apps/api/updater';
-import marked from 'marked';
+import { marked } from 'marked';
 
 @Component({
     selector: 'commandos-update-modal',
