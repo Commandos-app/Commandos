@@ -43,7 +43,7 @@
         "dayjs": "^1.10.7",
         "fuse.js": "^6.4.6",
         "gitdiff-parser": "ecomfe/gitdiff-parser#7/head",
-        "marked": "^4.0.3",
+        "marked": "^4.0.10",
         "modern-normalize": "^1.1.0",
         "ngx-autosize": "^1.8.4",
         "ngx-pipes": "^2.7.6",
