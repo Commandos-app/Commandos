@@ -47,4 +47,5 @@ Use Github issues to report bugs, or to ask questions.
 
 ## License
 
+Copyright (c) 2021 Commandos
 Link to [MIT LICENSE](LICENSE) doc.
