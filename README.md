@@ -6,7 +6,7 @@ Commandos is currently only available on Windows, we plan to add macOS and Linux
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-blue.svg)](https://conventionalcommits.org)
-
+[![CodeQL](https://github.com/Commandos-app/Commandos/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Commandos-app/Commandos/actions/workflows/codeql-analysis.yml)
 
 ## Table of Contents
 
