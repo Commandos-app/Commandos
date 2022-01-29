@@ -1,8 +1,7 @@
-import { logFormaterObject } from "../model";
-import { GitResult, runGit } from "./base";
+import { logFormaterObject } from '../model';
+import { GitResult, runGit } from './base';
 
 export async function getLogMeta(repository: string, branch = 'HEAD', limit = 100, skip: number = 0): Promise<GitResult> {
-
     const format = Object.values(logFormaterObject).join('%x00');
 
     const args = [
@@ -15,14 +14,13 @@ export async function getLogMeta(repository: string, branch = 'HEAD', limit = 10
         `--format=${format}`,
         '--no-show-signature',
         '--no-color',
-        '--'
+        '--',
     ];
 
     return await runGit(args, repository, 'getLogMeta');
 }
 
 export async function getLogMetadataOfSha(repository: string, sha: string): Promise<GitResult> {
-
     const format = Object.values(logFormaterObject).join('%x00');
 
     const args = [
@@ -35,14 +33,13 @@ export async function getLogMetadataOfSha(repository: string, sha: string): Prom
         `--format=${format}`,
         '--no-show-signature',
         '--no-color',
-        '--'
+        '--',
     ];
 
     return await runGit(args, repository, 'getLogMetaDataOfSha');
 }
 
 export async function getLogOfSha(repository: string, sha: string): Promise<GitResult> {
-
     const args = [
         'show',
         // '-p',
@@ -60,15 +57,37 @@ export async function getLogOfSha(repository: string, sha: string): Promise<GitR
     return await runGit(args, repository, 'getLogOfSha');
 }
 
+export async function getLogOfShaDifft(repository: string, sha: string): Promise<GitResult> {
+    const args = [
+        'show',
+        // '-p',
+        sha,
+        // '-m',
+        // '-1',
+        // '--first-parent',
+        // '--patch-with-raw',
+        // '-z',
+        //        `--format=${format}`,
+        '--ext-diff',
+        //'--'
+    ];
 
-export async function getDiffOfFile(repository: string, path: string, isNew: boolean, isRenamed: boolean, staged: boolean = false): Promise<GitResult> {
+    return await runGit(args, repository, 'getLogOfShaDifft');
+}
 
+export async function getDiffOfFile(
+    repository: string,
+    path: string,
+    isNew: boolean,
+    isRenamed: boolean,
+    staged: boolean = false,
+): Promise<GitResult> {
     const args = [
         'diff',
         '--no-ext-diff',
         '--patch-with-raw',
         //   '-z',
-        '--no-color'
+        '--no-color',
     ];
 
     if (isNew && !staged) {
