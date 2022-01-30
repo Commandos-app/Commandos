@@ -1,5 +1,4 @@
 <div class="commander-grid-commit commander-full-height">
-
     <commander-split-layout>
         <div class="commander-commit-area" sidebar>
             <div class="commander-commit-message-box" cds-layout="m-b:sm">
@@ -7,31 +6,54 @@
                     <cds-form-group layout="vertical">
                         <cds-textarea cds-layout="vertical p-l:xs p-r:xs">
                             <label></label>
-                            <textarea [(ngModel)]="commitMessage" rows="3" name="commit" id="commit"
-                                [disabled]="formDisabled" placeholder="Message"></textarea>
+                            <textarea
+                                [(ngModel)]="commitMessage"
+                                rows="3"
+                                name="commit"
+                                id="commit"
+                                [disabled]="formDisabled"
+                                placeholder="Message"></textarea>
                         </cds-textarea>
                     </cds-form-group>
 
                     <div cds-layout="horizontal gap:sm align-items:bottom align:right m-t:xs m-r:sm">
-
-                        <cds-icon-button *ngIf="viewMode === 'tree';else TreeView" (click)="changeToListView()"
-                            size="sm" action="flat" cds-layout="m-l:xs m-r:auto" aria-label="change to listview">
+                        <cds-icon-button
+                            *ngIf="viewMode === 'tree'; else TreeView"
+                            (click)="changeToListView()"
+                            size="sm"
+                            action="flat"
+                            cds-layout="m-l:xs m-r:auto"
+                            aria-label="change to listview">
                             <cds-icon shape="view-list" size="14"></cds-icon>
                         </cds-icon-button>
 
                         <ng-template #TreeView>
-                            <cds-icon-button (click)="changeToTreeView()" size="sm" action="flat"
-                                cds-layout="m-l:xs m-r:auto" aria-label="change to treeview">
+                            <cds-icon-button
+                                (click)="changeToTreeView()"
+                                size="sm"
+                                action="flat"
+                                cds-layout="m-l:xs m-r:auto"
+                                aria-label="change to treeview">
                                 <cds-icon shape="tree-view" size="14"></cds-icon>
                             </cds-icon-button>
                         </ng-template>
 
-                        <cds-button action="flat" status="success" [loadingState]="isCommiting" size="sm"
-                            (click)="commit()" [disabled]="formDisabled">
+                        <cds-button
+                            action="flat"
+                            status="success"
+                            [loadingState]="isCommiting"
+                            size="sm"
+                            (click)="commit()"
+                            [disabled]="formDisabled">
                             Commit
                         </cds-button>
-                        <cds-icon-button (click)="load()" size="sm" action="flat" cds-layout="m-r:sm"
-                            aria-label="refresh" [loadingState]="isLoading">
+                        <cds-icon-button
+                            (click)="load()"
+                            size="sm"
+                            action="flat"
+                            cds-layout="m-r:sm"
+                            aria-label="refresh"
+                            [loadingState]="isLoading">
                             <cds-icon shape="refresh" size="14"></cds-icon>
                         </cds-icon-button>
                     </div>
@@ -39,49 +61,40 @@
             </div>
             <cds-divider orientation="horizontal"></cds-divider>
             <ng-scrollbar class="virtual-scroll">
-                <commander-tree-view [treeData]="fileTree" [itemTemplate]="itemTmpl" scrollViewport>
-                </commander-tree-view>
-                <ng-container *ngIf="fileTree.length  === 0 ">
+                <commander-tree-view [treeData]="fileTree" [itemTemplate]="itemTmpl" scrollViewport> </commander-tree-view>
+                <ng-container *ngIf="fileTree.length === 0">
                     <p class="gray-col" cds-text="section" cds-layout="m:md">No changes</p>
                 </ng-container>
-
             </ng-scrollbar>
-
         </div>
 
         <div class="commander-full-height" content>
-            <div *ngIf="fileTree.length  === 0 " class="center-region">
+            <div *ngIf="fileTree.length === 0" class="center-region">
                 <cds-icon shape="happy-face" size="xxl"></cds-icon>
             </div>
-            <commandos-diff [data]="fileDiff" *ngIf="fileTree.length  !== 0" text="select a file to see the diff">
+            <commandos-diff [data]="fileDiff" *ngIf="fileTree.length !== 0" text="select a file to see the diff">
             </commandos-diff>
-            <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height"
-                *ngIf="isDiffLoading">
+            <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height" *ngIf="isDiffLoading">
                 <cds-progress-circle size="xl"></cds-progress-circle>
             </div>
         </div>
     </commander-split-layout>
-
 </div>
-
-
 
 <ng-template #itemTmpl let-node>
     <ng-container [ngSwitch]="node.type">
         <div *ngSwitchCase="'title'" class="comander-tree-row comander-tree-title">
-            <b>{{node.name}}</b>
+            <b>{{ node.name }}</b>
         </div>
 
         <div *ngSwitchCase="'file'" class="comander-tree-row commander-tree-file-row">
             <cds-icon shape="file"></cds-icon>
 
             <span cds-text="secondary" class="comander-tree-row-text clickable" (click)="loadDiff(node)">
-                <ng-container *ngIf="node.file.isRenamed">
-                    {{node.file.oldPath}} ->
-                </ng-container>
-                {{node.file.name}}
+                <ng-container *ngIf="node.file.isRenamed"> {{ node.file.oldPath }} -> </ng-container>
+                {{ node.file.name }}
                 <ng-container *ngIf="viewMode === 'list'">
-                    <i class="helper-text">{{node.path}}</i>
+                    <i class="helper-text">{{ node.path }}</i>
                 </ng-container>
             </span>
             <ng-container *ngIf="node.staged; then staged; else unstaged"></ng-container>
@@ -89,18 +102,20 @@
                 <div>
                     <!-- Placeholder ! -->
                 </div>
-                <cds-icon-button class="action" action="flat" size="sm" (click)="unstage(node.file.path)"
+                <cds-icon-button
+                    class="action"
+                    action="flat"
+                    size="sm"
+                    (click)="unstage(node.file.path)"
                     aria-label="unstage file">
                     <cds-icon shape="minus" class="clickable"></cds-icon>
                 </cds-icon-button>
             </ng-template>
             <ng-template #unstaged>
-                <cds-icon-button class="action" action="flat" size="sm" (click)="undo(node.file)"
-                    aria-label="undo file">
+                <cds-icon-button class="action" action="flat" size="sm" (click)="undo(node.file)" aria-label="undo file">
                     <cds-icon shape="undo" class="clickable"></cds-icon>
                 </cds-icon-button>
-                <cds-icon-button class="action" action="flat" size="sm" (click)="stage(node.file.path)"
-                    aria-label="stage file">
+                <cds-icon-button class="action" action="flat" size="sm" (click)="stage(node.file.path)" aria-label="stage file">
                     <cds-icon shape="plus" class="clickable"></cds-icon>
                 </cds-icon-button>
             </ng-template>
@@ -116,36 +131,36 @@
 
         <div *ngSwitchDefault class="comander-tree-row commander-tree-folder-row">
             <ng-container *ngIf="!node.hideChildren">
-                <cds-icon shape="angle" class="commander-tree-arrow" size="sm" direction="down"
+                <cds-icon
+                    shape="angle"
+                    class="commander-tree-arrow"
+                    size="sm"
+                    direction="down"
                     (click)="hideChild(node)"></cds-icon>
-                <cds-icon shape="folder-open" solid="true" (click)="hideChild(node)"></cds-icon>
+                <cds-icon shape="folder-open" [solid]="true" (click)="hideChild(node)"></cds-icon>
             </ng-container>
             <ng-container *ngIf="node.hideChildren">
-                <cds-icon shape="angle" class="commander-tree-arrow" direction="right" (click)="hideChild(node)">
-                </cds-icon>
-                <cds-icon shape="folder" solid="true" (click)="hideChild(node)"></cds-icon>
+                <cds-icon shape="angle" class="commander-tree-arrow" direction="right" (click)="hideChild(node)"> </cds-icon>
+                <cds-icon shape="folder" [solid]="true" (click)="hideChild(node)"></cds-icon>
             </ng-container>
             <span cds-text="secondary" class="comander-tree-row-text" (click)="hideChild(node)">
-                {{node.name}}
+                {{ node.name }}
             </span>
 
             <!-- <span class="action"> -->
             <ng-container *ngIf="node.staged; then staged; else unstaged"></ng-container>
             <ng-template #staged>
-                <cds-icon-button class="action" action="flat" size="sm" (click)="unstage(node.path)"
-                    aria-label="unstage folder">
+                <cds-icon-button class="action" action="flat" size="sm" (click)="unstage(node.path)" aria-label="unstage folder">
                     <cds-icon shape="minus" class="clickable"></cds-icon>
                 </cds-icon-button>
             </ng-template>
             <ng-template #unstaged>
-                <cds-icon-button class="action" action="flat" size="sm" (click)="stage(node.path)"
-                    aria-label="stage folder">
+                <cds-icon-button class="action" action="flat" size="sm" (click)="stage(node.path)" aria-label="stage folder">
                     <cds-icon shape="plus" class="clickable"></cds-icon>
                 </cds-icon-button>
             </ng-template>
             <!-- </span> -->
         </div>
-
 
         <cds-divider></cds-divider>
     </ng-container>

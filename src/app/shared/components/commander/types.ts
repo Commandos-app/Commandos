@@ -1,21 +1,27 @@
-import { RepositoriesSettings } from "@core/services";
+import { Directions } from '@cds/core/internal';
+import { RepositoriesSettings } from '@core/services';
 
 export type AvailableCommands =
-    'executeMerge' | 'executePull' | 'executePush' |
-    'executeCreateBranch' | 'executeDeleteBranch' | 'executeSync' |
-    'executePruneRemote' | 'executeCheckoutBranch';
+    | 'executeMerge'
+    | 'executePull'
+    | 'executePush'
+    | 'executeCreateBranch'
+    | 'executeDeleteBranch'
+    | 'executeSync'
+    | 'executePruneRemote'
+    | 'executeCheckoutBranch';
 
 export type FieldDefinition = {
     type: 'string' | 'branch' | 'repositories' | 'repository' | 'bool';
     name: string;
     label: string;
     value?: any;
-}
+};
 
 export type RegisterCommandOptions = {
     name: string;
     icon: string;
-    direction?: string;
+    direction?: Directions;
     fields?: Array<FieldDefinition>;
     command: AvailableCommands;
 };
@@ -23,12 +29,12 @@ export type RegisterCommandOptions = {
 export type CommanderModalOptions = {
     title: string;
     fields: Array<FieldDefinition>;
-}
+};
 
 export type CommandParams = {
     repos: RepositoriesSettings;
     formData: any;
-}
+};
 
 export type SelectType = 'Tag' | 'Repository' | 'All';
 
@@ -37,6 +43,3 @@ export type SelectedRepositoryTypes = {
     text: string;
     id?: number;
 };
-
-
-

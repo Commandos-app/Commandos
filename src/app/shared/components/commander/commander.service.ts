@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Directions } from '@cds/core/internal';
 import { Subject } from 'rxjs';
 export interface ICommand {
     icon: string;
     name: string;
-    direction?: string;
+    direction?: Directions;
     // eslint-disable-next-line @typescript-eslint/ban-types
     callback: Function;
 }

@@ -8,10 +8,22 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {
-    CdsAccordionModule, CdsAlertModule, CdsButtonModule, CdsCheckboxModule, CdsDividerModule,
-    CdsFileModule, CdsFormsModule, CdsIconModule, CdsInputModule, CdsModalModule,
-    CdsProgressCircleModule, CdsRadioModule, CdsSearchModule, CdsSelectModule,
-    CdsTagModule, CdsTextareaModule
+    CdsAccordionModule,
+    CdsAlertModule,
+    CdsButtonModule,
+    CdsCheckboxModule,
+    CdsDividerModule,
+    CdsFileModule,
+    CdsFormsModule,
+    CdsIconModule,
+    CdsInputModule,
+    CdsModalModule,
+    CdsProgressCircleModule,
+    CdsRadioModule,
+    CdsSearchModule,
+    CdsSelectModule,
+    CdsTagModule,
+    CdsTextareaModule,
 } from '@cds/angular';
 import { FilterModule } from '@josee9988/filter-pipe-ngx';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -41,9 +53,7 @@ import { UpdateModalComponent } from './components/update-modal/update-modal.com
 import { DateFormatePipe } from './pipe/date-formate.pipe';
 import { NgPipesModule } from 'ngx-pipes';
 
-
 const components = [
-
     CommanderComponent,
     CommanderModalComponent,
     ButtonControlComponent,
@@ -62,8 +72,7 @@ const components = [
     DiffLineByLineComponent,
     DiffSideBySideComponent,
     // Pipe
-    DateFormatePipe
-
+    DateFormatePipe,
 ];
 
 const clarity = [
@@ -82,7 +91,7 @@ const clarity = [
     CdsProgressCircleModule,
     CdsIconModule,
     CdsRadioModule,
-    CdsSearchModule
+    CdsSearchModule,
 ];
 
 const modules = [
@@ -117,21 +126,14 @@ const modules = [
 ];
 
 @NgModule({
-    declarations: [
-        ...components
-    ],
+    declarations: [...components],
     imports: [
         ...modules,
         ...clarity,
         NgScrollbarModule.withConfig({
-            visibility: 'hover'
-        })
+            visibility: 'hover',
+        }),
     ],
-    exports: [
-        ...modules,
-        ...clarity,
-        ...components,
-        NgScrollbarModule
-    ],
+    exports: [...modules, ...clarity, ...components, NgScrollbarModule],
 })
-export class SharedModule { }
+export class SharedModule {}

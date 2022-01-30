@@ -1,15 +1,18 @@
 <div class="command-input-container" data-tauri-drag-region>
     <div #commandInputContainer class="command-input">
         <cds-icon shape="wand"></cds-icon>
-        <input #commandInput type="text" [(ngModel)]="searchText" (click)="handleKeyDownListener($event)">
+        <input #commandInput type="text" [(ngModel)]="searchText" (click)="handleKeyDownListener($event)" />
     </div>
 </div>
 <ng-template #commandsTemplate>
     <div class="command-body">
-        <div *ngFor="let cmd of commands; index as i" class="command" [class.selected]="i === selected"
+        <div
+            *ngFor="let cmd of commands; index as idx"
+            class="command"
+            [class.selected]="idx === selected"
             (click)="runCommand(cmd)">
             <cds-icon [shape]="cmd.icon" [direction]="cmd.direction"></cds-icon>
-            &nbsp;{{cmd.name}}
+            &nbsp;{{ cmd.name }}
         </div>
         <div *ngIf="commands.length === 0" class="command">
             <cds-icon shape="unknown-status"></cds-icon>

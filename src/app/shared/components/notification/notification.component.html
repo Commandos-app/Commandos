@@ -1,9 +1,7 @@
 <ng-container *ngFor="let notification of notificationService.notifications">
-
-
     <cds-alert-group [status]="notification.type" type="banner">
         <cds-alert closable (closeChange)="notificationService.removeNotification(notification)">
-            {{notification.message}}
+            {{ notification.message }}
         </cds-alert>
     </cds-alert-group>
 </ng-container>
