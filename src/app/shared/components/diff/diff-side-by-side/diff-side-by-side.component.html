@@ -1,40 +1,40 @@
 <div *ngFor="let item of diff; let fileIdx = index" class="diff-item">
     <div class="diff-item-header">
-        <div>File: {{item.newPath}}</div>
+        <div>File: {{ item.newPath }}</div>
         <!-- <div>{{item.addedLines}} ++ {{item.deletedLines}} --</div> -->
     </div>
 
     <ng-container *ngFor="let block of item.hunks; let hunkIdx = index">
         <div class="diff-header">
             <div class="diff-block-header">
-                {{block.content}}
+                {{ block.content }}
             </div>
         </div>
         <div class="diff-side-by-side">
-            <div id="block-left-{{fileIdx}}-{{hunkIdx}}" class="diff-block left"
-                (scroll)="onScrollLeft($event, fileIdx, hunkIdx)">
+            <div id="block-left-{{ fileIdx }}-{{ hunkIdx }}" class="diff-block left" (scroll)="onScrollLeft($event, fileIdx, hunkIdx)">
                 <ng-container *ngFor="let line of block.changes">
                     <div class="diff-line" [ngClass]="line.type">
-                        <div class=" diff-line-number diff-line-old-number">{{line.oldLineNumber}}
-                            <ng-container *ngIf="line.type === 'delete'">{{line.lineNumber}}</ng-container>
+                        <div class="diff-line-number diff-line-old-number">
+                            {{ line.oldLineNumber }}
+                            <ng-container *ngIf="line.type === 'delete'">{{ line.lineNumber }}</ng-container>
                         </div>
-                        <div class="diff-line-number diff-line-new-number">{{line.newLineNumber}}</div>
+                        <div class="diff-line-number diff-line-new-number">{{ line.newLineNumber }}</div>
                         <div class="diff-line-content">
-                            <ng-container *ngIf="line.type !== 'insert'">{{line.content}}</ng-container>
+                            <ng-container *ngIf="line.type !== 'insert'">{{ line.content }}</ng-container>
                         </div>
                     </div>
                 </ng-container>
             </div>
-            <div id="block-right-{{fileIdx}}-{{hunkIdx}}" class="diff-block right"
-                (scroll)="onScrollRight($event, fileIdx, hunkIdx)">
+            <div id="block-right-{{ fileIdx }}-{{ hunkIdx }}" class="diff-block right" (scroll)="onScrollRight($event, fileIdx, hunkIdx)">
                 <ng-container *ngFor="let line of block.changes">
                     <div class="diff-line" [ngClass]="line.type">
-                        <div class="diff-line-number diff-line-old-number">{{line.oldLineNumber}}</div>
-                        <div class="diff-line-number diff-line-new-number">{{line.newLineNumber}}
-                            <ng-container *ngIf="line.type === 'insert'">{{line.lineNumber}}</ng-container>
+                        <div class="diff-line-number diff-line-old-number">{{ line.oldLineNumber }}</div>
+                        <div class="diff-line-number diff-line-new-number">
+                            {{ line.newLineNumber }}
+                            <ng-container *ngIf="line.type === 'insert'">{{ line.lineNumber }}</ng-container>
                         </div>
                         <div class="diff-line-content">
-                            <ng-container *ngIf="line.type !== 'delete'">{{line.content}}</ng-container>
+                            <ng-container *ngIf="line.type !== 'delete'">{{ line.content }}</ng-container>
                         </div>
                     </div>
                 </ng-container>

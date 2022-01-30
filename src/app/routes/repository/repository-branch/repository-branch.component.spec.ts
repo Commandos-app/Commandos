@@ -8,9 +8,8 @@ describe('RepositoryBranchComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [RepositoryBranchComponent]
-        })
-            .compileComponents();
+            declarations: [RepositoryBranchComponent],
+        }).compileComponents();
     });
 
     beforeEach(() => {

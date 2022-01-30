@@ -7,9 +7,6 @@ import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
     declarations: [DetailComponent],
-    imports: [
-        SharedModule,
-        DetailRoutingModule
-    ]
+    imports: [SharedModule, DetailRoutingModule],
 })
-export class DetailModule { }
+export class DetailModule {}

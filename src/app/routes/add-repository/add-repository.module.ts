@@ -5,13 +5,8 @@ import { AddRepositoryComponent } from './add-repository.component';
 import { CloneComponent } from './clone/clone.component';
 import { NewComponent } from './new/new.component';
 
-
-
 @NgModule({
     declarations: [AddRepositoryComponent, NewComponent, CloneComponent],
-    imports: [
-        SharedModule,
-        AddRepositoryRoutingModule
-    ],
+    imports: [SharedModule, AddRepositoryRoutingModule],
 })
-export class AddRepositoryModule { }
+export class AddRepositoryModule {}

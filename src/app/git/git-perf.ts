@@ -1,4 +1,3 @@
-
 declare var performance: any;
 let measuringPerf = false;
 let markID = 0;
@@ -14,10 +13,7 @@ export function stop() {
 }
 
 /** Measure an async git operation. */
-export async function measure<T>(
-    cmd: string,
-    fn: () => Promise<T>
-): Promise<T> {
+export async function measure<T>(cmd: string, fn: () => Promise<T>): Promise<T> {
     if ((window as any).__NOGITLOGGING__) {
         return await fn();
     }
@@ -26,9 +22,8 @@ export async function measure<T>(
 
     const startTime = performance && performance.now ? performance.now() : null;
     // let id = getRndInteger(100000, 2000000);
-    markBegin(id, cmd)
+    markBegin(id, cmd);
     try {
-
         console.log(`%c Executeing %c-${id}-`, 'color: #b71cd0', 'color:red;font-weight: bold', ` ${cmd}`);
         return await fn();
     } finally {
@@ -45,7 +40,7 @@ export async function measure<T>(
 /** Mark the beginning of a git operation. */
 function markBegin(id: number, cmd: string) {
     if (!measuringPerf) {
-        return
+        return;
     }
 
     const markName = `${id}::${cmd}`;
@@ -55,7 +50,7 @@ function markBegin(id: number, cmd: string) {
 /** Mark the end of a git operation. */
 function markEnd(id: number, cmd: string) {
     if (!measuringPerf) {
-        return
+        return;
     }
 
     const markName = `${id}::${cmd}`;

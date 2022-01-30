@@ -9,18 +9,16 @@ import { NgxTippyService } from 'ngx-tippy-wrapper';
 import { Branch, Branches } from '@git/model';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
-type MergeStrategy = { id: number, title: string, subtitle: string };
-type MergeStrategies = Array<MergeStrategy>
+type MergeStrategy = { id: number; title: string; subtitle: string };
+type MergeStrategies = Array<MergeStrategy>;
 
 @UntilDestroy()
 @Component({
     selector: 'app-repository-branch',
     templateUrl: './repository-branch.component.html',
-    styleUrls: ['./repository-branch.component.scss']
+    styleUrls: ['./repository-branch.component.scss'],
 })
 export class RepositoryBranchComponent implements OnInit {
-
-
     remoteBranches: Branches = [];
 
     openModalNew = false;
@@ -41,30 +39,30 @@ export class RepositoryBranchComponent implements OnInit {
     };
 
     mergeObj: any = {
-        modal: false
+        modal: false,
     };
 
     mergeStrategy: MergeStrategies = [
         {
             id: 1,
             title: 'Merge (no fast forward)',
-            subtitle: 'Nonlinear history preserving all commits'
+            subtitle: 'Nonlinear history preserving all commits',
         },
         {
             id: 2,
             title: 'Squash commit',
-            subtitle: 'Linear history with only a single commit on the target'
+            subtitle: 'Linear history with only a single commit on the target',
         },
         {
             id: 3,
             title: 'Rebase and fast-forward',
-            subtitle: 'Rebase source commits onto target and fast-forward'
+            subtitle: 'Rebase source commits onto target and fast-forward',
         },
         {
             id: 4,
             title: 'Semi-linear merge',
-            subtitle: 'Rebase source commits onto target and create a two-parent merge'
-        }
+            subtitle: 'Rebase source commits onto target and create a two-parent merge',
+        },
     ];
 
     selectedMergeStrategy: MergeStrategy = this.mergeStrategy[0];
@@ -73,14 +71,15 @@ export class RepositoryBranchComponent implements OnInit {
         public repositoryService: RepositoryService,
         private ngxTippyService: NgxTippyService,
         private commanderService: CommanderService,
-        private cd: ChangeDetectorRef
-    ) { }
+        private cd: ChangeDetectorRef,
+    ) {}
 
     ngOnInit(): void {
         this.repositoryService.loaded$
             .pipe(
-                filter(x => x), first(),
-                untilDestroyed(this)
+                filter((x) => x),
+                first(),
+                untilDestroyed(this),
             )
             .subscribe(() => {
                 this.repositoryService.getBranches();
@@ -88,13 +87,11 @@ export class RepositoryBranchComponent implements OnInit {
                 //     this.cd.detectChanges();
                 // }, 200);
             });
-        this.commanderService.onReload$.pipe(untilDestroyed(this))
-            .subscribe(() => {
-                this.repositoryService.getBranches();
-                // this.cd.detectChanges();
-            });
+        this.commanderService.onReload$.pipe(untilDestroyed(this)).subscribe(() => {
+            this.repositoryService.getBranches();
+            // this.cd.detectChanges();
+        });
     }
-
 
     async onDelete(branch: Branch): Promise<void> {
         await this.repositoryService.deleteBranch(branch);
@@ -121,13 +118,12 @@ export class RepositoryBranchComponent implements OnInit {
             //     this.electronService.git.Branch.setUpstream(ref, `origin/${this.newBranch.branchName}`);
             // }
 
-
             this.openModalNew = false;
 
             this.repositoryService.getBranches();
 
             this.newBranch = {
-                branchName: ''
+                branchName: '',
             };
         } catch {
             // hello?
@@ -157,13 +153,9 @@ export class RepositoryBranchComponent implements OnInit {
         }
     }
 
-    merge() {
+    merge() {}
 
-    }
-
-    onMergeChange(event: any) {
-
-    }
+    onMergeChange(event: any) {}
 
     closeModal() {
         this.mergeObj = { modal: false };

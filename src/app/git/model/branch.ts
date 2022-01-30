@@ -14,4 +14,4 @@ export const branchFormaterObject = {
     ref: '%(refname)',
     name: '%(refname:short)',
     upstream: '%(upstream:short)',
-}
+};

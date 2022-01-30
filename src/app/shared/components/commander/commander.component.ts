@@ -9,11 +9,10 @@ import { FilterPipe } from '@josee9988/filter-pipe-ngx';
 import { Router } from '@angular/router';
 import { fromEvent, merge, Subscription } from 'rxjs';
 
-
 @Component({
     selector: 'app-commander',
     templateUrl: './commander.component.html',
-    styleUrls: ['./commander.component.scss']
+    styleUrls: ['./commander.component.scss'],
 })
 export class CommanderComponent implements OnInit {
     public sub: Subscription;
@@ -22,10 +21,11 @@ export class CommanderComponent implements OnInit {
     @ViewChild('commandInput', { read: ViewContainerRef }) commandInputRef: ViewContainerRef;
     @ViewChild('commandsTemplate', { read: TemplateRef }) commandsRef: TemplateRef<unknown>;
 
-
     @HostListener('window:keydown.arrowdown', ['$event.target'])
     arrowDownListener(): void {
-        if (this.commanderModalService.preventKeyboardShortcuts()) { return; }
+        if (this.commanderModalService.preventKeyboardShortcuts()) {
+            return;
+        }
         const max = this.commands.length - 1;
         const val = this.selected + 1;
         this.selected = val > max ? 0 : val;
@@ -33,7 +33,9 @@ export class CommanderComponent implements OnInit {
 
     @HostListener('window:keydown.arrowup', ['$event.target'])
     arrowUpListener(): void {
-        if (this.commanderModalService.preventKeyboardShortcuts()) { return; }
+        if (this.commanderModalService.preventKeyboardShortcuts()) {
+            return;
+        }
         const max = this.commands.length - 1;
         const val = this.selected - 1;
         this.selected = val >= 0 ? val : max;
@@ -41,7 +43,9 @@ export class CommanderComponent implements OnInit {
 
     @HostListener('window:resize', ['$event.target'])
     onResizeListener(): void {
-        if (this.commanderModalService.preventKeyboardShortcuts()) { return; }
+        if (this.commanderModalService.preventKeyboardShortcuts()) {
+            return;
+        }
         if (this.overlayRef) {
             const width = this.commandInputContainerRef.element.nativeElement.clientWidth;
             this.overlayRef.updateSize({ width });
@@ -58,7 +62,9 @@ export class CommanderComponent implements OnInit {
 
     @HostListener('window:keyup.enter', ['$event'])
     runCommandListener(): void {
-        if (this.commanderModalService.preventKeyboardShortcuts()) { return; }
+        if (this.commanderModalService.preventKeyboardShortcuts()) {
+            return;
+        }
         if (this.overlayRef) {
             this.runCommandSelected();
         }
@@ -69,11 +75,14 @@ export class CommanderComponent implements OnInit {
     handleKeyDownListener($event: Event): void {
         $event.preventDefault();
         $event.stopPropagation();
-        if (this.commanderModalService.preventKeyboardShortcuts()) { return; }
+        if (this.commanderModalService.preventKeyboardShortcuts()) {
+            return;
+        }
         if (!this.overlayRef) {
             //new FlexibleConnectedPositionStrategy(this.commandInput.element);
             const width = this.commandInputContainerRef.element.nativeElement.clientWidth;
-            const positionStrategy = this.overlay.position()
+            const positionStrategy = this.overlay
+                .position()
                 .flexibleConnectedTo(this.commandInputContainerRef.element)
                 .withPositions(this.getPosition())
                 .withPush(false);
@@ -82,31 +91,26 @@ export class CommanderComponent implements OnInit {
                 positionStrategy,
                 width,
                 hasBackdrop: true,
-
             });
             const commander = new TemplatePortal(this.commandsRef, this.viewContainerRef);
             this.overlayRef.attach(commander);
             this.selected = 0;
             this.commandInputRef.element.nativeElement.focus();
 
-            this.sub = merge(
-                fromEvent<MouseEvent>(document, 'click'),
-                fromEvent<MouseEvent>(document, 'contextmenu')
-            )
+            this.sub = merge(fromEvent<MouseEvent>(document, 'click'), fromEvent<MouseEvent>(document, 'contextmenu'))
                 .pipe(
-                    filter(event => {
+                    filter((event) => {
                         const clickTarget = event.target as HTMLElement;
                         return !!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget);
                     }),
-                    take(1)
-                ).subscribe(() => this.disposeOverlay())
-        }
-        else {
+                    take(1),
+                )
+                .subscribe(() => this.disposeOverlay());
+        } else {
             if (this.overlayRef) {
                 this.disposeOverlay();
             }
         }
-
     }
 
     // @HostListener()
@@ -136,21 +140,23 @@ export class CommanderComponent implements OnInit {
         private router: Router,
         public commanderService: CommanderService,
         private logger: LoggerService,
-        private commanderModalService: CommanderModalService
-    ) { }
+        private commanderModalService: CommanderModalService,
+    ) {}
 
     ngOnInit(): void {
         this.filterCommands();
     }
 
     private getPosition(): ConnectedPosition[] {
-        return [{
-            originX: 'start',
-            originY: 'bottom',
-            overlayX: 'start',
-            overlayY: 'top',
-            panelClass: 'command-overlay'
-        }];
+        return [
+            {
+                originX: 'start',
+                originY: 'bottom',
+                overlayX: 'start',
+                overlayY: 'top',
+                panelClass: 'command-overlay',
+            },
+        ];
     }
 
     private filterCommands() {

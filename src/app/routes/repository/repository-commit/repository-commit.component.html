@@ -72,8 +72,7 @@
             <div *ngIf="fileTree.length === 0" class="center-region">
                 <cds-icon shape="happy-face" size="xxl"></cds-icon>
             </div>
-            <commandos-diff [data]="fileDiff" *ngIf="fileTree.length !== 0" text="select a file to see the diff">
-            </commandos-diff>
+            <commandos-diff [data]="fileDiff" *ngIf="fileTree.length !== 0" text="select a file to see the diff"> </commandos-diff>
             <div cds-layout="horizontal gap:sm align:center" class="commander-flex commander-full-height" *ngIf="isDiffLoading">
                 <cds-progress-circle size="xl"></cds-progress-circle>
             </div>
@@ -102,12 +101,7 @@
                 <div>
                     <!-- Placeholder ! -->
                 </div>
-                <cds-icon-button
-                    class="action"
-                    action="flat"
-                    size="sm"
-                    (click)="unstage(node.file.path)"
-                    aria-label="unstage file">
+                <cds-icon-button class="action" action="flat" size="sm" (click)="unstage(node.file.path)" aria-label="unstage file">
                     <cds-icon shape="minus" class="clickable"></cds-icon>
                 </cds-icon-button>
             </ng-template>
@@ -131,12 +125,7 @@
 
         <div *ngSwitchDefault class="comander-tree-row commander-tree-folder-row">
             <ng-container *ngIf="!node.hideChildren">
-                <cds-icon
-                    shape="angle"
-                    class="commander-tree-arrow"
-                    size="sm"
-                    direction="down"
-                    (click)="hideChild(node)"></cds-icon>
+                <cds-icon shape="angle" class="commander-tree-arrow" size="sm" direction="down" (click)="hideChild(node)"></cds-icon>
                 <cds-icon shape="folder-open" [solid]="true" (click)="hideChild(node)"></cds-icon>
             </ng-container>
             <ng-container *ngIf="node.hideChildren">

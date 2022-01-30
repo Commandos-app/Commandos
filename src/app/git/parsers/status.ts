@@ -1,11 +1,6 @@
-
-import { GitStatusEntry, IParsedStatusEntry, IStatusResult, UnmergedEntrySummary } from "../model";
-
-
-
+import { GitStatusEntry, IParsedStatusEntry, IStatusResult, UnmergedEntrySummary } from '../model';
 
 export function parseStatus(stdout: string): IStatusResult[] {
-
     if (stdout) {
         const unparsedFiles = stdout.split('\0');
 
@@ -13,11 +8,12 @@ export function parseStatus(stdout: string): IStatusResult[] {
 
         for (let index = 0; index < unparsedFiles.length; index++) {
             const entry = unparsedFiles[index];
-            if (!entry) { continue; }
+            if (!entry) {
+                continue;
+            }
 
             const parsedStatusEntry = splitByTypeOfChange(entry);
             if (parsedStatusEntry) {
-
                 const statusResult: IStatusResult = {
                     filename: parsedStatusEntry.path,
                     path: parsedStatusEntry.path,
@@ -27,7 +23,7 @@ export function parseStatus(stdout: string): IStatusResult[] {
                     isModified: isModified(parsedStatusEntry.code),
                     isNew: isAdded(parsedStatusEntry.code),
                     isUntracked: isUntracked(parsedStatusEntry.code),
-                    isDeleted: isDeleted(parsedStatusEntry.code)
+                    isDeleted: isDeleted(parsedStatusEntry.code),
                 };
 
                 if (statusResult.isRenamed || statusResult.isCopied) {
@@ -70,28 +66,28 @@ function splitByTypeOfChange(entry: string): IParsedStatusEntry | undefined {
     }
 }
 
-
 // 1 <XY> <sub> <mH> <mI> <mW> <hH> <hI> <path>
-const changedEntryRe = /^1 ([MADRCUTX?!.]{2}) (N\.\.\.|S[C.][M.][U.]) (\d+) (\d+) (\d+) ([a-f0-9]+) ([a-f0-9]+) ([\s\S]*?)$/
+const changedEntryRe = /^1 ([MADRCUTX?!.]{2}) (N\.\.\.|S[C.][M.][U.]) (\d+) (\d+) (\d+) ([a-f0-9]+) ([a-f0-9]+) ([\s\S]*?)$/;
 
 function parseChangedEntry(field: string): IParsedStatusEntry {
     const match = changedEntryRe.exec(field);
 
     if (!match) {
-        throw new Error(`Failed to parse status line for changed entry`)
+        throw new Error(`Failed to parse status line for changed entry`);
     }
 
     return {
         code: match[1],
         path: match[8],
-    }
+    };
 }
 
 // 2 <XY> <sub> <mH> <mI> <mW> <hH> <hI> <X><score> <path><sep><origPath>
-const renamedOrCopiedEntryRe = /^2 ([MADRCUTX?!.]{2}) (N\.\.\.|S[C.][M.][U.]) (\d+) (\d+) (\d+) ([a-f0-9]+) ([a-f0-9]+) ([RC]\d+) ([\s\S]*?)$/
+const renamedOrCopiedEntryRe =
+    /^2 ([MADRCUTX?!.]{2}) (N\.\.\.|S[C.][M.][U.]) (\d+) (\d+) (\d+) ([a-f0-9]+) ([a-f0-9]+) ([RC]\d+) ([\s\S]*?)$/;
 
 function parsedRenamedOrCopiedEntry(field: string): IParsedStatusEntry {
-    const match = renamedOrCopiedEntryRe.exec(field)
+    const match = renamedOrCopiedEntryRe.exec(field);
 
     if (!match) {
         throw new Error(`Failed to parse status line for renamed or copied entry`);
@@ -99,15 +95,15 @@ function parsedRenamedOrCopiedEntry(field: string): IParsedStatusEntry {
 
     return {
         code: match[1],
-        path: match[9]
-    }
+        path: match[9],
+    };
 }
 
 // u <xy> <sub> <m1> <m2> <m3> <mW> <h1> <h2> <h3> <path>
-const unmergedEntryRe = /^u ([DAU]{2}) (N\.\.\.|S[C.][M.][U.]) (\d+) (\d+) (\d+) (\d+) ([a-f0-9]+) ([a-f0-9]+) ([a-f0-9]+) ([\s\S]*?)$/
+const unmergedEntryRe = /^u ([DAU]{2}) (N\.\.\.|S[C.][M.][U.]) (\d+) (\d+) (\d+) (\d+) ([a-f0-9]+) ([a-f0-9]+) ([a-f0-9]+) ([\s\S]*?)$/;
 
 function parseUnmergedEntry(field: string): IParsedStatusEntry {
-    const match = unmergedEntryRe.exec(field)
+    const match = unmergedEntryRe.exec(field);
 
     if (!match) {
         throw new Error(`Failed to parse status line for unmerged entry`);
@@ -116,15 +112,15 @@ function parseUnmergedEntry(field: string): IParsedStatusEntry {
     return {
         code: match[1],
         path: match[10],
-    }
+    };
 }
 
 function parseUntrackedEntry(field: string): IParsedStatusEntry {
-    const path = field.substr(2)
+    const path = field.substr(2);
     return {
         code: '?',
         path,
-    }
+    };
 }
 
 function isUntracked(status: string): boolean {
@@ -159,17 +155,14 @@ function isStaged(status: string): boolean {
     return !!status && status[1] === '.';
 }
 
-
-
 function mapStatus(status: string): any {
-
     if (status === '.M') {
         return {
             kind: 'ordinary',
             type: 'modified',
             index: GitStatusEntry.Unchanged,
             workingTree: GitStatusEntry.Modified,
-        }
+        };
     }
 
     if (status === 'M.') {
@@ -178,7 +171,7 @@ function mapStatus(status: string): any {
             type: 'modified',
             index: GitStatusEntry.Modified,
             workingTree: GitStatusEntry.Unchanged,
-        }
+        };
     }
 
     if (status === '.A') {
@@ -187,7 +180,7 @@ function mapStatus(status: string): any {
             type: 'added',
             index: GitStatusEntry.Unchanged,
             workingTree: GitStatusEntry.Added,
-        }
+        };
     }
 
     if (status === 'A.') {
@@ -196,7 +189,7 @@ function mapStatus(status: string): any {
             type: 'added',
             index: GitStatusEntry.Added,
             workingTree: GitStatusEntry.Unchanged,
-        }
+        };
     }
 
     if (status === '.D') {
@@ -205,7 +198,7 @@ function mapStatus(status: string): any {
             type: 'deleted',
             index: GitStatusEntry.Unchanged,
             workingTree: GitStatusEntry.Deleted,
-        }
+        };
     }
 
     if (status === 'D.') {
@@ -214,7 +207,7 @@ function mapStatus(status: string): any {
             type: 'deleted',
             index: GitStatusEntry.Deleted,
             workingTree: GitStatusEntry.Unchanged,
-        }
+        };
     }
 
     if (status === 'R.') {
@@ -222,7 +215,7 @@ function mapStatus(status: string): any {
             kind: 'renamed',
             index: GitStatusEntry.Renamed,
             workingTree: GitStatusEntry.Unchanged,
-        }
+        };
     }
 
     if (status === '.R') {
@@ -230,7 +223,7 @@ function mapStatus(status: string): any {
             kind: 'renamed',
             index: GitStatusEntry.Unchanged,
             workingTree: GitStatusEntry.Renamed,
-        }
+        };
     }
 
     if (status === 'C.') {
@@ -238,7 +231,7 @@ function mapStatus(status: string): any {
             kind: 'copied',
             index: GitStatusEntry.Copied,
             workingTree: GitStatusEntry.Unchanged,
-        }
+        };
     }
 
     if (status === '.C') {
@@ -246,7 +239,7 @@ function mapStatus(status: string): any {
             kind: 'copied',
             index: GitStatusEntry.Unchanged,
             workingTree: GitStatusEntry.Copied,
-        }
+        };
     }
 
     if (status === 'AD') {
@@ -255,7 +248,7 @@ function mapStatus(status: string): any {
             type: 'added',
             index: GitStatusEntry.Added,
             workingTree: GitStatusEntry.Deleted,
-        }
+        };
     }
 
     if (status === 'AM') {
@@ -264,7 +257,7 @@ function mapStatus(status: string): any {
             type: 'added',
             index: GitStatusEntry.Added,
             workingTree: GitStatusEntry.Modified,
-        }
+        };
     }
 
     if (status === 'RM') {
@@ -272,7 +265,7 @@ function mapStatus(status: string): any {
             kind: 'renamed',
             index: GitStatusEntry.Renamed,
             workingTree: GitStatusEntry.Modified,
-        }
+        };
     }
 
     if (status === 'RD') {
@@ -280,7 +273,7 @@ function mapStatus(status: string): any {
             kind: 'renamed',
             index: GitStatusEntry.Renamed,
             workingTree: GitStatusEntry.Deleted,
-        }
+        };
     }
 
     if (status === 'DD') {
@@ -289,7 +282,7 @@ function mapStatus(status: string): any {
             action: UnmergedEntrySummary.BothDeleted,
             us: GitStatusEntry.Deleted,
             them: GitStatusEntry.Deleted,
-        }
+        };
     }
 
     if (status === 'AU') {
@@ -298,7 +291,7 @@ function mapStatus(status: string): any {
             action: UnmergedEntrySummary.AddedByUs,
             us: GitStatusEntry.Added,
             them: GitStatusEntry.UpdatedButUnmerged,
-        }
+        };
     }
 
     if (status === 'UD') {
@@ -307,7 +300,7 @@ function mapStatus(status: string): any {
             action: UnmergedEntrySummary.DeletedByThem,
             us: GitStatusEntry.UpdatedButUnmerged,
             them: GitStatusEntry.Deleted,
-        }
+        };
     }
 
     if (status === 'UA') {
@@ -316,7 +309,7 @@ function mapStatus(status: string): any {
             action: UnmergedEntrySummary.AddedByThem,
             us: GitStatusEntry.UpdatedButUnmerged,
             them: GitStatusEntry.Added,
-        }
+        };
     }
 
     if (status === 'DU') {
@@ -325,7 +318,7 @@ function mapStatus(status: string): any {
             action: UnmergedEntrySummary.DeletedByUs,
             us: GitStatusEntry.Deleted,
             them: GitStatusEntry.UpdatedButUnmerged,
-        }
+        };
     }
 
     if (status === 'AA') {
@@ -334,7 +327,7 @@ function mapStatus(status: string): any {
             action: UnmergedEntrySummary.BothAdded,
             us: GitStatusEntry.Added,
             them: GitStatusEntry.Added,
-        }
+        };
     }
 
     if (status === 'UU') {
@@ -343,15 +336,12 @@ function mapStatus(status: string): any {
             action: UnmergedEntrySummary.BothModified,
             us: GitStatusEntry.UpdatedButUnmerged,
             them: GitStatusEntry.UpdatedButUnmerged,
-        }
+        };
     }
 
     // as a fallback, we assume the file is modified in some way
     return {
         kind: 'ordinary',
         type: 'modified',
-    }
+    };
 }
-
-
-

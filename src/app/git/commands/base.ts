@@ -36,12 +36,9 @@ import { Command } from '@tauri-apps/api/shell';
 export type GitResult = {
     stdout: string;
     stderr: string;
-}
-
-
+};
 
 export async function runGit(args: string[], path: string, name: string, global = false): Promise<GitResult> {
-
     if (!global) {
         // unshift adds at first position!
         args.unshift(path);
@@ -54,10 +51,9 @@ export async function runGit(args: string[], path: string, name: string, global 
         // const cmd = invoke<GitResult>('git', { args });
 
         // const result = await GitPerf.measure(commandName, () => cmd)
-        .catch(err => {
+        .catch((err) => {
             throw new Error(`Failed to execute ${name}: ${err.code}`);
         });
 
     return result;
 }
-

@@ -4,17 +4,15 @@ import { File } from 'gitdiff-parser';
 @Component({
     selector: 'commandos-diff-side-by-side',
     templateUrl: './diff-side-by-side.component.html',
-    styleUrls: ['./diff-side-by-side.component.scss']
+    styleUrls: ['./diff-side-by-side.component.scss'],
 })
 export class DiffSideBySideComponent implements OnInit {
-
     @Input()
     diff: File[];
 
-    constructor() { }
+    constructor() {}
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
     onScrollLeft(e: any, fileIdx: number, hunkIdx: number) {
         this.onScroll(e, 'right', fileIdx, hunkIdx);

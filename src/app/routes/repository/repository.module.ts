@@ -9,7 +9,6 @@ import { RepositoryRoutingModule } from './repository-routing.module';
 import { RepositorySettingComponent } from './repository-setting/repository-setting.component';
 import { RepositoryComponent } from './repository.component';
 
-
 @NgModule({
     declarations: [
         RepositoryComponent,
@@ -19,10 +18,6 @@ import { RepositoryComponent } from './repository.component';
         RepositorySettingComponent,
         RepositoryHistoryCommitComponent,
     ],
-    imports: [
-        SharedModule,
-        RepositoryRoutingModule,
-        TextFieldModule
-    ],
+    imports: [SharedModule, RepositoryRoutingModule, TextFieldModule],
 })
-export class RepositoryModule { }
+export class RepositoryModule {}

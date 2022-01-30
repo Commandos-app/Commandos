@@ -10,21 +10,18 @@ import { interval } from 'rxjs';
 import { filter, first } from 'rxjs/operators';
 import { RepositoryService } from '../repository.service';
 
-
 @UntilDestroy()
 @Component({
     selector: 'app-repository-commit',
     templateUrl: './repository-commit.component.html',
-    styleUrls: ['./repository-commit.component.scss']
+    styleUrls: ['./repository-commit.component.scss'],
 })
 export class RepositoryCommitComponent implements OnInit {
-
     @ViewChild('myForm') commitForm: NgForm;
 
     fileTree: GroupedChangedFiles = [];
     formDisabled = false;
     viewMode: ViewMode = this.storeService.ViewMode;
-
 
     get commitMessage(): string {
         return localStorage.getItem(`commitMessage-${this.repositoryService.currentId}`);
@@ -43,19 +40,22 @@ export class RepositoryCommitComponent implements OnInit {
 
     fileDiff: string;
 
-
     constructor(
         private storeService: StoreService,
         private repositoryService: RepositoryService,
         private logger: LoggerService,
-        private cd: ChangeDetectorRef
-    ) { }
-
+        private cd: ChangeDetectorRef,
+    ) {}
 
     ngOnInit(): void {
-        this.repositoryService.loaded$.pipe(filter(x => x), first()).subscribe(() => {
-            this.load();
-        });
+        this.repositoryService.loaded$
+            .pipe(
+                filter((x) => x),
+                first(),
+            )
+            .subscribe(() => {
+                this.load();
+            });
         if (this.storeService.AutoFetch) {
             interval(10000)
                 .pipe(
@@ -70,7 +70,6 @@ export class RepositoryCommitComponent implements OnInit {
         }
     }
 
-
     async load(): Promise<void> {
         this.isLoading = 'loading';
         this.logger.info('Reload commit data');
@@ -78,8 +77,16 @@ export class RepositoryCommitComponent implements OnInit {
         const files = await this.repositoryService.getStatus();
 
         if (this.viewMode === 'tree') {
-            const filesUnstaged = this.groupChangedFiles(files.filter(file => !file.isStaged), 'Changes', false);
-            const filesStaged = this.groupChangedFiles(files.filter(file => file.isStaged), 'Staged Changes', true);
+            const filesUnstaged = this.groupChangedFiles(
+                files.filter((file) => !file.isStaged),
+                'Changes',
+                false,
+            );
+            const filesStaged = this.groupChangedFiles(
+                files.filter((file) => file.isStaged),
+                'Staged Changes',
+                true,
+            );
             const filesUnstagedSorted = this.sortFileTree(filesUnstaged);
             const filesStagedSorted = this.sortFileTree(filesStaged);
 
@@ -90,17 +97,24 @@ export class RepositoryCommitComponent implements OnInit {
             this.hasStaged = filesStagedSorted?.children?.length > 0;
             this.isLoading = 'default';
         } else {
-
-            const filesUnstaged = this.groupChangedFilesFlat(files.filter(file => !file.isStaged), 'Changes', false);
-            const filesStaged = this.groupChangedFilesFlat(files.filter(file => file.isStaged), 'Staged Changes', true);
+            const filesUnstaged = this.groupChangedFilesFlat(
+                files.filter((file) => !file.isStaged),
+                'Changes',
+                false,
+            );
+            const filesStaged = this.groupChangedFilesFlat(
+                files.filter((file) => file.isStaged),
+                'Staged Changes',
+                true,
+            );
             const filesUnstagedSorted = this.sortFileTree(filesUnstaged);
             const filesStagedSorted = this.sortFileTree(filesStaged);
 
             const fileTree = [filesStagedSorted, filesUnstagedSorted];
-            this.fileTree = fileTree.filter(x => !!x.name);
+            this.fileTree = fileTree.filter((x) => !!x.name);
 
             this.formDisabled = this.fileTree.length === 0;
-            this.hasStaged = files.some(file => file.isStaged);
+            this.hasStaged = files.some((file) => file.isStaged);
             this.isLoading = 'default';
         }
         console.log(this.fileTree);
@@ -130,7 +144,7 @@ export class RepositoryCommitComponent implements OnInit {
         }
     }
 
-    private * getFiles(fileTree: GroupedChangedFiles): Generator<GroupedChangedFile, any, undefined> {
+    private *getFiles(fileTree: GroupedChangedFiles): Generator<GroupedChangedFile, any, undefined> {
         for (const file of fileTree) {
             yield file;
             if (file.children) {
@@ -169,39 +183,35 @@ export class RepositoryCommitComponent implements OnInit {
         const result: Array<any> = [];
         const level = { result };
         files.forEach((file: IStatusResult) => {
-
             const changedFile: ChangedFile = {
                 name: basename(file.path), //path.basename(file.path),
-                ...file
+                ...file,
             };
 
             if (file.isRenamed) {
                 changedFile.oldName = file.oldPath; // path.basename(file.oldPath);
             }
 
-            file.path.split('/')
-                .reduce((res: any, name: string, idx: number, arr) => {
-                    if (!res[name]) {
-                        res[name] = { result: [] };
+            file.path.split('/').reduce((res: any, name: string, idx: number, arr) => {
+                if (!res[name]) {
+                    res[name] = { result: [] };
 
-                        const obj: Partial<TreeObject> = { name, staged, children: res[name].result };
+                    const obj: Partial<TreeObject> = { name, staged, children: res[name].result };
 
-                        if (idx === arr.length - 1) {
-                            obj.file = changedFile;
-                            obj.type = 'file';
-                        } else {
-                            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                            // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-                            obj.path = `${file.path.substring(0, file.path.indexOf(name) + name.length)}/`;
-                            obj.type = 'path';
-                        }
-                        res.result.push(obj);
+                    if (idx === arr.length - 1) {
+                        obj.file = changedFile;
+                        obj.type = 'file';
+                    } else {
+                        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+                        obj.path = `${file.path.substring(0, file.path.indexOf(name) + name.length)}/`;
+                        obj.type = 'path';
                     }
+                    res.result.push(obj);
+                }
 
-                    return res[name];
-                }, level);
-
-
+                return res[name];
+            }, level);
         });
 
         return { name: title, type: 'title', children: result };
@@ -215,10 +225,9 @@ export class RepositoryCommitComponent implements OnInit {
         const result: Array<any> = [];
 
         files.forEach((file: IStatusResult) => {
-
             const changedFile: ChangedFile = {
                 name: basename(file.path),
-                ...file
+                ...file,
             };
 
             if (file.isRenamed) {
@@ -232,9 +241,7 @@ export class RepositoryCommitComponent implements OnInit {
                 children: [],
                 type: 'file',
                 file: changedFile,
-
             };
-
 
             result.push(obj);
         });
@@ -310,5 +317,4 @@ export class RepositoryCommitComponent implements OnInit {
     hideChild(node: any) {
         node.hideChildren = !node.hideChildren;
     }
-
 }

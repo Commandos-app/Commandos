@@ -1,10 +1,4 @@
-<span class="{{!noColor ? 'red': ''}} smaller">{{
-    branch?.behind
-    }}<cds-icon shape="arrow" direction="down" class="updownarrow">
-    </cds-icon>
+<span class="{{ !noColor ? 'red' : '' }} smaller"
+    >{{ branch?.behind }}<cds-icon shape="arrow" direction="down" class="updownarrow"> </cds-icon>
 </span>
-<span class="{{!noColor ? 'green': ''}} smaller">{{
-    branch?.ahead
-    }}<cds-icon shape="arrow" class="updownarrow">
-    </cds-icon>
-</span>
+<span class="{{ !noColor ? 'green' : '' }} smaller">{{ branch?.ahead }}<cds-icon shape="arrow" class="updownarrow"> </cds-icon> </span>

@@ -8,10 +8,9 @@ import { NgForm } from '@angular/forms';
 @Component({
     selector: 'commandos-clone-repository',
     templateUrl: './clone.component.html',
-    styleUrls: ['./clone.component.scss']
+    styleUrls: ['./clone.component.scss'],
 })
 export class CloneComponent implements OnInit {
-
     @ViewChild('form') addForm: NgForm;
 
     path = '';
@@ -33,13 +32,12 @@ export class CloneComponent implements OnInit {
         private repositoryService: RepositoryService,
         private router: Router,
         private logger: LoggerService,
-        private storeService: StoreService
-    ) { }
+        private storeService: StoreService,
+    ) {}
 
     ngOnInit(): void {
         this.repositoryService.unload();
         this.path = this.storeService.DefaultPath;
-
     }
 
     setPathAndName() {
@@ -49,7 +47,6 @@ export class CloneComponent implements OnInit {
         this.path = `${this.path}/${name}`;
         this.name = name.charAt(0).toUpperCase() + name.slice(1);
     }
-
 
     async openDialog(): Promise<void> {
         const { path, name } = await selectFolder();
@@ -66,5 +63,4 @@ export class CloneComponent implements OnInit {
 
         this.router.navigate(['/repository', nextId]);
     }
-
 }

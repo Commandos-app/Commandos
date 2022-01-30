@@ -1,8 +1,7 @@
 <p cds-text="heading" cds-layout="m-t:none m-b:lg">Clone repository</p>
 <form #form="ngForm" cds-layout="m-t:md">
     <cds-form-group layout="horizontal" cds-layout="m-b:lg">
-
-        <cds-input >
+        <cds-input>
             <label>Repository url</label>
             <input type="text" name="url" required [(ngModel)]="url" />
             <cds-control-message status="error" *ngIf="form.controls['url']?.touched && url.length === 0">
@@ -32,10 +31,6 @@
                 Name of repository not defined
             </cds-control-message>
         </cds-input>
-
     </cds-form-group>
-    <cds-button (click)="clone()" [disabled]="form.invalid || !form.dirty">
-        Clone
-    </cds-button>
-
+    <cds-button (click)="clone()" [disabled]="form.invalid || !form.dirty"> Clone </cds-button>
 </form>

@@ -17,7 +17,7 @@ export function Store(defaultValue: any) {
 
         Object.defineProperty(target, propertyKey, {
             get: getter,
-            set: setter
+            set: setter,
         });
-    }
+    };
 }

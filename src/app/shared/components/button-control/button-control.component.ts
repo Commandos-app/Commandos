@@ -1,14 +1,11 @@
-
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
     selector: 'app-button-control',
     templateUrl: './button-control.component.html',
-    styleUrls: ['./button-control.component.scss']
+    styleUrls: ['./button-control.component.scss'],
 })
 export class ButtonControlComponent implements OnInit {
-
-
     // @ViewChild('commandButtonControlContainer', { read: ViewContainerRef }) commandButtonControlContainerRef: ViewContainerRef;
     // @ViewChild('commandsTemplate', { read: TemplateRef }) commandsRef: TemplateRef<unknown>;
     // overlayRef: OverlayRef;
@@ -18,7 +15,6 @@ export class ButtonControlComponent implements OnInit {
     @Input() value: string;
 
     @Output() onClick = new EventEmitter<void>();
-
 
     // @HostListener('document:click', ['$event.target'])
     // onClickOutside(targetElement): void {
@@ -34,11 +30,7 @@ export class ButtonControlComponent implements OnInit {
     //     }
     // }
 
-    constructor(
-    ) { }
+    constructor() {}
 
-    ngOnInit(): void {
-    }
-
+    ngOnInit(): void {}
 }
-

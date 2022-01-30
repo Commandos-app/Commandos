@@ -3,17 +3,16 @@ import { Observable, Subject } from 'rxjs';
 import { CommanderModalOptions, CommandParams, FieldDefinition } from '../types';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class CommanderModalService {
-
     open = false;
     title = 'not Set!';
     fields: Array<FieldDefinition> = [];
 
     private onClose = new Subject<CommandParams>();
 
-    constructor() { }
+    constructor() {}
 
     openModal(options: CommanderModalOptions): Observable<CommandParams> {
         this.open = true;
@@ -37,5 +36,4 @@ export class CommanderModalService {
     preventKeyboardShortcuts(): boolean {
         return this.open;
     }
-
 }

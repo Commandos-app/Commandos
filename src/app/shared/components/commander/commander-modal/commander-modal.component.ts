@@ -13,10 +13,9 @@ type FormData = { [key: string]: any };
 @Component({
     selector: 'app-commander-modal',
     templateUrl: './commander-modal.component.html',
-    styleUrls: ['./commander-modal.component.scss']
+    styleUrls: ['./commander-modal.component.scss'],
 })
 export class CommanderModalComponent implements OnInit {
-
     items: Array<SelectedRepositoryTypes> = [];
     branches: Array<string> = [];
     selected: SelectedRepositoryTypes = null;
@@ -26,14 +25,13 @@ export class CommanderModalComponent implements OnInit {
         this.commanderModalService.closeModal();
     }
 
-
     constructor(
         public commanderModalService: CommanderModalService,
         private repositoriesSettingsService: RepositoriesSettingsService,
         private storeService: StoreService,
         public repositoryService: RepositoryService,
-        private cd: ChangeDetectorRef
-    ) { }
+        private cd: ChangeDetectorRef,
+    ) {}
 
     ngOnInit(): void {
         this.addAll();
@@ -43,12 +41,12 @@ export class CommanderModalComponent implements OnInit {
     }
 
     private checkIfRepoIsSelected(): void {
-        const selected = this.commanderModalService.fields.find(field => field.type === 'repository');
+        const selected = this.commanderModalService.fields.find((field) => field.type === 'repository');
         if (selected) {
             const repoType: SelectedRepositoryTypes = {
                 type: 'Repository',
                 text: 'Repository',
-                id: this.repositoryService.currentId
+                id: this.repositoryService.currentId,
             };
             this.onRepositoriesSelected(repoType);
         }
@@ -58,17 +56,15 @@ export class CommanderModalComponent implements OnInit {
         const repos = this.loadSelectedRepos(this.selected);
         const formData: FormData = {};
 
-        this.commanderModalService.fields
-            .forEach((field) => {
-                formData[field.name] = field.value;
-            });
+        this.commanderModalService.fields.forEach((field) => {
+            formData[field.name] = field.value;
+        });
 
         const param = { repos, formData };
         this.commanderModalService.run(param);
     }
 
     async onRepositoriesSelected(event: SelectedRepositoryTypes): Promise<void> {
-
         if (event) {
             const repos = this.loadSelectedRepos(event);
             this.branches = [];
@@ -79,16 +75,14 @@ export class CommanderModalComponent implements OnInit {
                 if (branches) {
                     const parsedBranches = parseBranches(branches);
 
-                    branchSet = new Set([...branchSet, ...parsedBranches.map(branch => branch.name)]);
+                    branchSet = new Set([...branchSet, ...parsedBranches.map((branch) => branch.name)]);
                 }
             }
             this.branches = [...branchSet];
             this.branches = this.branches.sort();
-        }
-        else {
+        } else {
             this.branches = [];
         }
-
     }
 
     private loadSelectedRepos(selected: SelectedRepositoryTypes): RepositoriesSettings {
@@ -107,22 +101,21 @@ export class CommanderModalComponent implements OnInit {
     private addAll(): void {
         this.items.push({
             type: 'All',
-            text: 'All Repositories'
+            text: 'All Repositories',
         });
     }
 
     private loadTags(): void {
         const tags = this.storeService.Tags;
-        const mapedTags = tags.map<SelectedRepositoryTypes>(tag => ({ type: 'Tag', text: tag }));
+        const mapedTags = tags.map<SelectedRepositoryTypes>((tag) => ({ type: 'Tag', text: tag }));
 
         this.items.push(...mapedTags);
     }
 
     private loadRepos(): void {
         const repos = this.repositoriesSettingsService.getRepositories();
-        const mapedRepos = repos.map<SelectedRepositoryTypes>(repo => ({ type: 'Repository', text: repo.name, id: repo.id }));
+        const mapedRepos = repos.map<SelectedRepositoryTypes>((repo) => ({ type: 'Repository', text: repo.name, id: repo.id }));
 
         this.items.push(...mapedRepos);
     }
-
 }

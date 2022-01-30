@@ -1,10 +1,11 @@
 <div class="commander-grid-history-detail commander-full-height">
     <div class="commander-grid-history-header" *ngIf="!isLoading">
-        <div class="commander-history-title">{{metadata?.summary}}</div>
-        <div class="commander-history-author">{{metadata?.author}}<cds-icon shape="minus"></cds-icon>
-            <span [cdkCopyToClipboard]="metadata?.sha" class="clickable copy">{{metadata?.shortSha}}</span>
+        <div class="commander-history-title">{{ metadata?.summary }}</div>
+        <div class="commander-history-author">
+            {{ metadata?.author }}<cds-icon shape="minus"></cds-icon>
+            <span [cdkCopyToClipboard]="metadata?.sha" class="clickable copy">{{ metadata?.shortSha }}</span>
             <cds-icon shape="minus"></cds-icon>
-            {{metadata?.authorDate | dayJS}}
+            {{ metadata?.authorDate | dayJS }}
         </div>
     </div>
     <cds-divider></cds-divider>

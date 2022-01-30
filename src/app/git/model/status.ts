@@ -23,7 +23,6 @@ export enum GitStatusEntry {
     UpdatedButUnmerged = 'U',
 }
 
-
 export enum UnmergedEntrySummary {
     AddedByUs = 'added-by-us',
     DeletedByUs = 'deleted-by-us',
@@ -33,7 +32,6 @@ export enum UnmergedEntrySummary {
     BothAdded = 'both-added',
     BothModified = 'both-modified',
 }
-
 
 export interface IParsedStatusEntry {
     code: string;

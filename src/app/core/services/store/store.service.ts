@@ -6,28 +6,24 @@ import { DiffFormate, GroupByOptions, RepositoriesSettings, Settings, ViewMode }
 import { sortByProperty, Store } from '@shared/functions';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class StoreService {
-
     @Store([]) Repositories: RepositoriesSettings;
     @Store(false) DarkMode: boolean;
-    @Store(300) PaneSize: number
+    @Store(300) PaneSize: number;
     @Store(true) AutoFetch: boolean;
-    @Store('') DefaultPath: string
+    @Store('') DefaultPath: string;
     @Store('line-by-line') DiffOutputFormat: DiffFormate;
     @Store([]) Tags: Array<string>;
     @Store('tree') ViewMode: ViewMode;
 
-
-    private fileName = 'store.json'
+    private fileName = 'store.json';
     private data: Settings = {
-        repositories: []
+        repositories: [],
     };
 
-    constructor(
-        private logger: LoggerService
-    ) { }
+    constructor(private logger: LoggerService) {}
 
     async loadSettings(): Promise<void> {
         const path = await this.getStorePath();
@@ -66,8 +62,7 @@ export class StoreService {
             try {
                 this.logger.warn(`Tring to create the settings folder ${e}`);
                 this.createDir(path);
-            }
-            catch (e2: any) {
+            } catch (e2: any) {
                 this.logger.error(e2);
             }
         }
@@ -95,5 +90,4 @@ export class StoreService {
         this.saveSettings();
         // this.store.set(prop.toLowerCase(), value);
     }
-
 }

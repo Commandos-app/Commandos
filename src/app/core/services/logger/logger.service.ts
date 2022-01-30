@@ -6,7 +6,9 @@ import { invoke } from '@tauri-apps/api/tauri';
 
 type Logger = any;
 declare global {
-    interface Window { logger: Logger; }
+    interface Window {
+        logger: Logger;
+    }
 }
 
 enum LogLevel {
@@ -14,15 +16,14 @@ enum LogLevel {
     Debug,
     Info,
     Warn,
-    Error
+    Error,
 }
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class LoggerService {
-
-    constructor() { }
+    constructor() {}
 
     info = (message: string): Logger => this.log(LogLevel.Info, message);
     warn = (message: string): Logger => this.log(LogLevel.Warn, message);
@@ -31,13 +32,12 @@ export class LoggerService {
     trace = (message: string): Logger => this.log(LogLevel.Trace, message);
 
     log(level: LogLevel, message: string): void {
-
         const prefix = this.getPrefix(level);
         console.log(...prefix, message);
 
         invoke('logging', {
             level,
-            message
+            message,
         });
     }
 
@@ -53,8 +53,6 @@ export class LoggerService {
                 return ['%c[Warn]', 'color: #d99400;font-weight:bold'];
             case LogLevel.Error:
                 return ['%c[Error]', 'color: #ff0000;font-weight:bold'];
-
         }
     }
-
 }

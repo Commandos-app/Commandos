@@ -13,15 +13,13 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
 import { IPageInfo } from 'ngx-virtual-scroller';
 
-
 @UntilDestroy()
 @Component({
     selector: 'app-repository-history',
     templateUrl: './repository-history.component.html',
-    styleUrls: ['./repository-history.component.scss']
+    styleUrls: ['./repository-history.component.scss'],
 })
 export class RepositoryHistoryComponent implements OnInit {
-
     commits: Array<LogItem>;
     isChildRouteLoaded = false;
     private skip = 0;
@@ -38,25 +36,27 @@ export class RepositoryHistoryComponent implements OnInit {
         public overlay: Overlay,
         public viewContainerRef: ViewContainerRef,
         private commanderModalService: CommanderModalService,
-        private clipboard: Clipboard
-    ) {
-
-    }
+        private clipboard: Clipboard,
+    ) {}
 
     ngOnInit(): void {
-        this.repositoryService.loaded$.pipe(filter(x => x), first()).subscribe(() => {
-            this.getHistory();
-        });
+        this.repositoryService.loaded$
+            .pipe(
+                filter((x) => x),
+                first(),
+            )
+            .subscribe(() => {
+                this.getHistory();
+            });
 
         this.router.events
             .pipe(
-                filter(event => event instanceof ActivationEnd),
-                untilDestroyed(this)
+                filter((event) => event instanceof ActivationEnd),
+                untilDestroyed(this),
             )
-            .subscribe(_ => {
+            .subscribe((_) => {
                 this.isChildRouteLoaded = this.route.children.length > 0;
             });
-
     }
 
     async getHistory(): Promise<void> {
@@ -84,7 +84,8 @@ export class RepositoryHistoryComponent implements OnInit {
         $event.stopPropagation();
         const { x, y } = $event;
         this.close();
-        const positionStrategy = this.overlay.position()
+        const positionStrategy = this.overlay
+            .position()
             .flexibleConnectedTo({ x, y })
             .withPositions([
                 {
@@ -92,28 +93,27 @@ export class RepositoryHistoryComponent implements OnInit {
                     originY: 'bottom',
                     overlayX: 'end',
                     overlayY: 'top',
-                }
+                },
             ]);
 
         this.overlayRef = this.overlay.create({
             positionStrategy,
-            scrollStrategy: this.overlay.scrollStrategies.close()
+            scrollStrategy: this.overlay.scrollStrategies.close(),
         });
 
-        this.overlayRef.attach(new TemplatePortal(this.userMenu, this.viewContainerRef, {
-            $implicit: commit
-        }));
+        this.overlayRef.attach(
+            new TemplatePortal(this.userMenu, this.viewContainerRef, {
+                $implicit: commit,
+            }),
+        );
 
-        this.sub = merge(
-            fromEvent<MouseEvent>(document, 'click'),
-            fromEvent<MouseEvent>(document, 'contextmenu')
-        )
+        this.sub = merge(fromEvent<MouseEvent>(document, 'click'), fromEvent<MouseEvent>(document, 'contextmenu'))
             .pipe(
-                filter(event => {
+                filter((event) => {
                     const clickTarget = event.target as HTMLElement;
                     return !!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget);
                 }),
-                take(1)
+                take(1),
             )
             .subscribe(() => this.close());
     }
@@ -124,16 +124,15 @@ export class RepositoryHistoryComponent implements OnInit {
             { type: 'string', label: 'Name', name: 'name' },
         ];
         const onClose$ = this.commanderModalService.openModal({ title: `Create branch for ${commit.shortSha}`, fields: fields! });
-        const sub = onClose$
-            .subscribe(async (params) => {
-                if (params?.formData?.name) {
-                    await this.repositoryService.createBranchFromSha(params.formData.name, commit.sha);
-                }
-                this.repositoryService.getBranches();
-                await this.getHistory();
-                this.commanderModalService.closeModal();
-                sub.unsubscribe();
-            });
+        const sub = onClose$.subscribe(async (params) => {
+            if (params?.formData?.name) {
+                await this.repositoryService.createBranchFromSha(params.formData.name, commit.sha);
+            }
+            this.repositoryService.getBranches();
+            await this.getHistory();
+            this.commanderModalService.closeModal();
+            sub.unsubscribe();
+        });
     }
 
     async lastHistoryReached(event: IPageInfo) {
@@ -141,7 +140,7 @@ export class RepositoryHistoryComponent implements OnInit {
             this.skip += 20;
             const newCommits = await this.repositoryService.getHistroy('HEAD', this.skip);
             this.commits = [...this.commits, ...newCommits];
-            this.allLoaded = newCommits.length === 0
+            this.allLoaded = newCommits.length === 0;
         }
     }
 

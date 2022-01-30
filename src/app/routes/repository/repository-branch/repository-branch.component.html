@@ -12,28 +12,40 @@
                 <div></div>
                 <div></div>
                 <div></div>
-                <div>Name
+                <div>
+                    Name
                     <i class="upstream" cds-layout="m-r:md">Upstream</i>
                 </div>
             </div>
-            <div cdkDropList (cdkDropListDropped)="drop($event)"
+            <div
+                cdkDropList
+                (cdkDropListDropped)="drop($event)"
                 *ngFor="let branch of repositoryService.branches$ | async; let idx = index">
                 <!-- (cdkDragStarted)="dragStart()" (cdkDragEnded)="dragStop()" -->
-                <div class="commander-row commander-branches-row" cds-text="body" cdkDrag [cdkDragData]="branch"
-                    [ngClass]="{'current-branch': branch.current}">
+                <div
+                    class="commander-row commander-branches-row"
+                    cds-text="body"
+                    cdkDrag
+                    [cdkDragData]="branch"
+                    [ngClass]="{ 'current-branch': branch.current }">
                     <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-                    <div class="example-custom-placeholder" *cdkDragPreview>{{branch.name}}</div>
+                    <div class="example-custom-placeholder" *cdkDragPreview>{{ branch.name }}</div>
 
                     <div class="action custom-padding">
                         <ng-container *ngIf="!branch.current">
-                            <cds-icon shape="download" [ngxTippy]="checkoutTemplate"
-                                tippyName="template-ref-checkout-{{idx}}" [tippyProps]="templateRef"></cds-icon>
+                            <cds-icon
+                                shape="download"
+                                [ngxTippy]="checkoutTemplate"
+                                tippyName="template-ref-checkout-{{ idx }}"
+                                [tippyProps]="templateRef"></cds-icon>
                             <div #checkoutTemplate class="comander-tooltip">
-                                <div class="center-text">
-                                    Checkout branch?&nbsp;&nbsp;&nbsp;
-                                </div>
-                                <cds-icon-button size="sm" status="success" standard-hover
-                                    (click)="onCheckout(branch)" aria-label="checkout branch">
+                                <div class="center-text">Checkout branch?&nbsp;&nbsp;&nbsp;</div>
+                                <cds-icon-button
+                                    size="sm"
+                                    status="success"
+                                    standard-hover
+                                    (click)="onCheckout(branch)"
+                                    aria-label="checkout branch">
                                     <cds-icon shape="check" class="clickable"></cds-icon>
                                 </cds-icon-button>
                             </div>
@@ -41,7 +53,10 @@
                     </div>
 
                     <div class="action custom-padding">
-                        <cds-icon shape="note" [ngxTippy]="renameTemplate" tippyName="template-ref-rename-{{idx}}"
+                        <cds-icon
+                            shape="note"
+                            [ngxTippy]="renameTemplate"
+                            tippyName="template-ref-rename-{{ idx }}"
                             [tippyProps]="templateRef">
                         </cds-icon>
 
@@ -51,8 +66,12 @@
                                 &nbsp;&nbsp;&nbsp;
                             </div>
 
-                            <cds-icon-button size="sm" status="success" standard-hover
-                                (click)="onRename(branch.name, renameInput.value)" aria-label="rename branch">
+                            <cds-icon-button
+                                size="sm"
+                                status="success"
+                                standard-hover
+                                (click)="onRename(branch.name, renameInput.value)"
+                                aria-label="rename branch">
                                 <cds-icon shape="check" class="clickable"></cds-icon>
                             </cds-icon-button>
                         </div>
@@ -60,14 +79,19 @@
 
                     <div class="action custom-padding">
                         <ng-container *ngIf="!branch.current">
-                            <cds-icon shape="trash" [ngxTippy]="deleteTemplate" tippyName="template-ref-delete-{{idx}}"
+                            <cds-icon
+                                shape="trash"
+                                [ngxTippy]="deleteTemplate"
+                                tippyName="template-ref-delete-{{ idx }}"
                                 [tippyProps]="templateRef">
                             </cds-icon>
                             <div #deleteTemplate class="comander-tooltip">
-                                <div class="center-text">
-                                    Delete branch?&nbsp;&nbsp;&nbsp;
-                                </div>
-                                <cds-icon-button size="sm" status="danger" standard-hover (click)="onDelete(branch)"
+                                <div class="center-text">Delete branch?&nbsp;&nbsp;&nbsp;</div>
+                                <cds-icon-button
+                                    size="sm"
+                                    status="danger"
+                                    standard-hover
+                                    (click)="onDelete(branch)"
                                     aria-label="delete branch">
                                     <cds-icon shape="check" class="clickable"></cds-icon>
                                 </cds-icon-button>
@@ -77,47 +101,50 @@
 
                     <div class="lh">
                         <span cds-layout="m-r:md" *ngIf="branch.isRemote">
-                            <i>{{branch.name}}</i>
+                            <i>{{ branch.name }}</i>
                         </span>
                         <span cds-layout="m-r:md" *ngIf="!branch.isRemote">
-                            {{branch.name}}
+                            {{ branch.name }}
                         </span>
                         <ng-container *ngIf="branch.upstream">
-                            <i class="upstream" cds-layout="m-r:md">{{branch.upstream}}</i>
+                            <i class="upstream" cds-layout="m-r:md">{{ branch.upstream }}</i>
 
                             <commander-branch-ahead-behind [branch]="branch"></commander-branch-ahead-behind>
                         </ng-container>
                     </div>
-
                 </div>
             </div>
         </div>
     </ng-scrollbar>
-
 </div>
-
 
 <cds-modal [closable]="false" *ngIf="mergeObj.modal">
     <cds-modal-header>
-        <h3 cds-text="title">Merge
-            <span class="code">{{mergeObj.from?.name}}</span> to
-            <span class="code">{{mergeObj.to?.name}}</span> ?
+        <h3 cds-text="title">
+            Merge <span class="code">{{ mergeObj.from?.name }}</span> to <span class="code">{{ mergeObj.to?.name }}</span> ?
         </h3>
     </cds-modal-header>
     <cds-modal-content>
         <cds-form-group layout="horizontal" cds-layout="m-b:lg">
-
-
             <cds-control layout="horizontal">
                 <label>Merge strategy</label>
-                <ng-select cds-control [items]="mergeStrategy" bindLabel="text" [closeOnSelect]="true"
-                    [(ngModel)]="selectedMergeStrategy" appendTo="body" groupBy="type" (change)="onMergeChange($event)">
+                <ng-select
+                    cds-control
+                    [items]="mergeStrategy"
+                    bindLabel="text"
+                    [closeOnSelect]="true"
+                    [(ngModel)]="selectedMergeStrategy"
+                    appendTo="body"
+                    groupBy="type"
+                    (change)="onMergeChange($event)">
                     <ng-template ng-label-tmp let-item="item">
-                        {{item.title}}
+                        {{ item.title }}
                     </ng-template>
                     <ng-template ng-option-tmp let-item="item">
-                        <div><b>{{item.title}}</b></div>
-                        <div>{{item.subtitle}}</div>
+                        <div>
+                            <b>{{ item.title }}</b>
+                        </div>
+                        <div>{{ item.subtitle }}</div>
                     </ng-template>
                 </ng-select>
             </cds-control>
@@ -125,8 +152,12 @@
                 <label></label>
 
                 <div cds-control class="repos-merge-animation">
-                    <svg aria-labelledby="strategyAnimDesc" id="mergeStrategyImage" viewBox="0 0 140 24"
-                        xmlns="http://www.w3.org/2000/svg" *ngIf="selectedMergeStrategy.id === 1">
+                    <svg
+                        aria-labelledby="strategyAnimDesc"
+                        id="mergeStrategyImage"
+                        viewBox="0 0 140 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        *ngIf="selectedMergeStrategy.id === 1">
                         <rect width="8" height="8" rx="4" class="gray-fill"></rect>
                         <rect x="44" width="8" height="8" rx="4" class="gray-fill"></rect>
                         <rect x="44" y="16" width="8" height="8" rx="4" class="blue-fill"></rect>
@@ -134,20 +165,24 @@
                         <rect x="131" y="1" width="6" height="6" rx="4" class="blue-stroke fade-in-merge"></rect>
                         <line x1="10" y1="4" x2="42" y2="4" class="gray-stroke"></line>
                         <path d="M54 4H130" class="gray-stroke grow-right-merge"></path>
-                        <line x1="54" y1="20" x2="86" y2="20" class=" blue-stroke"></line>
+                        <line x1="54" y1="20" x2="86" y2="20" class="blue-stroke"></line>
                         <path d="M10 4C26 4 26 20 42 20" class="blue-stroke"></path>
                         <path d="M98 20C114 20 114 4 130 4" class="blue-stroke grow-right-merge"></path>
                     </svg>
 
-                    <svg aria-labelledby="strategyAnimDesc" id="mergeStrategyImage" viewBox="0 0 96 24"
-                        xmlns="http://www.w3.org/2000/svg" *ngIf="selectedMergeStrategy.id === 2">
+                    <svg
+                        aria-labelledby="strategyAnimDesc"
+                        id="mergeStrategyImage"
+                        viewBox="0 0 96 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        *ngIf="selectedMergeStrategy.id === 2">
                         <rect x="88" y="16" width="8" height="8" rx="4" class="fade-fill fade-in-final"></rect>
                         <line x1="54" y1="20" x2="86" y2="20" class="fade-stroke fade-in-final"></line>
                         <rect x="44" y="16" width="8" height="8" rx="4" class="fade-fill fade-in-final"></rect>
                         <path d="M10 4C26 4 26 20 42 20" class="fade-stroke fade-in-final"></path>
                         <rect width="8" height="8" rx="4" class="gray-fill"></rect>
                         <rect x="44" width="8" height="8" rx="4" class="gray-fill"></rect>
-                        <line x1="10" y1="4" x2="42" y2="4" class=" gray-stroke"></line>
+                        <line x1="10" y1="4" x2="42" y2="4" class="gray-stroke"></line>
                         <rect x="44" y="16" width="8" height="8" rx="4" class="blue-fill slide-right-squash"></rect>
                         <rect x="88" y="16" width="8" height="8" rx="4" class="blue-fill fade-out-squash2"></rect>
                         <line x1="54" y1="20" x2="86" y2="20" class="blue-stroke shrink-right-squash"></line>
@@ -155,8 +190,12 @@
                         <path d="M10 4C26 4 26 20 42 20" class="blue-stroke fade-out-squash1"></path>
                     </svg>
 
-                    <svg aria-labelledby="strategyAnimDesc" id="mergeStrategyImage" viewBox="0 0 140 24"
-                        xmlns="http://www.w3.org/2000/svg" *ngIf="selectedMergeStrategy.id === 3">
+                    <svg
+                        aria-labelledby="strategyAnimDesc"
+                        id="mergeStrategyImage"
+                        viewBox="0 0 140 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        *ngIf="selectedMergeStrategy.id === 3">
                         <rect x="44" y="16" width="8" height="8" rx="4" class="fade-fill fade-in-final"></rect>
                         <rect x="88" y="16" width="8" height="8" rx="4" class="fade-fill fade-in-final"></rect>
                         <line x1="54" y1="20" x2="86" y2="20" class="fade-stroke fade-in-final"></line>
@@ -171,9 +210,12 @@
                         <line x1="54" y1="4" x2="86" y2="4" class="blue-stroke fade-in-rebase"></line>
                     </svg>
 
-
-                    <svg aria-labelledby="strategyAnimDesc" id="mergeStrategyImage" viewBox="0 0 228 24"
-                        xmlns="http://www.w3.org/2000/svg" *ngIf="selectedMergeStrategy.id === 4">
+                    <svg
+                        aria-labelledby="strategyAnimDesc"
+                        id="mergeStrategyImage"
+                        viewBox="0 0 228 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        *ngIf="selectedMergeStrategy.id === 4">
                         <rect x="44" y="16" width="8" height="8" rx="4" class="fade-fill fade-in-final"></rect>
                         <rect x="88" y="16" width="8" height="8" rx="4" class="fade-fill fade-in-final"></rect>
                         <line x1="54" y1="20" x2="86" y2="20" class="fade-stroke fade-in-final"></line>
@@ -185,16 +227,13 @@
                         <rect x="44" width="8" height="8" rx="4" class="gray-fill"></rect>
                         <rect x="88" width="8" height="8" rx="4" class="gray-fill"></rect>
                         <rect x="219" y="1" width="6" height="6" rx="4" class="blue-stroke fade-in-rebaseMerge"></rect>
-                        <rect x="44" y="16" width="8" height="8" rx="4" class="blue-fill slide-right-rebaseMerge">
-                        </rect>
-                        <rect x="88" y="16" width="8" height="8" rx="4" class="blue-fill slide-right-rebaseMerge">
-                        </rect>
+                        <rect x="44" y="16" width="8" height="8" rx="4" class="blue-fill slide-right-rebaseMerge"></rect>
+                        <rect x="88" y="16" width="8" height="8" rx="4" class="blue-fill slide-right-rebaseMerge"></rect>
                         <line x1="54" y1="20" x2="86" y2="20" class="blue-stroke slide-right-rebaseMerge"></line>
                         <path d="M10 4C26 4 26 20 42 20" class="blue-stroke slide-right-rebaseMerge"></path>
                         <path d="M142 20C158 20 158 4 174 4" class="blue-stroke grow-right-rebaseMerge"></path>
                     </svg>
                 </div>
-
             </cds-control>
             <!-- <ng-container *ngFor="let field of commanderModalService.fields">
 
@@ -236,7 +275,6 @@
 
             </ng-container> -->
         </cds-form-group>
-
     </cds-modal-content>
     <cds-modal-actions>
         <cds-button action="flat" (click)="closeModal()">Cancel</cds-button>

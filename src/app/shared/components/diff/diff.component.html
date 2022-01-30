@@ -1,26 +1,35 @@
 <div class="diff-layout" *ngIf="!!diff">
-
     <div class="diff-switcher">
-
-        <cds-icon-button size="sm" action="flat" status="primary" standard-hover (click)="setMode('side-by-side')"
-            aria-label="change diff mode" *ngIf="outputFormat === 'line-by-line'" ngxTippy
+        <cds-icon-button
+            size="sm"
+            action="flat"
+            status="primary"
+            standard-hover
+            (click)="setMode('side-by-side')"
+            aria-label="change diff mode"
+            *ngIf="outputFormat === 'line-by-line'"
+            ngxTippy
             data-tippy-content="Switch to side-by-side">
             <cds-icon shape="side-by-side" class="clickable"></cds-icon>
         </cds-icon-button>
-        <cds-icon-button size="sm" action="flat" status="primary" standard-hover (click)="setMode('line-by-line')"
-            aria-label="change diff mode" *ngIf="outputFormat === 'side-by-side'" ngxTippy
+        <cds-icon-button
+            size="sm"
+            action="flat"
+            status="primary"
+            standard-hover
+            (click)="setMode('line-by-line')"
+            aria-label="change diff mode"
+            *ngIf="outputFormat === 'side-by-side'"
+            ngxTippy
             data-tippy-content="Switch to line-by-line">
             <cds-icon shape="line-by-line" class="clickable"></cds-icon>
         </cds-icon-button>
     </div>
     <!-- <ng-scrollbar class="virtual-scroll diff"> -->
     <div class="diff">
-        <commandos-diff-line-by-line [diff]="diff" *ngIf="outputFormat === 'line-by-line'">
-        </commandos-diff-line-by-line>
-        <commandos-diff-side-by-side [diff]="diff" *ngIf="outputFormat === 'side-by-side'">
-        </commandos-diff-side-by-side>
+        <commandos-diff-line-by-line [diff]="diff" *ngIf="outputFormat === 'line-by-line'"> </commandos-diff-line-by-line>
+        <commandos-diff-side-by-side [diff]="diff" *ngIf="outputFormat === 'side-by-side'"> </commandos-diff-side-by-side>
     </div>
     <!-- </ng-scrollbar> -->
-
 </div>
 <commandos-select-hint [text]="text" *ngIf="!diff"></commandos-select-hint>

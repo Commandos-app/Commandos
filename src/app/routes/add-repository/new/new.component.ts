@@ -8,15 +8,13 @@ import { NgForm } from '@angular/forms';
 @Component({
     selector: 'commandos-new-repository',
     templateUrl: './new.component.html',
-    styleUrls: ['./new.component.scss']
+    styleUrls: ['./new.component.scss'],
 })
 export class NewComponent implements OnInit {
-
     @ViewChild('form') addForm: NgForm;
 
     path = '';
     name = '';
-
 
     initGitRepo = false;
 
@@ -24,13 +22,12 @@ export class NewComponent implements OnInit {
         private repositoriesSettingsService: RepositoriesSettingsService,
         private repositoryService: RepositoryService,
         private router: Router,
-        private logger: LoggerService
-    ) { }
+        private logger: LoggerService,
+    ) {}
 
     ngOnInit(): void {
         this.repositoryService.unload();
     }
-
 
     async openDialog(): Promise<void> {
         const { path, name } = await selectFolder();
@@ -42,11 +39,11 @@ export class NewComponent implements OnInit {
     }
 
     async saveRepo(): Promise<void> {
-        this.initGitRepo && await this.initializeGitRepo();
+        this.initGitRepo && (await this.initializeGitRepo());
 
         const nextId = this.repositoriesSettingsService.addRepository({
             name: this.name,
-            path: this.path
+            path: this.path,
         });
 
         this.router.navigate(['/repository', nextId]);
@@ -57,5 +54,4 @@ export class NewComponent implements OnInit {
         return this.repositoryService.initRepository(this.path);
         // return this.electron.git.Repository.init(this.branchPath, 0);
     }
-
 }

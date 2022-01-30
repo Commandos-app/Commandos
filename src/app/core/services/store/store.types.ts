@@ -1,4 +1,3 @@
-
 export type RepositorySetting = {
     id: number;
     name: string;
@@ -12,9 +11,9 @@ export type RepositoriesSettings = Array<RepositorySetting>;
 export type DiffFormate = 'side-by-side' | 'line-by-line';
 
 export type Tag = {
-    id: number,
+    id: number;
     name: string;
-}
+};
 
 export type settings = {
     repositories: RepositoriesSettings;
@@ -23,10 +22,9 @@ export type settings = {
     gridcount: string;
     tags: Array<string>;
     [key: string]: any;
-}
+};
 
 export type Settings = Partial<settings>;
-
 
 export type GroupByOptions = 'none' | 'tags' | 'folder';
 

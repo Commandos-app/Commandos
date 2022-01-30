@@ -37,12 +37,7 @@
                     <cds-icon shape="sync"></cds-icon>
                 </cds-icon-button>
 
-                <cds-icon-button
-                    action-primary
-                    action="flat"
-                    class="hover"
-                    aria-label="Create new branch"
-                    (click)="openNewBranch($event)">
+                <cds-icon-button action-primary action="flat" class="hover" aria-label="Create new branch" (click)="openNewBranch($event)">
                     <cds-icon shape="plus"></cds-icon>
                 </cds-icon-button>
             </app-button-control>
@@ -99,25 +94,13 @@
                     <div (click)="openCmd()" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">
                         Open in Explorer
                     </div>
-                    <div
-                        (click)="openCode()"
-                        cds-text="secondary"
-                        cds-layout="p-x:md p-y:sm"
-                        class="clickable contextmenu-action">
+                    <div (click)="openCode()" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">
                         Open in VSCode
                     </div>
-                    <div
-                        (click)="openTerminal()"
-                        cds-text="secondary"
-                        cds-layout="p-x:md p-y:sm"
-                        class="clickable contextmenu-action">
+                    <div (click)="openTerminal()" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">
                         Open in Terminal
                     </div>
-                    <div
-                        (click)="copyPath()"
-                        cds-text="secondary"
-                        cds-layout="p-x:md p-y:sm"
-                        class="clickable contextmenu-action">
+                    <div (click)="copyPath()" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">
                         Copy Path
                     </div>
                 </section>

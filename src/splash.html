@@ -1,178 +1,169 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8" />
+        <title>The Commander</title>
+        <base href="/" />
 
-<head>
-    <meta charset="utf-8">
-    <title>The Commander</title>
-    <base href="/">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="assets/particles/particles.min.js"></script>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="assets/particles/particles.min.js"></script>
+        <style>
+            #particles-js.full {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                background: #247bae;
+                -webkit-user-select: none;
+                -webkit-app-region: drag;
+            }
 
-    <style>
-        #particles-js.full {
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            background: #247bae;
-            -webkit-user-select: none;
-            -webkit-app-region: drag;
+            #particles-js.full .text {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                font-size: 40px;
+                color: #ddd;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                font-family: Metropolis, 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
+            }
 
-        }
+            #particles-js.full .text .small {
+                margin-top: 20px;
+                font-size: 20px;
+            }
 
-        #particles-js.full .text {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            font-size: 40px;
-            color: #ddd;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            font-family: Metropolis, "Avenir Next", "Helvetica Neue", Arial, sans-serif;
-        }
+            #particles-js.full canvas {
+                display: block;
+                vertical-align: bottom;
+            }
+        </style>
+    </head>
 
-        #particles-js.full .text .small {
-            margin-top: 20px;
-            font-size: 20px;
-        }
-
-        #particles-js.full canvas {
-            display: block;
-            vertical-align: bottom;
-        }
-    </style>
-
-</head>
-
-<body>
-
-    <div id="particles-js" class="full">
-        <div class="text">
-            <div>
-                <div>The Commander</div>
-                <div class="small">GIT Experience but different</div>
+    <body>
+        <div id="particles-js" class="full">
+            <div class="text">
+                <div>
+                    <div>The Commander</div>
+                    <div class="small">GIT Experience but different</div>
+                </div>
             </div>
         </div>
 
-    </div>
-
-
-    <script>
-
-        particlesJS("particles-js", {
-            "particles": {
-                "number": {
-                    "value": 150,
-                    "density": {
-                        "enable": true,
-                        "value_area": 631.3480069132609
-                    }
+        <script>
+            particlesJS('particles-js', {
+                particles: {
+                    number: {
+                        value: 150,
+                        density: {
+                            enable: true,
+                            value_area: 631.3480069132609,
+                        },
+                    },
+                    color: {
+                        value: '#dddddd',
+                    },
+                    shape: {
+                        type: 'circle',
+                        stroke: {
+                            width: 0,
+                            color: '#000000',
+                        },
+                        polygon: {
+                            nb_sides: 4,
+                        },
+                        image: {
+                            src: 'img/github.svg',
+                            width: 100,
+                            height: 100,
+                        },
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: false,
+                        anim: {
+                            enable: false,
+                            speed: 1,
+                            opacity_min: 0.1,
+                            sync: false,
+                        },
+                    },
+                    size: {
+                        value: 3,
+                        random: true,
+                        anim: {
+                            enable: false,
+                            speed: 20,
+                            size_min: 0.1,
+                            sync: false,
+                        },
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: '#dddddd',
+                        opacity: 0.4,
+                        width: 1,
+                    },
+                    move: {
+                        enable: true,
+                        speed: 1,
+                        direction: 'none',
+                        random: false,
+                        straight: false,
+                        out_mode: 'out',
+                        bounce: false,
+                        attract: {
+                            enable: false,
+                            rotateX: 600,
+                            rotateY: 1200,
+                        },
+                    },
                 },
-                "color": {
-                    "value": "#dddddd"
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: {
+                        onhover: {
+                            enable: false,
+                            mode: 'repulse',
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: 'push',
+                        },
+                        resize: true,
+                    },
+                    modes: {
+                        grab: {
+                            distance: 400,
+                            line_linked: {
+                                opacity: 1,
+                            },
+                        },
+                        bubble: {
+                            distance: 400,
+                            size: 40,
+                            duration: 2,
+                            opacity: 8,
+                            speed: 3,
+                        },
+                        repulse: {
+                            distance: 200,
+                            duration: 0.4,
+                        },
+                        push: {
+                            particles_nb: 4,
+                        },
+                        remove: {
+                            particles_nb: 2,
+                        },
+                    },
                 },
-                "shape": {
-                    "type": "circle",
-                    "stroke": {
-                        "width": 0,
-                        "color": "#000000"
-                    },
-                    "polygon": {
-                        "nb_sides": 4
-                    },
-                    "image": {
-                        "src": "img/github.svg",
-                        "width": 100,
-                        "height": 100
-                    }
-                },
-                "opacity": {
-                    "value": 0.5,
-                    "random": false,
-                    "anim": {
-                        "enable": false,
-                        "speed": 1,
-                        "opacity_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "size": {
-                    "value": 3,
-                    "random": true,
-                    "anim": {
-                        "enable": false,
-                        "speed": 20,
-                        "size_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#dddddd",
-                    "opacity": 0.4,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 1,
-                    "direction": "none",
-                    "random": false,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                    "attract": {
-                        "enable": false,
-                        "rotateX": 600,
-                        "rotateY": 1200
-                    }
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": false,
-                        "mode": "repulse"
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": {
-                        "distance": 400,
-                        "line_linked": {
-                            "opacity": 1
-                        }
-                    },
-                    "bubble": {
-                        "distance": 400,
-                        "size": 40,
-                        "duration": 2,
-                        "opacity": 8,
-                        "speed": 3
-                    },
-                    "repulse": {
-                        "distance": 200,
-                        "duration": 0.4
-                    },
-                    "push": {
-                        "particles_nb": 4
-                    },
-                    "remove": {
-                        "particles_nb": 2
-                    }
-                }
-            },
-            "retina_detect": true
-        });
-
-    </script>
-</body>
-
+                retina_detect: true,
+            });
+        </script>
+    </body>
 </html>

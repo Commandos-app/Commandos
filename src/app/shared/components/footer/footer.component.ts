@@ -6,19 +6,14 @@ import { sleep } from '@shared/functions';
 @Component({
     selector: 'commandos-footer',
     templateUrl: './footer.component.html',
-    styleUrls: ['./footer.component.scss']
+    styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-
     isSync = false;
 
-    constructor(
-        public repositoryService: RepositoryService,
-        private commanderService: CommanderService
-    ) { }
+    constructor(public repositoryService: RepositoryService, private commanderService: CommanderService) {}
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
     async sync() {
         this.isSync = true;

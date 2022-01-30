@@ -5,7 +5,7 @@
         background: #fff;
     }
 
-    &[cds-theme=dark] {
+    &[cds-theme='dark'] {
         cds-form-group[card] {
             border: 1px solid var(--cds-global-color-blue-800);
             background: var(--cds-alias-object-app-background);
@@ -33,9 +33,9 @@
         .commander-button-control-action {
             cds-icon-button {
                 --color: var(--cds-global-typography-color-100);
-            }}
+            }
+        }
     }
-
 }
 
 .form-full-divider {

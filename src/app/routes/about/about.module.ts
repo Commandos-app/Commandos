@@ -3,13 +3,8 @@ import { SharedModule } from '@shared/shared.module';
 import { AboutRoutingModule } from './about-routing.module';
 import { AboutComponent } from './about.component';
 
-
-
 @NgModule({
     declarations: [AboutComponent],
-    imports: [
-        SharedModule,
-        AboutRoutingModule
-    ],
+    imports: [SharedModule, AboutRoutingModule],
 })
-export class AboutModule { }
+export class AboutModule {}

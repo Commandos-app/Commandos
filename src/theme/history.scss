@@ -26,7 +26,9 @@
     line-height: 18px;
     color: var(--cds-global-color-construction-500);
     font-size: var(--cds-global-typography-smallcaption-font-size);
-    font-weight: var(--cds-global-typography-smallcaption-font-weight); // line-height: var(--cds-global-typography-smallcaption-line-height);
+    font-weight: var(
+        --cds-global-typography-smallcaption-font-weight
+    ); // line-height: var(--cds-global-typography-smallcaption-line-height);
     letter-spacing: var(--cds-global-typography-smallcaption-letter-spacing);
 }
 

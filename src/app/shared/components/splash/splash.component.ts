@@ -6,7 +6,7 @@ import { filter, first } from 'rxjs/operators';
 @Component({
     selector: 'commander-splash',
     templateUrl: './splash.component.html',
-    styleUrls: ['./splash.component.scss']
+    styleUrls: ['./splash.component.scss'],
 })
 export class SplashComponent implements OnInit {
     devEnv: boolean = !environment.production;
@@ -17,23 +17,20 @@ export class SplashComponent implements OnInit {
     // First access the splash is visible
     showSplash = true;
 
-    constructor(private splashScreenResolver: SplashScreenResolver) { }
+    constructor(private splashScreenResolver: SplashScreenResolver) {}
 
     async ngOnInit(): Promise<void> {
         this.splashScreenResolver.state$
             .pipe(
-                filter(a => a),
-                first()
+                filter((a) => a),
+                first(),
             )
-            .subscribe(res => {
+            .subscribe((res) => {
                 this.hideSplashAnimation();
             });
     }
 
-
     private hideSplashAnimation() {
-
-
         // Setting the transition
         setTimeout(() => {
             // After the transition is ended the showSplash will be hided
@@ -43,5 +40,4 @@ export class SplashComponent implements OnInit {
             }, 1100);
         }, environment.splashDuration);
     }
-
 }

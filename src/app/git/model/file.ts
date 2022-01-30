@@ -5,7 +5,7 @@ export type ChangedFile = {
     isNew: boolean;
     isUntracked: boolean;
     isRenamed: boolean;
-}
+};
 
 export type GroupedChangedFile = {
     name: string;
@@ -21,6 +21,6 @@ export type TreeObject = {
     name: string;
     staged: boolean;
     children: any;
-}
+};
 
 export type GroupedChangedFiles = Array<GroupedChangedFile>;

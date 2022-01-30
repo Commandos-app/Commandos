@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { getVersion } from '@tauri-apps/api/app';
-import { checkUpdate, UpdateResult } from "@tauri-apps/api/updater";
+import { checkUpdate, UpdateResult } from '@tauri-apps/api/updater';
 import { appWindow, getCurrent } from '@tauri-apps/api/window';
 import { BehaviorSubject } from 'rxjs';
 
 type WindowState = 'maximized' | 'minimized' | 'windowed';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class TauriService {
-
     private windowState = new BehaviorSubject<WindowState>('windowed');
     windowState$ = this.windowState.asObservable();
 
@@ -27,7 +26,6 @@ export class TauriService {
                 this.windowState.next('windowed');
             }
         });
-
     }
 
     async minimize(): Promise<void> {

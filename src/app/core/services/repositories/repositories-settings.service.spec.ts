@@ -6,7 +6,7 @@ import { RepositoriesSettingsService } from './repositories.service';
 describe('Service: Repositories', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [RepositoriesSettingsService]
+            providers: [RepositoriesSettingsService],
         });
     });
 

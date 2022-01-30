@@ -1,5 +1,4 @@
 .d2h-wrapper {
-
     *,
     :after,
     :before,
@@ -15,8 +14,7 @@
     z-index: 1;
 }
 
-[cds-theme=dark] {
-
+[cds-theme='dark'] {
     .d2h-file-header,
     .d2h-file-stats {
         background: var(--cds-alias-object-app-background);
@@ -123,9 +121,15 @@ table th:not([align]) {
     }
 }
 
-body:not([cds-theme~=dark]) {
+body:not([cds-theme~='dark']) {
     .diff {
-        --diff-spacer: repeating-linear-gradient(-33deg, var(--cds-global-color-gray-100), var(--cds-global-color-gray-100) 10px, var(--cds-global-color-gray-50) 10px, var(--cds-global-color-gray-50) 20px);
+        --diff-spacer: repeating-linear-gradient(
+            -33deg,
+            var(--cds-global-color-gray-100),
+            var(--cds-global-color-gray-100) 10px,
+            var(--cds-global-color-gray-50) 10px,
+            var(--cds-global-color-gray-50) 20px
+        );
 
         &-item {
             &-header {
@@ -208,7 +212,7 @@ body:not([cds-theme~=dark]) {
     }
 }
 
-body[cds-theme~=dark] {
+body[cds-theme~='dark'] {
     .diff {
         &-block {
             &-header {

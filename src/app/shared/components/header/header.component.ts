@@ -7,10 +7,9 @@ import { ErrorService, TauriService } from '@core/services';
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss']
+    styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-
     isMaximised = false;
     isMenuOpen = false;
     version = '0.0.1';
@@ -20,17 +19,14 @@ export class HeaderComponent implements OnInit {
         public tauriService: TauriService,
         private cd: ChangeDetectorRef,
         private router: Router,
-        private notificationService: NotificationService
-    ) {
-    }
-
+        private notificationService: NotificationService,
+    ) {}
 
     ngOnInit(): void {
-        this.tauriService.windowState$
-            .subscribe((state) => {
-                this.isMaximised = state === 'maximized';
-                this.cd.detectChanges();
-            });
+        this.tauriService.windowState$.subscribe((state) => {
+            this.isMaximised = state === 'maximized';
+            this.cd.detectChanges();
+        });
         this.loadVersion();
     }
 
@@ -73,5 +69,4 @@ export class HeaderComponent implements OnInit {
             this.notificationService.addNotification('info', 'Commandos ist up to date :-D', 5000);
         }
     }
-
 }

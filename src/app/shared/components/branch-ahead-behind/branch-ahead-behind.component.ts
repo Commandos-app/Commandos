@@ -4,17 +4,14 @@ import { Branch } from '@git/model';
 @Component({
     selector: 'commander-branch-ahead-behind',
     templateUrl: './branch-ahead-behind.component.html',
-    styleUrls: ['./branch-ahead-behind.component.scss']
+    styleUrls: ['./branch-ahead-behind.component.scss'],
 })
 export class BranchAheadBehindComponent implements OnInit {
-
     @Input() noColor = false;
 
     @Input() branch: Branch;
 
-    constructor(
-    ) { }
+    constructor() {}
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 }

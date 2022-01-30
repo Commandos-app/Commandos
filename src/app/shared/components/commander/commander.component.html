@@ -6,11 +6,7 @@
 </div>
 <ng-template #commandsTemplate>
     <div class="command-body">
-        <div
-            *ngFor="let cmd of commands; index as idx"
-            class="command"
-            [class.selected]="idx === selected"
-            (click)="runCommand(cmd)">
+        <div *ngFor="let cmd of commands; index as idx" class="command" [class.selected]="idx === selected" (click)="runCommand(cmd)">
             <cds-icon [shape]="cmd.icon" [direction]="cmd.direction"></cds-icon>
             &nbsp;{{ cmd.name }}
         </div>

@@ -1,16 +1,15 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, SecurityContext, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { relaunch } from "@tauri-apps/api/process";
+import { relaunch } from '@tauri-apps/api/process';
 import { installUpdate, UpdateResult } from '@tauri-apps/api/updater';
 import { marked } from 'marked';
 
 @Component({
     selector: 'commandos-update-modal',
     templateUrl: './update-modal.component.html',
-    styleUrls: ['./update-modal.component.scss']
+    styleUrls: ['./update-modal.component.scss'],
 })
 export class UpdateModalComponent implements AfterViewInit {
-
     @ViewChild('content') content: ElementRef<HTMLElement>;
 
     version: string;
@@ -25,10 +24,7 @@ export class UpdateModalComponent implements AfterViewInit {
         this.manifest = this.domSanitizer.sanitize(SecurityContext.HTML, manifest);
     }
 
-
-    constructor(
-        private domSanitizer: DomSanitizer
-    ) { }
+    constructor(private domSanitizer: DomSanitizer) {}
 
     ngAfterViewInit(): void {
         const shadowDom = this.content.nativeElement.shadowRoot;

@@ -12,18 +12,16 @@ import { fromEvent, merge, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { RepositoryService } from './../repository/repository.service';
 
-
 type tag = {
-    selected: boolean,
-    name: string
-}
+    selected: boolean;
+    name: string;
+};
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+    styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-
     private repositories: RepositoriesSettings = [];
     filtredRepositories: RepositoriesSettings = [];
 
@@ -55,8 +53,8 @@ export class HomeComponent implements OnInit {
         public overlay: Overlay,
         public viewContainerRef: ViewContainerRef,
         private clipboard: Clipboard,
-        private storeService: StoreService
-    ) { }
+        private storeService: StoreService,
+    ) {}
 
     ngOnInit(): void {
         this.repositoryService.unload();
@@ -65,7 +63,7 @@ export class HomeComponent implements OnInit {
         // for now it is deactivated.
         this.handleFilter();
         const test = this.storeService.get<string[]>('tags', []);
-        this.tags = test.map(tag => ({ selected: false, name: tag }));
+        this.tags = test.map((tag) => ({ selected: false, name: tag }));
         this.tags.sort((a, b) => a.name.localeCompare(b.name));
         this.tags.push(this.emptyTag);
     }
@@ -78,7 +76,6 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['repository', id]);
     }
 
-
     openCmd(path: string): void {
         open(path);
         this.close();
@@ -90,7 +87,6 @@ export class HomeComponent implements OnInit {
     }
 
     openTerminal(path: string): void {
-
         invoke('open_cmd', { path });
         this.close();
     }
@@ -105,7 +101,8 @@ export class HomeComponent implements OnInit {
         $event.stopPropagation();
         const { x, y } = $event;
         this.close();
-        const positionStrategy = this.overlay.position()
+        const positionStrategy = this.overlay
+            .position()
             .flexibleConnectedTo({ x, y })
             .withPositions([
                 {
@@ -113,33 +110,30 @@ export class HomeComponent implements OnInit {
                     originY: 'bottom',
                     overlayX: 'end',
                     overlayY: 'top',
-                }
+                },
             ]);
 
         this.overlayRef = this.overlay.create({
             positionStrategy,
-            scrollStrategy: this.overlay.scrollStrategies.close()
+            scrollStrategy: this.overlay.scrollStrategies.close(),
         });
 
-        this.overlayRef.attach(new TemplatePortal(this.userMenu, this.viewContainerRef, {
-            $implicit: repo
-        }));
+        this.overlayRef.attach(
+            new TemplatePortal(this.userMenu, this.viewContainerRef, {
+                $implicit: repo,
+            }),
+        );
 
-        this.sub = merge(
-            fromEvent<MouseEvent>(document, 'click'),
-            fromEvent<MouseEvent>(document, 'contextmenu')
-        )
+        this.sub = merge(fromEvent<MouseEvent>(document, 'click'), fromEvent<MouseEvent>(document, 'contextmenu'))
             .pipe(
-                filter(event => {
+                filter((event) => {
                     const clickTarget = event.target as HTMLElement;
                     return !!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget);
                 }),
-                take(1)
+                take(1),
             )
             .subscribe(() => this.close());
-
     }
-
 
     toggle(tag: tag) {
         tag.selected = !tag.selected;
@@ -147,15 +141,15 @@ export class HomeComponent implements OnInit {
     }
 
     clearTagFilter() {
-        this.tags.forEach(tag => tag.selected = false);
+        this.tags.forEach((tag) => (tag.selected = false));
         this.handleFilter();
     }
 
     filterRepositories(): RepositoriesSettings {
-        const selectedTags = this.tags.filter(tag => tag.selected).map(tag => tag.name);
+        const selectedTags = this.tags.filter((tag) => tag.selected).map((tag) => tag.name);
         this.isTagFilterActive = selectedTags.length > 0;
-        let reposFiltredByTags = this.repositories.filter(repo => {
-            return selectedTags.some(tag => repo.tags.includes(tag) || (this.emptyTag.selected && repo.tags.length === 0));
+        let reposFiltredByTags = this.repositories.filter((repo) => {
+            return selectedTags.some((tag) => repo.tags.includes(tag) || (this.emptyTag.selected && repo.tags.length === 0));
         });
 
         if (reposFiltredByTags.length === 0) {
@@ -165,7 +159,7 @@ export class HomeComponent implements OnInit {
 
         this.createFuzzySearch(reposFiltredByTags);
         const searchResult = this.fuse.search(this.searchText);
-        searchResult.forEach(repo => {
+        searchResult.forEach((repo) => {
             repo.item.pathOrig = repo.item.path;
         });
 
@@ -176,12 +170,10 @@ export class HomeComponent implements OnInit {
         return search;
     }
 
-
     handleFilter() {
         const repos = this.filterRepositories();
         this.filtredRepositories = repos.sort(sortByProperty('name'));
     }
-
 
     private createFuzzySearch(repos: RepositoriesSettings = this.repositories) {
         const options = {
@@ -197,11 +189,10 @@ export class HomeComponent implements OnInit {
             // useExtendedSearch: false,
             //ignoreLocation: true,
             // ignoreFieldNorm: false,
-            keys: ['name', 'path']
+            keys: ['name', 'path'],
         };
         this.fuse = new Fuse(repos, options);
     }
-
 
     close() {
         this.sub && this.sub.unsubscribe();
@@ -210,9 +201,7 @@ export class HomeComponent implements OnInit {
             this.overlayRef = null;
         }
     }
-
 }
-
 
 const highlight = (fuseSearchResult: any, highlightClassName: string = 'commandos-highlight') => {
     const set = (obj: any, path: string, value: any) => {

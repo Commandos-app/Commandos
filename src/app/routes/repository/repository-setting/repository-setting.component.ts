@@ -9,10 +9,9 @@ import { stdout } from 'process';
 @Component({
     selector: 'app-repository-setting',
     templateUrl: './repository-setting.component.html',
-    styleUrls: ['./repository-setting.component.scss']
+    styleUrls: ['./repository-setting.component.scss'],
 })
 export class RepositorySettingComponent implements OnInit {
-
     @ViewChild('form') settingsForm: NgForm;
     selectedTags: Array<string> | undefined = [];
 
@@ -24,7 +23,7 @@ export class RepositorySettingComponent implements OnInit {
     user: UserConfig = {
         name: '',
         email: '',
-        global: true
+        global: true,
     };
     saveState: LoadingState = 'default';
 
@@ -32,8 +31,8 @@ export class RepositorySettingComponent implements OnInit {
         private repositoriesSettings: RepositoriesSettingsService,
         private router: Router,
         private storeService: StoreService,
-        private repositoryService: RepositoryService
-    ) { }
+        private repositoryService: RepositoryService,
+    ) {}
 
     ngOnInit(): void {
         this.load();
@@ -51,12 +50,10 @@ export class RepositorySettingComponent implements OnInit {
         this.settingsForm.form.markAsPristine();
     }
 
-
     removeRepo(): void {
         this.repositoriesSettings.removeRepository(this.repositoryService.currentId);
         this.router.navigate(['home']);
     }
-
 
     async save(): Promise<void> {
         this.saveState = 'loading';
@@ -96,8 +93,7 @@ export class RepositorySettingComponent implements OnInit {
         }
         if (this.oldOrigin === '' && this.origin !== '') {
             await this.repositoryService.addOriginUrl(this.origin);
-        }
-        else {
+        } else {
             await this.repositoryService.changeOriginUrl(this.origin);
         }
     }

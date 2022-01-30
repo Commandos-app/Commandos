@@ -10,16 +10,15 @@ export interface ICommand {
 }
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class CommanderService {
-
     commands: ICommand[] = [];
 
     private onReload = new Subject<void>();
     onReload$ = this.onReload.asObservable();
 
-    constructor() { }
+    constructor() {}
 
     registerCommand(command: ICommand): void {
         this.commands.push(command);

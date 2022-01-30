@@ -1,0 +1,14 @@
+{
+    "trailingComma": "all",
+    "bracketSameLine": true,
+    "tabWidth": 4,
+    "singleQuote": true,
+    "printWidth": 140,
+    "bracketSpacing": true,
+    "embeddedLanguageFormatting": "auto",
+    "htmlWhitespaceSensitivity": "css",
+    "proseWrap": "preserve",
+    "quoteProps": "as-needed",
+    "semi": true,
+    "useTabs": false
+}

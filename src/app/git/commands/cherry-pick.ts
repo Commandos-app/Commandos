@@ -6,4 +6,3 @@ export async function cherryPick(repository: string, sha: string): Promise<GitRe
 
     return runGit(args, repository, 'cherry-pick');
 }
-

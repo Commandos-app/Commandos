@@ -14,7 +14,6 @@ export class LogItem {
     refs!: string;
 }
 
-
 export const logFormaterObject = {
     sha: '%H', // SHA
     shortSha: '%h', // short SHA
@@ -32,4 +31,4 @@ export const logFormaterObject = {
     parents: '%P', // parent SHAs,
     trailers: '%(trailers:unfold,only)',
     refs: '%D',
-}
+};

@@ -6,16 +6,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
     selector: 'app-repository',
     templateUrl: './repository.component.html',
-    styleUrls: ['./repository.component.scss']
+    styleUrls: ['./repository.component.scss'],
 })
 export class RepositoryComponent implements OnInit {
-
     constructor(
         private activeRoute: ActivatedRoute,
         private router: Router,
         public repositoryService: RepositoryService,
         private logger: LoggerService,
-        private store: StoreService
+        private store: StoreService,
     ) {
         // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
@@ -27,5 +26,4 @@ export class RepositoryComponent implements OnInit {
             this.repositoryService.loadGitRepository();
         });
     }
-
 }

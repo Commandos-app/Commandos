@@ -1,6 +1,10 @@
 <ng-container *ngIf="!!repositoryService.repositorySetting?.name">
-    <commander-branch-ahead-behind *ngIf="!isSync; else spinner" (click)="sync()" [noColor]="true"
-        [branch]="repositoryService.currentBranch" cds-layout="m-l:sm">
+    <commander-branch-ahead-behind
+        *ngIf="!isSync; else spinner"
+        (click)="sync()"
+        [noColor]="true"
+        [branch]="repositoryService.currentBranch"
+        cds-layout="m-l:sm">
     </commander-branch-ahead-behind>
     <ng-template #spinner>
         <cds-icon shape="sync" class="spinner spin" cds-layout="m-l:sm"> </cds-icon>

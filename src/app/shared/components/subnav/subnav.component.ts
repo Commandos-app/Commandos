@@ -23,10 +23,9 @@ type branches = Array<{ name: string; remote?: boolean }>;
 @Component({
     selector: 'app-subnav',
     templateUrl: './subnav.component.html',
-    styleUrls: ['./subnav.component.scss']
+    styleUrls: ['./subnav.component.scss'],
 })
 export class SubnavComponent implements OnInit {
-
     currentId = 0;
     branches: branches = [];
     repositories: any[];
@@ -40,27 +39,30 @@ export class SubnavComponent implements OnInit {
         public repositoriesSettingsService: RepositoriesSettingsService,
         private commanderModalService: CommanderModalService,
         private clipboard: Clipboard,
-        private commanderService: CommanderService
-    ) { }
+        private commanderService: CommanderService,
+    ) {}
 
     ngOnInit(): void {
-        this.repositoryService.loaded$.pipe(filter(x => x), first()).subscribe(() => {
-            this.repositoryService.getBranches();
-        });
+        this.repositoryService.loaded$
+            .pipe(
+                filter((x) => x),
+                first(),
+            )
+            .subscribe(() => {
+                this.repositoryService.getBranches();
+            });
         this.repositories = this.repositoriesSettingsService.getRepositories();
     }
-
 
     navigate(id: number): void {
         this.currentId = id;
         const oldURL = this.router.url;
 
         if (oldURL.indexOf('/repository/') >= 0) {
-            this.router.navigate(this.replacePathArrayId(id))
+            this.router.navigate(this.replacePathArrayId(id));
         } else {
             this.router.navigate(['/repository', id]);
         }
-
     }
 
     openNewBranch($event: Event): void {
@@ -71,23 +73,20 @@ export class SubnavComponent implements OnInit {
             { type: 'repository', label: 'Repository', name: 'repo', value: this.repositoryService.repositorySetting.path },
             { type: 'branch', label: 'Base branch', name: 'from', value: this.repositoryService.currentBranch.name },
             { type: 'string', label: 'Name', name: 'name' },
-            { type: 'bool', label: 'Checkout', name: 'checkout' }
+            { type: 'bool', label: 'Checkout', name: 'checkout' },
         ];
 
-
         const onClose$ = this.commanderModalService.openModal({ title: name, fields: fields! });
-        const sub = onClose$
-            .subscribe(async (params) => {
-                if (params?.formData?.name && !params?.formData?.from) {
-                    await this.repositoryService.createBranch(params.formData.name, params.formData?.checkout);
-                }
-                else if (params?.formData?.name && params?.formData?.from) {
-                    await this.repositoryService.createBranchFromAnother(params.formData.name, params.formData.from, params.formData?.checkout);
-                }
-                this.commanderService.reloadData();
-                this.commanderModalService.closeModal();
-                sub.unsubscribe();
-            });
+        const sub = onClose$.subscribe(async (params) => {
+            if (params?.formData?.name && !params?.formData?.from) {
+                await this.repositoryService.createBranch(params.formData.name, params.formData?.checkout);
+            } else if (params?.formData?.name && params?.formData?.from) {
+                await this.repositoryService.createBranchFromAnother(params.formData.name, params.formData.from, params.formData?.checkout);
+            }
+            this.commanderService.reloadData();
+            this.commanderModalService.closeModal();
+            sub.unsubscribe();
+        });
     }
 
     async sync($event: Event) {
@@ -155,5 +154,4 @@ export class SubnavComponent implements OnInit {
     goToHome(): void {
         this.router.navigate(['/home']);
     }
-
 }

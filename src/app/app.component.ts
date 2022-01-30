@@ -11,7 +11,7 @@ import { UpdateResult } from '@tauri-apps/api/updater';
 @Component({
     selector: 'commander-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
     devEnv: boolean = !environment.production;
@@ -29,8 +29,7 @@ export class AppComponent {
         private renderer: Renderer2,
         public commanderModalService: CommanderModalService,
         private storeService: StoreService,
-        private tauriService: TauriService
-
+        private tauriService: TauriService,
     ) {
         this.load();
     }
@@ -42,7 +41,6 @@ export class AppComponent {
         this.translate.use('de');
 
         this.logger.info(`Starting The Commander`);
-
 
         // if (!process.env.LOCAL_GIT_DIRECTORY) {
         //     this.errorService.setError({
@@ -65,7 +63,6 @@ export class AppComponent {
 
         this.update = await this.tauriService.checkUpdate();
         this.hasUpdate = this.update.shouldUpdate;
-
     }
 
     closeUpdate() {
@@ -75,8 +72,7 @@ export class AppComponent {
     private setDarkMode() {
         if (this.storeService.DarkMode) {
             this.renderer.setAttribute(this.document.body, 'cds-theme', 'dark');
-        }
-        else {
+        } else {
             this.renderer.setAttribute(this.document.body, 'cds-theme', '');
         }
     }
@@ -85,7 +81,9 @@ export class AppComponent {
         const command: ICommand = {
             name: 'Open settings',
             icon: 'cog',
-            callback: () => { this.openSettings() }
+            callback: () => {
+                this.openSettings();
+            },
         };
         this.commanderService.registerCommand(command);
     }
@@ -94,12 +92,13 @@ export class AppComponent {
         this.router.navigate(['/settings']);
     }
 
-
     registerNewRepoCommand(): void {
         const command: ICommand = {
             name: 'Add repository',
             icon: 'plus',
-            callback: () => { this.openAddRepo() }
+            callback: () => {
+                this.openAddRepo();
+            },
         };
         this.commanderService.registerCommand(command);
     }
@@ -108,13 +107,14 @@ export class AppComponent {
         this.router.navigate(['/add-repository']);
     }
 
-
     registerToggleDarkModeCommand(): void {
         const command: ICommand = {
             name: 'Toggle dark mode',
             icon: this.getDarkModeIcon(),
-            callback: () => { this.toggleDarkMode(command) }
-        }
+            callback: () => {
+                this.toggleDarkMode(command);
+            },
+        };
         this.commanderService.registerCommand(command);
     }
 

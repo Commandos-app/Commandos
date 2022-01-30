@@ -62,9 +62,7 @@
                     {{ tag.name }}
                 </div>
             </div>
-            <h4 (click)="clearTagFilter()" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">
-                Clear filter
-            </h4>
+            <h4 (click)="clearTagFilter()" cds-text="secondary" cds-layout="p:sm" class="clickable contextmenu-action">Clear filter</h4>
         </section>
     </ng-template>
 </div>
@@ -82,32 +80,16 @@
 
 <ng-template #userMenu let-repo>
     <section class="contextmenu" cds-layout="p:md">
-        <div
-            (click)="openCmd(repo.pathOrig)"
-            cds-text="secondary"
-            cds-layout="p-x:md p-y:sm"
-            class="clickable contextmenu-action">
+        <div (click)="openCmd(repo.pathOrig)" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">
             Open in Explorer
         </div>
-        <div
-            (click)="openCode(repo.pathOrig)"
-            cds-text="secondary"
-            cds-layout="p-x:md p-y:sm"
-            class="clickable contextmenu-action">
+        <div (click)="openCode(repo.pathOrig)" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">
             Open in VSCode
         </div>
-        <div
-            (click)="openTerminal(repo.pathOrig)"
-            cds-text="secondary"
-            cds-layout="p-x:md p-y:sm"
-            class="clickable contextmenu-action">
+        <div (click)="openTerminal(repo.pathOrig)" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">
             Open in Terminal
         </div>
-        <div
-            (click)="copyPath(repo.pathOrig)"
-            cds-text="secondary"
-            cds-layout="p-x:md p-y:sm"
-            class="clickable contextmenu-action">
+        <div (click)="copyPath(repo.pathOrig)" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">
             Copy Path
         </div>
     </section>

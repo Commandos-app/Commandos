@@ -1,6 +1,4 @@
-import { GitResult, runGit } from "./base";
-
-
+import { GitResult, runGit } from './base';
 
 async function getStatus(repository: string): Promise<GitResult> {
     const args = [
@@ -15,6 +13,5 @@ async function getStatus(repository: string): Promise<GitResult> {
     const result = await runGit(args, repository, 'getStatus');
     return result;
 }
-
 
 export { getStatus };

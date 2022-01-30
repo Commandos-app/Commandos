@@ -3,15 +3,8 @@ import { SharedModule } from './../../shared/shared.module';
 import { ChangelogRoutingModule } from './changelog-routing.module';
 import { ChangelogComponent } from './changelog.component';
 
-
-
 @NgModule({
-  declarations: [
-    ChangelogComponent
-  ],
-  imports: [
-    SharedModule,
-    ChangelogRoutingModule
-  ]
+    declarations: [ChangelogComponent],
+    imports: [SharedModule, ChangelogRoutingModule],
 })
-export class ChangelogModule { }
+export class ChangelogModule {}

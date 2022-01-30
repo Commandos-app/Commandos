@@ -3,17 +3,16 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { DetailComponent } from './detail.component';
 
-
 const routes: Routes = [
     {
         path: '',
-        component: DetailComponent
-    }
+        component: DetailComponent,
+    },
 ];
 
 @NgModule({
     declarations: [],
     imports: [CommonModule, RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
-export class DetailRoutingModule { }
+export class DetailRoutingModule {}

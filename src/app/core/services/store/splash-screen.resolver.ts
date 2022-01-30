@@ -4,14 +4,13 @@ import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/r
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class SplashScreenResolver implements Resolve<boolean> {
-
     private subject = new BehaviorSubject(true);
     state$ = this.subject.asObservable();
 
-    constructor(private storeService: StoreService) { }
+    constructor(private storeService: StoreService) {}
 
     stop() {
         this.subject.next(false);
@@ -22,6 +21,5 @@ export class SplashScreenResolver implements Resolve<boolean> {
 
         this.stop();
         return true;
-
     }
 }

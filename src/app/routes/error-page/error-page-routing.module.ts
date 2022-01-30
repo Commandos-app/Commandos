@@ -6,12 +6,12 @@ import { ErrorPageComponent } from './error-page.component';
 const routes: Routes = [
     {
         path: '',
-        component: ErrorPageComponent
-    }
+        component: ErrorPageComponent,
+    },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
-export class ErrorPageRoutingModule { }
+export class ErrorPageRoutingModule {}

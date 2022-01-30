@@ -11,10 +11,9 @@ import { selectFolder } from '@shared/functions';
 @Component({
     selector: 'app-settings',
     templateUrl: './settings.component.html',
-    styleUrls: ['./settings.component.scss']
+    styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-
     @ViewChild('form') settingsForm: NgForm;
     devMode = !environment.production;
 
@@ -29,7 +28,7 @@ export class SettingsComponent implements OnInit {
     user: UserConfig = {
         name: '',
         email: '',
-        global: true
+        global: true,
     };
 
     saveState: LoadingState = 'default';
@@ -39,8 +38,8 @@ export class SettingsComponent implements OnInit {
         @Inject(DOCUMENT) private document: Document,
         private renderer: Renderer2,
         private storeService: StoreService,
-        private repositoryService: RepositoryService
-    ) { }
+        private repositoryService: RepositoryService,
+    ) {}
 
     async ngOnInit(): Promise<void> {
         this.autoFetch = this.storeService.AutoFetch;
@@ -53,10 +52,7 @@ export class SettingsComponent implements OnInit {
         this.settingsForm.form.markAsPristine();
     }
 
-    openDevTools(): void {
-
-    }
-
+    openDevTools(): void {}
 
     async save(): Promise<void> {
         this.saveState = 'loading';
@@ -69,8 +65,7 @@ export class SettingsComponent implements OnInit {
 
         if (this.darkMode) {
             this.renderer.setAttribute(this.document.body, 'cds-theme', 'dark');
-        }
-        else {
+        } else {
             this.renderer.setAttribute(this.document.body, 'cds-theme', '');
         }
         this.storeService.saveSettings();
@@ -85,7 +80,6 @@ export class SettingsComponent implements OnInit {
         this.ngOnInit();
     }
 
-
     async openDialog(): Promise<void> {
         const { path } = await selectFolder();
         if (path) {
@@ -93,5 +87,4 @@ export class SettingsComponent implements OnInit {
             this.settingsForm.form.markAsDirty();
         }
     }
-
 }

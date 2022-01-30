@@ -6,21 +6,15 @@ import { createBranch, deleteLocalBranch, push, pull, pruneRemote, createBranchF
 import { RepositorySetting } from '../store/store.types';
 import { GitResult } from '@git/commands/base';
 
-
-
 //! Refactor: Rename this Service
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class GitService {
-
     private sub!: Subscription;
 
-    constructor(
-        private commanderService: CommanderService,
-        private commanderModalService: CommanderModalService
-    ) { }
+    constructor(private commanderService: CommanderService, private commanderModalService: CommanderModalService) {}
 
     registerGitCommands(): void {
         this.registerPullCommand();
@@ -66,7 +60,7 @@ export class GitService {
             { type: 'repositories', label: 'Repositories', name: 'repo' },
             { type: 'branch', label: 'Base branch', name: 'from' },
             { type: 'string', label: 'Name', name: 'name' },
-            { type: 'bool', label: 'Checkout', name: 'checkout' }
+            { type: 'bool', label: 'Checkout', name: 'checkout' },
         ];
         this.registerCommand({ name, command, icon, fields });
     }
@@ -77,7 +71,7 @@ export class GitService {
         const command = 'executeDeleteBranch';
         const fields: Array<FieldDefinition> = [
             { type: 'repositories', label: 'Repositories', name: 'repo' },
-            { type: 'branch', label: 'Branch', name: 'name' }
+            { type: 'branch', label: 'Branch', name: 'name' },
         ];
         this.registerCommand({ name, command, icon, fields });
     }
@@ -88,7 +82,7 @@ export class GitService {
         const command = 'executeCheckoutBranch';
         const fields: Array<FieldDefinition> = [
             { type: 'repositories', label: 'Repositories', name: 'repo' },
-            { type: 'branch', label: 'Branch', name: 'name' }
+            { type: 'branch', label: 'Branch', name: 'name' },
         ];
         this.registerCommand({ name, command, icon, fields });
     }
@@ -100,8 +94,6 @@ export class GitService {
         const fields: Array<FieldDefinition> = [{ type: 'repositories', label: 'Repositories', name: 'repo' }];
         this.registerCommand({ name, command, icon, fields });
     }
-
-
 
     // private registerMergeCommand() {
     //     const name = 'Merge repositories';
@@ -115,7 +107,9 @@ export class GitService {
             name: options.name,
             icon: options.icon,
             direction: options.direction,
-            callback: () => { this.runCommand(options) }
+            callback: () => {
+                this.runCommand(options);
+            },
         };
         this.commanderService.registerCommand(command);
     }
@@ -124,33 +118,28 @@ export class GitService {
         this.unsubscribe();
 
         const onClose$ = this.commanderModalService.openModal({ title: options.name, fields: options.fields! });
-        this.sub = onClose$
-            .subscribe((params) => {
-                if (params.repos && params.repos.length > 0 && this[options.command]) {
-                    for (let i = 0; i < params.repos.length; i++) {
-                        this[options.command](params.formData, params.repos[i]);
-                    }
+        this.sub = onClose$.subscribe((params) => {
+            if (params.repos && params.repos.length > 0 && this[options.command]) {
+                for (let i = 0; i < params.repos.length; i++) {
+                    this[options.command](params.formData, params.repos[i]);
                 }
-                this.commanderService.reloadData();
-                this.unsubscribe();
-                this.commanderModalService.closeModal();
-            });
-
+            }
+            this.commanderService.reloadData();
+            this.unsubscribe();
+            this.commanderModalService.closeModal();
+        });
     }
 
     private async executeMerge(formData: any, repository: RepositorySetting): Promise<any> {
         throw new Error('Method not implemented.');
-
     }
 
     private async executeDeleteBranch(formData: any, repository: RepositorySetting): Promise<any> {
         return deleteLocalBranch(formData.name, repository.path);
     }
 
-
     private executePush(formData: any, repository: RepositorySetting): Promise<GitResult> {
         return push(repository.path);
-
     }
 
     private executePull(formData: any, repository: RepositorySetting): Promise<GitResult> {
@@ -167,19 +156,16 @@ export class GitService {
         if (formData.checkout) {
             this.executeCheckoutBranch(formData, repository);
         }
-
     }
 
     private async executeCheckoutBranch(formData: any, repository: RepositorySetting): Promise<any> {
         checkout(formData.name, repository.path);
-
     }
 
     private async executeSync(formData: any, repository: RepositorySetting): Promise<any> {
         await this.executePull(formData, repository);
         return this.executePush(formData, repository);
     }
-
 
     private async executePruneRemote(formData: any, repository: RepositorySetting): Promise<any> {
         return pruneRemote(repository.path);

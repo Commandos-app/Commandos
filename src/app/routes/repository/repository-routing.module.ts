@@ -16,21 +16,18 @@ const routes: Routes = [
             { path: 'commit', component: RepositoryCommitComponent },
             { path: 'branches', component: RepositoryBranchComponent },
             {
-                path: 'history', component: RepositoryHistoryComponent,
-                children: [
-                    { path: ':sha', component: RepositoryHistoryCommitComponent }
-                ]
+                path: 'history',
+                component: RepositoryHistoryComponent,
+                children: [{ path: ':sha', component: RepositoryHistoryCommitComponent }],
             },
             { path: 'setting', component: RepositorySettingComponent },
-            { path: '', redirectTo: 'branches', pathMatch: 'full' }
+            { path: '', redirectTo: 'branches', pathMatch: 'full' },
         ],
-
-
-    }
+    },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
-export class RepositoryRoutingModule { }
+export class RepositoryRoutingModule {}

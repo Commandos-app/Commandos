@@ -1,6 +1,4 @@
-
 import { parseStatus } from './status';
-
 
 describe('single File status', () => {
     test('should return empty parse', async () => {
@@ -9,7 +7,6 @@ describe('single File status', () => {
         const rtn = await parseStatus(gitStatus);
         expect(rtn.length).toBe(0);
     });
-
 
     test('should parse a new untracked file', async () => {
         const gitStatus: any = { stdout: `? new.md`, stderr: '', exitCode: 0 };
@@ -26,7 +23,11 @@ describe('single File status', () => {
     });
 
     test('should parse a modified unstaged file', async () => {
-        const gitStatus: any = { stdout: `1 .M N... 100644 100644 100644 04e15462f2997620d1d6df5b43440b5482624b31 04e15462f2997620d1d6df5b43440b5482624b31 readme.md`, stderr: '', exitCode: 0 };
+        const gitStatus: any = {
+            stdout: `1 .M N... 100644 100644 100644 04e15462f2997620d1d6df5b43440b5482624b31 04e15462f2997620d1d6df5b43440b5482624b31 readme.md`,
+            stderr: '',
+            exitCode: 0,
+        };
 
         const rtn = await parseStatus(gitStatus);
         const [file] = rtn;
@@ -39,9 +40,12 @@ describe('single File status', () => {
         expect(file.path).toBe('readme.md');
     });
 
-
     test('should parse a new staged file', async () => {
-        const gitStatus: any = { stdout: `1 A. N... 000000 100644 100644 0000000000000000000000000000000000000000 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 folder1/folder2/testnewtest.md`, stderr: '', exitCode: 0 };
+        const gitStatus: any = {
+            stdout: `1 A. N... 000000 100644 100644 0000000000000000000000000000000000000000 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 folder1/folder2/testnewtest.md`,
+            stderr: '',
+            exitCode: 0,
+        };
 
         const rtn = await parseStatus(gitStatus);
         const [file] = rtn;
@@ -57,9 +61,8 @@ describe('single File status', () => {
     test('should parse a renamed file', async () => {
         const data = [
             '2 R. N... 100644 100644 100644 fafc03149a548de1546c6ed53e42d54960872fa3 445f4f17ef620b18c9376e268a0fe9880dd3245e R78 second-file.md',
-            'secondfile.md'
-
-        ]
+            'secondfile.md',
+        ];
         const gitStatus: any = { stdout: data.join('\0'), stderr: '', exitCode: 0 };
 
         const rtn = await parseStatus(gitStatus);
@@ -74,9 +77,7 @@ describe('single File status', () => {
         expect(file.path).toBe('second-file.md');
         expect(file.oldPath).toBe('secondfile.md');
     });
-
 });
-
 
 describe('multiple files', () => {
     test('should parse 2 untracked files ', async () => {
@@ -100,7 +101,11 @@ describe('multiple files', () => {
     });
 
     test('should parse 2 files (modified,untracked)', async () => {
-        const gitStatus: any = { stdout: `1 .M N... 100644 100644 100644 fafc03149a548de1546c6ed53e42d54960872fa3 fafc03149a548de1546c6ed53e42d54960872fa3 secondfile.md\0? folder1/folder2/testnewtest.md`, stderr: '', exitCode: 0 };
+        const gitStatus: any = {
+            stdout: `1 .M N... 100644 100644 100644 fafc03149a548de1546c6ed53e42d54960872fa3 fafc03149a548de1546c6ed53e42d54960872fa3 secondfile.md\0? folder1/folder2/testnewtest.md`,
+            stderr: '',
+            exitCode: 0,
+        };
 
         const rtn = await parseStatus(gitStatus);
         const [file1, file2] = rtn;
@@ -122,9 +127,8 @@ describe('multiple files', () => {
     test('should parse 2 staged files (modified, added) ', async () => {
         const data = [
             '1 M. N... 100644 100644 100644 fafc03149a548de1546c6ed53e42d54960872fa3 445f4f17ef620b18c9376e268a0fe9880dd3245e secondfile.md',
-            '1 A. N... 000000 100644 100644 0000000000000000000000000000000000000000 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 folder1/folder2/testnewtest.md'
-
-        ]
+            '1 A. N... 000000 100644 100644 0000000000000000000000000000000000000000 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 folder1/folder2/testnewtest.md',
+        ];
         const gitStatus: any = { stdout: data.join('\0'), stderr: '', exitCode: 0 };
 
         const rtn = await parseStatus(gitStatus);
@@ -148,9 +152,8 @@ describe('multiple files', () => {
         const data = [
             '1 A. N... 000000 100644 100644 0000000000000000000000000000000000000000 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 folder1/folder2/testnewtest.md',
             '2 R. N... 100644 100644 100644 fafc03149a548de1546c6ed53e42d54960872fa3 445f4f17ef620b18c9376e268a0fe9880dd3245e R78 second-file.md',
-            'secondfile.md'
-
-        ]
+            'secondfile.md',
+        ];
         const gitStatus: any = { stdout: data.join('\0'), stderr: '', exitCode: 0 };
 
         const rtn = await parseStatus(gitStatus);

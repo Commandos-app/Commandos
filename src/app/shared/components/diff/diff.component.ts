@@ -5,10 +5,9 @@ import gitDiffParser, { File } from 'gitdiff-parser';
 @Component({
     selector: 'commandos-diff',
     templateUrl: './diff.component.html',
-    styleUrls: ['./diff.component.scss']
+    styleUrls: ['./diff.component.scss'],
 })
 export class DiffComponent implements OnInit {
-
     diff: File[];
     outputFormat: string;
     isOpen = false;
@@ -23,14 +22,12 @@ export class DiffComponent implements OnInit {
         }
     }
 
-    constructor(private storeService: StoreService) { }
+    constructor(private storeService: StoreService) {}
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
     setMode($event: any) {
         this.storeService.DiffOutputFormat = $event;
         this.outputFormat = $event;
     }
-
 }

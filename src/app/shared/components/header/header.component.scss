@@ -25,10 +25,8 @@
 
     white-space: nowrap;
 
-
     .branding-small {
         font-size: var(--cds-global-typography-caption-font-size);
-
     }
 }
 
@@ -42,12 +40,12 @@
     margin: 0;
 }
 
-.example-list>li {
+.example-list > li {
     list-style-type: none;
     border-bottom: solid 1px #8b8b8b;
     padding: 8px 0;
 }
 
-.example-list>li:last-child {
+.example-list > li:last-child {
     border-bottom: none;
 }

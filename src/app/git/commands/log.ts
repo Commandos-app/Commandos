@@ -23,18 +23,7 @@ export async function getLogMeta(repository: string, branch = 'HEAD', limit = 10
 export async function getLogMetadataOfSha(repository: string, sha: string): Promise<GitResult> {
     const format = Object.values(logFormaterObject).join('%x00');
 
-    const args = [
-        'log',
-        sha,
-        '-m',
-        '-1',
-        '--date=iso-local',
-        '-z',
-        `--format=${format}`,
-        '--no-show-signature',
-        '--no-color',
-        '--',
-    ];
+    const args = ['log', sha, '-m', '-1', '--date=iso-local', '-z', `--format=${format}`, '--no-show-signature', '--no-color', '--'];
 
     return await runGit(args, repository, 'getLogMetaDataOfSha');
 }

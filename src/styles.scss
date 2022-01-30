@@ -4,7 +4,7 @@
 @import '~@cds/core/global.min.css'; // clarity global styles
 @import '~@cds/core/styles/theme.dark.min.css';
 @import '~@cds/city/css/bundles/default.min'; // load base font
-@import "~@ng-select/ng-select/themes/default.theme.css";
+@import '~@ng-select/ng-select/themes/default.theme.css';
 @import '@angular/cdk/overlay-prebuilt.css';
 @import 'tippy.js/dist/tippy.css';
 // @import '~highlight.js/styles/github.css';
@@ -21,7 +21,7 @@ body {
     // }
 }
 
-[tree-view]>.item {
+[tree-view] > .item {
     padding-left: 21px;
 }
 
@@ -48,7 +48,7 @@ body {
 
 .commander-content {
     router-outlet {
-        &+* {
+        & + * {
             width: 100%;
         }
     }
@@ -56,16 +56,16 @@ body {
 
 .commander-tabs {
     .active {
-        box-shadow: 0 -.15rem 0 var(--cds-alias-status-info, var(--cds-global-color-blue-700, #0079ad)) inset;
+        box-shadow: 0 -0.15rem 0 var(--cds-alias-status-info, var(--cds-global-color-blue-700, #0079ad)) inset;
     }
 }
 
 .commander-button-control-backdrop {
-    background: rgba(0, 0, 0, .32);
+    background: rgba(0, 0, 0, 0.32);
     top: calc(var(--commander-header-height) + var(--commander-sub-header-height));
 }
 
-[cds-text*=body] {
+[cds-text*='body'] {
     &::before,
     &::after {
         display: none;
@@ -91,13 +91,13 @@ header {
 }
 
 code {
-    font-family: Consolas, "Courier New", Courier, monospace;
+    font-family: Consolas, 'Courier New', Courier, monospace;
 }
 
 .main-container {
     .content-container {
         .content-area {
-            padding: .9rem 1.2rem 1.2rem 1.2rem;
+            padding: 0.9rem 1.2rem 1.2rem 1.2rem;
         }
     }
 }
@@ -111,22 +111,22 @@ code {
         .clr-select {
             width: 100%;
         } // Override to make search full width
-        .hf-search-wrapper>.hf-search,
+        .hf-search-wrapper > .hf-search,
         .hf-search-select-input,
         .hf-search-input-text-container {
             width: 100%;
         } // Override to make input full width
-        .clr-input-wrapper>.clr-input {
+        .clr-input-wrapper > .clr-input {
             width: 100%;
         } // Override to make password full width
         .clr-input-wrapper {
             max-width: 100%;
             width: 100%;
-            &>.clr-input-group {
+            & > .clr-input-group {
                 max-width: 100%;
                 width: 100%;
                 padding-right: 0.4rem;
-                &>input {
+                & > input {
                     width: calc(100% - 1rem);
                 }
             }
@@ -183,7 +183,7 @@ code {
             padding: 3px 10px;
             &.ng-option-marked,
             &.ng-option-selected {
-                background: #F2F2F2;
+                background: #f2f2f2;
             }
             &.ng-option-child {
                 padding-left: 20px;
@@ -246,7 +246,7 @@ code {
         .commander-row-title {
             background: var(--cds-alias-object-app-background);
             border: 1px solid #ccc;
-            >div:not(.custom-padding) {
+            > div:not(.custom-padding) {
                 padding: 4px 10px 2px;
             }
         }
@@ -254,7 +254,7 @@ code {
             border: 1px solid var(--cds-global-color-gray-400);
             margin-top: -1px;
             min-height: 30px;
-            >div:not(.custom-padding) {
+            > div:not(.custom-padding) {
                 padding: 4px 10px;
             }
             &:hover {
@@ -281,7 +281,7 @@ code {
     .commander-flex {
         display: flex;
     }
-    &[cds-theme=dark] {
+    &[cds-theme='dark'] {
         .commander-navigation {
             background: var(--cds-global-color-blue-900);
         }
@@ -289,7 +289,7 @@ code {
             background: var(--cds-global-color-blue-1000);
         }
         .commander-button-control-backdrop {
-            background: rgba(255, 255, 255, .15);
+            background: rgba(255, 255, 255, 0.15);
         }
         svg {
             color: currentColor;
@@ -332,7 +332,7 @@ code {
     display: grid !important;
     grid-template-columns: 1fr 40px;
     .center-text {
-        line-height: 25px
+        line-height: 25px;
     }
     .tooltip-input {
         border: 0;
@@ -387,6 +387,6 @@ cds-checkbox {
     justify-content: center;
     align-items: center;
     cds-icon {
-        color: rgba(0, 0, 0, .10);
+        color: rgba(0, 0, 0, 0.1);
     }
 }

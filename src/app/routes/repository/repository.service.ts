@@ -3,10 +3,38 @@ import { RepositoriesSettingsService, RepositorySetting } from '@core/services';
 import { BehaviorSubject } from 'rxjs';
 import { LoggerService } from '@core/services/logger/logger.service';
 import {
-    createBranch, deleteLocalBranch, deleteRemoteBranch, getBranches, getCurrentBranch,
-    getStatus, renameBranch, stageAll, stageFile, unstageAll,
-    unstageFile, revertFile, checkout, commit, getLogMeta, getLogOfSha, getLogMetadataOfSha, getDiffOfFile, pull, push,
-    addOriginUrl, changeOriginUrl, getOriginUrl, getUserMail, getUsername, setUserMail, setUsername, removeOriginUrl, createBranchFromSha, pushWithSetUpstream, createBranchFromAnother, initRepository
+    createBranch,
+    deleteLocalBranch,
+    deleteRemoteBranch,
+    getBranches,
+    getCurrentBranch,
+    getStatus,
+    renameBranch,
+    stageAll,
+    stageFile,
+    unstageAll,
+    unstageFile,
+    revertFile,
+    checkout,
+    commit,
+    getLogMeta,
+    getLogOfSha,
+    getLogMetadataOfSha,
+    getDiffOfFile,
+    pull,
+    push,
+    addOriginUrl,
+    changeOriginUrl,
+    getOriginUrl,
+    getUserMail,
+    getUsername,
+    setUserMail,
+    setUsername,
+    removeOriginUrl,
+    createBranchFromSha,
+    pushWithSetUpstream,
+    createBranchFromAnother,
+    initRepository,
 } from '@git/commands';
 import { parseBranches, parseCurrentBranch, parseLog, parseStatus } from '@git/parsers';
 import { IStatusResult, LogItem, ChangedFile, Branch, Branches } from '@git/model';
@@ -26,15 +54,14 @@ export type ChangeBranch = {
     checkout?: boolean;
 };
 
-export type UserConfig = { name: string; email: string, global: boolean };
+export type UserConfig = { name: string; email: string; global: boolean };
 
 import { cloneRepository } from '@git/commands';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class RepositoryService {
-
     currentId!: number;
     repositorySetting!: RepositorySetting;
     currentBranch!: Branch;
@@ -45,10 +72,7 @@ export class RepositoryService {
     private branches = new BehaviorSubject<Branches | null>(null);
     branches$ = this.branches.asObservable();
 
-    constructor(
-        private repositoriesSettingsService: RepositoriesSettingsService,
-        private logger: LoggerService
-    ) { }
+    constructor(private repositoriesSettingsService: RepositoriesSettingsService, private logger: LoggerService) {}
 
     setId(id: string): void {
         const newId = parseInt(id);
@@ -101,13 +125,13 @@ export class RepositoryService {
         const { stdout: branches } = await getBranches(this.getPath());
         if (branches) {
             const parsedBranches = parseBranches(branches);
-            const upstreamBranches = parsedBranches.filter(f => f.upstream);
+            const upstreamBranches = parsedBranches.filter((f) => f.upstream);
             for (let index = 0; index < upstreamBranches.length; index++) {
                 const element = upstreamBranches[index];
                 await this.loadAheadBehind(element);
             }
             const currentBranchStr = await this.getCurrentBranch();
-            let currentBranch = parsedBranches.find(b => b.name === currentBranchStr);
+            let currentBranch = parsedBranches.find((b) => b.name === currentBranchStr);
             if (currentBranch) {
                 currentBranch.current = true;
             } else {
@@ -124,7 +148,7 @@ export class RepositoryService {
     async loadAheadBehind(branch: Branch): Promise<void> {
         const [ahead, behind] = await Promise.all([
             countRevList(this.getPath(), branch.upstream, branch.name),
-            countRevList(this.getPath(), branch.name, branch.upstream)
+            countRevList(this.getPath(), branch.name, branch.upstream),
         ]);
         branch.ahead = ahead.stdout;
         branch.behind = behind.stdout;
@@ -156,7 +180,6 @@ export class RepositoryService {
     }
 
     async deleteBranch(branch: Branch, includeRemote = false): Promise<void> {
-
         if (!branch.isRemote) {
             await deleteLocalBranch(branch.name, this.getPath());
         }
@@ -178,7 +201,6 @@ export class RepositoryService {
             const brnach = branches[index];
             this.logger.info(`delete branch ${brnach}`);
             await this.deleteBranch(brnach);
-
         }
     }
 
@@ -293,7 +315,7 @@ export class RepositoryService {
         return {
             name,
             email,
-            global: true
+            global: true,
         };
     }
 
