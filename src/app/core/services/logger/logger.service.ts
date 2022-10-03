@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { invoke } from '@tauri-apps/api/tauri';
+import { trace, info, error, debug, warn, attachConsole } from 'tauri-plugin-log-api';
 // import {  } from '@tauri-apps/api';
 // import { Logger, createLogger, format, transports } from 'winston';
 // import DailyRotateFile from 'winston-daily-rotate-file';
@@ -23,22 +23,23 @@ enum LogLevel {
     providedIn: 'root',
 })
 export class LoggerService {
-    constructor() {}
+    constructor() {
+        // if (!window.logger) {
+        attachConsole();
+        // }
+    }
 
-    info = (message: string): Logger => this.log(LogLevel.Info, message);
-    warn = (message: string): Logger => this.log(LogLevel.Warn, message);
-    error = (message: string): Logger => this.log(LogLevel.Error, message);
-    debug = (message: string): Logger => this.log(LogLevel.Debug, message);
-    trace = (message: string): Logger => this.log(LogLevel.Trace, message);
+    info = (message: string): Logger => this.log(LogLevel.Info, message, info);
+    warn = (message: string): Logger => this.log(LogLevel.Warn, message, warn);
+    error = (message: string): Logger => this.log(LogLevel.Error, message, error);
+    debug = (message: string): Logger => this.log(LogLevel.Debug, message, debug);
+    trace = (message: string): Logger => this.log(LogLevel.Trace, message, trace);
 
-    log(level: LogLevel, message: string): void {
+    log(level: LogLevel, message: string, nativeLogger: Function): void {
         const prefix = this.getPrefix(level);
-        console.log(...prefix, message);
+        // console.log(...prefix, message);
 
-        invoke('logging', {
-            level,
-            message,
-        });
+        nativeLogger(message);
     }
 
     private getPrefix(level: LogLevel): string[] {

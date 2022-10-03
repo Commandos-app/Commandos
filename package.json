@@ -53,6 +53,7 @@
         "normalize.css": "^8.0.1",
         "patch-package": "^6.4.7",
         "rxjs": "~7.5.2",
+        "tauri-plugin-log-api": "github:tauri-apps/tauri-plugin-log#release",
         "tippy.js": "^6.3.7",
         "tslib": "^2.3.1",
         "zone.js": "~0.11.4"
