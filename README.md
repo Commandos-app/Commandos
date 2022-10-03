@@ -13,6 +13,7 @@ Commandos is currently only available on Windows, we plan to add macOS and Linux
 - [Commandos](#commandos)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
+    - [Usefull commands](#usefull-commands)
   - [Contributing](#contributing)
   - [Support + Feedback](#support--feedback)
   - [License](#license)
@@ -34,6 +35,14 @@ To run the app, run these commands:
 ```bash
 yarn tauri dev
 yarn start
+```
+
+
+### Usefull commands
+
+Update Tauri:
+```bash
+yarn tauri deps update
 ```
 
 ## Contributing
