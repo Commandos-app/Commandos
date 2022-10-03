@@ -28,13 +28,11 @@
             "shortDescription": "",
             "longDescription": "",
             "deb": {
-                "depends": [],
-                "useBootstrapper": false
+                "depends": []
             },
             "macOS": {
                 "frameworks": [],
                 "minimumSystemVersion": "",
-                "useBootstrapper": false,
                 "exceptionDomain": "",
                 "signingIdentity": null,
                 "entitlements": null
@@ -54,7 +52,28 @@
             "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDY5QzE0QTk4NjlBODA5NjAKUldSZ0NhaHBtRXJCYWRRaGhUanovZGxkM296ZWQ1dmhCam8yVk5Lc2REMjdFd2F5TnpkL0V0TUgK"
         },
         "allowlist": {
-            "all": true
+            "all": true,
+            "fs": {
+                "all": true,
+                "scope": [
+                    "$LOCALDATA",
+                    "$LOCALDATA/**"
+                ],
+                "createDir": true,
+                "readDir": true,
+                "readFile": true,
+                "writeFile": true
+            },
+            "shell": {
+                "all": true,
+                "scope": [
+                    {
+                        "name": "git",
+                        "cmd": "git",
+                        "args": true
+                    }
+                ]
+            }
         },
         "windows": [
             {

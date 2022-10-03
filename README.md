@@ -10,18 +10,22 @@ Commandos is currently only available on Windows, we plan to add macOS and Linux
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Contributing](#contributing)
-- [Support + Feedback](#support--feedback)
-- [License](#license)
+- [Commandos](#commandos)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+    - [Usefull commands](#usefull-commands)
+  - [Contributing](#contributing)
+  - [Support + Feedback](#support--feedback)
+  - [License](#license)
 
 
 ## Installation
 
 To manage dependencies, Commandos uses the [yarn](https://yarnpkg.com/) manager. Feel free to use an matching alternative.
 
-Use the prebuild binaries, or if you like to build it yourself:
-Follow the instruction to install rust: https://tauri.studio/en/docs/getting-started/intro
+Use the prebuild binaries, or if you like to build it yourself:  
+Follow the instruction to install rust: https://tauri.studio/en/docs/getting-started/intro  
+  
 
 After this, you can install all dependencies:
 ```bash
@@ -31,6 +35,14 @@ To run the app, run these commands:
 ```bash
 yarn tauri dev
 yarn start
+```
+
+
+### Usefull commands
+
+Update Tauri:
+```bash
+yarn tauri deps update
 ```
 
 ## Contributing

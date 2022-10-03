@@ -1,9 +1,10 @@
 import { LoggerService } from '../logger/logger.service';
 import { Injectable } from '@angular/core';
 import { createDir, readDir, readTextFile, writeFile } from '@tauri-apps/api/fs';
-import { localDataDir } from '@tauri-apps/api/path';
+import { localDataDir, appDir } from '@tauri-apps/api/path';
 import { DiffFormate, GroupByOptions, RepositoriesSettings, Settings, ViewMode } from './store.types';
 import { sortByProperty, Store } from '@shared/functions';
+import { getName } from '@tauri-apps/api/app';
 
 @Injectable({
     providedIn: 'root',
@@ -56,20 +57,11 @@ export class StoreService {
 
     private async checkDirIfExistsOrCreate(path: string): Promise<void> {
         try {
-            await readDir(path);
+            await createDir(path, { recursive: true });
             //
-        } catch (e) {
-            try {
-                this.logger.warn(`Tring to create the settings folder ${e}`);
-                this.createDir(path);
-            } catch (e2: any) {
-                this.logger.error(e2);
-            }
+        } catch (error: any) {
+            this.logger.error(error);
         }
-    }
-
-    private async createDir(path: string): Promise<void> {
-        await createDir(path);
     }
 
     get<T = any>(prop: string, defaultValue: T): T {

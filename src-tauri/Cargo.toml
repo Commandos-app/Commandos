@@ -10,7 +10,7 @@ edition = "2018"
 build = "src/build.rs"
 
 [build-dependencies]
-tauri-build = { version = "1.0.0-beta.3" }
+tauri-build = { version = "1.0.0-beta.3", features = [] }
 
 [dependencies]
 serde_json = "1.0"
@@ -25,8 +25,12 @@ log4rs = { version = "1.0.0", features = [
 log = { version = "0.4.0", features = [ "std" ] }
 
   [dependencies.tauri]
-  version = "1.0.0-beta.8"
+  version = "1.1.1"
   features = [ "api-all", "updater" ]
+
+  [dependencies.tauri-plugin-log]
+  git = "https://github.com/tauri-apps/tauri-plugin-log"
+  branch = "release"
 
 [features]
 default = [ "custom-protocol" ]
