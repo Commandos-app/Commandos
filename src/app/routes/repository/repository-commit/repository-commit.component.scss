@@ -56,6 +56,7 @@ cds-icon-button {
     margin: 0; // height: 28px;
     padding: 0; // line-height: 27px;
     min-width: auto;
+    --min-width: auto;
     --padding: 0;
     &.action {
         vertical-align: top;
@@ -69,7 +70,7 @@ cds-icon-button {
 
 .commander-commit-area {
     display: grid;
-    grid-template-rows: 97px 1px 1fr;
+    grid-template-rows: 107px 1px 1fr;
     height: 100%;
     .virtual-scroll {
         // height: calc(100% - 91px);
@@ -79,6 +80,7 @@ cds-icon-button {
 cds-textarea {
     --cds-global-layout-space-xxl: 32px;
     --padding: var(--cds-global-space-4);
+    --cds-global-space-15: none;
 }
 
 .commander-tree-arrow {
