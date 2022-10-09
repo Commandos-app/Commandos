@@ -378,6 +378,9 @@ export class RepositoryService {
         return this.repositorySetting?.path?.replace(/\\\\/g, '/');
     }
 
+    unsetCurrentRepo() {
+        this.currentId = null;
+    }
     // private getRepository() {
     //     this.gitRepository = new Repository(this.getPath(), 0, null, true, null, false);
     // }

@@ -38,6 +38,7 @@ export class CommanderModalComponent implements OnInit {
         this.loadTags();
         this.loadRepos();
         this.checkIfRepoIsSelected();
+        this.sortActiveRepoToTop();
     }
 
     private checkIfRepoIsSelected(): void {
@@ -117,5 +118,14 @@ export class CommanderModalComponent implements OnInit {
         const mapedRepos = repos.map<SelectedRepositoryTypes>((repo) => ({ type: 'Repository', text: repo.name, id: repo.id }));
 
         this.items.push(...mapedRepos);
+    }
+
+    private sortActiveRepoToTop(): void {
+        const activeRepo = this.items.find((item) => item.id === this.repositoryService.currentId);
+        if (activeRepo) {
+            this.items = this.items.filter((item) => item !== activeRepo);
+            activeRepo.type = 'Current Repository';
+            this.items = [activeRepo, ...this.items];
+        }
     }
 }

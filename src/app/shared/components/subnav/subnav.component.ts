@@ -152,6 +152,7 @@ export class SubnavComponent implements OnInit {
     }
 
     goToHome(): void {
+        this.repositoryService.unsetCurrentRepo();
         this.router.navigate(['/home']);
     }
 }
