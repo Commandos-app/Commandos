@@ -1,5 +1,5 @@
 <commander-splash></commander-splash>
-<div class="commander-layout commander-app-layout" cds-layout="vertical align:stretch" (contextmenu)="preventContextMenu($event)">
+<div class="commander-layout commander-app-layout" cds-layout="vertical align:stretch"  (contextmenu)="$event.preventDefault()">
     <header class="commander-header" [ngClass]="{ dev: devEnv }">
         <app-header></app-header>
     </header>

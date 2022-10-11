@@ -25,7 +25,7 @@
 </div>
 
 <ng-template #userMenu let-commit>
-    <section class="contextmenu" cds-layout="p:md">
+    <section class="contextmenu" cds-layout="p:md" (contextmenu)="$event.preventDefault()">
         <div cds-text="secondary" cds-layout="p-x:md p-y:sm">
             SHA:<b>{{ commit.shortSha }}</b>
         </div>

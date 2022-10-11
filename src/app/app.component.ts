@@ -131,8 +131,4 @@ export class AppComponent {
     private getDarkModeIcon(): string {
         return this.storeService.DarkMode ? 'sun' : 'moon';
     }
-
-    preventContextMenu(event: MouseEvent) {
-        event.preventDefault();
-    }
 }

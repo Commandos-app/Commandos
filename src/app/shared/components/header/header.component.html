@@ -57,7 +57,7 @@
     [cdkConnectedOverlayOpen]="isMenuOpen"
     [cdkConnectedOverlayHasBackdrop]="true"
     (backdropClick)="isMenuOpen = false">
-    <section class="contextmenu" cds-layout="p:md">
+    <section class="contextmenu" cds-layout="p:md" (contextmenu)="$event.preventDefault()">
         <!-- <cds-divider></cds-divider> -->
         <div (click)="pin()" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">Always on top</div>
         <div (click)="goto('/settings')" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">Settings</div>
