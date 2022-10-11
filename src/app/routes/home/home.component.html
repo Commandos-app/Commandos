@@ -49,7 +49,7 @@
         [cdkConnectedOverlayOpen]="isFilterOpen"
         [cdkConnectedOverlayHasBackdrop]="true"
         (backdropClick)="isFilterOpen = false">
-        <section class="contextmenu" cds-layout="p:md">
+        <section class="contextmenu" cds-layout="p:md" (contextmenu)="$event.preventDefault()">
             <h4 class="contextmenu-header" cds-text="secondary" cds-layout="p:sm" class="">Filter by:</h4>
             <div class="action-list">
                 <div
@@ -68,7 +68,7 @@
 </div>
 
 <ng-template #noRepos>
-    <div class="center-region text-center">
+    <div class="center-region text-center" (contextmenu)="$event.preventDefault()">
         <p>
             Thank you for using Commandos!<br />
             Start adding repositories to Commandos, to use the awesome features!<br />
@@ -79,7 +79,7 @@
 </ng-template>
 
 <ng-template #userMenu let-repo>
-    <section class="contextmenu" cds-layout="p:md">
+    <section class="contextmenu" cds-layout="p:md" (contextmenu)="$event.preventDefault()">
         <div (click)="openCmd(repo.pathOrig)" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">
             Open in Explorer
         </div>

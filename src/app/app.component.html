@@ -1,5 +1,5 @@
 <commander-splash></commander-splash>
-<div class="commander-layout commander-app-layout" cds-layout="vertical align:stretch">
+<div class="commander-layout commander-app-layout" cds-layout="vertical align:stretch"  (contextmenu)="$event.preventDefault()">
     <header class="commander-header" [ngClass]="{ dev: devEnv }">
         <app-header></app-header>
     </header>
@@ -26,3 +26,10 @@
 <div class="commandos-notification-container">
     <commandos-notification></commandos-notification>
 </div>
+
+<ng-template #userMenu let-user>
+    <section class="user-menu">
+        <div>Delete</div>
+        <div>Send to</div>
+    </section>
+</ng-template>

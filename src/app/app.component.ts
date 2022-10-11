@@ -1,5 +1,7 @@
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, Renderer2 } from '@angular/core';
+import { Component, Inject, Renderer2, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ErrorService, GitService, LoggerService, StoreService, TauriService } from '@core/services';
 import { environment } from '@env/environment';
@@ -7,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CommanderModalService, CommanderService, ICommand } from '@shared/services';
 import { listen } from '@tauri-apps/api/event';
 import { UpdateResult } from '@tauri-apps/api/updater';
+import { filter, fromEvent, Subscription, take } from 'rxjs';
 
 @Component({
     selector: 'commander-root',
