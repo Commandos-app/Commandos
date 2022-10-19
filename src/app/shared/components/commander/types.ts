@@ -36,7 +36,7 @@ export type CommandParams = {
     formData: any;
 };
 
-export type SelectType = 'Tag' | 'Repository' | 'All';
+export type SelectType = 'Tag' | 'Repository' | 'All' | 'Current Repository';
 
 export type SelectedRepositoryTypes = {
     type: SelectType;

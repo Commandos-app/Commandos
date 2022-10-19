@@ -5,7 +5,7 @@
     </div>
 </div>
 <ng-template #commandsTemplate>
-    <div class="command-body">
+    <div class="command-body" (contextmenu)="$event.preventDefault()">
         <div *ngFor="let cmd of commands; index as idx" class="command" [class.selected]="idx === selected" (click)="runCommand(cmd)">
             <cds-icon [shape]="cmd.icon" [direction]="cmd.direction"></cds-icon>
             &nbsp;{{ cmd.name }}

@@ -90,7 +90,7 @@
                 [cdkConnectedOverlayOpen]="isMenuOpen"
                 [cdkConnectedOverlayHasBackdrop]="true"
                 (backdropClick)="isMenuOpen = false">
-                <section class="contextmenu" cds-layout="p:md">
+                <section class="contextmenu" cds-layout="p:md" (contextmenu)="$event.preventDefault()">
                     <div (click)="openCmd()" cds-text="secondary" cds-layout="p-x:md p-y:sm" class="clickable contextmenu-action">
                         Open in Explorer
                     </div>
