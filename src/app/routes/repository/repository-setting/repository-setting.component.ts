@@ -40,11 +40,18 @@ export class RepositorySettingComponent implements OnInit {
         this.load();
     }
 
+    addUserToAvailableUsers(): void{
+        let userAvailable = this.availableUsers.find(x => x.name == this.user.name && x.email == this.user.email)
+        if (userAvailable == undefined){
+            this.availableUsers.unshift(this.user)
+        }
+    }
+
     async load(): Promise<void> {
         this.selectedUser = { id: 0, name: '', email: ''};
         this.availableUsers = await this.storeService.Users;
         this.user = await this.repositoryService.loadUserConfig();
-
+        this.addUserToAvailableUsers();
         if (!this.user.global) {
             this.selectedUser = this.availableUsers.find(x => x.name == this.user.name && x.email == this.user.email)
         }
