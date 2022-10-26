@@ -1,9 +1,17 @@
+import internal from "stream";
+
 export type RepositorySetting = {
     id: number;
     name: string;
     path: string;
     pathOrig?: string;
     tags: Array<string>;
+};
+
+export type RepositoryUser = {
+    id?: number;
+    name?: string;
+    email?: string;
 };
 
 export type RepositoriesSettings = Array<RepositorySetting>;
