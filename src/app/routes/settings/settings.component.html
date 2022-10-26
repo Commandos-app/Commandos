@@ -83,4 +83,82 @@
             <cds-button status="success" (click)="openDevTools()" *ngIf="devMode">Open DevTools</cds-button>
         </div>
     </form>
+
+
+    <form #updateUserForm="ngForm" cds-layout="m-t:md">
+
+
+        <p cds-text="title" cds-layout="m-t:none m-b:lg">Git users</p>
+        <cds-form-group card layout="compact" cds-layout="m-b:lg">
+            <cds-input>
+                <label>Users</label>
+                <ng-select
+                cds-control
+                [multiple]="false"
+                name="users"
+                [closeOnSelect]="false"
+                [searchable]="true"
+                [clearSearchOnAdd]="true"
+                [(ngModel)]="selectedUser"
+                [addTag]="true"
+                appendTo="body"
+                class="users-select">
+               <ng-option *ngFor="let user_iter of availableUsers" [value]="user_iter">{{user_iter.id}} | {{user_iter.name}} | {{ user_iter.email }}</ng-option>
+            </ng-select>
+                <cds-control-message status="error" *ngIf="updateUserForm.controls['users']?.touched && user.name.length === 0">
+                    Name not defined
+                </cds-control-message>
+            </cds-input>
+            <cds-input>
+                <label>Name</label>
+                <input type="text" name="selectedUser.name" required [(ngModel)]="selectedUser.name" />
+                <cds-control-message status="error" *ngIf="updateUserForm.controls['selectedUser.name']?.touched && selectedUser.name.length === 0">
+                    Name not defined
+                </cds-control-message>
+            </cds-input>
+
+            <cds-input>
+                <label>Email</label>
+                <input type="text" name="selectedUser.email" required [(ngModel)]="selectedUser.email" />
+                <cds-control-message status="error" *ngIf="updateUserForm.controls['selectedUser.email']?.touched && selectedUser.email.length === 0">
+                    Email not defined
+                </cds-control-message>
+            </cds-input>
+            <div cds-layout="horizontal gap:sm">
+                <cds-button (click)="updateUser()" status="success" [loadingState]="updateUserState" [disabled]="updateUserForm.invalid || !updateUserForm.dirty">Update User</cds-button>
+                <cds-button (click)="deleteUser()" status="danger" [loadingState]="deleteUserState" [disabled]="updateUserForm.invalid || !updateUserForm.dirty">Delete User</cds-button>
+            </div>
+
+
+        </cds-form-group>
+        </form>
+
+        <form #addUserForm="ngForm" cds-layout="m-t:md">
+
+
+            <p cds-text="title" cds-layout="m-t:none m-b:lg">Add git user</p>
+            <cds-form-group card layout="compact" cds-layout="m-b:lg">
+            <div cds-layout="horizontal gap:sm">
+                <cds-input>
+                    <label>Name</label>
+                    <input type="text" name="userToCreate.name" required [(ngModel)]="userToCreate.name" />
+                    <cds-control-message status="error" *ngIf="addUserForm.controls['userToCreate.name']?.touched && userToCreate.name.length === 0">
+                        Name not defined
+                    </cds-control-message>
+                </cds-input>
+    
+                <cds-input>
+                    <label>Email</label>
+                    <input type="text" name="userToCreate.email" required [(ngModel)]="userToCreate.email" />
+                    <cds-control-message status="error" *ngIf="addUserForm.controls['userToCreate.email']?.touched && userToCreate.email.length === 0">
+                        Email not defined
+                    </cds-control-message>
+                </cds-input>
+            </div>
+            <div cds-layout="horizontal gap:sm">
+
+                <cds-button (click)="addUser()" [loadingState]="addUserState" [disabled]="addUserForm.invalid || !addUserForm.dirty">Add User</cds-button>
+            </div>
+        </cds-form-group>
+    </form>
 </div>

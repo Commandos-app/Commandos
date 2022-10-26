@@ -1,7 +1,7 @@
 import { environment } from '@env/environment';
 
 import { Component, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { ErrorService, StoreService, ViewMode } from '@core/services';
+import { ErrorService, RepositoryUser, StoreService, ViewMode } from '@core/services';
 import { DOCUMENT } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { UserConfig, RepositoryService } from '@routes/repository/repository.service';
@@ -15,6 +15,8 @@ import { selectFolder } from '@shared/functions';
 })
 export class SettingsComponent implements OnInit {
     @ViewChild('form') settingsForm: NgForm;
+    @ViewChild('updateUserForm') updateUserForm: NgForm;
+    @ViewChild('addUserForm') addUserForm: NgForm;
     devMode = !environment.production;
 
     gridCounts = [25, 50, 100];
@@ -32,6 +34,12 @@ export class SettingsComponent implements OnInit {
     };
 
     saveState: LoadingState = 'default';
+    addUserState: LoadingState = 'default';
+    updateUserState: LoadingState = 'default';
+    deleteUserState: LoadingState = 'default';
+    availableUsers: RepositoryUser[];
+    selectedUser: RepositoryUser;
+    userToCreate: RepositoryUser;
 
     constructor(
         private errorService: ErrorService,
@@ -48,11 +56,61 @@ export class SettingsComponent implements OnInit {
         this.defaultPath = this.storeService.DefaultPath;
         this.diffFormate = this.storeService.DiffOutputFormat === 'side-by-side';
         this.viewMode = this.storeService.ViewMode;
+        this.availableUsers = await this.storeService.Users;        
+        this.userToCreate = {name: '', email:''}
+        this.selectedUser = {id: 0, name: '', email:''};
         this.user = await this.repositoryService.loadGlobalUserConfig();
         this.settingsForm.form.markAsPristine();
     }
 
     openDevTools(): void {}
+
+    async addUser(): Promise<void>{
+        this.addUserState = 'loading';
+        let maxId = this.availableUsers.map(x => x.id).reduce((a, b) => Math.max(a, b), 0)
+        this.userToCreate.id = maxId + 1
+        this.availableUsers.push(this.userToCreate)
+        this.userToCreate = {id: 0, name: '', email: ''}
+        this.storeService.Users = this.availableUsers
+        this.storeService.saveSettings();
+        await sleep(600);
+        this.addUserState = 'success';
+        this.ngOnInit();
+        this.addUserForm.form.markAsPristine();
+        await sleep(1000);
+        this.addUserState = 'default';
+    }
+    
+    async updateUser(): Promise<void>{
+        this.updateUserState = 'loading';
+        const userIndex = this.availableUsers.findIndex(x => x.id == this.selectedUser.id)      
+        this.availableUsers[userIndex].name = this.selectedUser.name
+        this.availableUsers[userIndex].email = this.selectedUser.email
+        this.storeService.Users = this.availableUsers
+        this.storeService.saveSettings();
+        await sleep(600);
+        this.updateUserState = 'success';
+        this.ngOnInit();
+        this.updateUserForm.form.markAsPristine();
+        await sleep(1000);
+        this.updateUserState = 'default';
+    }
+
+    async deleteUser(): Promise<void>{
+        this.deleteUserState = 'loading';
+        const index = this.availableUsers.map(x => x.id).indexOf(this.selectedUser.id);
+        if (index > -1) {
+            this.availableUsers.splice(index, 1);
+        }
+        this.storeService.saveSettings();
+        await sleep(600);
+        this.deleteUserState = 'success';
+        this.ngOnInit();
+        this.updateUserForm.form.markAsPristine();
+        await sleep(1000);
+        this.deleteUserState = 'default';
+    }
+
 
     async save(): Promise<void> {
         this.saveState = 'loading';
@@ -68,6 +126,7 @@ export class SettingsComponent implements OnInit {
         } else {
             this.renderer.setAttribute(this.document.body, 'cds-theme', '');
         }
+        this.storeService.Users = this.availableUsers
         this.storeService.saveSettings();
         this.repositoryService.saveGlobalUserConfig(this.user);
 
