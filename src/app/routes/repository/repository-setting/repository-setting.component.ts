@@ -1,7 +1,7 @@
 import { selectFolder, sleep, LoadingState } from '@shared/functions';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { RepositoriesSettingsService, StoreService } from '@core/services';
+import { RepositoriesSettingsService, RepositoryUser, StoreService } from '@core/services';
 import { RepositoryService, UserConfig } from './../repository.service';
 import { NgForm } from '@angular/forms';
 import { stdout } from 'process';
@@ -26,24 +26,33 @@ export class RepositorySettingComponent implements OnInit {
         global: true,
     };
     saveState: LoadingState = 'default';
+    availableUsers: RepositoryUser[];
+    selectedUser: RepositoryUser = { id: 0, name: '', email: '', };
 
     constructor(
         private repositoriesSettings: RepositoriesSettingsService,
         private router: Router,
         private storeService: StoreService,
         private repositoryService: RepositoryService,
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.load();
     }
 
     async load(): Promise<void> {
+        this.selectedUser = { id: 0, name: '', email: ''};
+        this.availableUsers = await this.storeService.Users;
+        this.user = await this.repositoryService.loadUserConfig();
+
+        if (!this.user.global) {
+            this.selectedUser = this.availableUsers.find(x => x.name == this.user.name && x.email == this.user.email)
+        }
+
         this.tags = this.storeService.Tags;
         this.selectedTags = this.repositoryService.repositorySetting.tags;
         this.path = this.repositoryService.repositorySetting.path;
         this.name = this.repositoryService.repositorySetting.name;
-        this.user = await this.repositoryService.loadUserConfig();
         const { stdout } = await this.repositoryService.getOriginUrl();
         this.origin = stdout;
         this.oldOrigin = this.origin;
@@ -69,7 +78,8 @@ export class RepositorySettingComponent implements OnInit {
         await this.storeService.saveSettings();
 
         if (!this.user.global) {
-            await this.repositoryService.saveLocalUserConfig(this.user);
+            let userToSave: UserConfig = { 'name': this.selectedUser.name, 'email': this.selectedUser.email, 'global': this.user.global }
+            await this.repositoryService.saveLocalUserConfig(userToSave);
         } else {
             await this.repositoryService.unsetLocalUserConfig();
         }

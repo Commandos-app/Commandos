@@ -68,19 +68,33 @@
                 </cds-radio-group>
 
                 <cds-input>
-                    <label>Name</label>
-                    <input type="text" name="gitname" required [disabled]="user.global" [(ngModel)]="user.name" />
-                    <cds-control-message status="error" *ngIf="form.controls['gitname']?.touched && user.name.length === 0">
+                    <label>available Users</label>
+                    <ng-select
+                    [disabled]="this.user.global"
+                    cds-control
+                    [multiple]="false"
+                    name="users"
+                    [closeOnSelect]="false"
+                    [searchable]="true"
+                    [clearSearchOnAdd]="true"
+                    [(ngModel)]="selectedUser"
+                    [addTag]="true"
+                    appendTo="body"
+                    class="users-select">
+                   <ng-option *ngFor="let user_iter of availableUsers" [value]="user_iter">{{user_iter.name}} | {{ user_iter.email }}</ng-option>
+                </ng-select>
+                    <cds-control-message status="error" *ngIf="form.controls['users']?.touched && user.name.length === 0">
                         Name not defined
                     </cds-control-message>
                 </cds-input>
 
                 <cds-input>
+                    <label>Name</label>
+                    <input type="text" name="gitname" readonly [(ngModel)]="selectedUser.name" />
+                </cds-input>
+                <cds-input>
                     <label>Email</label>
-                    <input type="text" name="gitemail" required [disabled]="user.global" [(ngModel)]="user.email" />
-                    <cds-control-message status="error" *ngIf="form.controls['gitemail']?.touched && user.email.length === 0">
-                        Email not defined
-                    </cds-control-message>
+                    <input type="text" name="gitemail" readonly [(ngModel)]="selectedUser.email" />
                 </cds-input>
             </cds-form-group>
             <div cds-layout="horizontal gap:sm">
