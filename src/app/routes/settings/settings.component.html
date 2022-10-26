@@ -103,7 +103,7 @@
                 [addTag]="true"
                 appendTo="body"
                 class="users-select">
-               <ng-option *ngFor="let user_iter of availableUsers" [value]="user_iter">{{user_iter.id}} | {{user_iter.name}} | {{ user_iter.email }}</ng-option>
+               <ng-option *ngFor="let user_iter of availableUsers" [value]="user_iter">{{user_iter.name}} | {{ user_iter.email }}</ng-option>
             </ng-select>
                 <cds-control-message status="error" *ngIf="updateUserForm.controls['users']?.touched && user.name.length === 0">
                     Name not defined
